@@ -1,0 +1,78 @@
+{
+  "uri": "Tea%20Table01.gltf",
+  "mimeType": "model/gltf+json",
+  "validatorVersion": "2.0.0-dev.3.9",
+  "validatedAt": "2024-02-22T17:13:25.569Z",
+  "issues": {
+    "numErrors": 4,
+    "numWarnings": 0,
+    "numInfos": 0,
+    "numHints": 0,
+    "messages": [
+      {
+        "code": "IO_ERROR",
+        "message": "Node Exception: Error: ENOENT: no such file or directory, open '/Users/shafiqaabdat/Downloads/client-main/public/Tea Table01.bin'",
+        "severity": 0,
+        "pointer": "/buffers/0/uri"
+      },
+      {
+        "code": "IO_ERROR",
+        "message": "Node Exception: Error: ENOENT: no such file or directory, open '/Users/shafiqaabdat/Downloads/client-main/public/Tea Table_baseColor.png'",
+        "severity": 0,
+        "pointer": "/images/0/uri"
+      },
+      {
+        "code": "IO_ERROR",
+        "message": "Node Exception: Error: ENOENT: no such file or directory, open '/Users/shafiqaabdat/Downloads/client-main/public/Tea Table_occlusionRoughnessMetallic.png'",
+        "severity": 0,
+        "pointer": "/images/1/uri"
+      },
+      {
+        "code": "IO_ERROR",
+        "message": "Node Exception: Error: ENOENT: no such file or directory, open '/Users/shafiqaabdat/Downloads/client-main/public/Tea Table_normal.png'",
+        "severity": 0,
+        "pointer": "/images/2/uri"
+      }
+    ],
+    "truncated": false
+  },
+  "info": {
+    "version": "2.0",
+    "generator": "Substance Painter 7.1.0",
+    "resources": [
+      {
+        "pointer": "/buffers/0",
+        "mimeType": "application/gltf-buffer",
+        "storage": "external",
+        "uri": "Tea%20Table01.bin"
+      },
+      {
+        "pointer": "/images/0",
+        "storage": "external",
+        "uri": "Tea%20Table_baseColor.png"
+      },
+      {
+        "pointer": "/images/1",
+        "storage": "external",
+        "uri": "Tea%20Table_occlusionRoughnessMetallic.png"
+      },
+      {
+        "pointer": "/images/2",
+        "storage": "external",
+        "uri": "Tea%20Table_normal.png"
+      }
+    ],
+    "animationCount": 0,
+    "materialCount": 1,
+    "hasMorphTargets": false,
+    "hasSkins": false,
+    "hasTextures": true,
+    "hasDefaultScene": true,
+    "drawCallCount": 1,
+    "totalVertexCount": 288,
+    "totalTriangleCount": 160,
+    "maxUVs": 1,
+    "maxInfluences": 0,
+    "maxAttributes": 3
+  }
+}

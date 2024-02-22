@@ -45,3 +45,69 @@ body{
   margin-left:1100px;
   margin-top: 100px;
 }
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Adjust to take full height of the viewport */
+  padding: 20px; /* Optional: to ensure there's some space around */
+   width: 75vw;
+}
+.app-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-container select {
+  position: fixed;
+  top: 10px;
+  left: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.app-container button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.app-container button:hover {
+  background-color: #0056b3;
+}
+
+.app-container button:active {
+  background-color: #004494;
+}
+
+/* Additional styling for placing the control buttons nicely */
+.control-panel {
+  position: fixed;
+  top: 60px;
+  left: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Style adjustments for the canvas to ensure it fills the screen */
+.canvas-container canvas {
+  display: block; /* Removes extra space below the canvas */
+  width: 100%;
+  height: 100%;
+}
