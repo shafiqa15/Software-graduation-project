@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as THREE from 'three';
-// Ensure this path is correct for your project structure
+// Ensure the path is correct for your CSS file
 import '/Users/shafiqaabdat/Downloads/client-main/src/App.css';
 
 function CameraController() {
@@ -17,42 +16,7 @@ function CameraController() {
   return null;
 }
 
-function Model({ modelPath, position, rotation, scale }) {
-  const ref = useRef();
-  const { scene } = useLoader(GLTFLoader, modelPath);
-  useFrame(() => {
-    ref.current.position.set(...position);
-    ref.current.rotation.set(...rotation);
-    ref.current.scale.set(scale, scale, scale);
-  });
-  return <primitive ref={ref} object={scene} />;
-}
 
-function Floor() {
-  const texture = useLoader(THREE.TextureLoader, "/floor.jpeg");
-  texture.wrapS = THREE.RepeatWrapping;
-  texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(1, 1);
-
-  return (
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
-      <planeGeometry args={[10, 10]} />
-      <meshStandardMaterial map={texture} />
-    </mesh>
-  );
-}
-// function GridBorder({ size = 100 }) {
-//   const points = [
-//     new THREE.Vector3(-size / 2, 0, size / 2),
-//     new THREE.Vector3(size / 2, 0, size / 2),
-//     new THREE.Vector3(size / 2, 0, -size / 2),
-//     new THREE.Vector3(-size / 2, 0, -size / 2),
-//     new THREE.Vector3(-size / 2, 0, size / 2),
-//   ];
-//   const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-//   const lineMaterial = new THREE.LineBasicMaterial({ color: 'black' });
-//   return <lineLoop geometry={lineGeometry} material={lineMaterial} />;
-// }
 function GridBorder({ size = 100, height = 200, color = 'black' }) {
   const points = [
     new THREE.Vector3(-size / 2, 0, size / 2),
@@ -89,64 +53,91 @@ function GridBorder({ size = 100, height = 200, color = 'black' }) {
   );
 }
 
+
+function Floor() {
+  const texture = useLoader(THREE.TextureLoader, "/flo.jpeg");
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(1, 1);
+
+  return (
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
+      <planeGeometry args={[10, 10]} />
+      <meshStandardMaterial map={texture} />
+    </mesh>
+  );
+}
+
+function Model({ modelPath, position, rotation, scale }) {
+  const ref = useRef();
+  const gltf = useGLTF(modelPath);
+  useFrame(() => {
+    ref.current.position.set(...position);
+    ref.current.rotation.set(...rotation);
+    ref.current.scale.set(scale, scale, scale);
+  });
+  return <primitive ref={ref} object={gltf.scene} />;
+}
+
+// function Helpers() {
+//   return (
+//     <>
+//       <gridHelper args={[10, 10, 'white', 'grey']} />
+//       <axesHelper args={[5]} />
+//     </>
+//   );
+// }
+
+function updatefloor(){
+
+}
+
 function Helpers() {
   return (
     <>
   
       <gridHelper args={[10, 10, 'white', 'white']} />
       <GridBorder size={10} color={'black'} />
-      <axesHelper args={[5]} />
+      <axesHelper args={[20]} />
     </>
   );
 }
 
-
-
-
-
 function App() {
-  const [activeObject, setActiveObject] = useState('sofa');
-  const [modelUrl, setModelUrl] = useState(null); // Add this line
+  const [activeObject, setActiveObject] = useState(null);
+  const [objects, setObjects] = useState({});
 
-  const [objects, setObjects] = useState({
-    sofa: { position: [0, 0, 0], rotation: [0, 0, 0], scale: 0.01 },
-    table: { position: [2, 0, 0], rotation: [0, 0, 0], scale: 0.01 },
-  });
+  const handleModelUpload = event => {
+    const file = event.target.files[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      const modelName = file.name.split('.')[0];
+      setObjects(prev => ({
+        ...prev,
+        [modelName]: { modelPath: url, position: [0, 0, 0], rotation: [0, 0, 0], scale: 1 },
+      }));
+      setActiveObject(modelName);
+    }
+  };
 
   const updatePosition = (axis, distance) => {
-    setObjects(prevObjects => ({
-      ...prevObjects,
+    if (!activeObject) return;
+    setObjects(prev => ({
+      ...prev,
       [activeObject]: {
-        ...prevObjects[activeObject],
-        position: prevObjects[activeObject].position.map((value, index) => index === axis ? value + distance : value),
+        ...prev[activeObject],
+        position: prev[activeObject].position.map((value, index) => index === axis ? value + distance : value),
       },
     }));
   };
 
-    const handleModelUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setModelUrl(url); // This function is now correctly defined
-    }
-    
-  };
-  useEffect(() => {
-  // Cleanup function to revoke the URL
-  return () => {
-    if (modelUrl) {
-      URL.revokeObjectURL(modelUrl);
-    }
-  };
-}, [modelUrl]); // Dependency array to run cleanup when modelUrl changes
-
-
   const updateRotation = (axis, angle) => {
-    setObjects(prevObjects => ({
-      ...prevObjects,
+    if (!activeObject) return;
+    setObjects(prev => ({
+      ...prev,
       [activeObject]: {
-        ...prevObjects[activeObject],
-        rotation: prevObjects[activeObject].rotation.map((value, index) => index === axis ? value + angle : value),
+        ...prev[activeObject],
+        rotation: prev[activeObject].rotation.map((value, index) => index === axis ? value + angle : value),
       },
     }));
   };
@@ -157,43 +148,52 @@ function App() {
 
   return (
     <div className="app-container">
-      <select value={activeObject} onChange={handleChangeObject} style={{ position: 'absolute', zIndex: 100 }}>
-        <option value="sofa">Sofa 1</option>
-        <option value="table">Sofa 2</option>
-
-      </select>
+    
       <Canvas>
         <CameraController />
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 15, 10]} angle={0.3} />
-       {/* < modelUrl  <Model modelPath={modelUrl} {...objects.sofa} /> */}
-        <Model modelPath='/uploads-files-3170821-Red_sofa_glb.glb' {...objects.sofa} />
-        <Model modelPath='/uploads-files-3170821-Red_sofa_glb2.glb' {...objects.table} />
-          {modelUrl && <Model modelPath={modelUrl} position={[1, 0, 1]} rotation={[0, 0, 0]} scale={0.01} />}
- 
-        <Floor />
-     
+        {Object.entries(objects).map(([name, { modelPath, position, rotation, scale }]) => (
+          <Model key={name} modelPath={modelPath} position={position} rotation={rotation} scale={0.01} />
+        ))}
+
         <Helpers />
+        
         <OrbitControls />
       </Canvas>
-      <div style={{ position: 'absolute', top: '100px', left: '20px', zIndex: 100 }}>
-    <input type="file" onChange={handleModelUpload} accept=".glb,.gltf" />
-  </div>
+     
       <div style={{ position: 'absolute', top: '50px', left: '20px' }}>
-        <button onClick={() => updatePosition(0, 0.1)}>Right يمين</button>
-        <button onClick={() => updatePosition(0, -0.1)}>Left يسار</button>
-        <button onClick={() => updatePosition(1, 0.1)}>Up فوق</button>
-        <button onClick={() => updatePosition(1, -0.1)}>Down تحت </button>
-        <button onClick={() => updatePosition(2, 0.1)}>Forward للامام </button>
-        <button onClick={() => updatePosition(2, -0.1)}>Backward للخلف</button>
+        <button onClick={() => updatePosition(0, 0.1)}>Right</button>
+        <br/>
+        <button onClick={() => updatePosition(0, -0.1)}>Left</button>
+        <br/>
+        <button onClick={() => updatePosition(1, 0.1)}>Up</button>
+        <br/>
+        <button onClick={() => updatePosition(1, -0.1)}>Down</button>
+        <br/>
+        <button onClick={() => updatePosition(2, 0.1)}>Forward</button>
+        <br/>
+        <button onClick={() => updatePosition(2, -0.1)}>Backward</button>
+        <br/>
         <button onClick={() => updateRotation(0, Math.PI / 8)}>Rotate X</button>
+        <br/>
         <button onClick={() => updateRotation(1, Math.PI / 8)}>Rotate Y</button>
+        <br/>
         <button onClick={() => updateRotation(2, Math.PI / 8)}>Rotate Z</button>
+    <br></br>
+        <button onClick={() => updatefloor()}>updafloor</button>
+
       </div>
-  
+
+      <div style={{ position: 'absolute', top: '520px', left: '30px', zIndex: 100 }}>
+        <input type="file" onChange={handleModelUpload} accept=".glb,.gltf,.obj,.JPG" />
+      </div>
+      <select value={activeObject || ''} onChange={handleChangeObject} style={{ position: 'absolute',top: '550px',left: '25px',width:'100px' ,zIndex: 100 }}>
+        {Object.keys(objects).map(modelName => (
+          <option key={modelName} value={modelName}>{modelName}</option>
+        ))}
+      </select>
     </div>
-  
-  
   );
 }
 

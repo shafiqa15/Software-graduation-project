@@ -84,6 +84,7 @@ body{
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 100px;
 }
 
 .app-container button:hover {
