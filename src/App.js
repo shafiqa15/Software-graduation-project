@@ -88,9 +88,20 @@ function Model({ modelPath, position, rotation, scale }) {
 //   );
 // }
 
-function updatefloor(){
+// function updatefloor(){
+  
+//   const texture = useLoader(THREE.TextureLoader, "/floor.jpeg");
+//   texture.wrapS = THREE.RepeatWrapping;
+//   texture.wrapT = THREE.RepeatWrapping;
+//   texture.repeat.set(1, 1);
 
-}
+//   return (
+//     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
+//       <planeGeometry args={[10, 10]} />
+//       <meshStandardMaterial map={texture} />
+//     </mesh>
+//   );
+// }
 
 function Helpers() {
   return (
@@ -156,8 +167,8 @@ function App() {
         {Object.entries(objects).map(([name, { modelPath, position, rotation, scale }]) => (
           <Model key={name} modelPath={modelPath} position={position} rotation={rotation} scale={0.01} />
         ))}
-
-        <Helpers />
+{/* <Floor></Floor> */}
+        <Helpers  />
         
         <OrbitControls />
       </Canvas>
@@ -180,8 +191,11 @@ function App() {
         <button onClick={() => updateRotation(1, Math.PI / 8)}>Rotate Y</button>
         <br/>
         <button onClick={() => updateRotation(2, Math.PI / 8)}>Rotate Z</button>
+
     <br></br>
-        <button onClick={() => updatefloor()}>updafloor</button>
+    <button >NewFloor</button>
+
+
 
       </div>
 
