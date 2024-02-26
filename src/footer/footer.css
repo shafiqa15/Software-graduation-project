@@ -1,0 +1,65 @@
+.footer {
+    background-color: #333; /* Dark background for footer */
+    color: #fff; /* Light text color for contrast */
+    padding: 20px 0; /* Padding around the footer content */
+    font-family: Arial, sans-serif; /* Default font */
+    width: 100vw; /* Ensure footer is full viewport width */
+    box-sizing: border-box; /* Include padding in the element's total width */
+    position: relative; /* To offset any parent container's padding or margins */
+    left: 50%; /* Move to the exact middle of the viewport */
+    right: 50%; 
+    margin-left: -50vw; /* Pull back to align left edge with viewport */
+    margin-right: -50vw; /* Pull back to align right edge with viewport */
+  }
+  
+  .container_footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Space between the footer elements */
+    align-items: center; /* Align items vertically */
+    width: 100%; /* Use full width of the footer */
+    max-width: 1200px; /* Max width of the content inside footer */
+    margin: 0 auto; /* Center the container within the footer */
+    padding: 0 20px; /* Padding on the sides within the container */
+  }
+  .footer__logo {
+    flex: 1; /* Flex grow to take necessary space */
+    display: flex;
+    align-items: center; /* Align logo vertically */
+  }
+  
+  .footer__logo img {
+    margin-right: 10px; /* Space between logo image and text */
+  }
+  
+  .footer__nav {
+    flex: 2; /* Flex grow to take more space as needed */
+    display: flex;
+    justify-content: center; /* Center navigation links */
+  }
+  
+  .footer__link {
+    color: #fff; /* Light color for links */
+    text-decoration: none; /* No underline */
+    margin: 0 15px; /* Margin around links */
+  }
+  
+  .footer__socials {
+    flex: 1; /* Flex grow to take necessary space */
+    display: flex;
+    justify-content: flex-end; /* Align social icons to the right */
+  }
+  
+  .footer__social {
+    color: #fff; /* Light color for social links */
+    text-decoration: none; /* No underline */
+    margin-left: 15px; /* Space between social links */
+  }
+  
+  .footer__copy {
+    text-align: center; /* Center copyright text */
+    width: 100%; /* Full width */
+    margin-top: 20px; /* Space above copyright */
+    font-size: 0.8em; /* Smaller font size */
+  }
+  
