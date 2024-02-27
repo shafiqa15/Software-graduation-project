@@ -10,6 +10,7 @@
     right: 50%; 
     margin-left: -50vw; /* Pull back to align left edge with viewport */
     margin-right: -50vw; /* Pull back to align right edge with viewport */
+    
   }
   
   .container_footer {

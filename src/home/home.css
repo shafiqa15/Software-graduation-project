@@ -145,8 +145,6 @@ button {
   align-items: center;
   overflow-y: auto !important;
   height: auto !important;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.3)), url('/Users/shafiqaabdat/Desktop/demo/src/images/signup.webp');
-
 }
 
 .customBodyStyle
@@ -274,7 +272,7 @@ img {
 
     box-shadow: 0 8px 16px hsla(230, 75%, 32%, .15);
     width: 100%;
-    padding-block: 4.5rem 4rem;
+    padding-block: 3rem 3rem;
     transition: top .4s;
   }
 }
@@ -509,21 +507,85 @@ img {
 
 
   .content h1{
-    font-size: 70px;
-     margin-top: 130px;
-     color: white;
-     margin-left: 80px;
+    font-size: 50px;
+     margin-top: 25px;
+     color: black;
+     margin-left: 40px;
      
   }
 
-  .content p{
+  .advanced-glow {
+    color: #fff; /* White text color */
+    filter: drop-shadow(0 0 5px rgb(170, 93, 10)) drop-shadow(0 0 10px rgb(213, 84, 55)) drop-shadow(0 0 20px #F90);
+  }
+  
+  /* .content button{
+    
+  } */
+
+  .custom-button {
+    background-color:  rgb(209, 163, 113); /* Blue background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Top and bottom padding, left and right padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-top: 60px; /* Space from content above */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    margin-left: 50px;
+    
+  }
+  
+  .custom-button:hover {
+    background-color:rgb(170, 93, 10); /* Darker blue background on hover */
+  }
+  
+
+
+
+  .content h2{
+    font-size: 20px;
+     margin-top: 30px;
+     color: black;
+     margin-left: 40px;
+     width: 500px;
+     
+  }
+
+.content span{
+  font-size: 20px;
+  margin-top: 30px;
+  color: black;
+  margin-left: 40px;
+}
+  .new{
      margin: 20px auto;
      font-weight: 100; 
      line-height: 25px;
      font-size: 50px;
-     margin-left: 300px;
-     color: white;
+     margin-left: 580px;
+     color: black;
+     margin-top:1100px;
   }
+  .new2{
+    margin: 20px auto;
+    font-weight: 100; 
+    line-height: 25px;
+    font-size: 50px;
+    margin-left: 580px;
+    color: black;
+    margin-top:230px;
+  }
+
+
+  .slider-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Adjust the height as needed */
+    margin-left: 270px;
+  }
+  
 
   /* Define the keyframes for the animation */
 @keyframes slideInFromLeft {
@@ -587,6 +649,63 @@ img {
     background-color: #6c757d; /* Grey for secondary actions */
   }
   
+  .sora {
+    /* background-color: rgba(255, 255, 255, 0.9); */
+    background-image: url('/Users/shafiqaabdat/Downloads/client-main/src/images/Screenshot 2024-02-26 at 17.43.26.png');
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-size: 100% auto; /* Stretches the image to 100% of the element's width while maintaining aspect ratio */
+    margin-top: 117px;
+    height: 600px; /* You may need to adjust this depending on your needs */
+    width: 100vw; /* This makes the element's width equal to the width of the viewport */
+}
+.sora2{
+  /* background-color: rgba(255, 255, 255, 0.9); */
+  /* background-image: url('/Users/shafiqaabdat/Downloads/client-main/src/images/Screenshot 2024-02-26 at 17.43.26.png'); */
+  background-color:white; /* Prevents the image from repeating */
+  background-size: 100% auto; /* Stretches the image to 100% of the element's width while maintaining aspect ratio */
+
+  height: 600px; 
+  /* You may need to adjust this depending on your needs */
+  width: 100vw; /* This makes the element's width equal to the width of the viewport */
+
+}
+
+.section_title{
+  font-weight: 600;
+  margin-top: 10px;
+  margin-left: 50px;
+  color: black;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+/* Style adjustments for dropdown */
+.nav__item:hover .dropdown {
+  display: block; /* This shows the dropdown menu on hover */
+}
+
+.dropdown {
+  display: none; /* Ensures the menu is hidden by default */
+  position: absolute;
+  background-color: #f9f9f9; /* Adjust as needed */
+  box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2); /* Adds a subtle shadow */
+  z-index: 1; /* Ensures the dropdown is above other content */
+}
+
+.dropdown li {
+  display: block; /* Stack dropdown items vertically */
+}
+
+.dropdown .nav__link {
+  padding: 10px;
+  color: #333; /* Adjust text color as needed */
+}
+
+.dropdown li:hover {
+  background-color: #ddd; /* Changes background of dropdown items on hover */
+}
+
+
   #signInDiv {
     display: flex;
     justify-content: center;
@@ -612,3 +731,4 @@ img {
     color: white;
     font-weight: bold;
   } */
+

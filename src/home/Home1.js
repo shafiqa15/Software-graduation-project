@@ -4,7 +4,9 @@ import '/Users/shafiqaabdat/Downloads/client-main/src/home/home.css'; // Ensure 
 import home_img from '/Users/shafiqaabdat/Downloads/client-main/src/images/cash_.webp'; // Ensure this path is correct
 import Slider from '/Users/shafiqaabdat/Downloads/client-main/src/slider/Slider.js';
 import Footer from '/Users/shafiqaabdat/Downloads/client-main/src/footer/Footer.js';
-
+import Services from '/Users/shafiqaabdat/Downloads/client-main/src/services/Service.js';
+import ProductCard from './Trending/ProductCard';
+import { Container, Row, Col } from "reactstrap";
 const Home1 = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -38,9 +40,41 @@ const Home1 = () => {
   const handlecallbackresponse = (response) => {
     console.log("Encoded JWT ID token: " + response.credential);
   };
-
+  const year = new Date().getFullYear();
   return (
     <>
+
+  <div  className="sora" >
+  
+<div className="content">
+
+  <br/>
+  <span className='advanced-glow' >Trending product in {year} </span>
+        <h1>DESIGN YOUR HOUSE</h1>
+<h2>Make Your Interior More Minimalistic & Modern </h2>
+<br/>
+<span>
+
+
+  Cach bblash is where you will find all the modern styles of furniture and Electronics 
+</span>
+
+<br>
+
+</br>
+          <button className="custom-button">Shop Now</button> {/* Button added here */}
+          <p className='animated-text new2'> Categories </p>
+          <p className="animated-text new">Cash Bblash</p>
+          
+
+        </div>
+
+        </div>
+      
+
+
+ 
+
       <header className="header" id="header">
         <nav className="nav container">
           <a href="#" className="nav__logo">
@@ -50,11 +84,25 @@ const Home1 = () => {
 
           <div className={`nav__menu ${showMenu ? 'show-menu' : ''}`} id="nav-menu">
             <ul className="nav__list">
-              <li className="nav__item"><Link className="nav__link" to="/Design">Home</Link></li>
-              <li className="nav__item"><a href="#" className="nav__link">About Us</a></li>
-              <li className="nav__item"><a href="#" className="nav__link">Services</a></li>
+              <li className="nav__item"><Link className="nav__link" to="/Design">Home</Link>
+    </li>
+              <li className="nav__item">
+              <a href="#" className="nav__link">Bedrooms</a>
+              
+              <ul className="dropdown">
+      <li><Link className="nav__link" to="/BedRoomsLarge">Full Bedrooms</Link></li>
+      <li><a href="#" className="nav__link">Kids Bedrooms</a></li>
+      <li><a href="#" className="nav__link">King Bedrooms</a></li>
+    </ul>
+  </li>
+              
+           
+              <li className="nav__item"><a href="#" className="nav__link">Tables</a></li>
+              <li className="nav__item"><a href="#" className="nav__link">Setting Rooms</a></li>
+              <li className="nav__item"><a href="#" className="nav__link">Electronics</a></li>
               <li className="nav__item"><a href="#" className="nav__link">Featured</a></li>
               <li className="nav__item"><a href="#" className="nav__link">Contact Us</a></li>
+              <li className="nav__item"><a href="#" className="nav__link">About Us</a></li>
             </ul>
 
             <div className="nav__close" id="nav-close" onClick={() => setShowMenu(false)}>
@@ -106,25 +154,40 @@ const Home1 = () => {
         <i className="ri-close-line login__close" id="login-close" onClick={() => setShowLogin(false)}></i>
       </div>
 
-      <div className="content">
-        <div className="App">
-          <h1>DESIGN YOUR HOUSE</h1>
-          {/* <p className="animated-text">Cash Bblash</p> */}
-          <Slider></Slider>
-        </div>
+  
+<div>
 
-        {/* <div className="buttons-container">
-          <button className="button-style">Learn More↗</button>
-        </div> */}
-         
-      </div>
+{/* <img src={home_img}  style={{ top: '0px', borderRadius: '50%', width: '90px', height: '90px' }} /> */}
 
-      <div className="content">
-        <div className="App">
-         
-          <p className="animated-text">Cash Bblash</p>
-        </div>
-        </div>
+<div className="slider-container">
+
+  <Slider />
+</div>
+
+
+</div>
+<br/><br/>
+  <Services></Services>
+
+  {/* <div  className="sora2" > */}
+  <section className='trending'>
+    <Container>
+      <Row>
+        <Col lg="12" className="text-center">
+        <br/>
+        <h2 className='section_title' >
+        Trending Products
+
+        </h2>
+
+        </Col>
+        <ProductCard></ProductCard>
+      </Row>
+    </Container>
+  </section>
+{/* // </div> */}
+
+ 
           {/* <div className="buttons-container">
           <button className="button-style">Learn More↗</button>
         </div> */}

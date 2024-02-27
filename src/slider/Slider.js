@@ -7,20 +7,20 @@ const optionsData = [
         iconClass: 'fa-utensils',
         main: 'Dining Sets',
         sub: 'Elegant tables and chairs for family meals',
-backgroundImage:'https://scontent.fjrs26-1.fna.fbcdn.net/v/t39.30808-6/425645668_706155821632598_8728115842892822658_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=hdtxelgggr8AX_Rwasf&_nc_ht=scontent.fjrs26-1.fna&oh=00_AfDc7HK0eTtCg1LiNClowXppwqKJH2TGwHYONAx1gMrpTQ&oe=65DA6AB5',
+backgroundImage:'https://scontent.fjrs27-1.fna.fbcdn.net/v/t1.6435-9/118488384_759261141564645_9211105016124555152_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=dd63ad&_nc_ohc=ZEzM62FVHcYAX92ceRp&_nc_ht=scontent.fjrs27-1.fna&oh=00_AfD58cFdj38cyALca-nBfcLInO4kVu7V5ZwMjSBelN9T9A&oe=66040EE7',
       },
       {
         iconClass: 'fa-eye',
         main: 'mirrors',
         sub: 'Elegant reflections for every space',
-        backgroundImage: 'https://scontent.fjrs26-1.fna.fbcdn.net/v/t39.30808-6/416001138_689063730008474_1920494663602484279_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=vYkCKQq99bEAX_kWMel&_nc_ht=scontent.fjrs26-1.fna&oh=00_AfCeOQ6baFTcmtQFya8811dbh7-mFlLAYdXQnpdflsffqw&oe=65D936E6',
+        backgroundImage:'https://scontent.fjrs27-1.fna.fbcdn.net/v/t39.30808-6/421155666_697591609155686_2026242433103725274_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=HzJDhX4M3CMAX8-H9dd&_nc_ht=scontent.fjrs27-1.fna&oh=00_AfDSPWWDj3CIwStFgm9zlD_9A32Zqo8eSB2_SSk8yMGU0Q&oe=65E0EE4F',
       },
     
       {
         iconClass: 'fa-cube',
         main: 'Tables',
         sub: 'Find the perfect centerpiece for your dining room or offic',
-        backgroundImage: 'https://scontent.fjrs26-1.fna.fbcdn.net/v/t39.30808-6/412742094_680238884224292_553156169171486898_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=oDRRbwQVia8AX8WZJdf&_nc_ht=scontent.fjrs26-1.fna&oh=00_AfC5XmL3kGH0WacjuJGSChVXKPgDwrYI2ZLVkcvnsOIYgg&oe=65D97C0C',
+        backgroundImage: 'https://scontent.fjrs27-1.fna.fbcdn.net/v/t1.6435-9/107769389_718870505603709_6608763176993251286_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=dd63ad&_nc_ohc=eQolc_S0FoAAX9yu9y2&_nc_ht=scontent.fjrs27-1.fna&oh=00_AfBznsQqru3LKG5R_yusbFRae9DPqKwVIvJEDQYnaRQB6g&oe=66041DE8',
       },
   {
     iconClass: 'fa-bed',
@@ -31,7 +31,7 @@ backgroundImage:'https://scontent.fjrs26-1.fna.fbcdn.net/v/t39.30808-6/425645668
   { iconClass: 'fa-couch',
   main: 'Living Room',
   sub: 'Luxurious and modern sofas',
-  backgroundImage: 'https://scontent.fjrs26-1.fna.fbcdn.net/v/t39.30808-6/416026378_687982476783266_606215530998296958_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=RkOyt-itZVsAX8iF6S8&_nc_ht=scontent.fjrs26-1.fna&oh=00_AfCNLpNUKS40m3pt0GSLfqVvrulyxr8otNT5AFrqV3Fwvg&oe=65D9ADFA',
+  backgroundImage:'https://scontent.fjrs27-1.fna.fbcdn.net/v/t39.30808-6/424922107_711901527724694_9107286498942218375_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=ZFXD0YD0vjIAX-B30nE&_nc_ht=scontent.fjrs27-1.fna&oh=00_AfBkYfRqorDzXFSzyxzQiE3HG1MDVWu6cAhIVv2sEO7kKg&oe=65E121A5',
 },
 {
   iconClass: 'fa-tv',
@@ -43,7 +43,7 @@ backgroundImage:'https://scontent.fjrs26-1.fna.fbcdn.net/v/t39.30808-6/425645668
   iconClass: 'fa-blender-phone',
   main: 'Appliances',
   sub: 'High-quality kitchen and home devices',
-  backgroundImage: 'https://scontent.fjrs26-1.fna.fbcdn.net/v/t39.30808-6/421830115_699169865664527_7336878440810194385_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=L3gV3tObIf0AX_kytw_&_nc_oc=AQkZ0pVt6l1sQaIPBBJ0X-lbaE3q_DoCr_s_hlRDVBfFy_AQZOzuLKdUdD02u_0MgmI&_nc_ht=scontent.fjrs26-1.fna&oh=00_AfApp3246ivDMhazu367fCmYSyn4UXGqH5aPBvEGoKyIYg&oe=65DA5EDB',
+  backgroundImage:'https://scontent.fjrs27-1.fna.fbcdn.net/v/t39.30808-6/422092725_711192021128978_2078010298482439679_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=z0fRKrxOq7QAX9_rIOj&_nc_ht=scontent.fjrs27-1.fna&oh=00_AfClzZL64Nbkh4KgGRzf_7EapP2CZgbQUsmyDlNyTKgpeg&oe=65E135BB',
 },
 
   // ... add other options here

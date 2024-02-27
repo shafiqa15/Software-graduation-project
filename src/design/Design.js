@@ -132,88 +132,17 @@ function Design() {
   const [showWallUpload, setShowWallUpload] = useState(false);
 
 
-// const capture= () => {
-//   html2canvas(document.body).then(function(canvas){
+const capture= () => {
+  html2canvas(document.body).then(function(canvas){
 
-// var a=document.createElement('a');
-// a.href=canvas.toDataURL("/Users/shafiqaabdat/Downloads/client-main/src/images/VEGA.jpeg").replace("image/jpeg","image/octet-stream");
-// a.download='shafiqa.jpg';
-// a.click();
-//   });
-// };
-const capture = () => {
-  html2canvas(document.body).then(canvas => {
-    // Create an image element
-    const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-    
-    // Create a temporary link element
-    const link = document.createElement('a');
-    link.download = 'screenshot.png'; // Name the image
-    link.href = image;
-    document.body.appendChild(link); // Append to body (needed for Firefox)
-    link.click(); // Simulate click
-    document.body.removeChild(link); // Remove the link when done
+var a=document.createElement('a');
+a.href=canvas.toDataURL("/Users/shafiqaabdat/Downloads/client-main/src/images/VEGA.jpeg").replace("image/jpeg","image/octet-stream");
+a.download='shafiqa.jpg';
+a.click();
   });
 };
 
-
-function captureThreeJSScene() {
-  const canvas = document.querySelector('canvas'); // Assuming there's only one canvas on the page
-  return canvas.toDataURL('image/png');
-}
-
-function captureDOM() {
-  return new Promise((resolve, reject) => {
-    html2canvas(document.body, { ignoreElements: (el) => el.tagName === 'CANVAS' }).then(canvas => {
-      resolve(canvas.toDataURL('image/png'));
-    }).catch(reject);
-  });
-}
-
-
-function combineImages(domImageSrc, threeJSSceneSrc) {
-  const canvas = document.createElement('canvas');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  const ctx = canvas.getContext('2d');
-
-  return new Promise((resolve) => {
-    const domImage = new Image();
-    domImage.onload = function() {
-      ctx.drawImage(domImage, 0, 0);
-
-      const threeJSImage = new Image();
-      threeJSImage.onload = function() {
-        ctx.drawImage(threeJSImage, 0, 0);
-        resolve(canvas.toDataURL('image/png'));
-      };
-      threeJSImage.src = threeJSSceneSrc;
-    };
-    domImage.src = domImageSrc;
-  });
-}
-
-
-
-async function captureEntirePage() {
-  const threeJSSceneSrc = captureThreeJSScene();
-  const domImageSrc = await captureDOM();
-
-  combineImages(domImageSrc, threeJSSceneSrc).then((combinedImageSrc) => {
-    // Trigger download
-    const link = document.createElement('a');
-    link.download = 'complete-screenshot.png';
-    link.href = combinedImageSrc;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  });
-}
-
   
-
-
-
   const handleFloorUpload = event => {
     const file = event.target.files[0];
     if (file) {
@@ -339,14 +268,12 @@ async function captureEntirePage() {
         Floor
       </button>
 
+      <button onClick={() => setShowWallUpload(true)} style={{ position: 'absolute', top: '555px', left: '20px', zIndex: 100 }}>Wall</button>
+
       
       <video ref={videoRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -1 }} autoPlay muted />
       <button onClick={startCamera} style={{ position: 'absolute', zIndex: 100,top: '460px', left: '20px' }}>Camera</button>
      
-
-
-
-    
 
       
       <Canvas style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }  }>
@@ -354,7 +281,7 @@ async function captureEntirePage() {
         <ambientLight intensity={1.5} />
         <spotLight position={[5, 5, 10]} angle={0.3} intensity={1.5} />
         {Object.entries(objects).map(([name, { modelPath, position, rotation, scale }]) => (
-          <Model key={name} modelPath={modelPath} position={position} rotation={rotation} scale={0.01} />
+          <Model key={name} modelPath={modelPath} position={position} rotation={rotation} scale={1} />
         ))}
       <Helpers/>
         {floorTexturePath && <Floor texturePath={floorTexturePath} />}
@@ -362,6 +289,9 @@ async function captureEntirePage() {
       </Canvas>
 
     
+
+
+
       <div style={{ position: 'absolute', top: '10px', left: '20px' }}>
       <h2 >
           U CAN DESIGN UR CHOSEN PRODUCTS HERE !
@@ -384,22 +314,15 @@ async function captureEntirePage() {
         <button onClick={() => updateRotation(1, Math.PI / 8)}>Rotate Y</button>
         <br/>
         <button onClick={() => updateRotation(2, Math.PI / 8)}>Rotate Z</button>
-  
-
-
 
 
     <br></br>
     <br></br>
     <br></br>
-    <p> -----------------</p>
-
-
-
-     
+    
       
       <div style={{ position: 'absolute', top: '690px', left: '10px', zIndex: 100 }}>
-        <input type="file" onChange={handleModelUpload} accept=".glb,.gltf,.obj,.JPG,.max" />
+        <input type="file" onChange={handleModelUpload} accept=".glb,.gltf,.usdz" />
       </div>
       
       <select value={activeObject || ''} onChange={handleChangeObject} style={{ position: 'absolute',top: '640px',left: '7px',width:'100px' ,zIndex: 100 }}>
@@ -410,19 +333,10 @@ async function captureEntirePage() {
       <br/>
     <button onClick={deleteActiveObject} style={{ position: 'absolute', top: '590px', left: '2px', zIndex: 100 }}>Delete</button> 
 
-    <button className='btn btn-deafult'id='button' onClick={captureEntirePage} style={{ position: 'absolute', top: '720px', left: '2px', zIndex: 100 }}>  
+    <button className='btn btn-deafult'id='button' onClick={capture} style={{ position: 'absolute', top: '720px', left: '2px', zIndex: 100 }}>  
      screen
      </button>
-
-
-{/*  <select value={activeObject || ''} onChange={handleChangeObject} style={{ position: 'absolute',top: '590px',left: '7px',width:'100px' ,zIndex: 100 }}>
-    {Object.keys(objects).map(modelName => (
-      <option key={modelName} value={modelName}>{modelName}</option>
-    ))}
-  </select>
-  <button onClick={deleteActiveObject} style={{ position: 'absolute', top: '620px', left: '20px', zIndex: 100 }}>Delete Object</button> */}
  <br/>
-  <button onClick={() => setShowWallUpload(true)}>Wall</button>
     {/* {windowModel.visible && (
   <WindowModel
     modelPath={windowModel.modelPath}
@@ -443,10 +357,6 @@ async function captureEntirePage() {
     <br></br>  <br></br> 
 
     <>
-
-
-
-
   {showWallUpload && (
     <div style={{ position: 'absolute', top: '510px', left: '120px', zIndex: 100, background: 'white', padding: '20px', width:'240px'}}>
         <input type="file" onChange={handleWallUpload} accept="image/jpeg, image/png" />

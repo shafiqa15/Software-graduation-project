@@ -5,18 +5,29 @@ import Slider from './slider/Slider.js';
 import Footer from './footer/Footer.js';
 import Design from './design/Design.js';
 import SignUp from './signup/SignUp.js';
-
+import Service from '/Users/shafiqaabdat/Downloads/client-main/src/services/Service.js';
+import Trending from './home/Trending/Trending.js';
+import ProductCard from './home/Trending/ProductCard.js';
+import BedRoomsLarge from './BedRoomsLarge/BedRoomsLarge.js';
+import ImageUpload from './IMAGE/ImageUpload.js';
+// import Mode from './Mode/Mode.js';
 const App = () => {
   return (
     <Router> 
       <div>
         <Routes>    
-          <Route index element={<Design/>}/>
+          <Route index element={<Home1np/>}/>
           <Route path="/Home1" element={<Home1/>}/>
           <Route path="/Slider" element={<Slider/>}/> 
           <Route path="/SignUp" element={<SignUp/>}/>
           <Route path="/Footer" element={<Footer/>}/>
           <Route path='/Design' element={<Design/>}/> 
+          <Route path='/Service' element={<Service/>}/>
+          <Route path='/Trending' element={<Trending/>}/>
+          <Route path='/ProductCard' element={<ProductCard/>}/>
+          <Route path='/BedRoomsLarge' element={<BedRoomsLarge/>}/>
+          <Route path='/ImageUpload' element={<ImageUpload/>}/>
+          {/* <Route path='/Mode' element={<Mode/>}/> */}
 
         </Routes>
       </div>

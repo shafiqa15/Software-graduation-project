@@ -1,0 +1,80 @@
+/* Trending.css */
+
+.product__item {
+    border: 1px solid #eee;
+    padding: 15px;
+    margin: 10px 0;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .product__item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .pro_img img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .pro_name {
+    font-size: 20px;
+    color: #333;
+    margin-top: 10px;
+  }
+  
+  .product__item span {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+  }
+  
+  .pro_card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .price {
+    font-size: 18px;
+    color: #000;
+  }
+  
+  .pro_card span {
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+  /* Using Font Awesome for the cart icon */
+  .pro_card span i {
+    display: inline-block;
+    margin-left: 10px;
+  }
+  
+  /* Example hover effect for the cart icon */
+  .pro_card span:hover i {
+    color: #764040;
+    
+  }
+  .pro_card span:hover section {
+   box-shadow: rebeccapurple;
+    
+  }
+
+  .product__item {
+    border: 1px solid #eee;
+    padding: 15px;
+    margin: 10px 0;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Normal state shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add box-shadow to the transition */
+  }
+  
+  .product__item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(160, 75, 47, 0.5); /* Glowing effect on hover */
+  }
+  
