@@ -6,23 +6,44 @@ import '/Users/shafiqaabdat/Downloads/client-main/src/BedRoomsLarge/BedRoomsLarg
 import Top from '../PAGES/Top';
 import bedFrameImage from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/firstbedimage.png';
 import Footer from '../footer/Footer';
+import { useNavigate } from 'react-router-dom';
+import bed2 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/Screenshot 2024-02-28 at 22.05.01.png';
+import bed3 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/Screenshot 2024-02-28 at 22.05.15.png';
+import bed4 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/Screenshot 2024-02-28 at 22.05.24.png';
+import bed1 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/Screenshot 2024-02-28 at 22.05.33.png';
 // Combined products array
 const products = [
-  { id: 1, name: 'Bed Frame', price: 100,imageUrl: bedFrameImage,kind:"Imported manufacturing" },
-  { id: 2, name: 'Mattress', price: 200 ,imageUrl: bedFrameImage,kind:"Local manufacturing " },
-  { id: 3, name: 'Duvet Cover', price: 50,imageUrl: bedFrameImage,kind:"Local manufacturing"  },
-  { id: 4, name: 'Pillow', price: 235 ,imageUrl: bedFrameImage,kind:"Imported manufacturing" },
-  { id: 5, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Imported manufacturing" },
-  { id: 6, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Local manufacturing" },
-  { id: 7, name: 'Pillow', price: 25,imageUrl: bedFrameImage ,kind:"Imported manufacturing" },
-  { id: 8, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Imported manufacturing" },
-  { id: 9, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Imported manufacturing" },
-  { id: 10, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Local manufacturing" },
-  { id: 11, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Imported manufacturing" },
-  { id: 12, name: 'Pillow', price: 2445 ,imageUrl: bedFrameImage,kind:"Local manufacturing" },
+  { id: 1, name: 'Bed Frame', price: 100,imageUrl: bedFrameImage,kind:"Imported manufacturing",obj:"" ,img1:bed2,img2:bed2,img3:bed1,img4:bed4},
+  { id: 2, name: 'Mattress', price: 200 ,imageUrl: bedFrameImage,kind:"Local manufacturing " ,obj:"",img1:bed2,img2:bed2,img3:bed3,img4:bedFrameImage},
+  { id: 3, name: 'Duvet Cover', price: 50,imageUrl: bedFrameImage,kind:"Local manufacturing" ,obj:"" ,img1:bedFrameImage,img2:bedFrameImage,img3:bed3,img4:bedFrameImage},
+  { id: 4, name: 'Pillow', price: 235 ,imageUrl: bedFrameImage,kind:"Imported manufacturing",obj:"" ,img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage},
+  { id: 5, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Imported manufacturing" ,obj:"",img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage},
+  { id: 6, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Local manufacturing" ,obj:"",img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage},
+  { id: 7, name: 'Pillow', price: 25,imageUrl: bedFrameImage ,kind:"Imported manufacturing" ,obj:"",img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage},
+  { id: 8, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Imported manufacturing",obj:"" ,img1:bed2,img2:bed2,img3:bed3,img4:bedFrameImage},
+  { id: 9, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Imported manufacturing" ,obj:"",img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage},
+  { id: 10, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Local manufacturing" ,obj:"",img1:bed2,img2:bed2,img3:bed3,img4:bedFrameImage},
+  { id: 11, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Imported manufacturing",obj:"",img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage},
+  { id: 12, name: 'Pillow', price: 2445 ,imageUrl: bedFrameImage,kind:"Local manufacturing" ,obj:"",img1:bed2,img2:bed2,img3:bed3,img4:bedFrameImage},
 ];
+export { products };
+
+
+// const imageUrl2 = query.get('imageUrl');
 
 const BedRoomsLarge = () => {
+
+  // Inside your BedRoomsLarge component
+
+const navigate = useNavigate();
+
+// Update your addToCart function or create a new function for navigation
+
+const navigateToBedPage = (productId, imageUrl) => {
+  const encodedImageUrl = encodeURIComponent(imageUrl);
+  navigate(`/product/${productId}?imageUrl=${encodedImageUrl}`);
+};
+
   const [cart, setCart] = useState([]);
   const [sortCriteria, setSortCriteria] = useState('priceLowToHigh');
   const [sortedProducts, setSortedProducts] = useState(products);
@@ -75,7 +96,7 @@ const BedRoomsLarge = () => {
           <option value="priceLowToHigh">Price Low to High</option>
           <option value="priceHighToLow">Price High to Low</option>
           <option value="Imported manufacturing">Imported manufacturing</option>
-          <option value="Local manufacturing">Local manufacturing"</option>
+          <option value="Local manufacturing">Local manufacturing</option>
          
         </select>
       </div>
@@ -87,7 +108,8 @@ const BedRoomsLarge = () => {
             <div className="ProductName">{product.name}</div>
             <div className="ProductPrice">{` ${product.price} ₪`}</div>
             <div className="kind">{` ${product.kind} `}</div>
-            <button className="AddToCartButton" onClick={() => addToCart(product)}>Details</button>
+            {/* n<button className="AddToCartButton" onClick={() => addToCart(product)}>Details</button> */}
+            <button className="AddToCartButton" onClick={() => navigateToBedPage(product.id, product.imageUrl)}>Details</button>
           </div>
         ))}
       </div>

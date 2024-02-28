@@ -4,10 +4,14 @@ import { OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import '/Users/shafiqaabdat/Downloads/client-main/src/design/design.css';
 import html2canvas from 'html2canvas'; // Import html2canvas
+// import Scene1 from '/SESSION_1709059176_2562448_preview-2.glb';
 
 import { startTransition } from 'react';
 
 import { useScreenshot,createFileName } from 'use-react-screenshot';
+
+
+
 function CameraController() {
   const { camera, gl } = useThree();
   useEffect(() => {
@@ -90,22 +94,27 @@ function Floor({ texturePath }) {
 function Model({ modelPath, position, rotation, scale }) {
   const ref = useRef();
   const gltf = useGLTF(modelPath);
+  // const { scene1 } = useGLTF("/SESSION_1709059176_2562448_preview-2.glb");
+
   useFrame(() => {
     ref.current.position.set(...position);
     ref.current.rotation.set(...rotation);
     ref.current.scale.set(scale, scale, scale);
   });
   return <primitive ref={ref} object={gltf.scene} />;
+
 }
 
 
 function Helpers() {
+
   return (
     <>
     
       <gridHelper args={[10, 10, 'white', 'white']} />
       <GridBorder size={10} color={'black'} />
       <axesHelper args={[30]} />
+
     </>
   );
 }
@@ -283,6 +292,7 @@ a.click();
         {Object.entries(objects).map(([name, { modelPath, position, rotation, scale }]) => (
           <Model key={name} modelPath={modelPath} position={position} rotation={rotation} scale={1} />
         ))}
+
       <Helpers/>
         {floorTexturePath && <Floor texturePath={floorTexturePath} />}
         <OrbitControls />

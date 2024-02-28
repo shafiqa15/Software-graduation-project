@@ -10,13 +10,13 @@ import Trending from './home/Trending/Trending.js';
 import ProductCard from './home/Trending/ProductCard.js';
 import BedRoomsLarge from './BedRoomsLarge/BedRoomsLarge.js';
 import ImageUpload from './IMAGE/ImageUpload.js';
-// import Mode from './Mode/Mode.js';
+import BedPage from './BedRoomsLarge/BedPage.js';
 const App = () => {
   return (
     <Router> 
       <div>
         <Routes>    
-          <Route index element={<Home1np/>}/>
+          <Route index element={<Home1/>}/>
           <Route path="/Home1" element={<Home1/>}/>
           <Route path="/Slider" element={<Slider/>}/> 
           <Route path="/SignUp" element={<SignUp/>}/>
@@ -27,6 +27,7 @@ const App = () => {
           <Route path='/ProductCard' element={<ProductCard/>}/>
           <Route path='/BedRoomsLarge' element={<BedRoomsLarge/>}/>
           <Route path='/ImageUpload' element={<ImageUpload/>}/>
+          <Route path="/product/:id" element={<BedPage />} /> {/* Ensure this path matches */}
           {/* <Route path='/Mode' element={<Mode/>}/> */}
 
         </Routes>
