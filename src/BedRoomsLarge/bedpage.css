@@ -3,5 +3,101 @@
   }
   
   .img-zoom:hover {
-    transform: scale(1.1); /* Adjust scale value as needed */
+    transform: scale(1.3); /* Adjust scale value as needed */
   }
+  /* Add this to your CSS file */
+  .product-display-container {
+    display: flex;
+    margin-top: 20px;
+  }
+  
+  .main-image-container {
+    margin-right: 20px;
+  }
+  
+  .main-image {
+ 
+    display: block;
+  }
+  
+  .thumbnail-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+
+
+  /* Enhanced styling for the product display container */
+.product-display-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  /* Styling for the main image container with shadow */
+  .main-image-container {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .main-image-container:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Styling for the main image */
+  .main-image {
+    /* width: 500px; */
+    height: 450px;
+    object-fit: cover; /* Ensure the image covers the area nicely */
+  }
+  
+  /* Styling for the smaller images container */
+  .small-images-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* Enhanced styling for smaller images with border and transition */
+  .img-zoom {
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .img-zoom:hover {
+    transform: translateY(-5px);
+    border-color: #8d6948;
+  }
+  
+  /* Styling for the canvas container with shadow */
+  .canvas-container {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .canvas-container:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* General styling for paragraphs to enhance readability */
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #666;
+  }
+  
+  /* Enhancing the overall container layout */
+  .container {
+ 
+    margin: auto;
+    /* padding: 20px; */
+  }
+  

@@ -4,7 +4,8 @@ import { useGLTF } from '@react-three/drei';
 import { OrbitControls } from '@react-three/drei';
 import { products } from './BedRoomsLarge.js';
 import React, { useState } from 'react';
-
+import Top from '../PAGES/Top.js';
+import '/Users/shafiqaabdat/Downloads/client-main/src/BedRoomsLarge/bedpage.css';
 // Define the useQuery hook
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -30,19 +31,26 @@ const BedPage = () => {
   const changeMainImage = (newImageUrl) => {
     setMainImageUrl(newImageUrl);
   };
+
+
+
+
+  
   return (
     <>
-      <p>This is the product page for product ID: {id}</p>
-  
-      <div style={{ display: 'flex', marginTop: '20px' }}>
-        <div style={{ marginRight: '20px' }}>
+    <Top></Top>
+      <p>This is the product page for product ID: {product.name}</p>
+ 
+      <div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-550px'}}>
+        <div className='main-image-container' style={{ marginRight: '20px' }}>
           {/* Main image */}
-          <img src={mainImageUrl} alt="Main Product"  style={{ width: '500px', height: '450px',display:'block' }} />
+          <img  className='main-image'  src={mainImageUrl} alt="Main Product"  style={{ width: '450px', height: '450px',display:'block' }} />
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <div className='"small-images-container"' style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {/* Iterate over the smaller images */}
           {[product.img1, product.img2, product.img3, product.img4].map((img, index) => img && (
             <img
+            className="img-zoom"
               key={index}
               src={img}
               alt={`Product Detail ${index + 1}`}
@@ -52,8 +60,8 @@ const BedPage = () => {
           ))}
         </div>
       </div>
-    <div style={{ position: 'absolute', top: '190px', left: '800px', width: '400px', height: '100%',overflow:'hidden',display:'none'}}>
-        <Canvas>
+    <div style={{ position: 'absolute', top: '190px', left: '800px', width: '400px', height: '100%'}}>
+        <Canvas >
           <ambientLight intensity={1.5} />
           <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
           <Scene1Model modelPath={scene1Path} scale={2} />

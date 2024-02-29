@@ -1,5 +1,9 @@
-/* SignupPage.css */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
 
+body {
+  font-family: 'Caveat', cursive;
+}
+ 
 .cover-page {
     display: flex;
     justify-content: center;
@@ -7,6 +11,7 @@
     height: 100vh;
     /* background: rgba(0, 0, 0, 0.5); Dim the background slightly */
     background-blend-mode: overlay;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .signup-container {
@@ -43,7 +48,7 @@
 .signup-form input[type="text"]:focus,
 .signup-form input[type="email"]:focus,
 .signup-form input[type="password"]:focus {
-    border-color: #007bff;
+    border-color: #d8a698;
     outline: none;
 }
 
@@ -62,9 +67,10 @@
 }
 
 .signup-form button {
-    width: 100%;
+    width: 50%;
     padding: 15px;
     border: none;
+    justify-content: center;
     background-color: rgb(100, 83, 39);;
     color: white;
     border-radius: 6px;
@@ -147,5 +153,162 @@
   }
  
   .signup-close{
-    color: blue;
+    color: rgb(152, 136, 97);
   }
+
+  .cover-page {
+    background-color: #f5f5f5; /* Lighter background for better contrast */
+}
+
+.signup-container {
+    padding: 40px;
+    border-radius: 16px; /* Smoother border-radius */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtler shadow */
+    background-color: #fff; /* Pure white background */
+    max-width: 800px;
+    width: 90%;
+    text-align: center;
+    opacity: 1; /* Remove opacity for clearer text */
+}
+
+/* Input and Label Styles */
+.signup-container input,
+.signup-container label {
+    transition: all 0.3s ease; /* Smooth transition for all */
+}
+
+.signup-container input:focus + label,
+.signup-container:not(:placeholder-shown) label {
+    transform: translateY(-1rem); /* Adjust for clear visibility */
+    background-color: #fff; /* Match input background */
+    color: #b99676; /* Highlight color for focus */
+}
+
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"] {
+    border-radius: 8px; /* Smoother borders for input fields */
+    border: 2px solid #ccc; /* Slightly thicker border for definition */
+    padding: 12px; /* Adjust padding for comfort */
+}
+
+.signup-form input[type="text"]:focus,
+.signup-form input[type="email"]:focus,
+.signup-form input[type="password"]:focus {
+    border-color: #6f655d; /* Blue border on focus */
+}
+
+
+/* Input Fields Glow on Focus */
+.signup-form input[type="text"]:focus,
+.signup-form input[type="email"]:focus,
+.signup-form input[type="password"]:focus {
+    outline: none;
+    border-color: #d7bc98; /* Blue border to indicate focus */
+    box-shadow: 0 0 8px rgba(251, 184, 140, 0.8); /* Glowing effect */
+}
+
+/* Button Glow on Hover */
+.signup-form button:hover {
+    background-color: #c5955b; /* Slightly darker blue for the button */
+    box-shadow: 0 0 8px rgba(180, 166, 134, 0.8); /* Glowing effect to match button color */
+}
+
+/* Optional: Adjust the toggle-password-icon glow on hover */
+.password-input-container .toggle-password-icon:hover {
+    color: #b28969; /* Change icon color on hover */
+    text-shadow: 0 0 8px rgba(161, 131, 87, 0.8); /* Glowing effect for the icon */
+}
+
+/* Continuous Glow for the Signup Container */
+.signup-container {
+  padding: 40px;
+  border-radius: 16px; /* Smooth border radius */
+  box-shadow: 0 0 15px rgba(234, 187, 138, 0.5); /* Blue glow */
+  background-color: #fff; /* Pure white background */
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  margin: auto; /* Center the container */
+  transition: box-shadow 0.3s ease-in-out; /* Smooth transition for glow effect */
+}
+
+/* Enhanced Glow on Container Hover or Input Focus */
+.signup-container:hover, .signup-container input:focus-within {
+  box-shadow: 0 0 20px rgba(212, 177, 101, 0.75); /* Stronger blue glow */
+}
+
+/* Input Focus Glow - Optional */
+.signup-form input[type="text"]:focus,
+.signup-form input[type="email"]:focus,
+.signup-form input[type="password"]:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(187, 156, 118, 0.8); /* Glowing effect for input fields */
+}
+
+/* Maintain the rest of your styles without changes */
+.signup-container {
+  /* Ensure this container is centered as needed and has enough space */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-and-image {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%; /* Adjust based on your preference */
+}
+
+.signup-form {
+  flex: 1; /* Allows the form to grow and fill the space */
+  margin-right: 20px; /* Adjust the spacing between form and image as needed */
+}
+
+.signup-image {
+  flex: 1; /* Allows the image container to grow and fill the space */
+}
+
+.signup-image img {
+  width: 100%; /* Makes the image responsive within its container */
+  height: auto; /* Maintains aspect ratio */
+}
+
+
+.signup-container {
+  display: flex;
+  flex-direction: row; /* Align children horizontally */
+  align-items: flex-start; /* Align children to the top */
+  justify-content: space-between; /* Add space between the form and the image */
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  max-width: 800px; /* Adjust as necessary */
+  width: 90%;
+  margin: auto; /* Center the container on the page */
+  opacity: 1;
+}
+
+.signup-form-container {
+  /* Assign width or flex-basis as needed, for example: */
+  width: 50%; /* Or use flex-basis */
+}
+
+.signup-image-container {
+  /* Assign width or flex-basis as needed, for example: */
+  width: 50%; /* Or use flex-basis */
+}
+
+.signup-image-container img {
+  width: 100%; /* Ensure the image is responsive within its container */
+  height: auto; /* Maintain aspect ratio */
+  /* If you want to round only specific corners: */
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+/* Your other styles remain unchanged */
+
+

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '/Users/shafiqaabdat/Downloads/client-main/src/signup/SignupPage.css'; // Make sure this path is correct
-
+import image1 from '/Users/shafiqaabdat/Downloads/client-main/src/images/Screenshot 2024-03-01 at 01.22.19.png';
 const SignUp = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -50,16 +50,23 @@ const SignUp = () => {
     };
 
     return (
+        <>
+                        <h1 style={{marginTop:'70px',fontFamily:'fantasy',fontSize:'30px'}}>
+    Create a new account for Exclusive Furniture Deals!
+</h1>
+       
         <div className="cover-page">
+ 
             {/* Assuming <Top> is a navbar or header component */}
             {/* <Top /> */}
-            <i className="ri-close-line login__close" id="signup-close"  onClick={() => window.location.href = '/'}></i>
+            <i style={{marginTop:'-30px'}} className="ri-close-line login__close" id="signup-close"  onClick={() => window.location.href = '/'}></i>
 
-            <div className="signup-container">
+            <div className="signup-container" style={{marginTop:'10px'}}>
                 
-                <h2>Sign Up for Exclusive Furniture Deals!</h2>
+                {/* <h2>Sign Up for Exclusive Furniture Deals!</h2> */}
                 <form onSubmit={handleSubmit} className="signup-form">
             <div>
+            <br/>
             <div className="password-input-container">
                     <input
                         type="text"
@@ -121,7 +128,7 @@ const SignUp = () => {
                             
                         </span>
                     </div>
-                    <button type="submit" className="signup-container">Sign Up</button>
+                    <button type="submit" className="signup-container" style={{fontFamily:'fantasy',fontSize:'20px'}}>Sign Up</button>
                     {!passwordMatch && (
                         <label className="password-match-message">
                             Passwords do not match.
@@ -131,9 +138,15 @@ const SignUp = () => {
                    
 
                 </form>
+                <div className="signup-image-container">
+                        <img src={image1} alt="Decorative" className="signup-image" />
+                    </div>
             </div>
+   
         </div>
+        </>
     );
+    
 };
 
 export default SignUp;
