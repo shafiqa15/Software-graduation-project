@@ -26,21 +26,44 @@ const BedPage = () => {
 
   const scene1Path = '/SESSION_1709059176_2562448_preview-2.glb';
   const [mainImageUrl, setMainImageUrl] = useState(product?.imageUrl || product?.img1);
+  const [mainImageUrl2, setMainImageUrl2] = useState(product?.upadte1 || product?.img1);
+
 
   // Function to change the main image
   const changeMainImage = (newImageUrl) => {
     setMainImageUrl(newImageUrl);
   };
 
+  const handleButtonClick = () => {
+    setShowButton(!showButton);
+    setShowFirstImages(!showFirstImages);
 
-
-
+  };
   
+  const [showFirstImages, setShowFirstImages] = useState(true);
+
+  const [showButton, setShowButton] = useState(false);
+ 
+
+  const handleCircleButtonClick = (buttonNumber) => {
+    // Add your logic for handling circle button clicks
+    console.log(`Clicked on Circle Button ${buttonNumber}`);
+    // You can replace this with your specific logic
+  };
+
+
+
+
   return (
     <>
     <Top></Top>
       <p>This is the product page for product ID: {product.name}</p>
  
+
+
+     
+      {showFirstImages && (
+
       <div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-550px'}}>
         <div className='main-image-container' style={{ marginRight: '20px' }}>
           {/* Main image */}
@@ -60,14 +83,70 @@ const BedPage = () => {
           ))}
         </div>
       </div>
+      )}
+    
+      {showButton && (
+        <div className='product-display-container' style={{ display: 'flex', marginTop: '50px', marginLeft: '-550px' }}>
+          <div className='main-image-container' style={{ marginRight: '20px' }}>
+            <img className='main-image' src={mainImageUrl} alt='Main Product' style={{ width: '450px', height: '450px', display: 'block' }} />
+          </div>
+          <div className='small-images-container' style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {[product.upadte1, product.update2, product.upadte3, product.update4].map((img, index) =>
+              img && (
+                <img
+                  className='img-zoom'
+                  key={index}
+                  src={img}
+                  alt={`Product Detail ${index + 1}`}
+                  style={{ cursor: 'pointer', width: '100px', height: '100px' }}
+                  onClick={() => changeMainImage(img)}
+                />
+              )
+            )}
+          </div>
+        </div>
+      )}
+
+
+
+   {/* Right side content */}
+   <div className="right-side-content">
+        {/* Circle buttons */}
+        <button className="circle-button" onClick={handleButtonClick}>
+          {/* change color to blue */}
+        </button>
+
+        <div className="circle-buttons">
+          {[1, 2, 3, 4].map((buttonNumber) => (
+            
+            <div key={buttonNumber} className="circle-button">
+              {/* You can customize the circle button's appearance and behavior */}
+              <button onClick={() => handleCircleButtonClick(buttonNumber)}>Button {buttonNumber}</button>
+              
+            </div>
+            
+          ))}
+        </div>
+
+        {/* Description */}
+        <div className="description">
+          {/* Add your description content here */}
+          <p>This is the description below the circle buttons.</p>
+        </div>
+      </div>
+
+
+
+
+{/* 
     <div style={{ position: 'absolute', top: '190px', left: '800px', width: '400px', height: '100%'}}>
         <Canvas >
           <ambientLight intensity={1.5} />
           <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
-          <Scene1Model modelPath={scene1Path} scale={2} />
+          <Scene1Model modelPath={product.obj} scale={2} />
           <OrbitControls />
         </Canvas>
-      </div>
+      </div> */}
 
     </>
   );
