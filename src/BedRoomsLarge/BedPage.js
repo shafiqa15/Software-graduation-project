@@ -138,7 +138,7 @@ const BedPage = () => {
 
 
 
-{/* 
+
     <div style={{ position: 'absolute', top: '190px', left: '800px', width: '400px', height: '100%'}}>
         <Canvas >
           <ambientLight intensity={1.5} />
@@ -146,7 +146,7 @@ const BedPage = () => {
           <Scene1Model modelPath={product.obj} scale={2} />
           <OrbitControls />
         </Canvas>
-      </div> */}
+      </div>
 
     </>
   );
