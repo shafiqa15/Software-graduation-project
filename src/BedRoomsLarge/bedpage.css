@@ -243,7 +243,7 @@ margin-top: -450px;
 .circle-buttons8{
   width: 90px; /* Adjust the width and height to your preference for the circular shape */
   height: 90px;
-  margin-top: -200px;
+  margin-top: -250px;
   border-radius: 50%;
   margin-left: 1000px;
   /* background-image: url("../images//bed1/Screenshot 2024-03-01 at 18.53.48.png"); */
@@ -254,4 +254,19 @@ margin-top: -450px;
   background-color: #f3f1f0;
   box-shadow: 0 0 20px rgba(188, 124, 124, 0.8); /* Adjust the values as needed for the glow effect */
 
+}
+.circle-buttons9999{
+  width: 50px; /* Adjust the width and height to your preference for the circular shape */
+  height: 50px;
+  margin-top: -5px;
+  border-radius: 50%;
+  margin-left: 800px;
+  /* background-image: url("../images//bed1/Screenshot 2024-03-01 at 18.53.48.png"); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #a3684b;
+  box-shadow: 0 0 20px rgba(188, 124, 124, 0.8); /* Adjust the values as needed for the glow effect */
+  
 }

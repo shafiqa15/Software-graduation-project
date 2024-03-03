@@ -144,7 +144,7 @@ const BedPage = () => {
   const [showCanvas7, setShowCanvas7] = useState(false);
 
   const toggleCanvas7 = () => {
-    setShowCanvas7(!showCanvas5);
+    setShowCanvas7(!showCanvas7);
     setShowCanvas(showCanvas);
   };
 
@@ -345,7 +345,7 @@ const BedPage = () => {
 
 
 {showCanvas7 && (
-        <div style={{ position: 'absolute', top: '1900px', left: '840px', width: '500px', height: '100%' }}>    <Canvas>
+        <div style={{ position: 'absolute', top: '1870px', left: '950px', width: '500px', height: '100%' }}>    <Canvas>
       <ambientLight intensity={1.5} />
       <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
       <Scene1Model modelPath={product.mirrorobj} scale={2} material={<meshStandardMaterial color="white" />} />
@@ -450,7 +450,7 @@ const BedPage = () => {
 
 
 
-<br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  
+<br/>  <br/>  <br/>  <br/>  <br/>  <br/> 
 
 
 <div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-550px'}}>
@@ -473,6 +473,19 @@ const BedPage = () => {
   </div>
 </div>
 
+<p style={{marginTop:'-450px',marginLeft:'800px'}}> -{product.kind} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'800px'}}>-The wood kind is {product.name}.</p>
+
+       <p style={{marginTop:'-10px',marginLeft:'800px'}}>-Colors available:</p>
+ 
+    
+        <button className="circle-buttons9999" onClick={() => {handleCircleButtonClick() }}></button>
+          <div className="description" style={{marginTop:'230px',marginLeft:'800px'}}>
+          <p style={{color:'red'}}>Pick the color you want to see the changes ! </p>
+          <p style={{marginTop:'-20px'}}> U can see the 3d model of you chosen product to see all it's details .
+          
+</p>
+       
+      </div>  
 <button className="circle-buttons8" onClick={toggleCanvas7}><p style={{fontFamily:'fantasy',fontWeight:'bold',color:'black',fontSize:'40px',marginTop:'20px'}}> 3D</p> </button>
 
 
