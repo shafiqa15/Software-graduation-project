@@ -38,6 +38,8 @@ const BedPage = () => {
   const [mainImageUrl, setMainImageUrl] = useState(product?.imageUrl || product?.img1);
   const [mainImageUrl2, setMainImageUrl2] = useState(product?.upadte1 || product?.img1);
   const [mainImageUrlkhzana, setMainImageUrlkhzana] = useState(product?.khzana);
+  const [mainImageUrlkfloow, setMainImageUrlkfolow] = useState(product?.follow2);
+  const [mainImageUrlcomedena, setMainImageUrlcomedena] = useState(product?.comedena1);
 
 
   // Function to change the main image
@@ -49,6 +51,12 @@ const BedPage = () => {
     setMainImageUrlkhzana(newImageUrl);
   };
 
+  const changeMainImagefoloow= (newImageUrl) => {
+    setMainImageUrlkfolow(newImageUrl);
+  };
+  const changeMainImagecomedena= (newImageUrl) => {
+    setMainImageUrlcomedena(newImageUrl);
+  };
 
 
 
@@ -120,6 +128,13 @@ const BedPage = () => {
     setShowCanvas(showCanvas);
   };
 
+  const [showCanvas5, setShowCanvas5] = useState(false);
+
+  const toggleCanvas5 = () => {
+    setShowCanvas5(!showCanvas5);
+    setShowCanvas(showCanvas);
+  };
+
   // const IMAGES = [
   //   { url: product.bed1black, alt: "Car One" },
   //   { url: product.bed1black, alt: "Car Two" },
@@ -132,22 +147,24 @@ const BedPage = () => {
     <Top></Top>
  
 
-<p className='madimi-one-regular' style={{marginTop:'100px',fontWeight:'bold',fontSize:'30px',marginLeft:'200px'}}> One of the amazing {product.kind} in the website that has <span style={{color:'InfoText'}}>6 </span>peices </p>
+<p className='madimi-one-regular' style={{marginTop:'100px',fontWeight:'bold',fontSize:'30px',marginLeft:'200px'}}> One of the amazing {product.kind} in the website that has <span style={{color:'InfoText'}}>7 </span>peices </p>
     <div className='sora111' style={{   backgroundColor:'rgb(221, 215, 205)'
 
 }}>
-      <img style={{  marginLeft: '300px'}} className='photo' src={product.img1} alt="Photo 1" />
+      <img style={{  marginLeft: '200px'}} className='photo' src={product.img1} alt="Photo 1" />
 
       <img className='photo' src={product.khzana} alt="Photo 2" />
-      <img className='photo' src={product.follow} alt="Photo 3" />
+      <img className='photo' src={product.comedena1} alt="Photo 3" />
       <img className='photo' src={product.mirror} alt="Photo 4" />
+      <img className='photo' src={product.follow2} alt="Photo 5" />
     </div>
 
     <p className='madimi-one-regular' style={{ marginRight: '20px' }}>
-    <span style={{ marginLeft: '400px' }}>1 Bed</span>
+    <span style={{ marginLeft: '300px' }}>1 Bed</span>
        <span style={{ marginLeft: '150px' }}>1 Wardrobe</span>
-      <span style={{ marginLeft: '120px' }}>2 Bed Followings</span>
-      <span style={{ marginLeft: '100px' }}> 1 Mirror</span>
+      <span style={{ marginLeft: '100px' }}>2 Bed Followings</span>
+      <span style={{ marginLeft: '110px' }}> 1 Mirror</span>
+      <span style={{ marginLeft: '140px' }}> 1 Comedena</span>
     </p> 
 
     {/* <Imageslider images={IMAGES} /> */}
@@ -283,6 +300,21 @@ const BedPage = () => {
 
 
 
+
+      {showCanvas5 &&(
+        <div style={{ position: 'absolute', top: '1300px', left: '900px', width: '500px', height: '100%' }}>
+          <Canvas>
+            <ambientLight intensity={1.5} />
+            <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
+            <Scene1Model modelPath={product.comedenaobj} scale={2} />
+            <OrbitControls />
+          </Canvas>
+        </div>
+      )}
+
+
+
+
 {showCanvas3 && (
         <div style={{ position: 'absolute', top: '850px', left: '840px', width: '500px', height: '100%' }}>    <Canvas>
       <ambientLight intensity={1.5} />
@@ -336,13 +368,7 @@ const BedPage = () => {
 </div>
  <p style={{marginTop:'-450px',marginLeft:'800px'}}> -{product.kind} bed  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'800px'}}>-The wood kind is {product.name}.</p>
        <p style={{marginTop:'-10px',marginLeft:'800px'}}>-Only off-white.</p>
-
-
-   
-  
         <button className="circle-buttons6" onClick={() => {handleCircleButtonClick() }}></button>
-             {/* <span>   Dark Brown</span> */}
-          {/* Add your description content here */}
           <div className="description" style={{marginTop:'210px',marginLeft:'750px'}}>
           <p style={{color:'red'}}>Pick the color you want to see the changes ! </p>
           <p style={{marginTop:'-20px'}}> U can see the 3d model of you chosen product to see all it's details .
@@ -358,50 +384,54 @@ const BedPage = () => {
 <div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-550px'}}>
   <div className='main-image-container' style={{ marginRight: '20px' }}>
     {/* Main image */}
-    <img  className='main-image'  src={mainImageUrl} alt="Main Product"  style={{ width: '450px', height: '450px',display:'block' }} />
+    <img  className='main-image'  src={mainImageUrlcomedena} alt="Main Product"  style={{ width: '450px', height: '450px',display:'block' }} />
   </div>
   <div className='"small-images-container"' style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
     {/* Iterate over the smaller images */}
-    {[product.img1, product.img2, product.img3, product.img4].map((img, index) => img && (
+    {[product.comedena1, product.comedena2, product.comedena3, product.comedena4].map((img, index) => img && (
       <img
       className="img-zoom"
         key={index}
         src={img}
         alt={`Product Detail ${index + 1}`}
         style={{ cursor: 'pointer', width: '100px', height: '100px' }}
-        onClick={() => changeMainImage(img)}
+        onClick={() => changeMainImagecomedena(img)}
       />
     ))}
   </div>
 </div>
 
 
+<button className="circle-buttons7" onClick={toggleCanvas5}><p style={{fontFamily:'fantasy',fontWeight:'bold',color:'black',fontSize:'40px',marginTop:'20px'}}> 3D</p> </button>
 
 
 
 
-<br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  
+
+
+<br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  
+
 
 <div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-550px'}}>
   <div className='main-image-container' style={{ marginRight: '20px' }}>
     {/* Main image */}
-    <img  className='main-image'  src={mainImageUrl} alt="Main Product"  style={{ width: '450px', height: '450px',display:'block' }} />
+    <img  className='main-image'  src={mainImageUrlkfloow} alt="Main Product"  style={{ width: '450px', height: '450px',display:'block' }} />
   </div>
   <div className='"small-images-container"' style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
     {/* Iterate over the smaller images */}
-    {[product.img1, product.img2, product.img3, product.img4].map((img, index) => img && (
+    {[product.follow, product.follow2, product.folo3, product.follow].map((img, index) => img && (
       <img
       className="img-zoom"
         key={index}
         src={img}
         alt={`Product Detail ${index + 1}`}
         style={{ cursor: 'pointer', width: '100px', height: '100px' }}
-        onClick={() => changeMainImage(img)}
+        onClick={() => changeMainImagefoloow(img)}
       />
     ))}
   </div>
 </div>
-
+<br/><br/><br/><br/><br/><br/>
 
 
     {/* <div style={{ position: 'absolute', top: '390px', left: '800px', width: '400px', height: '100%'}}>

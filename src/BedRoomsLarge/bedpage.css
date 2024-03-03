@@ -221,3 +221,22 @@ margin-top: -450px;
   box-shadow: 0 0 20px rgba(188, 124, 124, 0.8); /* Adjust the values as needed for the glow effect */
 
 }
+
+
+.circle-buttons7{
+  width: 90px; /* Adjust the width and height to your preference for the circular shape */
+  height: 90px;
+  margin-top: -300px;
+  border-radius: 50%;
+  margin-left: 1000px;
+  /* background-image: url("../images//bed1/Screenshot 2024-03-01 at 18.53.48.png"); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #f3f1f0;
+  box-shadow: 0 0 20px rgba(188, 124, 124, 0.8); /* Adjust the values as needed for the glow effect */
+
+}
+
+
