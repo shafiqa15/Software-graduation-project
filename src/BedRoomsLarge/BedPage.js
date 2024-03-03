@@ -148,7 +148,12 @@ const BedPage = () => {
     setShowCanvas(showCanvas);
   };
 
+  const [showCanvas9, setShowCanvas9] = useState(false);
 
+  const toggleCanvas9 = () => {
+    setShowCanvas9(!showCanvas9);
+    setShowCanvas(showCanvas);
+  };
 
 
 
@@ -169,6 +174,9 @@ const BedPage = () => {
     <div className='sora111' style={{   backgroundColor:'rgb(221, 215, 205)'
 
 }}>
+
+
+
       <img style={{  marginLeft: '200px'}} className='photo' src={product.img1} alt="Photo 1" />
 
       <img className='photo' src={product.khzana} alt="Photo 2" />
@@ -180,10 +188,15 @@ const BedPage = () => {
     <p className='madimi-one-regular' style={{ marginRight: '20px' }}>
     <span style={{ marginLeft: '300px' }}>1 Bed</span>
        <span style={{ marginLeft: '150px' }}>1 Wardrobe</span>
-      <span style={{ marginLeft: '100px' }}>2 Bed Followings</span>
-      <span style={{ marginLeft: '110px' }}> 1 Mirror</span>
-      <span style={{ marginLeft: '140px' }}> 1 Comedena</span>
+      <span style={{ marginLeft: '100px' }}>2 Nightstands</span>
+      <span style={{ marginLeft: '130px' }}> 1 Mirror</span>
+      <span style={{ marginLeft: '140px' }}> 1 bed following</span>
     </p> 
+    <br></br>
+
+<p className='animated-text_bed' style={{marginLeft:'600px'}}> Price is {product.price}₪ </p>
+
+
 
     {/* <Imageslider images={IMAGES} /> */}
       {/* <p>This is the product page for product ID: {product.name}</p> */}
@@ -325,6 +338,19 @@ const BedPage = () => {
             <ambientLight intensity={1.5} />
             <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
             <Scene1Model modelPath={product.comedenaobj} scale={2} />
+            <OrbitControls />
+          </Canvas>
+        </div>
+      )}
+
+
+
+      {showCanvas9&&(
+        <div style={{ position: 'absolute', top: '2350px', left: '900px', width: '500px', height: '100%' }}>
+          <Canvas>
+            <ambientLight intensity={1.5} />
+            <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
+            <Scene1Model modelPath={product.folowobj} scale={2} />
             <OrbitControls />
           </Canvas>
         </div>
@@ -519,8 +545,21 @@ const BedPage = () => {
     ))}
   </div>
 </div>
+ <p style={{marginTop:'-450px',marginLeft:'800px'}}> -{product.kind} bed following  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'800px'}}>-The wood kind is {product.name}.</p>
+       <p style={{marginTop:'-10px',marginLeft:'800px'}}>-Colors available:Only off-white.</p>
+        <button className="circle-buttons6" onClick={() => {handleCircleButtonClick() }}></button>
+          <div className="description" style={{marginTop:'210px',marginLeft:'800px'}}>
+          <p style={{color:'red'}}>Pick the color you want to see the changes ! </p>
+          <p style={{marginTop:'-20px'}}> U can see the 3d model of you chosen product to see all it's details .
+          
+</p>
+       
+      </div>  
+
+<button className="circle-buttons9" onClick={toggleCanvas9}><p style={{fontFamily:'fantasy',fontWeight:'bold',color:'black',fontSize:'40px',marginTop:'20px'}}> 3D</p> </button>
 
 
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
     {/* <div style={{ position: 'absolute', top: '390px', left: '800px', width: '400px', height: '100%'}}>
         <Canvas >
           <ambientLight intensity={1.5} />
