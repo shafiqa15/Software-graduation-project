@@ -64,7 +64,7 @@ const SignUp = () => {
             <div className="signup-container" style={{marginTop:'10px'}}>
                 
                 {/* <h2>Sign Up for Exclusive Furniture Deals!</h2> */}
-                <form onSubmit={handleSubmit} className="signup-form">
+                <form onSubmit={handleSubmit} className="signup-form" >
             <div>
             <br/>
             <div className="password-input-container">

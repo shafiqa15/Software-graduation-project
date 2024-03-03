@@ -287,8 +287,8 @@ a.click();
       
       <Canvas style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }  }>
         <CameraController />
-        <ambientLight intensity={1.5} />
-        <spotLight position={[5, 5, 10]} angle={0.3} intensity={1.5} />
+        <ambientLight intensity={1} />
+        <spotLight position={[5, 5, 10]} angle={0.3} intensity={0.3} />
         {Object.entries(objects).map(([name, { modelPath, position, rotation, scale }]) => (
           <Model key={name} modelPath={modelPath} position={position} rotation={rotation} scale={1} />
         ))}

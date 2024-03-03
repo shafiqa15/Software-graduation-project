@@ -20,24 +20,37 @@ import bed1coloreblue from '../images/bed1/Untitled-4.jpg';
 import bed0coloreblue from '../images/bed1/Untitled.jpg';
 
 
+import black1 from '../images/Screenshot 2024-02-27 at 15.44.00.png';
+import black2 from '../images/Screenshot 2024-02-20 at 16.56.49.png';
+import black3 from '../images/Screenshot 2024-02-20 at 15.13.32.png';
+import black4 from '../images/Screenshot 2024-02-26 at 17.43.26.png';
+import khzana from '../images/bed1/Screenshot 2024-03-02 at 16.41.28.png'
 
-const obj1 = '/SESSION_1709059176_2562448_preview-2.glb';
+import folo from '../images/bed1/Screenshot_2024-03-02_at_02.23.41-removebg-preview.png'
+import mirror from '../images/bed1/mirror.png'
 
+import khazana2 from '../images/bed1/Screenshot 2024-03-02 at 16.38.24.png';
+import khazana3 from '../images/bed1/Screenshot 2024-03-02 at 16.38.30.png';
+import khazana4 from '../images/bed1/Screenshot 2024-03-02 at 16.41.13.png';
+
+const obj1 = '/SESSION_1709059176_2562448_mesh.gltf';
+const obj2='/SESSION_1709322881_5313601_mesh.gltf'
+const khzana_obj='/SESSION_1709322029_4794408_mesh.gltf';
 
 // Combined products array
 const products = [
-  { id: 1, name: 'Bed Frame', price: 100,imageUrl: bedFrameImage,kind:"Imported manufacturing",obj:obj1 ,img1:bed2,img2:bed2,img3:bed1,img4:bed4,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown"},
-  { id: 2, name: 'Mattress', price: 200 ,imageUrl: bedFrameImage,kind:"Local manufacturing " ,obj:obj1,img1:bed2,img2:bed2,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown"},
-  { id: 3, name: 'Duvet Cover', price: 50,imageUrl: bedFrameImage,kind:"Local manufacturing" ,obj:obj1,img1:bedFrameImage,img2:bedFrameImage,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown"},
-  { id: 4, name: 'Pillow', price: 235 ,imageUrl: bedFrameImage,kind:"Imported manufacturing",obj:obj1,img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown"},
-  { id: 5, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Imported manufacturing" ,obj:obj1,img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown"},
-  { id: 6, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Local manufacturing" ,obj:obj1,img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown"},
-  { id: 7, name: 'Pillow', price: 25,imageUrl: bedFrameImage ,kind:"Imported manufacturing" ,obj:obj1,img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown"},
-  { id: 8, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Imported manufacturing",obj:obj1 ,img1:bed2,img2:bed2,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown"},
-  { id: 9, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Imported manufacturing" ,obj:obj1,img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown"},
-  { id: 10, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Local manufacturing" ,obj:obj1,img1:bed2,img2:bed2,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown"},
-  { id: 11, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Imported manufacturing",obj:obj1,img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown"},
-  { id: 12, name: 'Pillow', price: 2445 ,imageUrl: bedFrameImage,kind:"Local manufacturing" ,obj:obj1,img1:bed2,img2:bed2,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown"},
+  { id: 1, name: 'Bed Frame', price: 100,imageUrl: bedFrameImage,kind:"Imported manufacturing",obj:obj1 ,img1:bed2,img2:bed2,img3:bed1,img4:bed4,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown",bed1black:black1,bed2black:black2,bed3black:black3,bed4black:black4,khzana:khzana,follow:folo ,mirror:mirror,objblue:obj2,khzana_obj:khzana_obj,Khzana2:khazana2,khzana3:khazana3,khzana4:khazana4},
+  { id: 2, name: 'Mattress', price: 200 ,imageUrl: bedFrameImage,kind:"Local manufacturing " ,obj:obj1,img1:bed2,img2:bed2,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown",khzana:khzana,follow:folo,mirror:mirror,objblue:obj2,khzana_obj:khzana_obj,Khzana2:khazana2,khzana3:khazana3,khzana4:khazana4},
+  { id: 3, name: 'Duvet Cover', price: 50,imageUrl: bedFrameImage,kind:"Local manufacturing" ,obj:obj1,img1:bedFrameImage,img2:bedFrameImage,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown",khzana:khzana,follow:folo,mirror:mirror,objblue:obj2,khzana_obj:khzana_obj,Khzana2:khazana2,khzana3:khazana3,khzana4:khazana4},
+  { id: 4, name: 'Pillow', price: 235 ,imageUrl: bedFrameImage,kind:"Imported manufacturing",obj:obj1,img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown",khzana:khzana,follow:folo,mirror:mirror,objblue:obj2,khzana_obj:khzana_obj,Khzana2:khazana2,khzana3:khazana3,khzana4:khazana4},
+  { id: 5, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Imported manufacturing" ,obj:obj1,img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown",khzana:khzana,follow:folo,mirror:mirror,objblue:obj2,khzana_obj:khzana_obj,Khzana2:khazana2,khzana3:khazana3,khzana4:khazana4},
+  { id: 6, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Local manufacturing" ,obj:obj1,img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown",khzana:khzana,follow:folo,mirror:mirror,objblue:obj2,khzana_obj:khzana_obj,Khzana2:khazana2,khzana3:khazana3,khzana4:khazana4},
+  { id: 7, name: 'Pillow', price: 25,imageUrl: bedFrameImage ,kind:"Imported manufacturing" ,obj:obj1,img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown",khzana:khzana,follow:folo,mirror:mirror,objblue:obj2,khzana_obj:khzana_obj,Khzana2:khazana2,khzana3:khazana3,khzana4:khazana4},
+  { id: 8, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Imported manufacturing",obj:obj1 ,img1:bed2,img2:bed2,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown",khzana:khzana,follow:folo,mirror:mirror,objblue:obj2,khzana_obj:khzana_obj,Khzana2:khazana2,khzana3:khazana3,khzana4:khazana4},
+  { id: 9, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Imported manufacturing" ,obj:obj1,img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown",khzana:khzana,follow:folo,mirror:mirror,objblue:obj2,khzana_obj:khzana_obj,Khzana2:khazana2,khzana3:khazana3,khzana4:khazana4},
+  { id: 10, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Local manufacturing" ,obj:obj1,img1:bed2,img2:bed2,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown",khzana:khzana,follow:folo,mirror:mirror,objblue:obj2,khzana_obj:khzana_obj,Khzana2:khazana2,khzana3:khazana3,khzana4:khazana4},
+  { id: 11, name: 'Pillow', price: 25 ,imageUrl: bedFrameImage,kind:"Imported manufacturing",obj:obj1,img1:bed2,img2:bedFrameImage,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown",khzana:khzana,follow:folo,mirror:mirror,objblue:obj2,khzana_obj:khzana_obj,Khzana2:khazana2,khzana3:khazana3,khzana4:khazana4},
+  { id: 12, name: 'Pillow', price: 2445 ,imageUrl: bedFrameImage,kind:"Local manufacturing" ,obj:obj1,img1:bed2,img2:bed2,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown",khzana:khzana,follow:folo,mirror:mirror,objblue:obj2,khzana_obj:khzana_obj,Khzana2:khazana2,khzana3:khazana3,khzana4:khazana4},
 ];
 export { products };
 

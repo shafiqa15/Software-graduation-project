@@ -9,6 +9,8 @@
   .product-display-container {
     display: flex;
     margin-top: 20px;
+    box-shadow: 0 0 30px rgba(188, 124, 124, 0.8); /* Adjust the values as needed for the glow effect */
+
   }
   
   .main-image-container {
@@ -107,10 +109,21 @@ margin-top: -450px;
 
   }
   
-  ..circle-buttons {
+  .circle-buttons {
+
+
+    background-image: url("../images//bed1/Screenshot 2024-03-02 at 00.02.13.png");
+
+    width: 50px; /* Adjust the width and height to your preference for the circular shape */
+    height: 50px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+  
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    cursor: pointer;
+
   }
   
   .circle-button {
@@ -125,6 +138,18 @@ margin-top: -450px;
     cursor: pointer;
   }
   
+
+  .circle-buttons3{
+    width: 50px; /* Adjust the width and height to your preference for the circular shape */
+    height: 50px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
   .circle-button button {
     border: none;
     background: none;
@@ -132,4 +157,67 @@ margin-top: -450px;
     font-size: 14px; /* Adjust the font size */
     cursor: pointer;
   }
+
+  .madimi-one-regular {
+    font-family: "Madimi One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
   
+/* 
+  .sora111 {
+    background-image: url('/Users/shafiqaabdat/Downloads/client-main/src/images/Screenshot 2024-02-26 at 17.43.26.png');
+    background-repeat: no-repeat; Prevents the image from repeating
+    background-size: 100% auto; Stretches the image to 100% of the element's width while maintaining aspect ratio
+    margin-top: -20px;
+    height: 500px; You may need to adjust this depending on your needs
+    width: 100vw; This makes the element's width equal to the width of the viewport */
+    /* margin-left: 0;
+    margin-right: 0;
+} */
+.sora111 {
+  display: flex; /* Use flexbox to arrange images horizontally */
+  width: 100%;
+  box-shadow: 0 0 20px rgba(188, 124, 124, 0.8); /* Adjust the values as needed for the glow effect */
+  outline: 2px solid rgba(255, 255, 255, 0.5); /* Adjust the values as needed for the border color and width */
+}
+
+
+.photo {
+  width: 200px; /* Set your preferred width */
+  height: 200px; /* Set your preferred height */
+  margin-right: 10px; /* Adjust the margin between images as needed */
+}
+
+
+.circle-button5 {
+  width: 90px; /* Adjust the width and height to your preference for the circular shape */
+  height: 90px;
+  margin-top: -250px;
+  border-radius: 50%;
+  margin-left: 1000px;
+  /* background-image: url("../images//bed1/Screenshot 2024-03-01 at 18.53.48.png"); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #f3f1f0;
+  box-shadow: 0 0 20px rgba(188, 124, 124, 0.8); /* Adjust the values as needed for the glow effect */
+
+}
+
+.circle-buttons6{
+  width: 50px; /* Adjust the width and height to your preference for the circular shape */
+  height: 50px;
+  margin-top: 20px;
+  border-radius: 50%;
+  margin-left: 800px;
+  /* background-image: url("../images//bed1/Screenshot 2024-03-01 at 18.53.48.png"); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #f3f1f0;
+  box-shadow: 0 0 20px rgba(188, 124, 124, 0.8); /* Adjust the values as needed for the glow effect */
+
+}

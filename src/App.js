@@ -29,6 +29,8 @@ const App = () => {
           <Route path='/BedRoomsLarge' element={<BedRoomsLarge/>}/>
           <Route path='/ImageUpload' element={<ImageUpload/>}/>
           <Route path="/product/:id" element={<BedPage />} /> {/* Ensure this path matches */}
+
+          
           {/* <Route path='/Mode' element={<Mode/>}/> */}
 
         </Routes>
