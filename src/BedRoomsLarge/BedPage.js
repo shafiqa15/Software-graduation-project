@@ -40,6 +40,7 @@ const BedPage = () => {
   const [mainImageUrlkhzana, setMainImageUrlkhzana] = useState(product?.khzana);
   const [mainImageUrlkfloow, setMainImageUrlkfolow] = useState(product?.follow2);
   const [mainImageUrlcomedena, setMainImageUrlcomedena] = useState(product?.comedena1);
+  const [mainImageUrlmirror, setMainImageUrlmirror] = useState(product?.mirror);
 
 
   // Function to change the main image
@@ -58,6 +59,10 @@ const BedPage = () => {
     setMainImageUrlcomedena(newImageUrl);
   };
 
+
+  const changeMainImagemirror= (newImageUrl) => {
+    setMainImageUrlmirror(newImageUrl);
+  };
 
 
 
@@ -134,6 +139,19 @@ const BedPage = () => {
     setShowCanvas5(!showCanvas5);
     setShowCanvas(showCanvas);
   };
+
+
+  const [showCanvas7, setShowCanvas7] = useState(false);
+
+  const toggleCanvas7 = () => {
+    setShowCanvas7(!showCanvas5);
+    setShowCanvas(showCanvas);
+  };
+
+
+
+
+
 
   // const IMAGES = [
   //   { url: product.bed1black, alt: "Car One" },
@@ -326,6 +344,15 @@ const BedPage = () => {
 )}
 
 
+{showCanvas7 && (
+        <div style={{ position: 'absolute', top: '1900px', left: '840px', width: '500px', height: '100%' }}>    <Canvas>
+      <ambientLight intensity={1.5} />
+      <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
+      <Scene1Model modelPath={product.mirrorobj} scale={2} material={<meshStandardMaterial color="white" />} />
+      <OrbitControls />
+    </Canvas>
+  </div>
+)}
 
 
 
@@ -366,10 +393,10 @@ const BedPage = () => {
     ))}
   </div>
 </div>
- <p style={{marginTop:'-450px',marginLeft:'800px'}}> -{product.kind} bed  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'800px'}}>-The wood kind is {product.name}.</p>
-       <p style={{marginTop:'-10px',marginLeft:'800px'}}>-Only off-white.</p>
+ <p style={{marginTop:'-450px',marginLeft:'800px'}}> -{product.kind} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'800px'}}>-The wood kind is {product.name}.</p>
+       <p style={{marginTop:'-10px',marginLeft:'800px'}}>-Colors available:Only off-white.</p>
         <button className="circle-buttons6" onClick={() => {handleCircleButtonClick() }}></button>
-          <div className="description" style={{marginTop:'210px',marginLeft:'750px'}}>
+          <div className="description" style={{marginTop:'210px',marginLeft:'800px'}}>
           <p style={{color:'red'}}>Pick the color you want to see the changes ! </p>
           <p style={{marginTop:'-20px'}}> U can see the 3d model of you chosen product to see all it's details .
           
@@ -402,6 +429,20 @@ const BedPage = () => {
 </div>
 
 
+
+<p style={{marginTop:'-450px',marginLeft:'800px'}}> -{product.kind} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'800px'}}>-The wood kind is {product.name}.</p>
+<p style={{marginLeft:'800px'}}>-2 peices.</p>
+       <p style={{marginTop:'-10px',marginLeft:'800px'}}>-Colors available:Only off-white.</p>
+ 
+    
+        <button className="circle-buttons6" onClick={() => {handleCircleButtonClick() }}></button>
+          <div className="description" style={{marginTop:'160px',marginLeft:'800px'}}>
+          <p style={{color:'red'}}>Pick the color you want to see the changes ! </p>
+          <p style={{marginTop:'-20px'}}> U can see the 3d model of you chosen product to see all it's details .
+          
+</p>
+       
+      </div>  
 <button className="circle-buttons7" onClick={toggleCanvas5}><p style={{fontFamily:'fantasy',fontWeight:'bold',color:'black',fontSize:'40px',marginTop:'20px'}}> 3D</p> </button>
 
 
@@ -409,7 +450,41 @@ const BedPage = () => {
 
 
 
-<br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  
+<br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  
+
+
+<div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-550px'}}>
+  <div className='main-image-container' style={{ marginRight: '20px' }}>
+    {/* Main image */}
+    <img  className='main-image'  src={mainImageUrlmirror} alt="Main Product"  style={{ width: '450px', height: '450px',display:'block' }} />
+  </div>
+  <div className='"small-images-container"' style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+    {/* Iterate over the smaller images */}
+    {[product.mirror, product.mirror2, product.mirror3, product.mirror4].map((img, index) => img && (
+      <img
+      className="img-zoom"
+        key={index}
+        src={img}
+        alt={`Product Detail ${index + 1}`}
+        style={{ cursor: 'pointer', width: '100px', height: '100px' }}
+        onClick={() => changeMainImagemirror(img)}
+      />
+    ))}
+  </div>
+</div>
+
+<button className="circle-buttons8" onClick={toggleCanvas7}><p style={{fontFamily:'fantasy',fontWeight:'bold',color:'black',fontSize:'40px',marginTop:'20px'}}> 3D</p> </button>
+
+
+
+
+
+
+
+
+
+
+<br/><br/><br/><br/><br/><br/>
 
 
 <div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-550px'}}>
@@ -431,7 +506,6 @@ const BedPage = () => {
     ))}
   </div>
 </div>
-<br/><br/><br/><br/><br/><br/>
 
 
     {/* <div style={{ position: 'absolute', top: '390px', left: '800px', width: '400px', height: '100%'}}>
