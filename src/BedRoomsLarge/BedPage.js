@@ -5,13 +5,18 @@ import { OrbitControls } from '@react-three/drei';
 import { products } from './BedRoomsLarge.js';
 import React, { useState } from 'react';
 import Top from '../PAGES/Top.js';
+import { Link } from 'react-router-dom';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 // import Imageslider  from '/Users/shafiqaabdat/Downloads/client-main/src/BedRoomsLarge/Imageslider.js';
 import '/Users/shafiqaabdat/Downloads/client-main/src/BedRoomsLarge/bedpage.css';
-
+import ReviewStars from './ReviewStars.js';
 
 import { useLoader } from '@react-three/fiber';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MeshStandardMaterial } from 'three';
+import { useNavigate } from 'react-router-dom';
 
 
 // Define the useQuery hook
@@ -21,6 +26,13 @@ function useQuery() {
 
 
 const BedPage = () => {
+
+  const navigate = useNavigate();
+
+  const handleDesignNavigation = () => {
+    navigate('/design', { state: { product } }); // 'product' is the product data you want to pass
+  };
+
   const {id } = useParams();
   const query = useQuery();
   const imageUrl = query.get('imageUrl');
@@ -34,6 +46,14 @@ const BedPage = () => {
   
 
 
+
+
+  const navigateToBedPage = (navigate, productId, imageUrl) => {
+    const encodedImageUrl = encodeURIComponent(imageUrl);
+    navigate(`/product/${productId}?imageUrl=${encodedImageUrl}`);
+  };
+  
+
   const scene1Path = '/SESSION_1709059176_2562448_preview-2.glb';
   const [mainImageUrl, setMainImageUrl] = useState(product?.imageUrl || product?.img1);
   const [mainImageUrl2, setMainImageUrl2] = useState(product?.upadte1 || product?.img1);
@@ -42,6 +62,87 @@ const BedPage = () => {
   const [mainImageUrlcomedena, setMainImageUrlcomedena] = useState(product?.comedena1);
   const [mainImageUrlmirror, setMainImageUrlmirror] = useState(product?.mirror);
 
+
+
+
+  
+
+  const handleAddFlower = () => {
+    const productFlowerData = {
+      // Example data structure; adjust as needed
+      modelPath: 'path/to/flower/model.glb',
+      position: [0, 0, 0],
+      rotation: [0, 0, 0],
+      scale: 1,
+    };
+
+    navigate('/design', { state: { flower: productFlowerData } });
+  };
+
+
+
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0); // To implement a hover effect, optional
+// Assuming this is part of your BedPage.js or a separate component file
+const StarRating = ({ rating, interactive = true, onRatingChange }) => {
+
+
+  return (
+    <div>
+      {[...Array(5)].map((star, index) => {
+        const ratingValue = index + 1;
+
+        return (
+          <label key={index}>
+            <input
+              type="radio"
+              name="rating"
+              value={ratingValue}
+              onClick={() => {
+                setRating(ratingValue);
+                onRatingChange(ratingValue); // Notify parent component
+              }}
+              style={{ display: 'none' }}
+            />
+            <span
+              onMouseEnter={() => setHover(ratingValue)}
+              onMouseLeave={() => setHover(0)}
+              style={{ cursor: 'pointer', color: ratingValue <= (hover || rating) ? 'yellow' : 'gray' }}
+            >
+              ★
+            </span>
+          </label>
+        );
+      })}
+    </div>
+  );
+};
+
+
+   const [userRating, setUserRating] = useState(0); // Track the user's rating
+
+   const handleReviewSubmit = (event) => {
+    event.preventDefault();
+    const newRating = userRating; // Assuming userRating is captured via state from StarRating component
+    const reviewText = event.target.reviewText.value; // Capture review text from a form field if available
+
+    // Update the reviews state with the new review
+    setReviews([...reviews, { rating: newRating, text: reviewText }]);
+    // Reset form and rating state if needed
+};
+
+  const [reviews, setReviews] = useState([]);
+  const averageRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length || 0;
+  const numberOfReviews = reviews.length;
+  
+  const handleNewAction = () => {
+    // Example action: navigate to a different page or show alert
+    // alert('Button clicked!');
+    // For navigation, you might use history.push('/some-path') if using React Router
+  };
+
+
+  
 
   // Function to change the main image
   const changeMainImage = (newImageUrl) => {
@@ -64,7 +165,18 @@ const BedPage = () => {
     setMainImageUrlmirror(newImageUrl);
   };
 
+ const navigateToDesignPage = (productId) => {
+    // Assuming the product you want to pass is at index 1
+    const productToPass = products.find(product => product.id === productId);
+    navigate(`/design`, { state: { product: productToPass } });
+  };
 
+
+// Example of navigating with multiple products
+const navigateToDesignPageWithMultipleProducts = () => {
+  const selectedProducts = [products[1], products[2]]; // Select products as per your logic
+  navigate('/design', { state: { selectedProducts } });
+};
 
 
   const handleButtonClick = () => {
@@ -155,6 +267,15 @@ const BedPage = () => {
     setShowCanvas(showCanvas);
   };
 
+  const [selectedImage, setSelectedImage] = useState(null);
+
+const handleImageChange = (event) => {
+  if (event.target.files && event.target.files[0]) {
+    // Update state with the selected file
+    setSelectedImage(event.target.files[0]);
+  }
+};
+
 
 
 
@@ -168,33 +289,47 @@ const BedPage = () => {
   return (
     <>
     <Top></Top>
- 
 
-<p className='madimi-one-regular' style={{marginTop:'100px',fontWeight:'bold',fontSize:'30px',marginLeft:'200px'}}> One of the amazing {product.kind} in the website that has <span style={{color:'InfoText'}}>7 </span>peices </p>
+    {/* <ReviewStars onSubmit={handleReviewSubmit}/>  */}
+  
+
+    <div className="main-container_beds">
+
+
+<p className='madimi-one-regular' style={{marginTop:'100px',fontWeight:'bold',fontSize:'30px',marginLeft:'40px'}}> One of the amazing {product.kind} in the website that has <span style={{color:'InfoText'}}>7 </span>peices </p>
+<button className='madimi-one-regular buttoncart' style={{ width:'150px',marginLeft:'1200px',marginTop:'-40px'}}>
+  <FontAwesomeIcon icon={faShoppingCart}/> Add to Cart
+</button> 
+   
     <div className='sora111' style={{   backgroundColor:'rgb(221, 215, 205)'
 
 }}>
 
 
 
-      <img style={{  marginLeft: '200px'}} className='photo' src={product.img1} alt="Photo 1" />
+      <img style={{  marginLeft: '80px'}} className='photo' src={product.img1} alt="Photo 1" />
 
       <img className='photo' src={product.khzana} alt="Photo 2" />
       <img className='photo' src={product.comedena1} alt="Photo 3" />
       <img className='photo' src={product.mirror} alt="Photo 4" />
       <img className='photo' src={product.follow2} alt="Photo 5" />
+
+    
+
     </div>
 
+
+
+
     <p className='madimi-one-regular' style={{ marginRight: '20px' }}>
-    <span style={{ marginLeft: '300px' }}>1 Bed</span>
+    <span style={{ marginLeft: '170px' }}>1 Bed</span>
        <span style={{ marginLeft: '150px' }}>1 Wardrobe</span>
       <span style={{ marginLeft: '100px' }}>2 Nightstands</span>
       <span style={{ marginLeft: '130px' }}> 1 Mirror</span>
       <span style={{ marginLeft: '140px' }}> 1 bed following</span>
     </p> 
-    <br></br>
+    
 
-<p className='animated-text_bed' style={{marginLeft:'600px'}}> Price is {product.price}₪ </p>
 
 
 
@@ -202,11 +337,14 @@ const BedPage = () => {
       {/* <p>This is the product page for product ID: {product.name}</p> */}
  
 
+      
 
-     
+
+
       {showFirstImages && showButton3&&(
 
-      <div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-550px'}}>
+      <div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-400px'}}>
+      
         <div className='main-image-container' style={{ marginRight: '20px' }}>
           {/* Main image */}
           <img  className='main-image'  src={mainImageUrl} alt="Main Product"  style={{ width: '450px', height: '450px',display:'block' }} />
@@ -224,13 +362,15 @@ const BedPage = () => {
             />
           ))}
         </div>
+        
       </div>
+      
       )}
-    
+  
 
 
       {showButton && (
-        <div className='product-display-container' style={{ display: 'flex', marginTop: '50px', marginLeft: '-550px' }}>
+        <div className='product-display-container' style={{ display: 'flex', marginTop: '50px', marginLeft: '-400px' }}>
           <div className='main-image-container' style={{ marginRight: '20px' }}>
             <img className='main-image' src={mainImageUrl} alt='Main Product' style={{ width: '450px', height: '450px', display: 'block' }} />
           </div>
@@ -306,12 +446,15 @@ const BedPage = () => {
           ))}
         </div>
 
+
         {/* Description */}
+
         <div className="description">
+        
           {/* Add your description content here */}
           <p> width : 2000cm, hight: 2000cim,length:2000cm</p>
           <p style={{color:'red'}}>Pick the color you want to see the changes ! </p>
-          <p style={{marginTop:'-20px'}}> U can see the 3d model of you chosen product to see all it's details .
+          <p style={{marginTop:'-20px',fontSize:'14px'}}> U can see the 3d model of you chosen product to see all it's details .
 </p>
         </div>
       </div>
@@ -319,25 +462,26 @@ const BedPage = () => {
       <button className="circle-button5" onClick={toggleCanvas}><p style={{fontFamily:'fantasy',fontWeight:'bold',color:'black',fontSize:'40px',marginTop:'20px'}}> 3D</p> </button>
 
 {showCanvas && (
-        <div style={{ position: 'absolute', top: '300px', left: '900px', width: '500px', height: '100%' }}>
+        <div style={{ position: 'absolute', top: '450px', left: '800px', width: '500px', height: '100%' }}>
           <Canvas>
             <ambientLight intensity={1.5} />
             <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
-            <Scene1Model modelPath={product.obj} scale={2} />
+            <Scene1Model modelPath={product.obj} scale={4} />
             <OrbitControls />
           </Canvas>
         </div>
       )}
 
+ 
 
 
 
       {showCanvas5 &&(
-        <div style={{ position: 'absolute', top: '1300px', left: '900px', width: '500px', height: '100%' }}>
+        <div style={{ position: 'absolute', top: '1500px', left: '700px', width: '500px', height: '100%' }}>
           <Canvas>
             <ambientLight intensity={1.5} />
             <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
-            <Scene1Model modelPath={product.comedenaobj} scale={2} />
+            <Scene1Model modelPath={product.comedenaobj} scale={4} />
             <OrbitControls />
           </Canvas>
         </div>
@@ -346,11 +490,11 @@ const BedPage = () => {
 
 
       {showCanvas9&&(
-        <div style={{ position: 'absolute', top: '2350px', left: '900px', width: '500px', height: '100%' }}>
+        <div style={{ position: 'absolute', top: '2550px', left: '800px', width: '500px', height: '100%' }}>
           <Canvas>
             <ambientLight intensity={1.5} />
             <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
-            <Scene1Model modelPath={product.folowobj} scale={2} />
+            <Scene1Model modelPath={product.folowobj} scale={4.4} />
             <OrbitControls />
           </Canvas>
         </div>
@@ -360,10 +504,10 @@ const BedPage = () => {
 
 
 {showCanvas3 && (
-        <div style={{ position: 'absolute', top: '850px', left: '840px', width: '500px', height: '100%' }}>    <Canvas>
+        <div style={{ position: 'absolute', top: '1000px', left: '700px', width: '500px', height: '100%' }}>    <Canvas>
       <ambientLight intensity={1.5} />
       <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
-      <Scene1Model modelPath={product.khzana_obj} scale={2} material={<meshStandardMaterial color="white" />} />
+      <Scene1Model modelPath={product.khzana_obj} scale={4} material={<meshStandardMaterial color="white" />} />
       <OrbitControls />
     </Canvas>
   </div>
@@ -371,10 +515,10 @@ const BedPage = () => {
 
 
 {showCanvas7 && (
-        <div style={{ position: 'absolute', top: '1870px', left: '950px', width: '500px', height: '100%' }}>    <Canvas>
+        <div style={{ position: 'absolute', top: '2000px', left: '800px', width: '500px', height: '100%' }}>    <Canvas>
       <ambientLight intensity={1.5} />
       <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
-      <Scene1Model modelPath={product.mirrorobj} scale={2} material={<meshStandardMaterial color="white" />} />
+      <Scene1Model modelPath={product.mirrorobj} scale={4.3} material={<meshStandardMaterial color="white" />} />
       <OrbitControls />
     </Canvas>
   </div>
@@ -386,11 +530,11 @@ const BedPage = () => {
 
 
       {showCanvas2 && !showCanvas&&(
-        <div style={{ position: 'absolute', top: '300px', left: '900px', width: '500px', height: '100%' }}>
+        <div style={{ position: 'absolute', top: '450px', left: '800px', width: '500px', height: '100%' }}>
           <Canvas>
             <ambientLight intensity={1.5} />
             <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
-            <Scene1Model modelPath={product.objblue} scale={2} />
+            <Scene1Model modelPath={product.objblue} scale={4} />
             <OrbitControls />
           </Canvas>
         </div>
@@ -400,7 +544,7 @@ const BedPage = () => {
     <br/>  <br/>  <br/>  <br/>  <br/>  <br/>
 
   
-<div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-550px'}}>
+<div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-400px'}}>
   <div className='main-image-container' style={{ marginRight: '20px' }}>
     {/* Main image */}
     <img  className='main-image'  src={mainImageUrlkhzana} alt="Main Product"  style={{ width: '450px', height: '450px',display:'block' }} />
@@ -419,12 +563,12 @@ const BedPage = () => {
     ))}
   </div>
 </div>
- <p style={{marginTop:'-450px',marginLeft:'800px'}}> -{product.kind} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'800px'}}>-The wood kind is {product.name}.</p>
-       <p style={{marginTop:'-10px',marginLeft:'800px'}}>-Colors available:Only off-white.</p>
+ <p style={{marginTop:'-450px',marginLeft:'700px'}}> -{product.kind} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is {product.name}.</p>
+       <p style={{marginTop:'-10px',marginLeft:'700px'}}>-Colors available:Only off-white.</p>
         <button className="circle-buttons6" onClick={() => {handleCircleButtonClick() }}></button>
-          <div className="description" style={{marginTop:'210px',marginLeft:'800px'}}>
+          <div className="description" style={{marginTop:'170px',marginLeft:'700px'}}>
           <p style={{color:'red'}}>Pick the color you want to see the changes ! </p>
-          <p style={{marginTop:'-20px'}}> U can see the 3d model of you chosen product to see all it's details .
+          <p style={{marginTop:'-20px',fontSize:'14px'}}> U can see the 3d model of you chosen product to see all it's details .
           
 </p>
        
@@ -434,7 +578,7 @@ const BedPage = () => {
 
 <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  
 
-<div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-550px'}}>
+<div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-400px'}}>
   <div className='main-image-container' style={{ marginRight: '20px' }}>
     {/* Main image */}
     <img  className='main-image'  src={mainImageUrlcomedena} alt="Main Product"  style={{ width: '450px', height: '450px',display:'block' }} />
@@ -456,15 +600,15 @@ const BedPage = () => {
 
 
 
-<p style={{marginTop:'-450px',marginLeft:'800px'}}> -{product.kind} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'800px'}}>-The wood kind is {product.name}.</p>
-<p style={{marginLeft:'800px'}}>-2 peices.</p>
-       <p style={{marginTop:'-10px',marginLeft:'800px'}}>-Colors available:Only off-white.</p>
+<p style={{marginTop:'-450px',marginLeft:'700px'}}> -{product.kind} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is {product.name}.</p>
+<p style={{marginLeft:'700px'}}>-2 peices.</p>
+       <p style={{marginTop:'-10px',marginLeft:'700px'}}>-Colors available:Only off-white.</p>
  
     
         <button className="circle-buttons6" onClick={() => {handleCircleButtonClick() }}></button>
-          <div className="description" style={{marginTop:'160px',marginLeft:'800px'}}>
+          <div className="description" style={{marginTop:'160px',marginLeft:'700px'}}>
           <p style={{color:'red'}}>Pick the color you want to see the changes ! </p>
-          <p style={{marginTop:'-20px'}}> U can see the 3d model of you chosen product to see all it's details .
+          <p style={{marginTop:'-20px',fontSize:'14px'}}> U can see the 3d model of you chosen product to see all it's details .
           
 </p>
        
@@ -479,7 +623,7 @@ const BedPage = () => {
 <br/>  <br/>  <br/>  <br/>  <br/>  <br/> 
 
 
-<div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-550px'}}>
+<div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-400px'}}>
   <div className='main-image-container' style={{ marginRight: '20px' }}>
     {/* Main image */}
     <img  className='main-image'  src={mainImageUrlmirror} alt="Main Product"  style={{ width: '450px', height: '450px',display:'block' }} />
@@ -499,15 +643,15 @@ const BedPage = () => {
   </div>
 </div>
 
-<p style={{marginTop:'-450px',marginLeft:'800px'}}> -{product.kind} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'800px'}}>-The wood kind is {product.name}.</p>
+<p style={{marginTop:'-450px',marginLeft:'700px'}}> -{product.kind} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is {product.name}.</p>
 
-       <p style={{marginTop:'-10px',marginLeft:'800px'}}>-Colors available:</p>
+       <p style={{marginTop:'-10px',marginLeft:'700px'}}>-Colors available:</p>
  
     
         <button className="circle-buttons9999" onClick={() => {handleCircleButtonClick() }}></button>
-          <div className="description" style={{marginTop:'230px',marginLeft:'800px'}}>
+          <div className="description" style={{marginTop:'180px',marginLeft:'700px'}}>
           <p style={{color:'red'}}>Pick the color you want to see the changes ! </p>
-          <p style={{marginTop:'-20px'}}> U can see the 3d model of you chosen product to see all it's details .
+          <p style={{marginTop:'-20px',fontSize:'14px'}}> U can see the 3d model of you chosen product to see all it's details .
           
 </p>
        
@@ -526,7 +670,7 @@ const BedPage = () => {
 <br/><br/><br/><br/><br/><br/>
 
 
-<div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-550px'}}>
+<div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-400px'}}>
   <div className='main-image-container' style={{ marginRight: '20px' }}>
     {/* Main image */}
     <img  className='main-image'  src={mainImageUrlkfloow} alt="Main Product"  style={{ width: '450px', height: '450px',display:'block' }} />
@@ -545,18 +689,23 @@ const BedPage = () => {
     ))}
   </div>
 </div>
- <p style={{marginTop:'-450px',marginLeft:'800px'}}> -{product.kind} bed following  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'800px'}}>-The wood kind is {product.name}.</p>
-       <p style={{marginTop:'-10px',marginLeft:'800px'}}>-Colors available:Only off-white.</p>
+ <p style={{marginTop:'-450px',marginLeft:'700px'}}> -{product.kind} bed following  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is {product.name}.</p>
+       <p style={{marginTop:'-10px',marginLeft:'700px'}}>-Colors available:Only off-white.</p>
         <button className="circle-buttons6" onClick={() => {handleCircleButtonClick() }}></button>
-          <div className="description" style={{marginTop:'210px',marginLeft:'800px'}}>
+          <div className="description" style={{marginTop:'170px',marginLeft:'700px'}}>
           <p style={{color:'red'}}>Pick the color you want to see the changes ! </p>
-          <p style={{marginTop:'-20px'}}> U can see the 3d model of you chosen product to see all it's details .
+          <p style={{marginTop:'-20px',fontSize:'14px'}}> U can see the 3d model of you chosen product to see all it's details .
           
 </p>
        
       </div>  
 
+
 <button className="circle-buttons9" onClick={toggleCanvas9}><p style={{fontFamily:'fantasy',fontWeight:'bold',color:'black',fontSize:'40px',marginTop:'20px'}}> 3D</p> </button>
+
+
+
+
 
 
 <br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -568,7 +717,45 @@ const BedPage = () => {
           <OrbitControls />
         </Canvas>
       </div> */}
+ 
 
+
+
+      <form onSubmit={handleReviewSubmit} style={{marginLeft:'1200px' ,width:'200px',marginTop:'-2900px'}}>
+      <p className='animated-text_bed madimi-one-regular ' style={{marginLeft:'10px'}}> Price is {product.price}₪ </p>
+ 
+        <StarRating onRatingChange={(rating) => setUserRating(rating)} />
+
+        <label htmlFor="reviewImage" className='madimi-one-regular'>Upload Image:</label>
+    <input type="file" id="reviewImage" name="reviewImage" accept="image/*" onChange={handleImageChange} className='madimi-one-regular' />
+        <textarea name="reviewText" required className='madimi-one-regular' />
+        <button type="submit" className='madimi-one-regular'>Submit Review</button>
+        {reviews.map((review, index) => (
+            <div key={index}>
+                <StarRating rating={review.rating} />
+                <p>username:{review.text}</p>
+            </div>
+        ))}
+{/* Image preview */}
+{selectedImage && (
+  <div>
+    <img src={URL.createObjectURL(selectedImage)} alt="Preview" style={{width: '100px', height: '100px'}} />
+  </div>
+)}
+
+        
+      </form>
+
+      <button onClick={handleAddFlower} className='madimi-one-regular newbutton_bed' style={{marginLeft:'1200px', marginTop: '20px', display: 'block',width:'200px'}}>
+      <Link to="/Design" style={{color:'white'}}> Click here to arrange this room components in room!</Link> 
+    
+      </button>
+
+      <button className="AddToCartButton" onClick={() => navigateToDesignPage(product.id)}>Design This Bedroom</button>
+
+
+
+      </div>
     </>
   );
 };

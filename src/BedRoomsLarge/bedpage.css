@@ -103,7 +103,7 @@
     /* padding: 20px; */
   }
   .right-side-content{
-margin-left: 800px;
+margin-left: 700px;
 margin-top: -450px;
 
 
@@ -195,7 +195,7 @@ margin-top: -450px;
   height: 90px;
   margin-top: -250px;
   border-radius: 50%;
-  margin-left: 1000px;
+  margin-left: 900px;
   /* background-image: url("../images//bed1/Screenshot 2024-03-01 at 18.53.48.png"); */
   display: flex;
   justify-content: center;
@@ -211,7 +211,7 @@ margin-top: -450px;
   height: 50px;
   margin-top: 20px;
   border-radius: 50%;
-  margin-left: 800px;
+  margin-left: 700px;
   /* background-image: url("../images//bed1/Screenshot 2024-03-01 at 18.53.48.png"); */
   display: flex;
   justify-content: center;
@@ -228,7 +228,7 @@ margin-top: -450px;
   height: 90px;
   margin-top: -240px;
   border-radius: 50%;
-  margin-left: 1000px;
+  margin-left: 900px;
   /* background-image: url("../images//bed1/Screenshot 2024-03-01 at 18.53.48.png"); */
   display: flex;
   justify-content: center;
@@ -243,9 +243,9 @@ margin-top: -450px;
 .circle-buttons8{
   width: 90px; /* Adjust the width and height to your preference for the circular shape */
   height: 90px;
-  margin-top: -250px;
+  margin-top: -200px;
   border-radius: 50%;
-  margin-left: 1000px;
+  margin-left: 800px;
   /* background-image: url("../images//bed1/Screenshot 2024-03-01 at 18.53.48.png"); */
   display: flex;
   justify-content: center;
@@ -260,7 +260,7 @@ margin-top: -450px;
   height: 50px;
   margin-top: -5px;
   border-radius: 50%;
-  margin-left: 800px;
+  margin-left: 700px;
   /* background-image: url("../images//bed1/Screenshot 2024-03-01 at 18.53.48.png"); */
   display: flex;
   justify-content: center;
@@ -274,9 +274,9 @@ margin-top: -450px;
 .circle-buttons9{
   width: 90px; /* Adjust the width and height to your preference for the circular shape */
   height: 90px;
-  margin-top: -250px;
+  margin-top: -200px;
   border-radius: 50%;
-  margin-left: 1000px;
+  margin-left: 900px;
   /* background-image: url("../images//bed1/Screenshot 2024-03-01 at 18.53.48.png"); */
   display: flex;
   justify-content: center;
@@ -287,6 +287,7 @@ margin-top: -450px;
 }
 .animated-text_bed {
   animation: 5s ease-out 0s 1 slideInFromLeft;
+  width: 200px;
 }
 
 @keyframes slideInFromLeft {
@@ -300,6 +301,46 @@ margin-top: -450px;
   }
 }
 
-.animated-text_bed {
-  animation: 10s ease-out 0s 1 slideInFromLeft;
+
+.buttoncart {
+  background-color: #94634b; /* Green background */
+  color: white; /* White text */
+  padding: 10px 5px; 
+  border: none; /* No border */
+  cursor: pointer; /* Cursor changes to pointer to indicate it's clickable */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Text size */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+  width:130px;
+
+}
+
+.buttoncart:hover {
+  background-color: #ebc0a7; /* Slightly darker green on hover */
+}
+
+
+
+.main-container_beds{
+  padding-right: 250px;
+  
+}
+/* In bedpage.css or a relevant CSS file */
+.main-container_beds {
+  position: relative; /* Ensures the review form is positioned relative to this container */
+}
+
+/* .review-form {
+
+} */
+.newbutton_bed{
+  background-color: #94634b; /* Green background */
+  color: white; /* White text */
+  padding: 10px 5px; 
+  border: none; /* No border */
+  cursor: pointer; /* Cursor changes to pointer to indicate it's clickable */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Text size */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+  width:130px;
 }

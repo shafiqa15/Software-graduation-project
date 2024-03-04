@@ -5,11 +5,16 @@ import * as THREE from 'three';
 import '/Users/shafiqaabdat/Downloads/client-main/src/design/design.css';
 import html2canvas from 'html2canvas'; // Import html2canvas
 // import Scene1 from '/SESSION_1709059176_2562448_preview-2.glb';
-
+import { products, navigateToBedPage } from '/Users/shafiqaabdat/Downloads/client-main/src/BedRoomsLarge/BedRoomsLarge.js'; // Adjust the path as necessary
 import { startTransition } from 'react';
 
 import { useScreenshot,createFileName } from 'use-react-screenshot';
+import { useNavigate } from 'react-router-dom';
 
+import { useLocation } from 'react-router-dom';
+
+
+// Then use it in your component like so:
 
 
 function CameraController() {
@@ -22,6 +27,9 @@ function CameraController() {
   }, [camera, gl]);
   return null;
 }
+
+
+
 
 
 function GridBorder({ size = 100, height = 200, color = 'black' }) {
@@ -131,6 +139,11 @@ function Design() {
 
 
 
+
+  const location = useLocation();
+  const { product } = location.state || {}; 
+
+  const navigate = useNavigate();
 
 
   const [activeObject, setActiveObject] = useState(null);
@@ -261,6 +274,88 @@ a.click();
   }, []);
  
 
+  useEffect(() => {
+    // Assuming the product data is passed as a prop or through React Router's state
+    const product = location.state?.product;
+  
+    if (product) {
+      const initialObjects = {
+        khazana: { 
+          modelPath: product.khzana_obj, 
+          position: [0, 0, 0], // Customize as needed
+          rotation: [0, 0, 0], // Customize as needed
+          scale: 1, // Customize as needed
+        },
+        bedFrame: { 
+          modelPath: product.objblue, // Assuming obj1 is a property containing the model path for the bed frame
+          position: [2, 0, 0], // Customize as needed
+          rotation: [0, Math.PI / 2, 0], // Customize as needed
+          scale: 1, // Customize as needed
+        },
+        follow: { 
+          modelPath: product.folowobj, 
+          position: [-2, 0, 0], // Customize as needed
+          rotation: [0, 0, 0], // Customize as needed
+          scale: 1, // Customize as needed
+        },
+        comedena:{
+
+          modelPath: product.comedenaobj, 
+          position: [-2, 0, 0], // Customize as needed
+          rotation: [0, 0, 0], // Customize as needed
+          scale: 1, // Customize as needed
+
+        },
+        comedena2:{
+
+          modelPath: product.comedenaobj2, 
+          position: [-2, 0, 0], // Customize as needed
+          rotation: [0, 0, 0], // Customize as needed
+          scale: 1, // Customize as needed
+
+        }
+
+        
+      };
+  
+      setObjects(initialObjects);
+    }
+  }, [location.state]);
+  
+
+
+
+
+
+
+
+ 
+  const addProductFlowerToScene = () => {
+    if (product?.obj1) {
+      console.log("Adding flower to scene", product.obj1);
+      const flowerObject = {
+        modelPath: product.obj1.modelPath,
+        position: product.obj1.position || [0, 0, 0],
+        rotation: product.obj1.rotation || [0, 0, 0],
+        scale: product.obj1.scale || 1,
+      };
+
+      
+
+      setObjects(prevObjects => ({
+        ...prevObjects,
+        obj1: flowerObject,
+      }));
+    } else {
+      console.error("Product.flower is undefined");
+    }
+  };
+
+
+
+
+
+
   return (
     
     <div className="app-container">
@@ -276,6 +371,8 @@ a.click();
       <button onClick={toggleFloorUpload} style={{ position: 'absolute', top: '510px', left: '20px', zIndex: 100 }}>
         Floor
       </button>
+      <p>Product Name: {product?.name}</p>
+      <p>Product Name: {product?.kind}</p>
 
       <button onClick={() => setShowWallUpload(true)} style={{ position: 'absolute', top: '555px', left: '20px', zIndex: 100 }}>Wall</button>
 
@@ -289,9 +386,14 @@ a.click();
         <CameraController />
         <ambientLight intensity={1} />
         <spotLight position={[5, 5, 10]} angle={0.3} intensity={0.3} />
-        {Object.entries(objects).map(([name, { modelPath, position, rotation, scale }]) => (
-          <Model key={name} modelPath={modelPath} position={position} rotation={rotation} scale={1} />
-        ))}
+        {Object.entries(objects).map(([key, obj]) => (
+    <Model key={key} modelPath={obj.modelPath} position={obj.position} rotation={obj.rotation} scale={obj.scale} />
+  ))}
+
+      
+
+
+
 
       <Helpers/>
         {floorTexturePath && <Floor texturePath={floorTexturePath} />}
@@ -339,6 +441,7 @@ a.click();
         {Object.keys(objects).map(modelName => (
           <option key={modelName} value={modelName}>{modelName}</option>
         ))}
+
       </select>
       <br/>
     <button onClick={deleteActiveObject} style={{ position: 'absolute', top: '590px', left: '2px', zIndex: 100 }}>Delete</button> 
@@ -346,6 +449,10 @@ a.click();
     <button className='btn btn-deafult'id='button' onClick={capture} style={{ position: 'absolute', top: '720px', left: '2px', zIndex: 100 }}>  
      screen
      </button>
+
+     {/* <button onClick={addProductFlowerToScene} style={{ position: 'absolute', top: '20px', left: '20px', zIndex: 100 }}>
+        Add Flower
+      </button> */}
  <br/>
     {/* {windowModel.visible && (
   <WindowModel
