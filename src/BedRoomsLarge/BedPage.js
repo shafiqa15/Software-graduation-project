@@ -746,12 +746,12 @@ const handleImageChange = (event) => {
         
       </form>
 
-      <button onClick={handleAddFlower} className='madimi-one-regular newbutton_bed' style={{marginLeft:'1200px', marginTop: '20px', display: 'block',width:'200px'}}>
+      {/* <button onClick={handleAddFlower} className='madimi-one-regular newbutton_bed' style={{marginLeft:'1200px', marginTop: '20px', display: 'block',width:'200px'}}>
       <Link to="/Design" style={{color:'white'}}> Click here to arrange this room components in room!</Link> 
     
-      </button>
+      </button> */}
 
-      <button className="AddToCartButton" onClick={() => navigateToDesignPage(product.id)}>Design This Bedroom</button>
+      <button style={{marginLeft:'1200px', marginTop: '20px', display: 'block',width:'200px'}} className="AddToCartButton madimi-one-regular" onClick={() => navigateToDesignPage(product.id)}>Design This Bedroom</button>
 
 
 

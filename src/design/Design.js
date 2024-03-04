@@ -284,19 +284,19 @@ a.click();
           modelPath: product.khzana_obj, 
           position: [0, 0, 0], // Customize as needed
           rotation: [0, 0, 0], // Customize as needed
-          scale: 1, // Customize as needed
+          scale: 2, // Customize as needed
         },
         bedFrame: { 
           modelPath: product.objblue, // Assuming obj1 is a property containing the model path for the bed frame
           position: [2, 0, 0], // Customize as needed
           rotation: [0, Math.PI / 2, 0], // Customize as needed
-          scale: 1, // Customize as needed
+          scale: 2, // Customize as needed
         },
         follow: { 
           modelPath: product.folowobj, 
           position: [-2, 0, 0], // Customize as needed
           rotation: [0, 0, 0], // Customize as needed
-          scale: 1, // Customize as needed
+          scale: 2, // Customize as needed
         },
         comedena:{
 
@@ -314,6 +314,16 @@ a.click();
           scale: 1, // Customize as needed
 
         }
+      ,
+      mirror:{
+       
+        modelPath: product.mirrorobj, 
+        position: [-2, 0, 0], // Customize as needed
+        rotation: [0, 0, 0], // Customize as needed
+        scale: 1, // Customize as needed
+
+        
+      }
 
         
       };
@@ -371,14 +381,14 @@ a.click();
       <button onClick={toggleFloorUpload} style={{ position: 'absolute', top: '510px', left: '20px', zIndex: 100 }}>
         Floor
       </button>
-      <p>Product Name: {product?.name}</p>
-      <p>Product Name: {product?.kind}</p>
+      {/* <p>Product Name: {product?.name}</p>
+      <p>Product Name: {product?.kind}</p> */}
 
       <button onClick={() => setShowWallUpload(true)} style={{ position: 'absolute', top: '555px', left: '20px', zIndex: 100 }}>Wall</button>
 
       
       <video ref={videoRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -1 }} autoPlay muted />
-      <button onClick={startCamera} style={{ position: 'absolute', zIndex: 100,top: '460px', left: '20px' }}>Camera</button>
+      <button onClick={startCamera} style={{ position: 'absolute', zIndex: 100,top: '780px', left: '20px' }}>Camera</button>
      
 
       
