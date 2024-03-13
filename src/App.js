@@ -13,12 +13,13 @@ import BedRoomsLarge from './BedRoomsLarge/BedRoomsLarge.js';
 import ImageUpload from './IMAGE/ImageUpload.js';
 import BedPage from './BedRoomsLarge/BedPage.js';
 import Decore from './decore/Decore.js';
+import Wardrobe from './decore/Wardrobe.js';
 const App = () => {
   return (
     <Router> 
       <div>
         <Routes>    
-          <Route index element={<Decore/>}/>
+          <Route index element={<Wardrobe/>}/>
           <Route path="/Home1" element={<Home1/>}/>
           <Route path="/Slider" element={<Slider/>}/> 
           <Route path="/SignUp" element={<SignUp/>}/>
