@@ -325,9 +325,11 @@ a.click();
         
       }
 
+
         
       };
   
+      //jk
       setObjects(initialObjects);
     }
   }, [location.state]);

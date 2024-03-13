@@ -12,12 +12,13 @@ import ProductCard from './home/Trending/ProductCard.js';
 import BedRoomsLarge from './BedRoomsLarge/BedRoomsLarge.js';
 import ImageUpload from './IMAGE/ImageUpload.js';
 import BedPage from './BedRoomsLarge/BedPage.js';
+import Decore from './decore/Decore.js';
 const App = () => {
   return (
     <Router> 
       <div>
         <Routes>    
-          <Route index element={<Home1/>}/>
+          <Route index element={<Decore/>}/>
           <Route path="/Home1" element={<Home1/>}/>
           <Route path="/Slider" element={<Slider/>}/> 
           <Route path="/SignUp" element={<SignUp/>}/>
@@ -30,7 +31,7 @@ const App = () => {
           <Route path='/ImageUpload' element={<ImageUpload/>}/>
           <Route path="/product/:id" element={<BedPage />} /> {/* Ensure this path matches */}
           <Route path="/bedpage/:id" element={<BedPage />} />
-          
+          <Route path="/Decore" element={<Decore/>} />
           {/* <Route path='/Mode' element={<Mode/>}/> */}
 
         </Routes>
