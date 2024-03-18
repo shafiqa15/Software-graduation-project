@@ -1,0 +1,63 @@
+/* Add this to your CSS file */
+#leftSideSeparator {
+    position: absolute;
+    left: 240px;
+    top: 110px;
+    bottom: 0;
+    width: 2px; /* Width of the line */
+    background-color: #552e2e; /* Color of the line */
+    z-index: 100; /* Ensure it's above other elements */
+  }
+  
+  .model-selector {
+    cursor: pointer;
+    /* additional styling */
+    padding: 10px;
+    margin-top: 5px; /* to ensure they are above each other with space */
+  }
+  
+  .avia_prod{
+    margin-top: -730px;
+    /* margin-left: -25; */
+    /* top: 110px;
+    bottom: 0;
+    width: 2px; /* Width of the line */
+    /* background-color: #552e2e; /* Color of the line */
+    /* z-index: 100; Ensure it's above other elements */
+
+  }
+
+  .images_prop{
+    width: 100px;
+    /* margin-left: 100px; */
+  }
+
+  .image-container_decore{
+    cursor: pointer;
+    padding: 0px;
+    margin: 5px 0; /* Space between each image container */
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+    transition: transform 0.2s ease; /* Optional: for a hover effect */
+margin-left: 20px;
+  }
+  
+  .image-container_decore:hover {
+    transform: scale(1.5); /* Optional: slight zoom on hover */
+  }
+  
+  .image-container_decore img {
+    width: auto; /* Maintain the original aspect ratio */
+    height: 150px; /* Adjust the height as necessary */
+    object-fit: contain; /* Ensure the image fits within the container */
+  }
+  #messageContainer {
+    position: absolute;
+    /* Other styles to position it inside the red circle */
+    color: black; /* Or whatever color you want for the text */
+    text-align: center;
+    /* Additional styles */
+    margin-top: -70px;
+  }
+  

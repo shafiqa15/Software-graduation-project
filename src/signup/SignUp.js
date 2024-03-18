@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '/Users/shafiqaabdat/Downloads/client-main/src/signup/SignupPage.css'; // Make sure this path is correct
 import image1 from '/Users/shafiqaabdat/Downloads/client-main/src/images/Screenshot 2024-03-01 at 01.22.19.png';
+import axios from 'axios';
 const SignUp = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -27,27 +28,36 @@ const SignUp = () => {
         setPasswordShown2(!passwordShown2);
     };
 
+   
     const [passwordMatch, setPasswordMatch] = useState(true); // State to keep track of password match
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        
+    const [flage, setflage] = useState(false);
+    const [name,setName]=useState('');
+  const [email,setEmail]=useState('');
+  const [password,setpassword]=useState('');
+  const [confirmPassword,setconfirmPassword]=useState('');
+    const handleSubmit = () => {
         // Check if passwords match
-        if (formData.password !== formData.confirmPassword) {
-            alert("Passwords don't match.");
-            return; // Don't submit form until passwords match
-        }
-
-        if (!passwordMatch) {
-            alert("Passwords don't match.");
-            return; // Don't submit form until passwords match
-        }
-
-
+        setflage(true);
+        if (password !== confirmPassword) {
+          
+          setPasswordMatch(false);
+          //alert("Passwords don't match.");
+          return;
+        }else setPasswordMatch(true);
+        const userData={
+          name: formData.name,
+          email:formData.email,
+          password:formData.password
+        };
+        axios.post('http://192.168.88.8:9000/signup',userData)
+        .then( res =>console.log(res.data))
+        .catch( e =>console.log(e));
+    
         // Proceed with the form submission
-        console.log('Form data submitted:', formData);
+        // console.log('Form data submitted:', formData);
         // Here you would typically also include a call to your API for the signup
-    };
+      };
 
     return (
         <>
@@ -72,11 +82,15 @@ const SignUp = () => {
                         type="text"
                         name="name"
                         value={formData.name}
+                        // onChange={(value)=>setName(value)}
+
+                 
                         onChange={handleChange}
                         placeholder="Your Name"
                         required
                         
                     /> 
+                    {name==='' &&flage&&<p className='errormsg'>Name is required.</p>}
                     <label htmlFor="text" > Your name </label>
               
                   </div>
@@ -85,12 +99,17 @@ const SignUp = () => {
                     <input
                         type="email"
                         name="email"
+                        // value={email}
+                        // onChange={(value)=>setEmail(value)}
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="Your Email"
                         required
                         
                     />
+                    {email==='' &&flage&&<p className='errormsg'>Email is required.</p>}
+
+
                      <label htmlFor="email" > Your Email </label>
                     </div>
                     
@@ -98,12 +117,18 @@ const SignUp = () => {
                         <input 
                             type={passwordShown ? "text" : "password"}
                             name="password"
+                            // value={password}
+                            // onChange={(value)=>setpassword(value)}
                             value={formData.password}
-                            onChange={handleChange}
+                        onChange={handleChange}
                             placeholder="Password"
                             className="password-input"
                             required
                         />
+
+      {password==='' &&flage&&<p className='errormsg'>Passwords is required.</p>}
+
+
                           <label htmlFor="password" > password </label>
                         <span className="toggle-password-icon" onClick={togglePasswordVisibility}>
                             {passwordShown ? '👁️' : '🙈'}
@@ -114,13 +139,21 @@ const SignUp = () => {
                         <input 
                             type= {passwordShown2 ? "text" : "password"}
                             name="confirmPassword"
-                            value={formData.confirmPassword}
+                            // value={confirmPassword}
                             
-                            onChange={handleChange}
+                            // onChange={(value)=>setconfirmPassword(value)}
+                            value={formData.confirmPassword}
+                        onChange={handleChange}
                             placeholder="Confirm Password"
                             className="password-input"
                             required
                         />
+
+{(confirmPassword==='' &&flage&&<p className='errormsg'>confirmPassword is required.</p>)||
+          (!passwordMatch && <p className='errormsg'>Passwords do not match.</p>)}
+
+
+
                                    <label htmlFor="password" >confirm password </label>
 
                             <span className="toggle-password-icon" onClick={togglePasswordVisibility2}>
@@ -128,7 +161,7 @@ const SignUp = () => {
                             
                         </span>
                     </div>
-                    <button type="submit" className="signup-container" style={{fontFamily:'fantasy',fontSize:'20px'}}>Sign Up</button>
+                    <button type="submit" className="signup-container" onClick={handleSubmit }  style={{fontFamily:'fantasy',fontSize:'20px'}}>Sign Up</button>
                     {!passwordMatch && (
                         <label className="password-match-message">
                             Passwords do not match.

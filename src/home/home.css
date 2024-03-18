@@ -605,6 +605,17 @@ img {
   }
   
 
+  .errormsg
+{
+  color :'red';
+  margin-top: 5px;
+  margin-bottom:-20px;
+
+  text-align: left;
+
+  
+}
+
   .title-container {
     text-align: center;
     /* other styles for positioning and formatting your title and subtitle */

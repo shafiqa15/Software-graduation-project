@@ -7,6 +7,8 @@ import Footer from '/Users/shafiqaabdat/Downloads/client-main/src/footer/Footer.
 import Services from '/Users/shafiqaabdat/Downloads/client-main/src/services/Service.js';
 import ProductCard from './Trending/ProductCard';
 import { Container, Row, Col } from "reactstrap";
+import axios from 'axios';
+
 const Home1 = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -41,6 +43,51 @@ const Home1 = () => {
     console.log("Encoded JWT ID token: " + response.credential);
   };
   const year = new Date().getFullYear();
+
+  const [formData, setFormData] = useState({
+
+    email:'',
+    password: '',
+   
+});
+
+  const handleLogin = () => {
+    setflageerror(true);
+    // Implement your login logic here
+    const userData={
+      email:formData.email,
+      password:formData.password
+    };
+    // console.log('Login submitted:', { username, password });
+    axios.post('http://192.168.1.12:9000/signin',userData)
+    .then( res =>{ 
+      res.data? <Link className="nav__link" to="/Home"></Link>:setflage(true);
+     
+
+    // <Text style={styles.passwordMatchMessage}>Passwords do not match.</Text>
+    }
+    )
+    .catch( e =>{console.log(e);
+    // console.log(flage);
+  });
+    
+    // Here you would typically include a call to your API for the login
+  };
+
+  const handleChange = (e) => {
+    const {name, value } = e.target;
+    setFormData(prevState => ({
+        ...prevState,
+        [name]: value
+    }));
+};
+
+
+
+  const [flageerror, setflageerror] = useState(false);
+  const [flage, setflage] = useState(false);
+
+
   return (
     <>
 
@@ -134,11 +181,35 @@ const Home1 = () => {
           <div className="login__group">
             <div>
               <label htmlFor="email" className="login__label">Email</label>
-              <input type="email" placeholder="Write your email" id="email" className="login__input" />
+              <input
+               type="email" 
+              placeholder="Write your email" 
+              id="email"
+              className="login__input" 
+              // value={formData.email}
+              onChange={handleLogin}
+
+
+              />
+
+     {/* {formData.email==='' &&flageerror&&<p className='errormsg'>Email is required.</p>} */}
+
+
+
             </div>
             <div>
               <label htmlFor="password" className="login__label">Password</label>
-              <input type="password" placeholder="Enter your password" id="password" className="login__input" />
+              <input
+               type="password"
+                placeholder="Enter your password" 
+                id="password" 
+                className="login__input"
+                // value={formData.password}
+                onChange={handleLogin} 
+
+                />
+  {/* {formData.password==='' &&flageerror&&<p className='errormsg'>Password is required.</p>} */}
+
             </div>
           </div>
           <div className="login__options">

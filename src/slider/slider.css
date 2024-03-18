@@ -16,7 +16,7 @@
     height: 100vh;
     font-family: "Roboto", sans-serif;
     transition: 0.25s;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8)), url('/Users/shafiqaabdat/Desktop/demo/src/images/signup.webp');
+  /* nbackground-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8)), url('/Users/shafiqaabdat/Desktop/demo/src/images/signup.webp'); */
 
 }
 

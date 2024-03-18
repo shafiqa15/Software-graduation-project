@@ -276,6 +276,17 @@ body {
 }
 
 
+.errormsg
+{
+  color :'red';
+  margin-top: 5px;
+  margin-bottom:-20px;
+
+  text-align: left;
+
+  
+}
+
 .signup-container {
   display: flex;
   flex-direction: row; /* Align children horizontally */
