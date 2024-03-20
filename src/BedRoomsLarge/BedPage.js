@@ -269,13 +269,13 @@ const navigateToDesignPageWithMultipleProducts = () => {
 
   const [selectedImage, setSelectedImage] = useState(null);
 
-const handleImageChange = (event) => {
-  if (event.target.files && event.target.files[0]) {
-    // Update state with the selected file
-    setSelectedImage(event.target.files[0]);
-  }
-};
-
+  const handleImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      // Update state with the selected file
+      setSelectedImage(event.target.files[0]);
+    }
+  };
+  
 
 
 
@@ -727,7 +727,7 @@ const handleImageChange = (event) => {
         <StarRating onRatingChange={(rating) => setUserRating(rating)} />
 
         <label htmlFor="reviewImage" className='madimi-one-regular'>Upload Image:</label>
-    <input type="file" id="reviewImage" name="reviewImage" accept="image/*" onChange={handleImageChange} className='madimi-one-regular' />
+        <input type="file" id="reviewImage" name="reviewImage" accept=".png" onChange={handleImageChange} className='madimi-one-regular' />
         <textarea name="reviewText" required className='madimi-one-regular' />
         <button type="submit" className='madimi-one-regular'>Submit Review</button>
         {reviews.map((review, index) => (
