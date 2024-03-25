@@ -2,8 +2,6 @@
     import React, { useRef, useEffect, useState } from 'react';
     import * as THREE from 'three';
     import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-    import { useLoader } from '@react-three/fiber';
-    import { TextureLoader } from 'three';
     import Top from '../PAGES/Top';
     import '../decore/decore.css';
 
@@ -47,6 +45,8 @@
           obj.material = material;
         });
       }, [material]);
+
+
     useEffect(() => {
       const scene = sceneRef.current;
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -67,41 +67,42 @@
     
       const [boxDimensions, setBoxDimensions] = useState({ width: 1, height: 1, depth: 1 });
     
-    
-      
-     useEffect(() => {
+
+      const createSimpleBox = (offsetX = 0, offsetY = 0) => {
         const scene = sceneRef.current;
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth * 0.75, window.innerHeight * 0.75);
-        renderer.setClearColor(0xffffff);
-        mountRef.current.appendChild(renderer.domElement);
+        const legGeom = new THREE.BoxGeometry(0.1, 1, 0.1);
+        const topFrameGeom = new THREE.BoxGeometry(1, 0.1, 1);
+        const bottomFrameGeom = new THREE.BoxGeometry(1, 0.1, 1);
     
-        const controls = new OrbitControls(camera, renderer.domElement);
+        const positions = [
+          [-0.45 + offsetX, 0.5 + offsetY, -0.45],
+          [0.45 + offsetX, 0.5 + offsetY, -0.45],
+          [0.45 + offsetX, 0.5 + offsetY, 0.45],
+          [-0.45 + offsetX, 0.5 + offsetY, 0.45],
+        ];
     
-        scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-        scene.add(new THREE.DirectionalLight(0xffffff, 0.5));
+        positions.forEach(pos => {
+          const mesh = new THREE.Mesh(legGeom, material);
+          mesh.position.set(...pos);
+          scene.add(mesh);
+          objectsRef.current.push(mesh);
+        });
     
-        createObjects(0, 0); // Initial creation with the default material
+        const topFrame = new THREE.Mesh(topFrameGeom, material);
+        topFrame.position.set(0 + offsetX, 1 + offsetY, 0);
+        scene.add(topFrame);
+        objectsRef.current.push(topFrame);
     
-        camera.position.z = 5;
-    
-        const animate = () => {
-          requestAnimationFrame(animate);
-          controls.update();
-          renderer.render(scene, camera);
-        };
-    
-        animate();
-    
-        return () => {
-          mountRef.current.removeChild(renderer.domElement);
-        };
-      }, []); // The material does not need to be a dependency since it's not expected to change
+        const bottomFrame = new THREE.Mesh(bottomFrameGeom, material);
+        bottomFrame.position.set(0 + offsetX, 0.1 + offsetY, 0);
+        scene.add(bottomFrame);
+        objectsRef.current.push(bottomFrame);
+      };
+      
   
     
     const [boxWidth, setBoxWidth] = useState(1);
-    const [boxHeight, setBoxHeight] = useState(1);
+  
     
     
     
@@ -214,82 +215,165 @@
       
       
       
-    
-      // Function to create and add objects to the scene, supporting both horizontal and vertical offsets
+    const [lastObjectDetails, setLastObjectDetails] = useState({ x: 0, y: 0, width: 1, height: 1 });
+    const gapBetweenModels = 0; // This is an example value, in whatever units you are using (typically meters in 3D spaces)
+
       const createObjects = (offsetX = 0, offsetY = 0) => {
-        const scene = sceneRef.current;
-        const legGeom = new THREE.BoxGeometry(0.1, 1, 0.1);
-        const topFrameGeom = new THREE.BoxGeometry(1, 0.1, 1);
-        const bottomFrameGeom = new THREE.BoxGeometry(1, 0.1, 1);
-    
-        const positions = [
-          [-0.45 + offsetX, 0.5 + offsetY, -0.45],
-          [0.45 + offsetX, 0.5 + offsetY, -0.45],
-          [0.45 + offsetX, 0.5 + offsetY, 0.45],
-          [-0.45 + offsetX, 0.5 + offsetY, 0.45],
-        ];
-    
-        positions.forEach(pos => {
-          const mesh = new THREE.Mesh(legGeom, material);
-          mesh.position.set(...pos);
-          scene.add(mesh);
-          objectsRef.current.push(mesh);
-        });
-    
-        const topFrame = new THREE.Mesh(topFrameGeom, material);
-        topFrame.position.set(0 + offsetX,0.5 + offsetY, 0);
-        scene.add(topFrame);
-        objectsRef.current.push(topFrame);
-    
-        const bottomFrame = new THREE.Mesh(bottomFrameGeom, material);
-        bottomFrame.position.set(0 + offsetX, 0.1 + offsetY, 0);
-        scene.add(bottomFrame);
-        objectsRef.current.push(bottomFrame);
-        createBoxWithDoorsAndLock(0 + offsetX, 0.5+ offsetY, 0); // Adjust these values as needed
-    
-      };
-    
-        
-    const handleIncreaseWidth = () => setBoxWidth(prevWidth => prevWidth + 0.1);
-    const handleIncreaseHeight = () => setBoxHeight(prevHeight => prevHeight + 0.1);
-    
-    
-      const columnHeights = [1]; // Start with one column, height 1 (for the initial model)
-    
-    const addModelToRight = () => {
-      let maxX = -Infinity;
-      objectsRef.current.forEach(obj => {
-        maxX = Math.max(maxX, obj.position.x);
-      });
-      // Assuming 1 unit is the width of the model, and 0.5 is the gap between models
-      createObjects(maxX + 0.55, 0); 
-      columnHeights.push(1); // Add a new column with height 1
-    };
-    
-    const addModelAbove = () => {
-      if (columnHeights.length === 0) {
-        // If there are no columns, add the first one
-        createObjects(0, 0);
-        columnHeights.push(1);
-      } else {
-        // Find the rightmost column to add the model above
-        const columnIndex = columnHeights.length - 1;
-        const columnHeight = columnHeights[columnIndex];
-        // Assuming the x position of the rightmost column is columnIndex * (model width + gap)
-        const xPosition = columnIndex ; 
-        createObjects(xPosition, columnHeight);
-        columnHeights[columnIndex]++; // Increment the height of this column
+        if (currentModel === 'simpleBox') {
+          createSimpleBox(offsetX, offsetY-0.05, 0); // Adjust these values and parameters as needed
+          
+                setLastObjectDetails({ x: offsetX, y: offsetY, width: 1, height: 1 }); // Update these dimensions based on actual sizes
+
+        } 
+        else if(currentModel=='createBoxWithDoorsAndLock'){
+          createBoxWithDoorsAndLock(0 + offsetX, 0.5+ offsetY, 0); // Adjust these values as needed
+      setLastObjectDetails({ x: offsetX, y: offsetY, width: 1, height: 1}); // Update these dimensions based on actual sizes
+
+        }
+        else  {
+          
+      createBoxWithDoorsAndLock(0 + offsetX, 0.5+ offsetY, 0); // Adjust these values as needed
       }
-    };
-    
-    
-      const [currentModel, setCurrentModel] = useState('defaultModel');
-    
-      const changeModel = (modelName) => {
-        setCurrentModel(modelName);
-        // ... additional code to update the middle model
       };
+
+
+
+
+      const createObjects2 = (offsetX = 0, offsetY = 0) => {
+        if (currentModel === 'simpleBox') {
+             createSimpleBox(offsetX-0.9, offsetY-0.2, 0); // Adjust these values and parameters as needed
+          
+                setLastObjectDetails({ x: offsetX, y: offsetY+ 1, width: 1, height: 1 }); // Update these dimensions based on actual sizes
+
+        } 
+        else if(currentModel=='createBoxWithDoorsAndLock'){
+          createBoxWithDoorsAndLock(0 + offsetX, 0.5+ offsetY, 0); // Adjust these values as needed
+      setLastObjectDetails({ x: offsetX, y: offsetY, width: 1, height: 1}); // Update these dimensions based on actual sizes
+
+        }
+        else  {
+          
+      createBoxWithDoorsAndLock(0 + offsetX, 0.5+ offsetY, 0); // Adjust these values as needed
+      }
+      };
+
+
+      const createObjects3 = (offsetX = 0, offsetY = 0) => {
+        if (currentModel === 'simpleBox') {
+             createSimpleBox(offsetX+0.05, offsetY-0.05, 0); // Adjust these values and parameters as needed
+          
+                setLastObjectDetails({ x: offsetX, y: offsetY+ 1, width: 1, height: 1 }); // Update these dimensions based on actual sizes
+
+        } 
+        else if(currentModel=='createBoxWithDoorsAndLock'){
+       createBoxWithDoorsAndLock(0 + offsetX, 1+ offsetY, 0); // Adjust these values as needed
+      setLastObjectDetails({ x: offsetX, y: offsetY, width: 1, height: 1}); // Update these dimensions based on actual sizes
+
+        }
+        else  {
+          
+      createBoxWithDoorsAndLock(0 + offsetX,0.5+ offsetY, 0); // Adjust these values as needed
+
+      }
+      };
+
+  const handleModelChange = (modelName) => {
+  setCurrentModel(modelName); // Assuming this sets state that decides which object creation function to use
+};
+        
    
+    
+      const addModelAbove = () => {
+  const { x, y, height } = lastObjectDetails;
+  const newY = y -0.05+ height + gapBetweenModels; 
+
+  const newModelHeight = 1; // Example height of the new model, adjust based on actual model
+  createObjects(x, newY, 0); // Adjust parameters as needed for your createObjects function
+  
+  setLastObjectDetails({ x, y: newY, width: boxWidth, height: newModelHeight });
+};
+
+      const addModelToRight = () => {
+        if (objectsRef.current.length > 0) {
+          const lastAddedObject = objectsRef.current[objectsRef.current.length - 1];
+          
+          const lastObjectPosition = lastAddedObject.position;
+          const lastObjectSize = lastAddedObject.geometry.parameters;
+          
+          const gap = 0.9; 
+          
+         
+          const newModelX = lastObjectPosition.x + (lastObjectSize.width / 2) + gap + (boxDimensions.width / 2);
+          
+          createObjects2(newModelX, lastObjectPosition.y+0.1, lastAddedObject.position.z);
+          
+          setLastObjectDetails({ x: newModelX, y: lastObjectPosition.y, width: boxDimensions.width, height: boxDimensions.height });
+        } else {
+          createObjects(0, 0); // or any default position you'd like to start with
+          setLastObjectDetails({ x: 0, y: 0, width: boxDimensions.width, height: boxDimensions.height });
+        }
+      };
+
+
+
+      
+
+      
+      const addModelToLeft = () => {
+        if (objectsRef.current.length > 0) {
+          const lastAddedObject = objectsRef.current[objectsRef.current.length - 1];
+          const lastObjectSize = lastAddedObject.geometry.parameters;
+          const gap = 0; 
+      
+          const newModelX = lastAddedObject.position.x - lastObjectSize.width / 2 - boxDimensions.width / 2 ;
+      
+          createObjects3(newModelX, lastAddedObject.y, lastAddedObject.position.z);
+      
+          setLastObjectDetails({ x: newModelX, y: lastAddedObject.position.y, width: boxDimensions.width, height: boxDimensions.height });
+        } else {
+          createObjects(0, 0);
+          setLastObjectDetails({ x: 0, y: 0, width: boxDimensions.width, height: boxDimensions.height });
+        }
+      };
+      
+      
+   
+    
+    const [currentModel, setCurrentModel] = useState('defaultModel');
+    
+   const changeModel = (modelName) => {
+  setCurrentModel(modelName);
+  if (modelName === 'model1') {
+    objectsRef.current.forEach(obj => {
+      if (obj.isLock || obj.isDoor) {
+        obj.visible = false; // or scene.remove(obj) to completely remove it from the scene
+      }
+    });
+  } else {
+    // Code to revert back to the default model with lock and door
+    objectsRef.current.forEach(obj => {
+      if (obj.isLock || obj.isDoor) {
+        obj.visible = true; // or you can re-add them to the scene if you've removed them
+      }
+    });
+  }
+  // ... additional code to update the middle model
+};
+
+const [textureFile, setTextureFile] = useState(null);
+
+
+// Use useEffect to update the material when the textureFile changes
+useEffect(() => {
+  if (textureFile) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const texture = new THREE.TextureLoader().load(e.target.result);
+      setMaterial(new THREE.MeshPhongMaterial({ map: texture }));
+    };
+    reader.readAsDataURL(textureFile);
+  }
+}, [textureFile]);
       
     
       return (
@@ -300,57 +384,130 @@
     
     <div className="image-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%',marginTop:'90px'}}>
       <img src={image1} alt="Decor 1" style={{ width: '15%', height: 'auto',paddingRight:'20px' }} />
-      <img src={img1} alt="Decor 2" style={{ width: '15%', height: 'auto' ,paddingRight:'20px'}} />
+      <img src={img1} alt="Decor 2" style={{ width: '15%', height: 'auto' ,paddingRight:'20px'}}  />
       <img src={img2} alt="Decor 3" style={{ width: '15%', height: 'auto',paddingRight:'20px' }} />
       <img src={img3} alt="Decor 4" style={{ width: '15%', height: '190px' ,paddingRight:'20px'}} />
     </div>
     
-            <div ref={mountRef} style={{ width: '75vw', height: '75vh',marginTop:'210px' }}></div>
+    {/* <div className="model-display-container"> */}
+    <div ref={mountRef} style={{ width:'120%', height: '500px',marginTop:'60px',backgroundColor:'red' }}></div>
+  {/* </div> */}
     
-          <input
+       <div style={{ 
+    position: 'absolute', 
+    top: '45vh', 
+    left: '22%', 
+    transform: 'translateX(-50%)', 
+    display: 'flex', 
+    flexDirection: 'column', 
+    alignItems: 'center', 
+    gap: '10px',
+    fontFamily: 'Arial, sans-serif', // Use a common font for simplicity
+}}>
+    <button onClick={addModelAbove} style={{
+        padding: '10px 20px',
+      
+        color: '#fff',
+        backgroundColor: '#b32c04',
+        border: 'none',
+        borderRadius: '5px',
+        width:'165px',
+        cursor: 'pointer',
+        outline: 'none',
+        transition: 'background-color 0.3s ease',fontSize:'15px',
+    }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
+       onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
+      Add Model Above↑
+    </button>
+    <button onClick={addModelToRight} style={{
+        padding: '10px 20px',
+      
+        color: '#fff',
+        backgroundColor: '#b32c04',
+        border: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        width:'165px',
+        outline: 'none',fontSize:'15px',
+        transition: 'background-color 0.3s ease',
+    }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
+       onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
+      Add Model to Right →
+    </button>
+    <button onClick={addModelToLeft} style={{
+        padding: '10px 20px',
+        
+        color: '#fff',
+        backgroundColor: '#b32c04',
+        border: 'none',
+        borderRadius: '5px',
+        width:'165px',
+        cursor: 'pointer',
+        outline: 'none',fontSize:'15px',
+        transition: 'background-color 0.3s ease',
+    }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
+       onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
+      Add Model To Left ←
+    </button>
+
+    <label htmlFor="file-upload" style={{
+        padding: '10px 20px',
+  
+        color: '#fff',
+        backgroundColor: '#b32c04',
+        border: 'none',
+        borderRadius: '5px',fontSize:'15px',
+        width:'165px',
+        cursor: 'pointer',
+        outline: 'none',
+        transition: 'background-color 0.3s ease',
+        textAlign: 'center',
+        display: 'inline-block',
+        marginTop: '10px', 
+    }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
+       onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
+        Upload Wood picture
+        <input
+        type="file"
+        id="file-upload"
+        accept="image/*"
+        onChange={(e) => setTextureFile(e.target.files[0])}
+        style={{ 
+            display: 'none',
+        }}
+      />
+    </label>
+    <p> Pick the color u want:</p>
+    <input
+  
             type="color"
             value={`#${color.toString(16)}`}
             onChange={(e) => setColor(parseInt(e.target.value.substr(1), 16))}
-            style={{ position: 'absolute', top: '85vh', left: '50%', transform: 'translateX(-50%)' }}
+            style={{ position: 'absolute', top: '42vh', left: '50%', transform: 'translateX(-50%)' }}
           />
-          
-          <button onClick={addModelAbove} style={{ position: 'absolute', top: '90vh', left: '30%', transform: 'translateX(-50%)' }}>
-            Add Model Above
-          </button>
-          <button onClick={addModelToRight} style={{ position: 'absolute', top: '90vh', left: '70%', transform: 'translateX(-50%)' }}>
-            Add Model to Right
-          </button>
-       
-    
+</div>
 
-    
-          <button onClick={handleIncreaseWidth} style={{ position: 'absolute', top: '95vh', left: '30%' }}>
-            Increase Width
-          </button>
-          <button onClick={handleIncreaseHeight} style={{ position: 'absolute', top: '95vh', left: '70%' }}>
-            Increase Height
-          </button>
-    
-    
+
     
                <div  className='avia_prod'>
                <br/>
             <p style={{ fontFamily: 'Mulish' }}>
-              Available Components to be <br/> designed:
+              Choose the model you want:<br/>
             </p> 
-            <div id="messageContainer" style={{ marginLeft:'500px',fontFamily: 'Mulish',marginTop:'100px'}}>
-      <h3>You can design ur own product here   😉</h3>
+            <div id="messageContainer" style={{ marginLeft:'600px',fontFamily: 'Mulish',marginTop:'150px'}}>
+           <h3>You can design ur own product here  😉</h3>
     </div>
     
     
-    
+   
+
             <div onClick={() => changeModel('model1')} className="model-selector">
               <img className='images_prop image-container_decore' src={image1} alt="Model 1" />
             </div>
-            <div onClick={() => changeModel('model2')} className="model-selector">
+            <div onClick={() => handleModelChange('simpleBox')} className="model-selector" >
               <img className='images_prop image-container_decore' src={image2} alt="Model 2" />
             </div>
-            <div onClick={() => changeModel('model3')} className="model-selector">
+            <div onClick={() => handleModelChange('createBoxWithDoorsAndLock')} className="model-selector">
               <img className='images_prop image-container_decore' src={image3} alt="Model 3" />
             </div>
             <div onClick={() => changeModel('model4')} className="model-selector">

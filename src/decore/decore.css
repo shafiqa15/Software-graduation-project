@@ -17,7 +17,7 @@
   }
   
   .avia_prod{
-    margin-top: -1010px;
+    margin-top: -750px;
     /* margin-left: -25; */
     /* top: 110px;
     bottom: 0;
@@ -61,3 +61,35 @@ margin-left: 20px;
     margin-top: -70px;
   }
   
+
+  /* decore.css */
+.controls-container {
+  flex: 1;
+  /* Additional styles for the button container */
+}
+
+.model-display-container {
+  flex: 2;
+  padding: 20px;
+  background: #c28787;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(255, 225, 225, 0.1);
+  margin: 0 20px;
+  margin-top: 50px;
+  margin-left: 400px;
+  height: 60vh;
+  width:1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 500px) {
+  .controls-and-model-display {
+      flex-direction: column;
+  }
+
+  .model-display-container {
+      margin: 20px 0;
+      width: 500px;
+  }
+}
