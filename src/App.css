@@ -25,3 +25,18 @@ body {
     transform: rotateY(360deg) rotateX(360deg);
   }
 }
+p {
+  font-family: "Comfortaa", sans-serif;
+  
+  
+    /* For a darker, more muted red, you might use something like: */
+    /* background-color: #8B0000; */ /* Dark red */
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Quicksand:wght@300..700&display=swap');
+  span,h2,h1,option ,div,button{
+    font-family: "Comfortaa", sans-serif;
+    
+    
+      /* For a darker, more muted red, you might use something like: */
+      /* background-color: #8B0000; */ /* Dark red */
+    }

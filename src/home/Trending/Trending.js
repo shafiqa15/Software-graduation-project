@@ -5,8 +5,6 @@ import  '/Users/shafiqaabdat/Downloads/client-main/src/home/Trending/Trending.cs
 
 import { Col } from "reactstrap";
 
-
-
 const Trending = ({ image, productName, category, price }) => {
   return (
     <Col lg="3" md="6" sm="12">

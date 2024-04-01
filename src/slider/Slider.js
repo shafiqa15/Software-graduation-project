@@ -13,7 +13,7 @@ backgroundImage:'https://scontent.fjrs27-1.fna.fbcdn.net/v/t1.6435-9/118488384_7
         iconClass: 'fa-eye',
         main: 'mirrors',
         sub: 'Elegant reflections for every space',
-        backgroundImage:'https://scontent.fjrs27-1.fna.fbcdn.net/v/t39.30808-6/421155666_697591609155686_2026242433103725274_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=HzJDhX4M3CMAX8-H9dd&_nc_ht=scontent.fjrs27-1.fna&oh=00_AfDSPWWDj3CIwStFgm9zlD_9A32Zqo8eSB2_SSk8yMGU0Q&oe=65E0EE4F',
+        backgroundImage:'https://scontent.fjrs27-1.fna.fbcdn.net/v/t39.30808-6/421155666_697591609155686_2026242433103725274_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=cqsAerdE4RYAX91RLSh&_nc_ht=scontent.fjrs27-1.fna&oh=00_AfCVceqHzLPeb38rZiGH_H8EYWyJBA0x_kSA4KxcEvr4Vw&oe=6606810F',
       },
     
       {
@@ -26,12 +26,14 @@ backgroundImage:'https://scontent.fjrs27-1.fna.fbcdn.net/v/t1.6435-9/118488384_7
     iconClass: 'fa-bed',
     main: 'Bedroom',
     sub: 'Comfortable and stylish beds',
-    backgroundImage:'https://parisfurnitureeg.com/wp-content/uploads/2023/05/WhatsApp-Image-2023-05-11-ccccat-14.41.05.jpg',
+    backgroundImage:'https://scontent.fjrs27-1.fna.fbcdn.net/v/t39.30808-6/419198067_693453482902832_1114294966367502952_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=j6cuGNT7O1IAX8WEr99&_nc_ht=scontent.fjrs27-1.fna&oh=00_AfB7VwgfpW-kQpOkAuSitt-d5pWJcwqqI36v9RR6XtyJUA&oe=6606A36C',
   },
   { iconClass: 'fa-couch',
   main: 'Living Room',
   sub: 'Luxurious and modern sofas',
-  backgroundImage:'https://scontent.fjrs27-1.fna.fbcdn.net/v/t39.30808-6/424922107_711901527724694_9107286498942218375_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=ZFXD0YD0vjIAX-B30nE&_nc_ht=scontent.fjrs27-1.fna&oh=00_AfBkYfRqorDzXFSzyxzQiE3HG1MDVWu6cAhIVv2sEO7kKg&oe=65E121A5',
+  backgroundImage:'https://scontent.fjrs27-1.fna.fbcdn.net/v/t39.30808-6/419708516_694005959514251_5297615818236237879_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=_VzsvbkHMMcAX9TJMOZ&_nc_ht=scontent.fjrs27-1.fna&oh=00_AfD4lAs-n9KMElG42a-5cdVp-WbF1J8clJe7Qcu9NvcamA&oe=66080921',
+
+
 },
 {
   iconClass: 'fa-tv',
@@ -43,7 +45,7 @@ backgroundImage:'https://scontent.fjrs27-1.fna.fbcdn.net/v/t1.6435-9/118488384_7
   iconClass: 'fa-blender-phone',
   main: 'Appliances',
   sub: 'High-quality kitchen and home devices',
-  backgroundImage:'https://scontent.fjrs27-1.fna.fbcdn.net/v/t39.30808-6/422092725_711192021128978_2078010298482439679_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=z0fRKrxOq7QAX9_rIOj&_nc_ht=scontent.fjrs27-1.fna&oh=00_AfClzZL64Nbkh4KgGRzf_7EapP2CZgbQUsmyDlNyTKgpeg&oe=65E135BB',
+  backgroundImage:'https://scontent.fjrs27-1.fna.fbcdn.net/v/t39.30808-6/433130330_732466939001486_3939752521216473422_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_ohc=c-1atjhu1B0AX9tkx-I&_nc_ht=scontent.fjrs27-1.fna&oh=00_AfB_Xr7ZfyuQfnndl-7BkVh_GF5k77vdmwFa5MVLDAVt6w&oe=6607F9D0',
 },
 
   // ... add other options here

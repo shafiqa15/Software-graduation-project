@@ -1,24 +1,32 @@
 /* Trending.css */
 
-.product__item {
-    border: 1px solid #eee;
-    padding: 15px;
-    margin: 10px 0;
-    position: relative;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-  }
+
   
   .product__item:hover {
     transform: translateY(-5px);
   }
   
-  .pro_img img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
-  
+/* Ensure a uniform size for each product item */
+.product__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* This helps in distributing the space inside the div */
+  align-items: center;
+  height: 300px; /* Example height, adjust as needed */
+  width: 100%; /* This makes sure it takes the full width of its parent column */
+  overflow: hidden; /* Ensures that content does not overflow */
+}
+
+/* Additional styling to ensure the image fits well */
+.pro_img img {
+  width: 100%; /* Make the image fill the container width */
+  height: auto; /* Adjust height automatically to maintain aspect ratio */
+  max-height: 150px; /* Example max height to prevent very tall images */
+  object-fit: cover; /* This makes sure the image covers the area, might crop */
+}
+
+/* Adjust as necessary for your design */
+
   .pro_name {
     font-size: 20px;
     color: #333;
@@ -78,3 +86,5 @@
     box-shadow: 0 0 15px rgba(160, 75, 47, 0.5); /* Glowing effect on hover */
   }
   
+
+

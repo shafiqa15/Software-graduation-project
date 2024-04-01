@@ -14,12 +14,17 @@ import ImageUpload from './IMAGE/ImageUpload.js';
 import BedPage from './BedRoomsLarge/BedPage.js';
 import Decore from './decore/Decore.js';
 import Wardrobe from './decore/Wardrobe.js';
+import Cart from './Cart/Cart.js';
+import { CartProvider } from './Cart/CartContext.js';
+
 const App = () => {
   return (
+    <CartProvider>
+    
     <Router> 
       <div>
         <Routes>    
-          <Route index element={<Decore/>}/>
+          <Route index element={<Home1/>}/>
           <Route path="/Home1" element={<Home1/>}/>
           <Route path="/Slider" element={<Slider/>}/> 
           <Route path="/SignUp" element={<SignUp/>}/>
@@ -33,11 +38,16 @@ const App = () => {
           <Route path="/product/:id" element={<BedPage />} /> {/* Ensure this path matches */}
           <Route path="/bedpage/:id" element={<BedPage />} />
           <Route path="/Decore" element={<Decore/>} />
+          <Route path="/Cart" element={<Cart/>} />
+          <Route path="/CartProvider" element={<CartProvider/>} />
+           
           {/* <Route path='/Mode' element={<Mode/>}/> */}
+          
 
         </Routes>
       </div>
     </Router>
+    </CartProvider>
   );
 }
 

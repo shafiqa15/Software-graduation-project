@@ -18,6 +18,7 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MeshStandardMaterial } from 'three';
 import { useNavigate } from 'react-router-dom';
 
+import { useCart } from '../Cart/CartContext.js'; // Adjust the import path based on your file structure
 
 // Define the useQuery hook
 function useQuery() {
@@ -66,6 +67,15 @@ const BedPage = () => {
 
 
   
+ // Part of the BedRoomsLarge component
+const { addToCart } = useCart(); // This is how you access addToCart now
+// Using useNavigate hook from react-router-dom
+// const navigate = useNavigate();
+
+const handleAddToCartClick = (product) => {
+  addToCart({ ...product, quantity: 1 });
+  navigate('/cart'); // Assuming '/cart' is your cart page's path
+};
 
   const handleAddFlower = () => {
     const productFlowerData = {
@@ -172,6 +182,13 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
   };
 
 
+  const navigateToDetailingPage = (productId) => {
+    // Assuming the product you want to pass is at index 1
+    const productToPass = products.find(product => product.id === productId);
+    navigate(`/Decore`, { state: { product: productToPass } });
+  };
+
+
 // Example of navigating with multiple products
 const navigateToDesignPageWithMultipleProducts = () => {
   const selectedProducts = [products[1], products[2]]; // Select products as per your logic
@@ -185,6 +202,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
     setShowButton3(showButton3);
 
   };
+
   
   const [showFirstImages, setShowFirstImages] = useState(true);
 
@@ -278,7 +296,9 @@ const navigateToDesignPageWithMultipleProducts = () => {
   
 
 
+  const [quantity, setQuantity] = useState(1); // Default to 1, assuming users want at least one item
 
+  
   // const IMAGES = [
   //   { url: product.bed1black, alt: "Car One" },
   //   { url: product.bed1black, alt: "Car Two" },
@@ -296,14 +316,30 @@ const navigateToDesignPageWithMultipleProducts = () => {
     <div className="main-container_beds">
 
 
-<p className='madimi-one-regular' style={{marginTop:'100px',fontWeight:'bold',fontSize:'30px',marginLeft:'40px'}}> One of the amazing {product.kind} in the website that has <span style={{color:'InfoText'}}>7 </span>peices </p>
-<button className='madimi-one-regular buttoncart' style={{ width:'150px',marginLeft:'1200px',marginTop:'-40px'}}>
-  <FontAwesomeIcon icon={faShoppingCart}/> Add to Cart
-</button> 
-   
-    <div className='sora111' style={{   backgroundColor:'rgb(221, 215, 205)'
+<p className='madimi-one-regular' style={{marginTop:'100px',fontWeight:'bold',fontSize:'30px',marginLeft:'40px'}}> One of the amazing {product.kind} in the website that has <span style={{color:'InfoText'}}>{product.number_of_pieces} </span>peices </p>
+<div style={{marginLeft: '1200px', marginTop: '20px', display: 'block', width: '150px'}}>
+  <p>{product.available} rooms remain</p>
+  <input
+    type="number"
+    value={quantity}
+    onChange={(e) => setQuantity(Math.max(1, Math.min(e.target.value, product.available)))} // Ensure the value is between 1 and the maximum available
+    min="1"
+    max={product.available}
+    className="quantity-input"
+    style={{width: '100%', marginBottom: '10px'}}
+  />
+  
 
-}}>
+  <br/>  
+  <button className='madimi-one-regular buttoncart' onClick={() => handleAddToCartClick({ ...product, quantity })} style={{ width: '100%' }}>
+  <FontAwesomeIcon icon={faShoppingCart}/> Add to Cart
+</button>
+
+  <br/>  <br/>  <br/>  <br/><br/>  <br/><br/>  <br/>
+</div>
+
+
+    <div className='sora111' style={{   backgroundColor:'rgb(221, 215, 205)',marginTop:'-200px'}}>
 
 
 
@@ -326,7 +362,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
        <span style={{ marginLeft: '150px' }}>1 Wardrobe</span>
       <span style={{ marginLeft: '100px' }}>2 Nightstands</span>
       <span style={{ marginLeft: '130px' }}> 1 Mirror</span>
-      <span style={{ marginLeft: '140px' }}> 1 bed following</span>
+      <span style={{ marginLeft: '100px' }}> 1 bed following</span>
     </p> 
     
 
@@ -424,7 +460,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
         {/* Circle buttons */}
 
 
-       -{product.kind} bed  which is manufactured on Palestine. <p style={{marginTop:'10px'}}>-The wood kind is {product.name}.</p>
+       <p>-{product.kind} bed  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px'}}>-The wood kind is {product.name}.</p>
        <p>-Colors available:Dark blue,brown and black.</p>
        
        <button className="circle-button" onClick={(e) => { handleButtonClick(); toggleCanvas2(); }}>
@@ -452,7 +488,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
         <div className="description">
         
           {/* Add your description content here */}
-          <p> width : 2000cm, hight: 2000cim,length:2000cm</p>
+          <p> width : 2000cm, hight: 2000cm,length:2000cm</p>
           <p style={{color:'red'}}>Pick the color you want to see the changes ! </p>
           <p style={{marginTop:'-20px',fontSize:'14px'}}> U can see the 3d model of you chosen product to see all it's details .
 </p>
@@ -567,6 +603,8 @@ const navigateToDesignPageWithMultipleProducts = () => {
        <p style={{marginTop:'-10px',marginLeft:'700px'}}>-Colors available:Only off-white.</p>
         <button className="circle-buttons6" onClick={() => {handleCircleButtonClick() }}></button>
           <div className="description" style={{marginTop:'170px',marginLeft:'700px'}}>
+          <p> width : 2000cm, hight: 2000cim,length:2000cm</p>
+
           <p style={{color:'red'}}>Pick the color you want to see the changes ! </p>
           <p style={{marginTop:'-20px',fontSize:'14px'}}> U can see the 3d model of you chosen product to see all it's details .
           
@@ -606,14 +644,16 @@ const navigateToDesignPageWithMultipleProducts = () => {
  
     
         <button className="circle-buttons6" onClick={() => {handleCircleButtonClick() }}></button>
-          <div className="description" style={{marginTop:'160px',marginLeft:'700px'}}>
+          <div className="description" style={{marginTop:'130px',marginLeft:'700px'}}>
+          <p> width : 2000cm, hight: 2000cim,length:2000cm</p>
+
           <p style={{color:'red'}}>Pick the color you want to see the changes ! </p>
           <p style={{marginTop:'-20px',fontSize:'14px'}}> U can see the 3d model of you chosen product to see all it's details .
           
 </p>
        
       </div>  
-<button className="circle-buttons7" onClick={toggleCanvas5}><p style={{fontFamily:'fantasy',fontWeight:'bold',color:'black',fontSize:'40px',marginTop:'20px'}}> 3D</p> </button>
+<button className="circle-buttons7" onClick={toggleCanvas5}><p style={{fontFamily:'fantasy',fontWeight:'bold',color:'black',fontSize:'40px',marginTop:'10px'}}> 3D</p> </button>
 
 
 
@@ -650,6 +690,8 @@ const navigateToDesignPageWithMultipleProducts = () => {
     
         <button className="circle-buttons9999" onClick={() => {handleCircleButtonClick() }}></button>
           <div className="description" style={{marginTop:'180px',marginLeft:'700px'}}>
+          <p> width : 2000cm, hight: 2000cim,length:2000cm</p>
+
           <p style={{color:'red'}}>Pick the color you want to see the changes ! </p>
           <p style={{marginTop:'-20px',fontSize:'14px'}}> U can see the 3d model of you chosen product to see all it's details .
           
@@ -693,6 +735,8 @@ const navigateToDesignPageWithMultipleProducts = () => {
        <p style={{marginTop:'-10px',marginLeft:'700px'}}>-Colors available:Only off-white.</p>
         <button className="circle-buttons6" onClick={() => {handleCircleButtonClick() }}></button>
           <div className="description" style={{marginTop:'170px',marginLeft:'700px'}}>
+          <p> width : 2000cm, hight: 2000cim,length:2000cm</p>
+
           <p style={{color:'red'}}>Pick the color you want to see the changes ! </p>
           <p style={{marginTop:'-20px',fontSize:'14px'}}> U can see the 3d model of you chosen product to see all it's details .
           
@@ -721,7 +765,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
 
 
 
-      <form onSubmit={handleReviewSubmit} style={{marginLeft:'1200px' ,width:'200px',marginTop:'-2900px'}}>
+      <form onSubmit={handleReviewSubmit} style={{marginLeft:'1200px' ,width:'200px',marginTop:'-3100px'}}>
       <p className='animated-text_bed madimi-one-regular ' style={{marginLeft:'10px'}}> Price is {product.price}₪ </p>
  
         <StarRating onRatingChange={(rating) => setUserRating(rating)} />
@@ -746,12 +790,10 @@ const navigateToDesignPageWithMultipleProducts = () => {
         
       </form>
 
-      {/* <button onClick={handleAddFlower} className='madimi-one-regular newbutton_bed' style={{marginLeft:'1200px', marginTop: '20px', display: 'block',width:'200px'}}>
-      <Link to="/Design" style={{color:'white'}}> Click here to arrange this room components in room!</Link> 
     
-      </button> */}
 
       <button style={{marginLeft:'1200px', marginTop: '20px', display: 'block',width:'200px'}} className="AddToCartButton madimi-one-regular" onClick={() => navigateToDesignPage(product.id)}>Design This Bedroom</button>
+      <button style={{marginLeft:'1200px', marginTop: '20px', display: 'block',width:'200px'}} className="AddToCartButton madimi-one-regular" onClick={() => navigateToDetailingPage(product.id)}>Put it to detailing page</button>
 
 
 

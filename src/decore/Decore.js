@@ -46,24 +46,67 @@
         });
       }, [material]);
 
+     
+      
 
-    useEffect(() => {
-      const scene = sceneRef.current;
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setSize(window.innerWidth * 0.75, window.innerHeight * 0.75);
-      renderer.setClearColor(0xffffff);
-      mountRef.current.appendChild(renderer.domElement);
-      const controls = new OrbitControls(camera, renderer.domElement);
-      scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-      scene.add(new THREE.DirectionalLight(0xffffff, 0.5));
-      createObjects(); // Initial creation
-      camera.position.z = 5;
-      const animate = () => { requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); };
-      animate();
-      return () => { mountRef.current.removeChild(renderer.domElement); };
-    }, []);
+      useEffect(() => {
+        const scene = sceneRef.current;
+        const width = mountRef.current.clientWidth;
+        const height = 500; // Set a fixed height for the renderer
+      
+        const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(width, height); // Use the width and height determined above
+      
+        // Append the renderer to the DOM
+        mountRef.current.appendChild(renderer.domElement);
+        renderer.setClearColor(0xFAF9F6
+          ); // You can also use new THREE.Color('#b0955b') if you prefer
+
+        // Add controls
+        const controls = new OrbitControls(camera, renderer.domElement);
+        scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+        scene.add(new THREE.DirectionalLight(0xffffff, 0.5));
+      
+        // Set the initial creation of objects
+        createObjects(); 
+        camera.position.z = 5;
+      
+        // Start the rendering loop
+        const animate = () => {
+          requestAnimationFrame(animate);
+          controls.update();
+          renderer.render(scene, camera);
+        };
+        animate();
+      
+        // This will run when the component unmounts
+        return () => {
+          mountRef.current.removeChild(renderer.domElement);
+        };
+      }, []);
+      
+
+  // useEffect(() => {
+  //   const scene = sceneRef.current;
     
+  //   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  //   const renderer = new THREE.WebGLRenderer({ antialias: true });
+  //   renderer.setSize(window.innerWidth * 0.75, window.innerHeight * 0.75);
+  //   renderer.setClearColor(0xffffff);
+  //   mountRef.current.appendChild(renderer.domElement);
+  //   const controls = new OrbitControls(camera, renderer.domElement);
+  //   scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+  //   scene.add(new THREE.DirectionalLight(0xffffff, 0.5));
+  //   createObjects(); // Initial creation
+  //   camera.position.z = 5;
+  //   const animate = () => { requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); };
+  //   animate();
+  //   return () => { mountRef.current.removeChild(renderer.domElement); };
+  // }, []);
+
+  
+  
     
       const [boxDimensions, setBoxDimensions] = useState({ width: 1, height: 1, depth: 1 });
     
@@ -266,13 +309,13 @@
 
         } 
         else if(currentModel=='createBoxWithDoorsAndLock'){
-       createBoxWithDoorsAndLock(0 + offsetX, 1+ offsetY, 0); // Adjust these values as needed
+       createBoxWithDoorsAndLock(0 + offsetX, 0.1+ offsetY, 0); // Adjust these values as needed
       setLastObjectDetails({ x: offsetX, y: offsetY, width: 1, height: 1}); // Update these dimensions based on actual sizes
 
         }
         else  {
           
-      createBoxWithDoorsAndLock(0 + offsetX,0.5+ offsetY, 0); // Adjust these values as needed
+      createBoxWithDoorsAndLock(0 + offsetX,0.6+ offsetY, 0); // Adjust these values as needed
 
       }
       };
@@ -319,18 +362,46 @@
       
 
       
+      // const addModelToLeft = () => {
+      //   if (objectsRef.current.length > 0) {
+      //     const lastAddedObject = objectsRef.current[objectsRef.current.length - 1];
+      //     const lastObjectSize = lastAddedObject.geometry.parameters;
+      //     const gap = 0; 
+      
+      //     const newModelX = lastAddedObject.position.x - lastObjectSize.width / 2 - boxDimensions.width / 2 ;
+      
+      //     createObjects3(newModelX, lastAddedObject.y, lastAddedObject.position.z);
+      
+      //     setLastObjectDetails({ x: newModelX, y: lastAddedObject.position.y, width: boxDimensions.width, height: boxDimensions.height });
+      //   } else {
+      //     createObjects(0, 0);
+      //     setLastObjectDetails({ x: 0, y: 0, width: boxDimensions.width, height: boxDimensions.height });
+      //   }
+      // };
+      
       const addModelToLeft = () => {
         if (objectsRef.current.length > 0) {
           const lastAddedObject = objectsRef.current[objectsRef.current.length - 1];
+          
+          // Assuming lastObjectSize stores the dimensions of the last added object correctly
           const lastObjectSize = lastAddedObject.geometry.parameters;
-          const gap = 0; 
+          
+          // You might want a gap between the models, even if it's just a small one.
+          const gap = 0; // Adjust this value to your needs
       
-          const newModelX = lastAddedObject.position.x - lastObjectSize.width / 2 - boxDimensions.width / 2 ;
+          // Calculate the new model's X position based on the last object's position, its width, the new object's width, and the gap
+          // We subtract half of the last object's width, the gap, and then half of the new object's width
+          const newModelX = lastAddedObject.position.x - (lastObjectSize.width / 2) - gap - (boxDimensions.width / 2);
       
-          createObjects3(newModelX, lastAddedObject.y, lastAddedObject.position.z);
+          // Correct the Y position to be the same as the last added object if needed
+          // Assuming you want to place it directly to the left without changing the vertical position
+          const newY = lastAddedObject.position.y;
       
-          setLastObjectDetails({ x: newModelX, y: lastAddedObject.position.y, width: boxDimensions.width, height: boxDimensions.height });
+          createObjects3(newModelX, newY, lastAddedObject.position.z);
+      
+          setLastObjectDetails({ x: newModelX, y: newY, width: boxDimensions.width, height: boxDimensions.height });
         } else {
+          // If no objects have been added, create the first object at an initial position
           createObjects(0, 0);
           setLastObjectDetails({ x: 0, y: 0, width: boxDimensions.width, height: boxDimensions.height });
         }
@@ -340,6 +411,10 @@
    
     
     const [currentModel, setCurrentModel] = useState('defaultModel');
+    const [modelWidth, setModelWidth] = useState('');
+const [modelHeight, setModelHeight] = useState('');
+const [designDescription, setDesignDescription] = useState('');
+
     
    const changeModel = (modelName) => {
   setCurrentModel(modelName);
@@ -390,9 +465,14 @@ useEffect(() => {
     </div>
     
     {/* <div className="model-display-container"> */}
-    <div ref={mountRef} style={{ width:'120%', height: '500px',marginTop:'60px',backgroundColor:'red' }}></div>
+<div ref={mountRef} style={{ width: '100%', height: '500px', position: 'relative', top: '50px', border: '2px solid #b0955b',marginLeft:'200px',backgroundColor:'##FAF9F6' }}></div>
+      {/* width :
+      hight: */}
+   
   {/* </div> */}
-    
+  {/* <div ref={mountRef} style={{ width: '120%', height: '500px', marginTop: '60px', border: '2px solid black' }}></div> */}
+
+   
        <div style={{ 
     position: 'absolute', 
     top: '45vh', 
@@ -494,7 +574,7 @@ useEffect(() => {
             <p style={{ fontFamily: 'Mulish' }}>
               Choose the model you want:<br/>
             </p> 
-            <div id="messageContainer" style={{ marginLeft:'600px',fontFamily: 'Mulish',marginTop:'150px'}}>
+            <div id="messageContainer" style={{ marginLeft:'600px',fontFamily: 'Mulish',marginTop:'140px'}}>
            <h3>You can design ur own product here  😉</h3>
     </div>
     
@@ -516,8 +596,62 @@ useEffect(() => {
             <div onClick={() => changeModel('model5')} className="model-selector">
               <img className='images_prop image-container_decore' src={image5} alt="Model 5" />
             </div>
-          </div> 
+          </div>
+
+
+          <div style={{ marginTop: '20px', textAlign: 'center', padding: '20px', backgroundColor: '#FAF9F6', border: '1px solid #b0955b', borderRadius: '5px',marginLeft:'200px' }}>
+  <div style={{ marginBottom: '10px', display: 'flex', justifyContent: 'center', gap: '20px' }}>
+    <input
+      type="text"
+      placeholder="Width (e.g., 2.5 meters)"
+      value={modelWidth}
+      onChange={(e) => setModelWidth(e.target.value)}
+      style={{ padding: '10px', width: '200px', border: '1px solid #ccc', borderRadius: '4px', fontFamily: 'Arial, sans-serif' }}
+    />
+    <input
+      type="text"
+      placeholder="Height (e.g., 1.5 meters)"
+      value={modelHeight}
+      onChange={(e) => setModelHeight(e.target.value)}
+      style={{ padding: '10px', width: '200px', border: '1px solid #ccc', borderRadius: '4px', fontFamily: 'Arial, sans-serif' }}
+    />
+  </div>
+  <textarea
+    placeholder="Describe your design here... Include all details you think are important."
+    value={designDescription}
+    onChange={(e) => setDesignDescription(e.target.value)}
+    style={{ width: '420px', height: '100px', padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontFamily: 'Arial, sans-serif', resize: 'none' }}
+  ></textarea>
+  <button
+    onClick={() => {
+      console.log(`Width: ${modelWidth}, Height: ${modelHeight}, Description: ${designDescription}`);
+      // Additional actions here, like sending data to a server or updating the scene
+    }}
+    style={{
+      display: 'block',
+      marginTop: '10px',
+      padding: '10px 20px',
+      cursor: 'pointer',
+      backgroundColor: '#b32c04',
+      color: 'white',
+      border: 'none',
+      borderRadius: '5px',
+      marginLeft:'500px',
+      fontFamily: 'Arial, sans-serif',
+      transition: 'background-color 0.3s ease',
+    }}
+    onMouseOver={(e) => (e.target.style.backgroundColor = '#cf5532')}
+    onMouseOut={(e) => (e.target.style.backgroundColor = '#b32c04')}
+  >
+    Submit Design
+  </button>
+</div>
+
+
         </div>
+
+
+
       );
     }
     

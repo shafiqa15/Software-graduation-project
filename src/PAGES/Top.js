@@ -3,7 +3,8 @@ import '/Users/shafiqaabdat/Downloads/client-main/src/home/home.css'; // Ensure 
 import home_img from '/Users/shafiqaabdat/Downloads/client-main/src/images/cash_.webp'; // Ensure this path is correct
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import '../PAGES/Top.css';
+// import '/Users/shafiqaabdat/Downloads/client-main/src/PAGES/Top.css'
 const Top = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -46,23 +47,26 @@ const Top = () => {
     <>
      
      <header className="header" id="header">
-        <nav className="nav container">
-          <a href="#" className="nav__logo">
-            <img src={home_img} alt="Logo" style={{ margin: '0px', borderRadius: '50%', width: '90px', height: '90px' }} />
+        <nav className="nav container" style={{marginRight:'90px'}}>
+          <a href="/Home1" className="nav__logo">
+            <img src={home_img} alt="Logo" style={{ margin: '0px', borderRadius: '50%', width: '90px', height: '90px',marginRight:'10px' }} />
             <span className="nav__logo-text">Cach Bblash</span>
+            
           </a>
 
           <div className={`nav__menu ${showMenu ? 'show-menu' : ''}`} id="nav-menu">
-            <ul className="nav__list">
-              <li className="nav__item"><Link className="nav__link" to="/Design">Home</Link>
-    </li>
+            <ul className="nav__list" style={{marginRight:'-70px',marginTop:'-55px'}}>
+            <li className="nav__item"><a href="#" className="nav__link">Contact Us</a></li>
+            {/* <li className="nav__item"><a href="#" className="nav__link">About Us</a></li> */}
+
+    
               <li className="nav__item">
               <a href="#" className="nav__link">Bedrooms</a>
               
               <ul className="dropdown">
       <li><Link className="nav__link" to="/BedRoomsLarge">Full Bedrooms</Link></li>
       <li><a href="#" className="nav__link">Kids Bedrooms</a></li>
-      <li><a href="#" className="nav__link">King Bedrooms</a></li>
+      {/* <li><a href="#" className="nav__link">King Bedrooms</a></li> */}
     </ul>
   </li>
               
@@ -70,9 +74,28 @@ const Top = () => {
               <li className="nav__item"><a href="#" className="nav__link">Tables</a></li>
               <li className="nav__item"><a href="#" className="nav__link">Setting Rooms</a></li>
               <li className="nav__item"><a href="#" className="nav__link">Electronics</a></li>
-              <li className="nav__item"><a href="#" className="nav__link">Design</a></li>
-              <li className="nav__item"><a href="#" className="nav__link">Contact Us</a></li>
-              <li className="nav__item"><a href="#" className="nav__link">About Us</a></li>
+              <li className="nav__item"><Link className="nav__link" to="/Decore">Design</Link>
+              
+              
+              <ul className="dropdown">
+      <li><Link className="nav__link" to="/Decore">Your own design</Link></li>
+      <li><a href="#" className="nav__link">Existing desgins</a></li>
+      {/* <li><a href="#" className="nav__link">King Bedrooms</a></li> */}
+    </ul>
+    </li>
+              <li className="nav__item"><a href="#" className="nav__link">Offers</a></li>
+              <li className="nav__item"><a href="#" className="nav__link">Videos</a></li>
+              <li className="nav__item"><a href="#" className="nav__link">Cart</a></li>
+              {/* <li className="nav__item"><a href="#" className="nav__link">Videos</a></li> */}
+              <div className="nav__actions">
+            <i className="ri-search-line nav__search" id="search-btn" onClick={() => setShowSearch(true)}></i>
+            <i className="ri-user-line nav__login" id="login-btn" onClick={() => setShowLogin(true)}></i>
+            <div className="nav__toggle" id="nav-toggle" onClick={() => setShowMenu(true)}>
+              <i className="ri-menu-line"></i>
+            </div>
+          </div>
+
+              {/* <li className="nav__item"><a href="#" className="nav__link">About Us</a></li> */}
             </ul>
 
             <div className="nav__close" id="nav-close" onClick={() => setShowMenu(false)}>
@@ -80,13 +103,7 @@ const Top = () => {
             </div>
           </div>
 
-          <div className="nav__actions">
-            <i className="ri-search-line nav__search" id="search-btn" onClick={() => setShowSearch(true)}></i>
-            <i className="ri-user-line nav__login" id="login-btn" onClick={() => setShowLogin(true)}></i>
-            <div className="nav__toggle" id="nav-toggle" onClick={() => setShowMenu(true)}>
-              <i className="ri-menu-line"></i>
-            </div>
-          </div>
+  
         </nav>
       </header>
 

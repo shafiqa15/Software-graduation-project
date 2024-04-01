@@ -1,745 +1,762 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+body {
+  font-family: 'Caveat', cursive;
+
+}
+
+
+
 .navigation-menu {
-    background: #333; /* Dark background for the nav bar */
-    color: white;
-    padding: 0;
-    margin: 0;
-    list-style: none;
+  background: #333; /* Dark background for the nav bar */
+  color: white;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.navigation-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+
+
+
+.navigation-menu li {
+  display: inline-block; /* Align items horizontally */
+  margin-right: 20px; /* Space between menu items */
+}
+
+
+
+.navigation-menu li a {
+  color: white; /* White text color */
+  text-decoration: none; /* No underline on links */
+  padding: 10px 15px; /* Padding around links */
+  display: block;
+}
+
+.navigation-menu li ul {
+  display: none; /* Hide dropdowns by default */
+  position: absolute; /* Positioning for the dropdown */
+  background: #444; /* Slightly lighter than the nav bar for contrast */
+}
+
+.navigation-menu li:hover ul {
+  display: block; /* Show dropdown on hover */
+}
+
+.navigation-menu li ul li {
+  display: block; /* Stack dropdown items vertically */
+}
+
+.navigation-menu li ul li a {
+  padding: 5px 10px; /* Smaller padding for dropdown links */
+  color: #ddd; /* Lighter text color for dropdown items */
+}
+
+/* Add a rotation fade in effect for dropdown */
+@keyframes rotationFadeIn {
+  from {
+    opacity: 0;
+    transform: rotateX(-90deg);
   }
-  
-  .navigation-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  to {
+    opacity: 1;
+    transform: rotateX(0deg);
   }
-  
-  .navigation-menu li {
-    display: inline-block; /* Align items horizontally */
-    margin-right: 20px; /* Space between menu items */
-  }
-  
-  .navigation-menu li a {
-    color: white; /* White text color */
-    text-decoration: none; /* No underline on links */
-    padding: 10px 15px; /* Padding around links */
-    display: block;
-  }
-  
-  .navigation-menu li ul {
-    display: none; /* Hide dropdowns by default */
-    position: absolute; /* Positioning for the dropdown */
-    background: #444; /* Slightly lighter than the nav bar for contrast */
-  }
-  
-  .navigation-menu li:hover ul {
-    display: block; /* Show dropdown on hover */
-  }
-  
-  .navigation-menu li ul li {
-    display: block; /* Stack dropdown items vertically */
-  }
-  
-  .navigation-menu li ul li a {
-    padding: 5px 10px; /* Smaller padding for dropdown links */
-    color: #ddd; /* Lighter text color for dropdown items */
-  }
-  
-  /* Add a rotation fade in effect for dropdown */
-  @keyframes rotationFadeIn {
-    from {
-      opacity: 0;
-      transform: rotateX(-90deg);
-    }
-    to {
-      opacity: 1;
-      transform: rotateX(0deg);
-    }
-  }
-  
-  .navigation-menu li ul {
-    animation: rotationFadeIn 0.5s ease forwards;
-  }
-  
-  /* Style adjustments for header and nav elements */
-  header {
-    background: #222; /* Dark background for header */
-    padding: 10px;
-    text-align: center;
-  }
-  
-  nav {
-    margin-top: 10px;
-  }
-  /*=============== GOOGLE FONTS ===============*/
+}
+
+.navigation-menu li ul {
+  animation: rotationFadeIn 0.5s ease forwards;
+}
+
+/* Style adjustments for header and nav elements */
+header {
+  background: #222; /* Dark background for header */
+  padding: 10px;
+  text-align: center;
+}
+
+nav {
+  margin-top: 10px;
+}
+/*=============== GOOGLE FONTS ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&display=swap");
 
 /*=============== VARIABLES CSS ===============*/
 :root {
-  --header-height: 3.5rem;
+--header-height: 3.5rem;
 
-  /*========== Colors ==========*/
-  /*Color mode HSL(hue, saturation, lightness)*/
-  --first-color: rgb(100, 83, 39);
-  /* ed: 255
-  Green: 199
-  Blue: 145 */
-  /* Red: 33
+/*========== Colors ==========*/
+/*Color mode HSL(hue, saturation, lightness)*/
+--first-color: rgb(100, 83, 39);
+/* ed: 255
+Green: 199
+Blue: 145 */
+/* Red: 33
 Green: 25
 Blue: 19 */
-  --title-color: hsl(230, 75%, 15%);
-  --text-color: hsl(230, 12%, 40%);
-  --body-color:white;
-  --container-color: hsl(230, 100%, 97%);
-  --border-color: rgb(89, 32, 32);
+--title-color: hsl(230, 75%, 15%);
+--text-color: hsl(230, 12%, 40%);
+--body-color:white;
+--container-color: hsl(230, 100%, 97%);
+--border-color: rgb(89, 32, 32);
 
-  /*========== Font and typography ==========*/
-  /*.5rem = 8px | 1rem = 16px ...*/
-  --body-font: "Syne", sans-serif;
-  --h2-font-size: 1.25rem;
-  --normal-font-size: .938rem;
+/*========== Font and typography ==========*/
+/*.5rem = 8px | 1rem = 16px ...*/
+--body-font: "Syne", sans-serif;
+--h2-font-size: 1.25rem;
+--normal-font-size: .938rem;
 
-  /*========== Font weight ==========*/
-  --font-regular: 400;
-  --font-medium: 500;
-  --font-semi-bold: 600;
+/*========== Font weight ==========*/
+--font-regular: 400;
+--font-medium: 500;
+--font-semi-bold: 600;
 
-  /*========== z index ==========*/
-  --z-fixed: 100;
-  --z-modal: 1000;
+/*========== z index ==========*/
+--z-fixed: 100;
+--z-modal: 1000;
 }
 
 /*========== Responsive typography ==========*/
 @media screen and (min-width: 1023px) {
-  :root {
-    --h2-font-size: 1.5rem;
-    --normal-font-size: 1rem;
-  }
+:root {
+  --h2-font-size: 1.5rem;
+  --normal-font-size: 1rem;
+}
 }
 
 /*=============== BASE ===============*/
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  overflow: visible !important;
+box-sizing: border-box;
+padding: 0;
+margin: 0;
+overflow: visible !important;
 }
 
 html {
-  overflow-y: auto !important;
-  height: auto !important;
+overflow-y: auto !important;
+height: auto !important;
 }
 
 .customBodyStyle,
 input,
 button {
-  font-family: var(--body-font);
-  font-size: var(--normal-font-size);
+font-family: var(--body-font);
+font-size: var(--normal-font-size);
 }
 .customBodyStyle {
-  /* background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('/Users/shafiqaabdat/Desktop/demo/src/images/signup.webp'); */
-  background-position: center;
-  background-size: cover;
-  width: 100%;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-y: auto !important;
-  height: auto !important;
+/* background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('/Users/shafiqaabdat/Desktop/demo/src/images/signup.webp'); */
+background-position: center;
+background-size: cover;
+width: 100%;
+margin: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+overflow-y: auto !important;
+height: auto !important;
 }
 
 .customBodyStyle
 input,
 button {
-  border: none;
-  outline: none;
+border: none;
+outline: none;
 }
 
 ul {
-  list-style: none;
+list-style: none;
 }
 
 a {
-  text-decoration: none;
+text-decoration: none;
 }
 
 img {
-  display: block;
-  max-width: 100%;
-  height: auto;
+display: block;
+max-width: 100%;
+height: auto;
 }
 
 /*=============== REUSABLE CSS CLASSES ===============*/
 .container {
-  max-width: 1120px;
-  margin-inline: 1.5rem;
+max-width: 1120px;
+margin-inline: 1.5rem;
 }
 
 .main {
-  position: relative;
-  /* height: 100vh; */
+position: relative;
+/* height: 100vh; */
 }
 
 .main__bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  z-index: -1;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+object-position: center;
+z-index: -1;
 }
 
 .search,
 .login {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: var(--z-modal);
-  background-color: hsla(230, 75%, 15%, .1);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px); /* For safari */
-  padding: 8rem 1.5rem 0;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .4s;
+position: fixed;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+z-index: var(--z-modal);
+background-color: hsla(230, 75%, 15%, .1);
+backdrop-filter: blur(24px);
+-webkit-backdrop-filter: blur(24px); /* For safari */
+padding: 8rem 1.5rem 0;
+opacity: 0;
+pointer-events: none;
+transition: opacity .4s;
+font-family: 'Roboto', sans-serif;
+
 }
 
 .search__close,
 .login__close {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-  font-size: 1.5rem;
-  color: var(--title-color);
-  cursor: pointer;
+position: absolute;
+top: 2rem;
+right: 2rem;
+font-size: 1.5rem;
+color: var(--title-color);
+cursor: pointer;
 }
 
 /*=============== HEADER & NAV ===============*/
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  opacity: 0.88;
-  background-color: var(--body-color);
-  box-shadow: 0 2px 16px hsla(230, 75%, 32%, .15);
-  z-index: var(--z-fixed);
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+opacity: 0.88;
+background-color: var(--body-color);
+box-shadow: 0 2px 16px hsla(230, 75%, 32%, .15);
+z-index: var(--z-fixed);
 }
 
 .nav {
-  height: var(--header-height);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+height: var(--header-height);
+display: flex;
+justify-content: space-between;
+align-items: center;
 }
 
 .nav__logo {
-  color: var(--title-color);
-  font-weight: var(--font-semi-bold);
-  transition: color .4s;
+color: var(--title-color);
+font-weight: var(--font-semi-bold);
+transition: color .4s;
 }
 
 .nav__actions {
-  display: flex;
-  align-items: center;
-  column-gap: 1rem;
+display: flex;
+align-items: center;
+column-gap: 1rem;
 }
 
 .nav__search, 
 .nav__login, 
 .nav__toggle, 
 .nav__close {
-  font-size: 1.25rem;
-  color: var(--title-color);
-  cursor: pointer;
-  transition: color .4s;
+font-size: 1.25rem;
+color: var(--title-color);
+cursor: pointer;
+transition: color .4s;
 }
 
 :is(.nav__logo, .nav__search, .nav__login, .nav__toggle, .nav__link):hover {
-  color: var(--first-color);
+color: var(--first-color);
 }
 
 /* Navigation for mobile devices */
 @media screen and (max-width: 1023px) {
-  .nav__menu {
-    position: fixed;
-    top: -100%;
-    left: 0;
-    background-color: var(--body-color);
+.nav__menu {
+  position: fixed;
+  top: -100%;
+  left: 0;
+  background-color: var(--body-color);
 
-    box-shadow: 0 8px 16px hsla(230, 75%, 32%, .15);
-    width: 100%;
-    padding-block: 3rem 3rem;
-    transition: top .4s;
-  }
+  box-shadow: 0 8px 16px hsla(230, 75%, 32%, .15);
+  width: 100%;
+  padding-block: 3rem 3rem;
+  transition: top .4s;
+}
 }
 
 .nav__list {
-  display: flex;
-  flex-direction: column;
-  row-gap: 2.5rem;
-  text-align: center;
+display: flex;
+flex-direction: column;
+row-gap: 1.5rem;
+text-align: center;
 }
 
 .nav__link {
-  color: var(--title-color);
-  font-weight: var(--font-semi-bold);
-  transition: color .4s;
+color: var(--title-color);
+font-weight: var(--font-semi-bold);
+transition: color .4s;
 }
 
 .nav__close {
-  position: absolute;
-  top: 1.15rem;
-  right: 1.5rem;
+position: absolute;
+top: 1.15rem;
+right: 0.5rem;
 }
 
 /* Show menu */
 .show-menu {
-  top: 0;
+top: 0;
 }
 
 /*=============== SEARCH ===============*/
 .search__form {
-  display: flex;
-  align-items: center;
-  column-gap: .5rem;
-  background-color: var(--container-color);
- 
-  box-shadow: 0 8px 32px hsla(230, 75%, 15%, .2);
-  padding-inline: 1rem;
-  border-radius: .5rem;
-  transform: translateY(-1rem);
-  transition: transform .4s;
+display: flex;
+align-items: center;
+column-gap: .5rem;
+background-color: var(--container-color);
+
+box-shadow: 0 8px 32px hsla(230, 75%, 15%, .2);
+padding-inline: 1rem;
+border-radius: .5rem;
+transform: translateY(-1rem);
+transition: transform .4s;
 }
 
 .search__icon {
-  font-size: 1.25rem;
-  color: var(--title-color);
+font-size: 1.25rem;
+color: var(--title-color);
 }
 
 .search__input {
-  width: 100%;
-  padding-block: 1rem;
-  background-color: var(--container-color);
-  color: var(--text-color);
+width: 100%;
+padding-block: 1rem;
+background-color: var(--container-color);
+color: var(--text-color);
 }
 
 .search__input::placeholder {
-  color: var(--text-color);
+color: var(--text-color);
 }
 
 /* Show search */
 .show-search {
-  opacity: 1;
-  pointer-events: initial;
+opacity: 1;
+pointer-events: initial;
 }
 
 .show-search .search__form {
-  transform: translateY(0);
+transform: translateY(0);
 }
 
 /*=============== LOGIN ===============*/
 .login__form, 
 .login__group {
-  display: grid;
+display: grid;
 }
 
 .login__form {
-  background-color: var(--container-color);
-  padding: 2rem 1.5rem 2.5rem;
-  box-shadow: 0 8px 32px hsla(230, 75%, 15%, .2);
-  border-radius: 1rem;
-  row-gap: 1.25rem;
-  text-align: center;
-  transform: translateY(-1rem);
-  transition: transform .4s;
+background-color: var(--container-color);
+padding: 2rem 1.5rem 2.5rem;
+box-shadow: 0 8px 32px hsla(230, 75%, 15%, .2);
+border-radius: 1rem;
+row-gap: 1.25rem;
+text-align: center;
+transform: translateY(-1rem);
+transition: transform .4s;
 }
 
 .login__title {
-  font-size: var(--h2-font-size);
-  color: var(--title-color);
+font-size: var(--h2-font-size);
+color: var(--title-color);
 }
 
 .login__group {
-  row-gap: 1rem;
+row-gap: 1rem;
 }
 
 .login__label {
-  display: block;
-  text-align: initial;
-  color: var(--title-color);
-  font-weight: var(--font-medium);
-  margin-bottom: .25rem;
+display: block;
+text-align: initial;
+color: var(--title-color);
+font-weight: var(--font-medium);
+margin-bottom: .25rem;
 }
 
 .login__input {
-  width: 100%;
-  background-color: var(--container-color);
-  border: 2px solid var(--border-color);
-  padding: 1rem;
-  border-radius: .5rem;
-  color: var(--text-color);
+width: 100%;
+background-color: var(--container-color);
+border: 2px solid var(--border-color);
+padding: 1rem;
+border-radius: .5rem;
+color: var(--text-color);
 }
 
 .login__input::placeholder {
-  color: var(--text-color);
+color: var(--text-color);
 }
 
 .login__signup {
-  margin-bottom: .5rem;
+margin-bottom: .5rem;
 }
 
 .login__signup a {
-  color: var(--first-color);
+color: var(--first-color);
 }
 
 .login__forgot {
-  display: inline-block;
-  color: var(--first-color);
-  margin-bottom: 1.25rem;
+display: inline-block;
+color: var(--first-color);
+margin-bottom: 1.25rem;
 }
 
 .login__button {
-  display: inline-block;
-  background-color: var(--first-color);
-  width: 70%;
-  color: #fff;
-  font-weight: var(--font-semi-bold);
-  padding: 1rem;
-  border-radius: .5rem;
-  cursor: pointer;
-  transition: box-shadow .4s;
-  /* margin-top: 170px; */
-  margin-left: 60px;
+display: inline-block;
+background-color: var(--first-color);
+width: 70%;
+color: #fff;
+font-weight: var(--font-semi-bold);
+padding: 1rem;
+border-radius: .5rem;
+cursor: pointer;
+transition: box-shadow .4s;
+/* margin-top: 170px; */
+margin-left: 60px;
 
 
 }
 
 .login__button:hover {
-  box-shadow: 0 4px 24px hsla(230, 75%, 40%, .4);
+box-shadow: 0 4px 24px hsla(230, 75%, 40%, .4);
 }
 
 /* Show login */
 .show-login {
-  opacity: 1;
-  pointer-events: initial;
+opacity: 1;
+pointer-events: initial;
 }
 
 .show-login .login__form {
-  transform: translateY(0);
+transform: translateY(0);
 }
 
 /*=============== BREAKPOINTS ===============*/
 /* For medium devices */
 @media screen and (min-width: 576px) {
-  .search,
-  .login {
-    padding-top: 10rem;
-  }
+.search,
+.login {
+  padding-top: 10rem;
+}
 
-  .search__form {
-    max-width: 450px;
-    margin-inline: auto;
-  }
+.search__form {
+  max-width: 450px;
+  margin-inline: auto;
+}
 
-  .search__close,
-  .login__close {
-    width: max-content;
-    top: 5rem;
-    left: 0;
-    right: 0;
-    margin-inline: auto;
-    font-size: 2rem;
-  }
+.search__close,
+.login__close {
+  width: max-content;
+  top: 5rem;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  font-size: 2rem;
+}
 
-  .login__form {
-    max-width: 400px;
-    margin-inline: auto;
-  }
+.login__form {
+  max-width: 400px;
+  margin-inline: auto;
+}
 }
 
 /* For large devices */
 @media screen and (min-width: 1023px) {
-  .nav {
-    height: calc(var(--header-height) + 2rem);
-    column-gap: 3rem;
-  }
-  .nav__close, 
-  .nav__toggle {
-    display: none;
-    /* shafqia */
-  }
-  .nav__menu {
-    margin-left: auto;
-  }
-  .nav__list {
-    flex-direction: row;
-    column-gap: 3rem;
-  }
+.nav {
+  height: calc(var(--header-height) + 2rem);
+  column-gap: 3rem;
+}
+.nav__close, 
+.nav__toggle {
+  display: none;
+  /* shafqia */
+}
+.nav__menu {
+  margin-left: auto;
+}
+.nav__list {
+  flex-direction: row;
+  column-gap: 3rem;
+}
 
-  .login__form {
-    padding: 3rem 2rem 3.5rem;
-  }
+.login__form {
+  padding: 3rem 2rem 3.5rem;
+}
 }
 
 @media screen and (min-width: 1150px) {
-  .container {
-    margin-inline: auto;
-  }
+.container {
+  margin-inline: auto;
+}
 }.nav__logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav__logo img {
+  margin-right: 4px; /* Reduce space between image and text */
+}
+
+.nav__logo-text {
+  margin: 0;
+  padding: 0;
+  line-height: 1; /* Adjust line height to remove extra vertical space */
+}
+
+
+.content h1{
+  font-size: 50px;
+   margin-top: 25px;
+   color: black;
+   margin-left: 40px;
+   
+}
+
+.advanced-glow {
+  color: #fff; /* White text color */
+  filter: drop-shadow(0 0 5px rgb(170, 93, 10)) drop-shadow(0 0 10px rgb(213, 84, 55)) drop-shadow(0 0 20px #F90);
+}
+
+/* .content button{
   
-  .nav__logo img {
-    margin-right: 4px; /* Reduce space between image and text */
-  }
+} */
+
+.custom-button {
+  background-color:  rgb(209, 163, 113); /* Blue background */
+  color: white; /* White text */
+  padding: 10px 20px; /* Top and bottom padding, left and right padding */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  margin-top: 60px; /* Space from content above */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  margin-left: 50px;
   
-  .nav__logo-text {
-    margin: 0;
-    padding: 0;
-    line-height: 1; /* Adjust line height to remove extra vertical space */
-  }
+}
 
-
-  .content h1{
-    font-size: 50px;
-     margin-top: 25px;
-     color: black;
-     margin-left: 40px;
-     
-  }
-
-  .advanced-glow {
-    color: #fff; /* White text color */
-    filter: drop-shadow(0 0 5px rgb(170, 93, 10)) drop-shadow(0 0 10px rgb(213, 84, 55)) drop-shadow(0 0 20px #F90);
-  }
-  
-  /* .content button{
-    
-  } */
-
-  .custom-button {
-    background-color:  rgb(209, 163, 113); /* Blue background */
-    color: white; /* White text */
-    padding: 10px 20px; /* Top and bottom padding, left and right padding */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    margin-top: 60px; /* Space from content above */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-    margin-left: 50px;
-    
-  }
-  
-  .custom-button:hover {
-    background-color:rgb(170, 93, 10); /* Darker blue background on hover */
-  }
-  
+.custom-button:hover {
+  background-color:rgb(170, 93, 10); /* Darker blue background on hover */
+}
 
 
 
-  .content h2{
-    font-size: 20px;
-     margin-top: 30px;
-     color: black;
-     margin-left: 40px;
-     width: 500px;
-     
-  }
+
+.content h2{
+  font-size: 20px;
+   margin-top: 30px;
+   color: black;
+   margin-left: 40px;
+   width: 500px;
+   
+}
 
 .content span{
-  font-size: 20px;
-  margin-top: 30px;
+font-size: 20px;
+margin-top: 30px;
+color: black;
+margin-left: 40px;
+}
+.new{
+   margin: 20px auto;
+   font-weight: 100; 
+   line-height: 25px;
+   font-size: 50px;
+   margin-left: 580px;
+   color: black;
+   margin-top:1100px;
+}
+.new2{
+  margin: 20px auto;
+  font-weight: 100; 
+  line-height: 25px;
+  font-size: 50px;
+  margin-left: 580px;
   color: black;
-  margin-left: 40px;
+  margin-top:230px;
 }
-  .new{
-     margin: 20px auto;
-     font-weight: 100; 
-     line-height: 25px;
-     font-size: 50px;
-     margin-left: 580px;
-     color: black;
-     margin-top:1100px;
-  }
-  .new2{
-    margin: 20px auto;
-    font-weight: 100; 
-    line-height: 25px;
-    font-size: 50px;
-    margin-left: 580px;
-    color: black;
-    margin-top:230px;
-  }
 
 
-  .slider-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%; /* Adjust the height as needed */
-    margin-left: 270px;
-  }
-  
+.slider-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Adjust the height as needed */
+  margin-left: 270px;
+}
 
-  /* Define the keyframes for the animation */
+
+/* Define the keyframes for the animation */
 @keyframes slideInFromLeft {
-    0% {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateX(0);
-      opacity: 1;
-    }
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
   }
-  
-  /* Apply the animation to your text element */
-  .animated-text {
-    animation: 20s ease-out 0s 1 slideInFromLeft;
+  100% {
+    transform: translateX(0);
+    opacity: 1;
   }
-  
-
-  .errormsg
-{
-  color :'red';
-  margin-top: 5px;
-  margin-bottom:-20px;
-
-  text-align: left;
-
-  
 }
 
-  .title-container {
-    text-align: center;
-    /* other styles for positioning and formatting your title and subtitle */
-  }
-  
-  .buttons-container {
-    margin-top: 60px; /* Adjust the space between text and buttons */
-    display: flex;
-    justify-content: center; /* This centers the buttons in the container */
-    gap: 10px; /* This adds space between the two buttons */
- 
+/* Apply the animation to your text element */
+.animated-text {
+  animation: 20s ease-out 0s 1 slideInFromLeft;
+}
 
-  }
-  
-  .button-style {
-    padding: 12px 25px; /* Padding inside the button */
-    font-size: 16px; /* Text size inside the button */
-    font-weight: 600; /* Font weight for the text */
-    color: #ffffff; /* Text color */
-    background-color: rgb(100, 83, 39); /* Button background color */
-    border: none; /* Remove borders */
-    border-radius: 5px; /* Rounded corners for the button */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow to lift the button off the page */
-    cursor: pointer; /* Cursor indicates the button is clickable */
-    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
-    text-transform: uppercase; /* Optional: transforms text to uppercase */
-    margin-top: 40px
-  }
-  
-  .button-style:hover, .button-style:focus {
-    background-color: rgb(89, 32, 32); /* Darker shade for the button background on hover/focus */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Larger shadow for a "lifted" effect on hover/focus */
-    outline: none; /* Removes the outline on focus */
-  }
-  
-  /* If you're using two buttons, you might want to differentiate them */
-  .button-primary {
-    background-color: #28a745; /* Green for primary actions */
-  }
-  
-  .button-secondary {
-    background-color: #6c757d; /* Grey for secondary actions */
-  }
-  
-  .sora {
-    /* background-color: rgba(255, 255, 255, 0.9); */
-    background-image: url('/Users/shafiqaabdat/Downloads/client-main/src/images/Screenshot 2024-02-26 at 17.43.26.png');
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    background-size: 100% auto; /* Stretches the image to 100% of the element's width while maintaining aspect ratio */
-    margin-top: 117px;
-    height: 600px; /* You may need to adjust this depending on your needs */
-    width: 100vw; /* This makes the element's width equal to the width of the viewport */
+
+.errormsg
+{
+color :'red';
+margin-top: 5px;
+margin-bottom:-20px;
+
+text-align: left;
+
+
+}
+
+.title-container {
+  text-align: center;
+  /* other styles for positioning and formatting your title and subtitle */
+}
+
+.buttons-container {
+  margin-top: 60px; /* Adjust the space between text and buttons */
+  display: flex;
+  justify-content: center; /* This centers the buttons in the container */
+  gap: 10px; /* This adds space between the two buttons */
+
+
+}
+
+.button-style {
+  padding: 12px 25px; /* Padding inside the button */
+  font-size: 16px; /* Text size inside the button */
+  font-weight: 600; /* Font weight for the text */
+  color: #ffffff; /* Text color */
+  background-color: rgb(100, 83, 39); /* Button background color */
+  border: none; /* Remove borders */
+  border-radius: 5px; /* Rounded corners for the button */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow to lift the button off the page */
+  cursor: pointer; /* Cursor indicates the button is clickable */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+  text-transform: uppercase; /* Optional: transforms text to uppercase */
+  margin-top: 40px
+}
+
+.button-style:hover, .button-style:focus {
+  background-color: rgb(89, 32, 32); /* Darker shade for the button background on hover/focus */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Larger shadow for a "lifted" effect on hover/focus */
+  outline: none; /* Removes the outline on focus */
+}
+
+/* If you're using two buttons, you might want to differentiate them */
+.button-primary {
+  background-color: #28a745; /* Green for primary actions */
+}
+
+.button-secondary {
+  background-color: #6c757d; /* Grey for secondary actions */
+}
+
+.sora {
+  /* background-color: rgba(255, 255, 255, 0.9); */
+  background-image: url('/Users/shafiqaabdat/Downloads/client-main/src/images/Screenshot 2024-02-26 at 17.43.26.png');
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-size: 100% auto; /* Stretches the image to 100% of the element's width while maintaining aspect ratio */
+  margin-top: 117px;
+  height: 600px; /* You may need to adjust this depending on your needs */
+  width: 100vw; /* This makes the element's width equal to the width of the viewport */
 }
 .sora2{
-  /* background-color: rgba(255, 255, 255, 0.9); */
-  /* background-image: url('/Users/shafiqaabdat/Downloads/client-main/src/images/Screenshot 2024-02-26 at 17.43.26.png'); */
-  background-color:white; /* Prevents the image from repeating */
-  background-size: 100% auto; /* Stretches the image to 100% of the element's width while maintaining aspect ratio */
+/* background-color: rgba(255, 255, 255, 0.9); */
+/* background-image: url('/Users/shafiqaabdat/Downloads/client-main/src/images/Screenshot 2024-02-26 at 17.43.26.png'); */
+background-color:white; /* Prevents the image from repeating */
+background-size: 100% auto; /* Stretches the image to 100% of the element's width while maintaining aspect ratio */
 
-  height: 600px; 
-  /* You may need to adjust this depending on your needs */
-  width: 100vw; /* This makes the element's width equal to the width of the viewport */
+height: 600px; 
+/* You may need to adjust this depending on your needs */
+width: 100vw; /* This makes the element's width equal to the width of the viewport */
 
 }
 
 .section_title{
-  font-weight: 600;
-  margin-top: 10px;
-  margin-left: 50px;
-  color: black;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+font-weight: 600;
+margin-top: 10px;
+margin-left: 50px;
+color: black;
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
 }
 
 /* Style adjustments for dropdown */
 .nav__item:hover .dropdown {
-  display: block; /* This shows the dropdown menu on hover */
+display: block; /* This shows the dropdown menu on hover */
 }
 
 .dropdown {
-  display: none; /* Ensures the menu is hidden by default */
-  position: absolute;
-  background-color: #f9f9f9; /* Adjust as needed */
-  box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2); /* Adds a subtle shadow */
-  z-index: 1; /* Ensures the dropdown is above other content */
+display: none; /* Ensures the menu is hidden by default */
+position: absolute;
+background-color: #f9f9f9; /* Adjust as needed */
+box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2); /* Adds a subtle shadow */
+z-index: 1; /* Ensures the dropdown is above other content */
 }
 
 .dropdown li {
-  display: block; /* Stack dropdown items vertically */
+display: block; /* Stack dropdown items vertically */
 }
 
 .dropdown .nav__link {
-  padding: 10px;
-  color: #333; /* Adjust text color as needed */
+padding: 10px;
+color: #333; /* Adjust text color as needed */
 }
 
 .dropdown li:hover {
-  background-color: #ddd; /* Changes background of dropdown items on hover */
+background-color: #ddd; /* Changes background of dropdown items on hover */
 }
 
 
-  #signInDiv {
-    display: flex;
-    justify-content: center;
-  }
-  /* .icon{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    min-width: 40px;
-    max-width: 40px;
-    height: 40px;
-    border-radius: 100%;
-    background-color: white;
-    color: red;
-  }
+#signInDiv {
+  display: flex;
+  justify-content: center;
+}
 
-  .info{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 10px;
-    color: white;
-    font-weight: bold;
-  } */
 
+/* .icon{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-width: 40px;
+  max-width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: white;
+  color: red;
+}
+
+.info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+  color: white;
+  font-weight: bold;
+} */

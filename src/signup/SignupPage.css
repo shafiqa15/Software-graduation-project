@@ -2,7 +2,12 @@
 
 body {
   font-family: 'Caveat', cursive;
+
+  /* For a darker, more muted red, you might use something like: */
+  /* background-color: #8B0000; */ /* Dark red */
 }
+
+
  
 .cover-page {
     display: flex;

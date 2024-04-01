@@ -2,7 +2,7 @@ import axios from 'axios';
 import image1 from '/Users/shafiqaabdat/Downloads/client-main/src/images/Screenshot 2024-03-01 at 01.22.19.png';
 import './SignupPage.css'; // Update this path if necessary
 import React, { useState, useEffect } from 'react';
-
+import Top from '../PAGES/Top';
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -41,12 +41,13 @@ const SignUp = () => {
         if (formData.password !== formData.confirmPassword) {
             return; // Stop the form submission if passwords do not match
         }
-    
-        axios.post('http://192.168.88.8:9000/signup', formData)
+        axios.post('http://192.168.88.6:9000/signup', formData)
         .then(response => {
             console.log('Signup successful:', response.data);
             // Redirect the user to the home page after successful signup
             window.location.href = '/Home1';
+
+          
         })
         .catch(error => {
             console.error('Signup error:', error);
@@ -75,7 +76,7 @@ const SignUp = () => {
     // }, []);
 
     useEffect(() => {
-        axios.get('http://192.168.88.8:9000/signup') // Adjust this URL
+        axios.get('http://192.168.88.6:9000/signup') // Adjust this URL
             .then(response => {
                 console.log('Fetched users:', response.data); // Check the structure here
                 setUsers(response.data); // Adjust based on your actual structure
@@ -94,10 +95,10 @@ const SignUp = () => {
     return (
         <>
 
+<Top></Top>
 
 
-
-            <h1 style={{marginTop: '70px', fontFamily: 'fantasy', fontSize: '30px'}}>
+            <h1 style={{marginTop: '150px', fontFamily: 'fantasy', fontSize: '30px'}}>
                 Create a new account for Exclusive Furniture Deals!
             </h1>
             <div className="cover-page">

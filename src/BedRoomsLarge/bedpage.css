@@ -226,7 +226,7 @@ margin-top: -450px;
 .circle-buttons7{
   width: 90px; /* Adjust the width and height to your preference for the circular shape */
   height: 90px;
-  margin-top: -240px;
+  margin-top: -270px;
   border-radius: 50%;
   margin-left: 900px;
   /* background-image: url("../images//bed1/Screenshot 2024-03-01 at 18.53.48.png"); */
@@ -344,3 +344,14 @@ margin-top: -450px;
   transition: background-color 0.3s; /* Smooth transition for hover effect */
   width:130px;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+
+p {
+font-family: "Comfortaa", sans-serif;
+
+
+  /* For a darker, more muted red, you might use something like: */
+  /* background-color: #8B0000; */ /* Dark red */
+}
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Quicksand:wght@300..700&display=swap');

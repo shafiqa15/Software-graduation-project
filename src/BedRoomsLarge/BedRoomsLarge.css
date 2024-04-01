@@ -62,22 +62,38 @@ body {
   }
   
   .ProductImage {
-    width: 100%;
+    width: 100px;
+    height: 100px;
     border-radius: 5px;
     margin-bottom: 15px;
   }
   
   .ProductName {
-    font-size: 18px;
-    color: #333;
+    font-size: 15px;
+    color: black; /* Change to your desired color */
     margin-bottom: 10px;
   }
   
   .ProductPrice {
     font-size: 16px;
-    color: #555;
+    color: #8a5a3d; /* Change to your desired color */
     margin-bottom: 20px;
   }
+  
+  .ProductFooter .ProductKind {
+    font-size: 15px;
+
+    color: #FFC107; /* Change to your desired color */
+    margin-bottom: 5px; /* Ensures a little space between this and the button */
+  }
+  
+
+  
+  /* Assuming you might have more lines that need color, follow the pattern */
+  .AnotherLineClass {
+    color: #DC3545; /* Example for another line of text, change as needed */
+  }
+  
   .AddToCartButton {
     padding: 10px 20px;
     background-color:rgba(165, 110, 98, 0.75);
@@ -87,6 +103,8 @@ body {
     cursor: pointer;
     font-size: 16px;
     transition: all 0.3s ease;
+    
+
   }
   
   .AddToCartButton:hover {
@@ -154,3 +172,33 @@ body {
 
 
 
+
+.ProductCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.ProductImage {
+  width: 100%;
+  object-fit: cover;
+}
+
+.ProductInfo {
+  padding: 10px; /* Add padding as needed */
+}
+
+.ProductFooter {
+  margin-top: auto; /* This will push your footer (kind + button) to the bottom */
+  display: flex;
+  flex-direction: column;
+}
+
+.ProductKind {
+  /* Style for the product kind */
+}
+
+.AddToCartButton {
+  margin-top: 5px; /* Ensure there's a little space between the kind and the button */
+}

@@ -21,10 +21,10 @@
 import React from "react";
 import Trending from "/Users/shafiqaabdat/Downloads/client-main/src/home/Trending/Trending.js";
 import { Row } from "reactstrap";
-import bed1 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/firstbedimage.png';
-import bed2 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/firstbedimage.png';
-import bed3 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/firstbedimage.png';
-import bed4 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/firstbedimage.png';
+import bed1 from '../../images/decore/Screenshot 2024-03-26 at 04.37.25.png';
+import bed2 from '../../images/decore/Screenshot 2024-03-26 at 00.09.11.png';
+import bed3 from '../../images/decore/Screenshot 2024-03-26 at 00.02.13.png';
+import bed4 from '../../images/decore/Screenshot 2024-03-25 at 23.57.27.png';
 
 const ProductCard = () => {
   return (
