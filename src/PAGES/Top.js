@@ -85,7 +85,7 @@ const Top = () => {
     </li>
               <li className="nav__item"><a href="#" className="nav__link">Offers</a></li>
               <li className="nav__item"><a href="#" className="nav__link">Videos</a></li>
-              <li className="nav__item"><a href="#" className="nav__link">Cart</a></li>
+              <li className="nav__item"><a href="#" className="nav__link">Cart🛒</a></li>
               {/* <li className="nav__item"><a href="#" className="nav__link">Videos</a></li> */}
               <div className="nav__actions">
             <i className="ri-search-line nav__search" id="search-btn" onClick={() => setShowSearch(true)}></i>

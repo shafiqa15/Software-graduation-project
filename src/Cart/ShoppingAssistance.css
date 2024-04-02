@@ -1,0 +1,47 @@
+.shopping-assistance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.shopping-assistance-content h2 {
+  font-size: 20px;
+  text-align: center;
+}
+
+.shopping-assistance-content p {
+  font-size: 12px;
+  text-align: center;
+}
+
+.shopping-assistance-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.button-call, .button-chat {
+  padding: 10px 2px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Additional styles for the advanced glow effect on h2 and other desired styling */
+.advanced-glow {
+  /* Your glow effect styling here */
+}
+
+/* Adjust button styles as needed for hover effects, active states, etc. */
+.button-call:hover, .button-chat:hover {
+  /* Your hover effect styling here */
+}
