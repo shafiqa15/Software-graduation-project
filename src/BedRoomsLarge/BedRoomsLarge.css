@@ -202,3 +202,13 @@ body {
 .AddToCartButton {
   margin-top: 5px; /* Ensure there's a little space between the kind and the button */
 }
+
+
+.heart-icon {
+  cursor: pointer;
+  margin-right: 10px; 
+}
+
+.heart-icon.favorited {
+  color: red;
+}

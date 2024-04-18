@@ -12,10 +12,13 @@ import ProductCard from './home/Trending/ProductCard.js';
 import BedRoomsLarge from './BedRoomsLarge/BedRoomsLarge.js';
 import ImageUpload from './IMAGE/ImageUpload.js';
 import BedPage from './BedRoomsLarge/BedPage.js';
+import Admin_convert3d from './Admin/Admin_convert3d.js';
 import Decore from './decore/Decore.js';
+import Guide from './decore/Guide.js';
 import Wardrobe from './decore/Wardrobe.js';
 import Cart from './Cart/Cart.js';
 import { CartProvider } from './Cart/CartContext.js';
+import Contact from '/Users/shafiqaabdat/Downloads/client-main/src/Contactus/Contact.js';
 
 const App = () => {
   return (
@@ -24,8 +27,9 @@ const App = () => {
     <Router> 
       <div>
         <Routes>    
-          <Route index element={<Home1/>}/>
-          <Route path="/Home1" element={<Home1/>}/>
+          <Route index element={<Admin_convert3d/>}/>
+          <Route path="/Home1" element={<Admin_convert3d/>}/>
+          <Route path="/Contact" element={<Contact/>}/>
           <Route path="/Slider" element={<Slider/>}/> 
           <Route path="/SignUp" element={<SignUp/>}/>
           <Route path="/Footer" element={<Footer/>}/>
@@ -40,7 +44,8 @@ const App = () => {
           <Route path="/Decore" element={<Decore/>} />
           <Route path="/Cart" element={<Cart/>} />
           <Route path="/CartProvider" element={<CartProvider/>} />
-           
+          <Route path="/Guide" element={<Guide/>} />
+
           {/* <Route path='/Mode' element={<Mode/>}/> */}
           
 

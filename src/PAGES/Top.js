@@ -56,7 +56,7 @@ const Top = () => {
 
           <div className={`nav__menu ${showMenu ? 'show-menu' : ''}`} id="nav-menu">
             <ul className="nav__list" style={{marginRight:'-70px',marginTop:'-55px'}}>
-            <li className="nav__item"><a href="#" className="nav__link">Contact Us</a></li>
+            <li className="nav__item"><a href="/Contact" className="nav__link" >Contact </a></li>
             {/* <li className="nav__item"><a href="#" className="nav__link">About Us</a></li> */}
 
     
@@ -84,8 +84,9 @@ const Top = () => {
     </ul>
     </li>
               <li className="nav__item"><a href="#" className="nav__link">Offers</a></li>
-              <li className="nav__item"><a href="#" className="nav__link">Videos</a></li>
-              <li className="nav__item"><a href="#" className="nav__link">Cart🛒</a></li>
+              <li className="nav__item"><a href="#" className="nav__link">Reels</a></li>
+              <li className="nav__item"><a href="/Cart" className="nav__link">Cart🛒</a></li>
+              <li className="nav__item"><a href="/Cart" className="nav__link" style={{marginLeft:'-30px'}}>♡</a></li>
               {/* <li className="nav__item"><a href="#" className="nav__link">Videos</a></li> */}
               <div className="nav__actions">
             <i className="ri-search-line nav__search" id="search-btn" onClick={() => setShowSearch(true)}></i>

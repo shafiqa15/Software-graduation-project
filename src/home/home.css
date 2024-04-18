@@ -34,7 +34,7 @@ body {
 .navigation-menu li a {
   color: white; /* White text color */
   text-decoration: none; /* No underline on links */
-  padding: 10px 15px; /* Padding around links */
+  padding: 10px 1px; /* Padding around links */
   display: block;
 }
 
@@ -53,7 +53,7 @@ body {
 }
 
 .navigation-menu li ul li a {
-  padding: 5px 10px; /* Smaller padding for dropdown links */
+  padding: 5px 1px; /* Smaller padding for dropdown links */
   color: #ddd; /* Lighter text color for dropdown items */
 }
 

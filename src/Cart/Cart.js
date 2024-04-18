@@ -7,7 +7,7 @@ import ConfirmModal from './ConfirmModal';
 import Footer from '../footer/Footer';
 import React, { useState } from 'react';
 import ShoppingAssistance from './ShoppingAssistance';
-import visaImage from '/Users/shafiqaabdat/Downloads/client-main/src/images/cash_.webp';
+import visaImage from '../Cart/webimage-ED81074F-347A-430E-AC7CC0A3429D9570.jpg';
 
 import cashImage from '/Users/shafiqaabdat/Downloads/client-main/src/images/cash_.webp';
 
@@ -46,8 +46,8 @@ const Cart = () => {
   const paymentMethodsSection = (
     <div className="payment-methods">
       <h3>Payment Methods</h3>
-      <img src={visaImage} alt="Visa" style={{width:'100px',height:'100px'}} />
-      <img src={cashImage} alt="Cash" style={{width:'100px',height:'100px'}} />
+      <img src={visaImage} alt="Visa" style={{width:'70px',height:'50px'}} />
+      <img src={cashImage} alt="Cash" style={{width:'70px',height:'50px'}} />
     </div>
   );
 
@@ -57,7 +57,7 @@ const Cart = () => {
       <ShoppingAssistance />
       <div className="cart-header">
         <Top1 itemCount={totalItemCount} />
-        <h1 style={{marginTop:'100px'}}>Your Cart</h1>
+        <h1 style={{marginTop:'100px',marginRight:'20px'}}>Your Cart</h1>
         {cartItems.length === 0 ? (
           <p>Your cart is empty</p>
         ) : (

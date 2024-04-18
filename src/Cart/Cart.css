@@ -6,109 +6,115 @@
     flex-direction: column;
     align-items: center; /* Center children horizontally */
     padding: 2rem 0; /* Padding at the top and bottom */
-  }
-  
-  /* Header section */
-  .cart-header h1 {
+}
+
+/* Header section */
+.cart-header h1 {
     color: #333;
     font-size: 2.5rem; /* Large, readable font size */
     font-weight: 600;
     margin-bottom: 2rem; /* Space below the header */
-  }
-  
-  /* Cart item list and cart total */
-  .cart-container {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Cart item list and cart total */
+.cart-container {
     width: 80%; /* Adjust the width as needed */
     max-width: 1200px; /* Maximum width */
     margin: auto; /* Center container in the available horizontal space */
     padding: 1rem; /* Padding around the container */
     background: white;
     border-radius: 10px; /* Rounded corners for the container */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  }
-  
-  .cart-item {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Soft shadow for depth, less intense */
+    transition: box-shadow 0.3s ease-in-out; /* Smooth transition for shadow */
+}
+
+.cart-container:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+}
+
+.cart-item {
     display: flex; /* Turns the cart item into a flex container */
-    border: 1px solid #ccc; /* Example border: light grey */
-    background-color: #f9f9f9; /* Example background color: very light grey */
+    border: 1px solid #ccc; /* Light grey border */
+    background-color: #fff; /* White background for contrast */
     padding: 10px;
     margin-bottom: 10px; /* Adds space between cart items */
     border-radius: 5px; /* Rounds the corners of the border */
     align-items: center; /* Centers items vertically */
-  }
-  
-  .cart-item .photo {
+    transition: background-color 0.3s, transform 0.2s; /* Smooth background and transform transitions */
+}
+
+.cart-item:hover {
+    background-color: #f3f3f3; /* Light grey background on hover */
+    transform: translateY(-3px); /* Slight lift effect on hover */
+}
+
+.cart-item .photo {
     margin-right: 10px; /* Adds some space between the image and the item details */
-  }
-  
-  .item-details {
+}
+
+.item-details {
     flex-grow: 1; /* Makes the item details fill the available space */
-  }
-  
-  .button-remove {
-    margin-left: auto; /* Pushes the remove button to the far right */
-  }
-  
-  
-  .cart-item:last-child {
-    border-bottom: none; /* No border for the last item */
-  }
-  
-  .cart-item img.photo {
-    width: 100px; /* Fixed image width */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 5px;
-  }
-  
-  .item-details {
-    flex-grow: 1; /* Allow the details to fill the space */
     padding: 0 1.5rem; /* Space around the text */
-  }
-  
-  .item-details h3,
-  .item-details p {
+}
+
+.item-details h3,
+.item-details p {
     margin: 0.25rem 0; /* Margin for spacing text */
-  }
-  
-  /* Quantity input */
-  .item-details input[type="number"] {
+}
+
+/* Quantity input styling enhancements */
+.item-details input[type="number"] {
     width: 60px; /* Smaller width for a neater look */
     margin-left: 0.5rem; /* Space from the quantity label */
-  }
-  
-  /* Remove button improvements */
-  .button-remove {
-    background-color: #ff6b6b; /* A softer red color */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.5rem;
+    transition: border-color 0.3s;
+}
+
+.item-details input[type="number"]:focus {
+    border-color: #0056b3; /* Blue border on focus for visibility */
+}
+
+/* Remove button improvements */
+.button-remove {
+    background-color: #8a3838; /* A softer red color */
     color: white;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
-  }
-  
-  .button-remove:hover {
+}
+
+.button-remove:hover {
     background-color: #ff8787; /* A lighter red on hover */
-  }
-  
-  /* Cart total area */
-  .cart-total {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+}
+
+/* Cart total area */
+.cart-total {
     text-align: right;
     padding: 1.5rem;
     font-size: 1.5rem; /* Larger font size for the total */
     font-weight: bold;
-  }
-  
-  /* Confirm modal and other elements styled as before */
-  
+    border-top: 2px solid #ccc; /* Subtle top border for separation */
+}
 
-  .payment-methods {
+/* Payment methods styling */
+.payment-methods {
     display: flex;
     align-items: center;
     gap: 10px;
-  }
-  
-  .payment-methods h3 {
+    padding: 10px;
+    border-radius: 5px;
+    background: linear-gradient(145deg, #ffffff, #f1f1f1); /* Subtle gradient background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.payment-methods h3 {
     margin-right: 10px;
-  }
-  
+    color: #333;
+    font-weight: 500;
+}

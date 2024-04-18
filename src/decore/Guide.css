@@ -1,0 +1,42 @@
+.guide-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.guide-container h1 {
+    color: #b32c04;
+    text-align: center;
+}
+
+.section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.section h2 {
+    color: #b32c04;
+}
+
+ol, ul {
+    margin-left: 20px;
+}
+
+.video-tutorial video {
+    width: 100%; /* Responsive video width */
+    max-width: 600px; /* Limit video size */
+    display: block;
+    margin: auto;
+}
+
+img {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: 10px auto;
+}

@@ -1,5 +1,7 @@
 
     import React, { useRef, useEffect, useState } from 'react';
+    import ReactModal from 'react-modal';
+
     import * as THREE from 'three';
     import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
     import Top from '../PAGES/Top';
@@ -8,9 +10,8 @@
 
     import image2 from '../images/decore/Screenshot 2024-03-20 at 02.58.49.png';
     import image3 from '../images/decore/Screenshot 2024-03-20 at 02.55.56.png';
-    import image4 from '../images/decore/tv.webp';
+    import image4 from '../images/decore/Screenshot 2024-04-03 at 01.07.56.png';
     import image5 from '../images/decore/tv.webp';
-
 
 
     import image1 from '../images/decore/tv.webp';
@@ -20,40 +21,51 @@
 
     
 
+    import example1 from '../images/decore/Screenshot 2024-04-07 at 14.37.06.png';
+    import example2 from '../images/decore/Screenshot 2024-04-07 at 13.51.38.png';
+  
+    import example3 from '../images/decore/Screenshot 2024-04-07 at 15.00.55.png';
+    
+
+
     function Decore() {
       const mountRef = useRef(null);
       const objectsRef = useRef([]);
       const sceneRef = useRef(new THREE.Scene()); // Use a ref for the scene to access it outside of useEffect
-    
       const [color, setColor] = useState(0xffffff); // Default color is white
       const [material, setMaterial] = useState(new THREE.MeshPhongMaterial({ color: color }));
-    
-      useEffect(() => {
-        objectsRef.current.forEach(obj => {
-          // التحقق إذا كان الكائن ليس القفل
-          if (!obj.isLock) {
-            // إنشاء مادة جديدة باللون الجديد وتعيينها للكائن
-            const newMaterial = new THREE.MeshPhongMaterial({ color: color });
-            obj.material = newMaterial;
-          }
-        });
-      }, [color]);
-      
-    
-   useEffect(() => {
-        objectsRef.current.forEach(obj => {
-          obj.material = material;
-        });
-      }, [material]);
+      const [boxDimensions, setBoxDimensions] = useState({ width: 1, height: 1, depth: 1 });
+      const [boxWidth, setBoxWidth] = useState(1);
+      const [currentModel, setCurrentModel] = useState('defaultModel');
+      const [modelWidth, setModelWidth] = useState('');
+      const [modelHeight, setModelHeight] = useState('');
+      const [designDescription, setDesignDescription] = useState('');
+      const [textureFile, setTextureFile] = useState(null);
 
-     
-      
 
-      useEffect(() => {
+  useEffect(() => {
+  objectsRef.current.forEach(obj => {
+    if (!obj.isLock && !obj.isMiddleLine) { // Exclude locks and the middle line
+      const newMaterial = new THREE.MeshPhongMaterial({ color: color });
+      obj.material = newMaterial;
+    }
+  });
+}, [color]);
+
+useEffect(() => {
+  objectsRef.current.forEach(obj => {
+    if (!obj.isLock && !obj.isMiddleLine) { // Again, exclude locks and the middle line
+      obj.material = material;
+    }
+  });
+}, [material]);
+
+        
+
+     useEffect(() => {
         const scene = sceneRef.current;
         const width = mountRef.current.clientWidth;
         const height = 500; // Set a fixed height for the renderer
-      
         const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(width, height); // Use the width and height determined above
@@ -86,29 +98,6 @@
         };
       }, []);
       
-
-  // useEffect(() => {
-  //   const scene = sceneRef.current;
-    
-  //   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  //   const renderer = new THREE.WebGLRenderer({ antialias: true });
-  //   renderer.setSize(window.innerWidth * 0.75, window.innerHeight * 0.75);
-  //   renderer.setClearColor(0xffffff);
-  //   mountRef.current.appendChild(renderer.domElement);
-  //   const controls = new OrbitControls(camera, renderer.domElement);
-  //   scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-  //   scene.add(new THREE.DirectionalLight(0xffffff, 0.5));
-  //   createObjects(); // Initial creation
-  //   camera.position.z = 5;
-  //   const animate = () => { requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); };
-  //   animate();
-  //   return () => { mountRef.current.removeChild(renderer.domElement); };
-  // }, []);
-
-  
-  
-    
-      const [boxDimensions, setBoxDimensions] = useState({ width: 1, height: 1, depth: 1 });
     
 
       const createSimpleBox = (offsetX = 0, offsetY = 0) => {
@@ -116,7 +105,6 @@
         const legGeom = new THREE.BoxGeometry(0.1, 1, 0.1);
         const topFrameGeom = new THREE.BoxGeometry(1, 0.1, 1);
         const bottomFrameGeom = new THREE.BoxGeometry(1, 0.1, 1);
-    
         const positions = [
           [-0.45 + offsetX, 0.5 + offsetY, -0.45],
           [0.45 + offsetX, 0.5 + offsetY, -0.45],
@@ -143,11 +131,6 @@
       };
       
   
-    
-    const [boxWidth, setBoxWidth] = useState(1);
-  
-    
-    
     
     const createBoxWithDoorsAndLock = (offsetX = 0, offsetY = 0, offsetZ = 0, totalWidth = 1, totalDepth = 1) => {
     
@@ -260,10 +243,12 @@
       
     const [lastObjectDetails, setLastObjectDetails] = useState({ x: 0, y: 0, width: 1, height: 1 });
     const gapBetweenModels = 0; // This is an example value, in whatever units you are using (typically meters in 3D spaces)
+ 
 
       const createObjects = (offsetX = 0, offsetY = 0) => {
+   
         if (currentModel === 'simpleBox') {
-          createSimpleBox(offsetX, offsetY-0.05, 0); // Adjust these values and parameters as needed
+          createSimpleBox(offsetX, offsetY, 0); // Adjust these values and parameters as needed
           
                 setLastObjectDetails({ x: offsetX, y: offsetY, width: 1, height: 1 }); // Update these dimensions based on actual sizes
 
@@ -273,6 +258,14 @@
       setLastObjectDetails({ x: offsetX, y: offsetY, width: 1, height: 1}); // Update these dimensions based on actual sizes
 
         }
+        else if(currentModel=='createCupboardWithDoubleDoors'){
+
+          createCupboardWithDoubleDoors( 0+ offsetX, 0.5+ offsetY, 0);
+          setLastObjectDetails({ x: offsetX-0.5, y: offsetY-0.5, width: 1, height: 1}); // Update these dimensions based on actual sizes
+          
+          
+                    
+                  }
         else  {
           
       createBoxWithDoorsAndLock(0 + offsetX, 0.5+ offsetY, 0); // Adjust these values as needed
@@ -294,6 +287,16 @@
       setLastObjectDetails({ x: offsetX, y: offsetY, width: 1, height: 1}); // Update these dimensions based on actual sizes
 
         }
+
+
+        else if(currentModel=='createCupboardWithDoubleDoors'){
+
+createCupboardWithDoubleDoors(0 + offsetX-0.4,  offsetY-0.1, 0);
+setLastObjectDetails({ x: offsetX, y: offsetY+0.2, width: 1, height: 1}); // Update these dimensions based on actual sizes
+
+
+          
+        }
         else  {
           
       createBoxWithDoorsAndLock(0 + offsetX, 0.5+ offsetY, 0); // Adjust these values as needed
@@ -303,7 +306,7 @@
 
       const createObjects3 = (offsetX = 0, offsetY = 0) => {
         if (currentModel === 'simpleBox') {
-             createSimpleBox(offsetX+0.05, offsetY-0.05, 0); // Adjust these values and parameters as needed
+             createSimpleBox(offsetX+0.04, offsetY-0.1, 0); // Adjust these values and parameters as needed
           
                 setLastObjectDetails({ x: offsetX, y: offsetY+ 1, width: 1, height: 1 }); // Update these dimensions based on actual sizes
 
@@ -313,6 +316,14 @@
       setLastObjectDetails({ x: offsetX, y: offsetY, width: 1, height: 1}); // Update these dimensions based on actual sizes
 
         }
+        else if(currentModel=='createCupboardWithDoubleDoors'){
+
+          createCupboardWithDoubleDoors(0 + offsetX, 0.5+ offsetY, 0);
+          setLastObjectDetails({ x: offsetX, y: offsetY, width: 1, height: 1}); // Update these dimensions based on actual sizes
+          
+          
+                    
+                  }
         else  {
           
       createBoxWithDoorsAndLock(0 + offsetX,0.6+ offsetY, 0); // Adjust these values as needed
@@ -321,87 +332,50 @@
       };
 
   const handleModelChange = (modelName) => {
-  setCurrentModel(modelName); // Assuming this sets state that decides which object creation function to use
+  setCurrentModel(modelName); 
 };
         
    
     
       const addModelAbove = () => {
-  const { x, y, height } = lastObjectDetails;
-  const newY = y -0.05+ height + gapBetweenModels; 
+         const { x, y, height } = lastObjectDetails;
+         const newY = y -0.05+ height + gapBetweenModels; 
+         const newModelHeight = 1; 
+         createObjects(x, newY, 0); 
+         setLastObjectDetails({ x, y: newY, width: boxWidth, height: newModelHeight });
+      };
 
-  const newModelHeight = 1; // Example height of the new model, adjust based on actual model
-  createObjects(x, newY, 0); // Adjust parameters as needed for your createObjects function
-  
-  setLastObjectDetails({ x, y: newY, width: boxWidth, height: newModelHeight });
-};
+      
+
 
       const addModelToRight = () => {
+        
         if (objectsRef.current.length > 0) {
-          const lastAddedObject = objectsRef.current[objectsRef.current.length - 1];
-          
+          const lastAddedObject = objectsRef.current[objectsRef.current.length - 1];   
           const lastObjectPosition = lastAddedObject.position;
           const lastObjectSize = lastAddedObject.geometry.parameters;
-          
           const gap = 0.9; 
-          
-         
           const newModelX = lastObjectPosition.x + (lastObjectSize.width / 2) + gap + (boxDimensions.width / 2);
-          
           createObjects2(newModelX, lastObjectPosition.y+0.1, lastAddedObject.position.z);
-          
           setLastObjectDetails({ x: newModelX, y: lastObjectPosition.y, width: boxDimensions.width, height: boxDimensions.height });
         } else {
-          createObjects(0, 0); // or any default position you'd like to start with
+          createObjects(0, 0); 
           setLastObjectDetails({ x: 0, y: 0, width: boxDimensions.width, height: boxDimensions.height });
         }
       };
 
 
-
-      
-
-      
-      // const addModelToLeft = () => {
-      //   if (objectsRef.current.length > 0) {
-      //     const lastAddedObject = objectsRef.current[objectsRef.current.length - 1];
-      //     const lastObjectSize = lastAddedObject.geometry.parameters;
-      //     const gap = 0; 
-      
-      //     const newModelX = lastAddedObject.position.x - lastObjectSize.width / 2 - boxDimensions.width / 2 ;
-      
-      //     createObjects3(newModelX, lastAddedObject.y, lastAddedObject.position.z);
-      
-      //     setLastObjectDetails({ x: newModelX, y: lastAddedObject.position.y, width: boxDimensions.width, height: boxDimensions.height });
-      //   } else {
-      //     createObjects(0, 0);
-      //     setLastObjectDetails({ x: 0, y: 0, width: boxDimensions.width, height: boxDimensions.height });
-      //   }
-      // };
-      
+     
       const addModelToLeft = () => {
         if (objectsRef.current.length > 0) {
-          const lastAddedObject = objectsRef.current[objectsRef.current.length - 1];
-          
-          // Assuming lastObjectSize stores the dimensions of the last added object correctly
+          const lastAddedObject = objectsRef.current[objectsRef.current.length - 1];  
           const lastObjectSize = lastAddedObject.geometry.parameters;
-          
-          // You might want a gap between the models, even if it's just a small one.
-          const gap = 0; // Adjust this value to your needs
-      
-          // Calculate the new model's X position based on the last object's position, its width, the new object's width, and the gap
-          // We subtract half of the last object's width, the gap, and then half of the new object's width
+          const gap = 0; 
           const newModelX = lastAddedObject.position.x - (lastObjectSize.width / 2) - gap - (boxDimensions.width / 2);
-      
-          // Correct the Y position to be the same as the last added object if needed
-          // Assuming you want to place it directly to the left without changing the vertical position
           const newY = lastAddedObject.position.y;
-      
           createObjects3(newModelX, newY, lastAddedObject.position.z);
-      
           setLastObjectDetails({ x: newModelX, y: newY, width: boxDimensions.width, height: boxDimensions.height });
         } else {
-          // If no objects have been added, create the first object at an initial position
           createObjects(0, 0);
           setLastObjectDetails({ x: 0, y: 0, width: boxDimensions.width, height: boxDimensions.height });
         }
@@ -409,36 +383,44 @@
       
       
    
-    
-    const [currentModel, setCurrentModel] = useState('defaultModel');
-    const [modelWidth, setModelWidth] = useState('');
-const [modelHeight, setModelHeight] = useState('');
-const [designDescription, setDesignDescription] = useState('');
+      const addModelToBottom = () => {
+        const { x, y, height } = lastObjectDetails;
+        // Assuming the positive Y direction is upwards and you want to add the model below the current one,
+        // you should subtract the height and gap to find the newY.
+        const newY = y - height - gapBetweenModels; // Adjust this calculation based on your coordinate system
+        const newModelHeight = 1; // You may adjust this based on the specific model being added
+        
+        // Assuming createObjects function can handle the placement based on the newX and newY,
+        // if your implementation varies, adjust accordingly.
+        createObjects(x, newY, 0); 
+        setLastObjectDetails({ x, y: newY, width: boxWidth, height: newModelHeight });
+      };
+      
 
+      
+
+    
     
    const changeModel = (modelName) => {
   setCurrentModel(modelName);
   if (modelName === 'model1') {
     objectsRef.current.forEach(obj => {
       if (obj.isLock || obj.isDoor) {
-        obj.visible = false; // or scene.remove(obj) to completely remove it from the scene
+        obj.visible = false; 
       }
     });
   } else {
-    // Code to revert back to the default model with lock and door
+
     objectsRef.current.forEach(obj => {
       if (obj.isLock || obj.isDoor) {
-        obj.visible = true; // or you can re-add them to the scene if you've removed them
+        obj.visible = true; 
       }
     });
   }
   // ... additional code to update the middle model
 };
 
-const [textureFile, setTextureFile] = useState(null);
 
-
-// Use useEffect to update the material when the textureFile changes
 useEffect(() => {
   if (textureFile) {
     const reader = new FileReader();
@@ -450,125 +432,444 @@ useEffect(() => {
   }
 }, [textureFile]);
       
-    
+
+
+
+const createCupboardWithDoubleDoors = (offsetX = 0, offsetY = 0, offsetZ = 0) => {
+  const scene = sceneRef.current;
+  const cupboardWidth = 1;
+  const cupboardHeight = 1;
+  const cupboardDepth = 1;
+  const cupboardGeometry = new THREE.BoxGeometry(cupboardWidth, cupboardHeight, cupboardDepth);
+  const cupboardMaterial = new THREE.MeshPhongMaterial({ color: 0xFF5733 });
+  const cupboardMesh = new THREE.Mesh(cupboardGeometry, cupboardMaterial);
+  cupboardMesh.position.set(offsetX, offsetY, offsetZ);
+  scene.add(cupboardMesh);
+  objectsRef.current.push(cupboardMesh);
+
+  // Doors
+  const doorWidth = cupboardWidth / 2;
+  const doorHeight = cupboardHeight;
+  const doorDepth = 0; // Thickness of the door
+  const doorGeometry = new THREE.BoxGeometry(doorWidth, doorHeight, doorDepth);
+  const doorMaterial = new THREE.MeshPhongMaterial({ color: 0xFF5733, side: THREE.DoubleSide });
+
+  // Left door
+  const leftDoorMesh = new THREE.Mesh(doorGeometry, doorMaterial);
+  leftDoorMesh.position.set(offsetX - doorWidth / 2, offsetY, offsetZ + cupboardDepth / 2 + doorDepth / 2);
+  scene.add(leftDoorMesh);
+  objectsRef.current.push(leftDoorMesh);
+
+  // Locks
+  const lockGeometry = new THREE.CylinderGeometry(0.05, 0.05, 0.1, 32);
+  const lockMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff }); // Locks' color changed to white for visibility
+
+  // Create and position the left lock
+  const leftLockMesh = new THREE.Mesh(lockGeometry, lockMaterial);
+  leftLockMesh.rotation.x = Math.PI / 2;
+  leftLockMesh.position.set(offsetX - doorWidth / 2, offsetY, 0.05+offsetZ + cupboardDepth / 2);
+  leftLockMesh.isLock = true; // Mark as lock
+  scene.add(leftLockMesh);
+  objectsRef.current.push(leftLockMesh);
+
+  // Create and position the right lock
+  const rightLockMesh = new THREE.Mesh(lockGeometry, lockMaterial);
+  rightLockMesh.rotation.x = Math.PI / 2;
+  rightLockMesh.position.set(offsetX + doorWidth / 2, offsetY, 0.05+offsetZ + cupboardDepth / 2);
+  rightLockMesh.isLock = true; // Mark as lock
+  scene.add(rightLockMesh);
+  objectsRef.current.push(rightLockMesh);
+
+  // Right door
+  const rightDoorMesh = new THREE.Mesh(doorGeometry, doorMaterial);
+  rightDoorMesh.position.set(offsetX + doorWidth / 2, offsetY, offsetZ + cupboardDepth / 2 + doorDepth / 2);
+  scene.add(rightDoorMesh);
+  objectsRef.current.push(rightDoorMesh);
+
+  // // Top door
+  // const topDoorMesh = new THREE.Mesh(new THREE.BoxGeometry(cupboardWidth, doorDepth, cupboardDepth), doorMaterial);
+  // topDoorMesh.position.set(offsetX, offsetY + doorDepth , offsetZ);
+  // scene.add(topDoorMesh);
+  // objectsRef.current.push(topDoorMesh);
+
+  //  const edgeMaterial = new THREE.LineBasicMaterial({ color: 'white' });
+  //  const edges = new THREE.EdgesGeometry(cupboardGeometry);
+  //  const line = new THREE.LineSegments(edges, edgeMaterial);
+  //  cupboardMesh.add(line); // This will add the line as a child of the box mesh
+
+  // Middle line
+  const middleLineGeometry = new THREE.PlaneGeometry(0.01, cupboardHeight);
+  const middleLineMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff, side: THREE.DoubleSide }); // Middle line material set to double-sided
+  const middleLineMesh = new THREE.Mesh(middleLineGeometry, middleLineMaterial);
+  middleLineMesh.position.set(offsetX, offsetY, offsetZ + cupboardDepth / 2 + doorDepth); // Adjusted to be in front of the doors
+  middleLineMesh.isMiddleLine = true;
+  scene.add(middleLineMesh);
+  objectsRef.current.push(middleLineMesh);
+
+
+
+
+
+  const edgeMaterial = new THREE.LineBasicMaterial({ color: 'white' });
+  const edges = new THREE.EdgesGeometry(cupboardGeometry);
+  const cupboardLine = new THREE.LineSegments(edges, edgeMaterial);
+  cupboardMesh.add(cupboardLine); // Add as a child of the cupboard mesh
+
+  // Function to create edges for a given mesh
+  const addEdgesToMesh = (mesh, geometry) => {
+    const edges = new THREE.EdgesGeometry(geometry);
+    const line = new THREE.LineSegments(edges, edgeMaterial);
+    mesh.add(line);
+  };
+
+  // Adding edge lines for the doors
+  addEdgesToMesh(leftDoorMesh, doorGeometry);
+  addEdgesToMesh(rightDoorMesh, doorGeometry);
+
+
+
+
+
+
+  
+};
+
+
+
+const addSpacer = (offsetX = 0, offsetY = 0, offsetZ = 0) => {
+  const scene = sceneRef.current;
+  const geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1); // Small, effectively invisible
+  const material = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0 }); // Completely transparent
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.position.set(offsetX, offsetY, offsetZ);
+  scene.add(mesh);
+  objectsRef.current.push(mesh);
+  // Update last object details for positioning of the next object
+  setLastObjectDetails({ x: offsetX, y: offsetY, width: 0.1, height: 0.1 });
+};
+
+
+const addSpaceAbove = () => {
+  const { x, y, height } = lastObjectDetails;
+  const newY = y + height + gapBetweenModels; // Update Y position based on the last object's position and height
+  addSpacer(x, newY); // Add the spacer at the new position
+  setLastObjectDetails({ ...lastObjectDetails, y: newY }); // Update lastObjectDetails to reflect the new position
+};
+
+const addSpaceToRight = () => {
+  const { x, width } = lastObjectDetails;
+  const newX = x + width + gapBetweenModels; // Update X position based on the last object's position and width
+  addSpacer(newX, lastObjectDetails.y); // Add the spacer at the new position
+  setLastObjectDetails({ ...lastObjectDetails, x: newX }); // Update lastObjectDetails to reflect the new position
+};
+
+const addSpaceToLeft = () => {
+  const { x, width } = lastObjectDetails;
+  const newX = x - width - gapBetweenModels; // Calculate new X position for the spacer
+  addSpacer(newX, lastObjectDetails.y); // Add the spacer at the new position
+  setLastObjectDetails({ ...lastObjectDetails, x: newX }); // Update lastObjectDetails to reflect the new position
+};
+
+const addSpaceToBottom = () => {
+  const { x, y, height } = lastObjectDetails;
+  const newY = y - height - gapBetweenModels; // Calculate new Y position for the spacer
+  addSpacer(x, newY); // Add the spacer at the new position
+  setLastObjectDetails({ ...lastObjectDetails, y: newY }); // Update lastObjectDetails to reflect the new position
+};
+
+
+
+
+const [isGuidebookOpen, setIsGuidebookOpen] = useState(false);
+const toggleGuidebook = () => {
+  setIsGuidebookOpen(!isGuidebookOpen);
+}
+
+
+
+const [isGuidebookExpanded, setIsGuidebookExpanded] = useState(false);
+
+const toggleGuidebookSection = () => {
+  setIsGuidebookExpanded(!isGuidebookExpanded);
+}
+
+
+
+const [texturePreview, setTexturePreview] = useState(null);
+
+
+const handleTextureChange = (e) => {
+    if (e.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            setTexturePreview(event.target.result);
+        };
+        reader.readAsDataURL(e.target.files[0]);
+        setTextureFile(e.target.files[0]);
+    }
+};
+
+
+
+
       return (
     
         <div>
       <Top></Top>
         
+
+
+
+  
     
-    <div className="image-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%',marginTop:'90px'}}>
+    <div className="image-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%',marginTop:'90px',marginLeft:'300px'}}>
       <img src={image1} alt="Decor 1" style={{ width: '15%', height: 'auto',paddingRight:'20px' }} />
       <img src={img1} alt="Decor 2" style={{ width: '15%', height: 'auto' ,paddingRight:'20px'}}  />
-      <img src={img2} alt="Decor 3" style={{ width: '15%', height: 'auto',paddingRight:'20px' }} />
-      <img src={img3} alt="Decor 4" style={{ width: '15%', height: '190px' ,paddingRight:'20px'}} />
+      {/* <img src={img2} alt="Decor 3" style={{ width: '15%', height: 'auto',paddingRight:'20px' }} /> */}
+      <img src={img3} alt="Decor 4" style={{ width: '15%', height: '150px' ,paddingRight:'20px'}} />
+
+      <div style={{ marginLeft: '50px', width:'400px' }}>
+            <button onClick={toggleGuidebookSection} style={{ padding: '10px', border: 'none', background: '#b32c04', color: 'white' }}>
+                {isGuidebookExpanded ? 'Hide Guidebook' : 'Show Guidebook'}
+            </button>
+            {isGuidebookExpanded && (
+                <div style={{ padding: '10px', background: '#f0f0f0', marginTop: '5px' }}>
+                    <h4>How to Use This Page</h4>
+                    <p>Here you can find step-by-step instructions on how to interact with the decor options...</p>
+                    <button  style={{ padding: '5px 10px', border: 'none', background: '#8b4513', color: 'white', fontSize: '0.8em', cursor: 'pointer', marginTop: '10px' }}>
+                     <a href="/Guide"> Go to Guide Page </a>
+                    </button>
+                </div>
+            )}
+        </div>
     </div>
     
+
+
+
+
     {/* <div className="model-display-container"> */}
-<div ref={mountRef} style={{ width: '100%', height: '500px', position: 'relative', top: '50px', border: '2px solid #b0955b',marginLeft:'200px',backgroundColor:'##FAF9F6' }}></div>
+  <div ref={mountRef} style={{ width: '100%', height: '700px', position: 'relative', top: '50px', border: '2px solid #b0955b',marginLeft:'200px',backgroundColor:'##FAF9F6' }}></div>
       {/* width :
       hight: */}
    
-  {/* </div> */}
-  {/* <div ref={mountRef} style={{ width: '120%', height: '500px', marginTop: '60px', border: '2px solid black' }}></div> */}
 
-   
-       <div style={{ 
-    position: 'absolute', 
-    top: '45vh', 
-    left: '22%', 
-    transform: 'translateX(-50%)', 
-    display: 'flex', 
-    flexDirection: 'column', 
-    alignItems: 'center', 
-    gap: '10px',
-    fontFamily: 'Arial, sans-serif', // Use a common font for simplicity
+      
+  <div style={{ 
+  position: 'absolute', 
+  top: '45vh', 
+  left: '22%', 
+  transform: 'translateX(-50%)', 
+  display: 'flex', 
+  flexDirection: 'column', 
+  alignItems: 'center', 
+  gap: '10px',
+  fontFamily: 'Arial, sans-serif',
 }}>
-    <button onClick={addModelAbove} style={{
-        padding: '10px 20px',
-      
-        color: '#fff',
-        backgroundColor: '#b32c04',
-        border: 'none',
-        borderRadius: '5px',
-        width:'165px',
-        cursor: 'pointer',
-        outline: 'none',
-        transition: 'background-color 0.3s ease',fontSize:'15px',
-    }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
-       onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
-      Add Model Above↑
-    </button>
-    <button onClick={addModelToRight} style={{
-        padding: '10px 20px',
-      
-        color: '#fff',
-        backgroundColor: '#b32c04',
-        border: 'none',
-        borderRadius: '5px',
-        cursor: 'pointer',
-        width:'165px',
-        outline: 'none',fontSize:'15px',
-        transition: 'background-color 0.3s ease',
-    }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
-       onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
-      Add Model to Right →
-    </button>
-    <button onClick={addModelToLeft} style={{
-        padding: '10px 20px',
-        
-        color: '#fff',
-        backgroundColor: '#b32c04',
-        border: 'none',
-        borderRadius: '5px',
-        width:'165px',
-        cursor: 'pointer',
-        outline: 'none',fontSize:'15px',
-        transition: 'background-color 0.3s ease',
-    }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
-       onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
-      Add Model To Left ←
-    </button>
+  {/* Existing model addition buttons */}
+  <button onClick={addModelAbove} style={{
+      padding: '10px 20px',
+      color: '#fff',
+      backgroundColor: '#b32c04',
+      border: 'none',
+      borderRadius: '5px',
+      width:'165px',
+      cursor: 'pointer',
+      outline: 'none',
+      transition: 'background-color 0.3s ease',
+      fontSize:'15px',
+  }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
+     onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
+    Add Model Above↑
+  </button>
+  <button onClick={addModelToRight} style={{
+      padding: '10px 20px',
+      color: '#fff',
+      backgroundColor: '#b32c04',
+      border: 'none',
+      borderRadius: '5px',
+      width:'165px',
+      cursor: 'pointer',
+      outline: 'none',
+      fontSize:'15px',
+      transition: 'background-color 0.3s ease',
+  }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
+     onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
+    Add Model to Right →
+  </button>
+  <button onClick={addModelToLeft} style={{
+      padding: '10px 20px',
+      color: '#fff',
+      backgroundColor: '#b32c04',
+      border: 'none',
+      borderRadius: '5px',
+      width:'165px',
+      cursor: 'pointer',
+      outline: 'none',
+      fontSize:'15px',
+      transition: 'background-color 0.3s ease',
+  }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
+     onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
+    Add Model To Left ←
+  </button>
+  <button onClick={addModelToBottom} style={{
+      padding: '10px 20px',
+      color: '#fff',
+      backgroundColor: '#b32c04',
+      border: 'none',
+      borderRadius: '5px',
+      width:'165px',
+      cursor: 'pointer',
+      outline: 'none',
+      fontSize:'15px',
+      transition: 'background-color 0.3s ease',
+  }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
+     onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
+    Add Model to Bottom ↓
+  </button>
 
-    <label htmlFor="file-upload" style={{
-        padding: '10px 20px',
-  
-        color: '#fff',
-        backgroundColor: '#b32c04',
-        border: 'none',
-        borderRadius: '5px',fontSize:'15px',
-        width:'165px',
-        cursor: 'pointer',
-        outline: 'none',
-        transition: 'background-color 0.3s ease',
-        textAlign: 'center',
-        display: 'inline-block',
-        marginTop: '10px', 
-    }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
-       onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
-        Upload Wood picture
-        <input
-        type="file"
-        id="file-upload"
-        accept="image/*"
-        onChange={(e) => setTextureFile(e.target.files[0])}
-        style={{ 
-            display: 'none',
-        }}
-      />
-    </label>
+  {/* New spacing addition buttons */}
+  <button onClick={addSpaceAbove} style={{
+      padding: '10px 20px',
+      color: '#fff',
+      backgroundColor: '#b32c04',
+      border: 'none',
+      borderRadius: '5px',
+      width:'165px',
+      cursor: 'pointer',
+      outline: 'none',
+      fontSize:'15px',
+      transition: 'background-color 0.3s ease',
+  }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
+     onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
+    Space Above
+  </button>
+  <button onClick={addSpaceToRight} style={{
+      padding: '10px 20px',
+      color: '#fff',
+      backgroundColor: '#b32c04',
+      border: 'none',
+      borderRadius: '5px',
+      width:'165px',
+      cursor: 'pointer',
+      outline: 'none',
+      fontSize:'15px',
+      transition: 'background-color 0.3s ease',
+  }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
+     onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
+    Space to Right →
+  </button>
+  <button onClick={addSpaceToLeft} style={{
+      padding: '10px 20px',
+      color: '#fff',
+      backgroundColor: '#b32c04',
+      border: 'none',
+      borderRadius: '5px',
+      width:'165px',
+      cursor: 'pointer',
+      outline: 'none',
+      fontSize:'15px',
+      transition: 'background-color 0.3s ease',
+  }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
+     onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
+    Space to Left ←
+  </button>
+  <button onClick={addSpaceToBottom} style={{
+      padding: '10px 20px',
+      color: '#fff',
+      backgroundColor: '#b32c04',
+      border: 'none',
+      borderRadius: '5px',
+      width:'165px',
+      cursor: 'pointer',
+      outline: 'none',
+      fontSize:'15px',
+      transition: 'background-color 0.3s ease',
+  }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
+     onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
+    Space to Bottom ↓
+  </button>
+
+
+
+  <label htmlFor="file-upload" style={{
+                padding: '10px 20px',
+                color: '#fff',
+                backgroundColor: '#b32c04',
+                border: 'none',
+                borderRadius: '5px',
+                fontSize: '15px',
+                width: '165px',
+                cursor: 'pointer',
+                outline: 'none',
+                transition: 'background-color 0.3s ease',
+                textAlign: 'center',
+                display: 'inline-block',
+                marginTop: '10px',
+            }} onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
+                onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
+                Upload Wood Texture
+                <input
+                    type="file"
+                    id="file-upload"
+                    accept="image/*"
+                    onChange={handleTextureChange}
+                    style={{ display: 'none' }}
+                />
+            </label>
+            
+            {/* ... more JSX code */}
+
+            {/* Image preview section */}
+           
+            {texturePreview && (
+              
+                <div style={{
+                  marginTop:'500px',
+                    position: 'absolute',
+                    top: '30%', // Adjust the position as necessary
+                    left: '5%',
+                    border: '3px dashed #b32c04',
+                    borderRadius: '10px',
+                    padding: '5px',
+                    width: '170px', // Adjust the size as necessary
+                    height: '160px', // Adjust the size as necessary
+                }}>
+
+
+                    <img 
+                   
+                        src={texturePreview} 
+                        alt="Wood Texture Preview" 
+                        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                    />
+                    <p style={{fontSize:'14px'}}> Chosen wood shape:</p>
+                </div>
+                
+            )}
+
     <p> Pick the color u want:</p>
     <input
   
             type="color"
             value={`#${color.toString(16)}`}
             onChange={(e) => setColor(parseInt(e.target.value.substr(1), 16))}
-            style={{ position: 'absolute', top: '42vh', left: '50%', transform: 'translateX(-50%)' }}
+            style={{ position: 'absolute', top: '77vh', left: '50%', transform: 'translateX(-50%)' }}
           />
 </div>
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
                <div  className='avia_prod'>
                <br/>
             <p style={{ fontFamily: 'Mulish' }}>
@@ -579,27 +880,46 @@ useEffect(() => {
     </div>
     
     
+
+
+
+
+
+
+
    
 
-            <div onClick={() => changeModel('model1')} className="model-selector">
-              <img className='images_prop image-container_decore' src={image1} alt="Model 1" />
-            </div>
+
             <div onClick={() => handleModelChange('simpleBox')} className="model-selector" >
               <img className='images_prop image-container_decore' src={image2} alt="Model 2" />
             </div>
             <div onClick={() => handleModelChange('createBoxWithDoorsAndLock')} className="model-selector">
               <img className='images_prop image-container_decore' src={image3} alt="Model 3" />
             </div>
-            <div onClick={() => changeModel('model4')} className="model-selector">
+            <div onClick={() => handleModelChange('createCupboardWithDoubleDoors')} className="model-selector">
               <img className='images_prop image-container_decore' src={image4} alt="Model 4" />
             </div>
-            <div onClick={() => changeModel('model5')} className="model-selector">
-              <img className='images_prop image-container_decore' src={image5} alt="Model 5" />
+       
+            <div>
+            ---------------------------------- <br/>
+              Here r an examples  <br/>of deatailing models
             </div>
+            <div onClick={() => changeModel('model5')} className="model-selector">
+              <img className='images_prop image-container_decore' src={example1} alt="Model 5" />
+            </div>
+            <div onClick={() => changeModel('model1')} className="model-selector">
+              <img className='images_prop image-container_decore' src={example2} alt="Model 1" />
+            </div>
+
+            <div onClick={() => changeModel('model1')} className="model-selector">
+              <img className='images_prop image-container_decore' src={example3} alt="Model 1" />
+            </div>
+
+
           </div>
 
 
-          <div style={{ marginTop: '20px', textAlign: 'center', padding: '20px', backgroundColor: '#FAF9F6', border: '1px solid #b0955b', borderRadius: '5px',marginLeft:'200px' }}>
+          <div style={{ marginTop: '100px', textAlign: 'center', padding: '20px', backgroundColor: '#FAF9F6', border: '1px solid #b0955b', borderRadius: '5px',marginLeft:'200px' }}>
   <div style={{ marginBottom: '10px', display: 'flex', justifyContent: 'center', gap: '20px' }}>
     <input
       type="text"

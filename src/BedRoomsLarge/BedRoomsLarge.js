@@ -7,6 +7,15 @@ import Top from '../PAGES/Top';
 import bedFrameImage from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/firstbedimage.png';
 import Footer from '../footer/Footer';
 import { useNavigate } from 'react-router-dom';
+
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'; 
+import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons'; 
+
+
+
+
 import bed2 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/Screenshot 2024-02-28 at 22.05.01.png';
 import bed3 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/Screenshot 2024-02-28 at 22.05.15.png';
 import bed4 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/Screenshot 2024-02-28 at 22.05.24.png';
@@ -129,6 +138,26 @@ const navigateToBedPage = (productId, imageUrl) => {
     setCart([...cart, product]);
   };
 
+
+
+  const [favorites, setFavorites] = useState([]);
+
+  // Function to handle favorite toggle
+  const toggleFavorite = (productId) => {
+    setFavorites((currentFavorites) => {
+      if (currentFavorites.includes(productId)) {
+        return currentFavorites.filter((id) => id !== productId);
+      } else {
+        return [...currentFavorites, productId];
+      }
+    });
+  };
+
+
+
+
+
+
   return (
     <div>
       <Top />
@@ -170,6 +199,12 @@ const navigateToBedPage = (productId, imageUrl) => {
   </div>
   <div className="ProductFooter">
     <div className="ProductKind">{product.kind}</div>
+
+    <FontAwesomeIcon
+          icon={favorites.includes(product.id) ? fasHeart : farHeart}
+          className={`heart-icon ${favorites.includes(product.id) ? 'favorited' : ''}`}
+          onClick={() => toggleFavorite(product.id)}
+        />
     <button className="AddToCartButton" onClick={() => navigateToBedPage(product.id, product.imageUrl)}>Details</button>
   </div>
 </div>
