@@ -84,10 +84,12 @@ const Top = () => {
     </ul>
     </li>
               <li className="nav__item"><a href="#" className="nav__link">Offers</a></li>
-              <li className="nav__item"><a href="#" className="nav__link">Reels</a></li>
+              <li className="nav__item"><a href="/ReelsPage" className="nav__link">Reels</a></li>
               <li className="nav__item"><a href="/Cart" className="nav__link">Cart🛒</a></li>
-              <li className="nav__item"><a href="/Cart" className="nav__link" style={{marginLeft:'-30px'}}>♡</a></li>
+              <li className="nav__item"><a href="/favorites" className="nav__link" style={{marginLeft:'-30px'}}>♡</a></li>
               {/* <li className="nav__item"><a href="#" className="nav__link">Videos</a></li> */}
+              {/* <a href="/favorites" className="nav__link">Bedrooms</a> */}
+
               <div className="nav__actions">
             <i className="ri-search-line nav__search" id="search-btn" onClick={() => setShowSearch(true)}></i>
             <i className="ri-user-line nav__login" id="login-btn" onClick={() => setShowLogin(true)}></i>

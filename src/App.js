@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import '/Users/shafiqaabdat/Downloads/client-main/src/App.css';
 import Home1 from './home/Home1.js';
@@ -15,15 +15,22 @@ import BedPage from './BedRoomsLarge/BedPage.js';
 import Admin_convert3d from './Admin/Admin_convert3d.js';
 import Decore from './decore/Decore.js';
 import Guide from './decore/Guide.js';
-import Wardrobe from './decore/Wardrobe.js';
+import ReelsPage from './Reels/ReelsPage.js';
 import Cart from './Cart/Cart.js';
 import { CartProvider } from './Cart/CartContext.js';
 import Contact from '/Users/shafiqaabdat/Downloads/client-main/src/Contactus/Contact.js';
+// import Like from './Like/Like.js';
+// import FavoritesProvider from './Like/FavoritesContext.js';
+import FavoritesPage from './Fav/FavoritesPage.js';
+import { products } from './BedRoomsLarge/BedRoomsLarge.js'; // Adjust the path to where products is actually defined
 
 const App = () => {
+
+
   return (
     <CartProvider>
-    
+          {/* <FavoritesProvider>   */}
+
     <Router> 
       <div>
         <Routes>    
@@ -45,14 +52,20 @@ const App = () => {
           <Route path="/Cart" element={<Cart/>} />
           <Route path="/CartProvider" element={<CartProvider/>} />
           <Route path="/Guide" element={<Guide/>} />
+          <Route path="/favorites" element={<FavoritesPage products={products} />} />
+          <Route path="/ReelsPage" element={<ReelsPage/>} />
 
+
+          {/* <Route path="/Liken" element={<Like />} /> */}
           {/* <Route path='/Mode' element={<Mode/>}/> */}
           
 
         </Routes>
       </div>
     </Router>
+    {/* </FavoritesProvider>   */}
     </CartProvider>
+
   );
 }
 

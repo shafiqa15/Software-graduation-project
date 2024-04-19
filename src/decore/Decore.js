@@ -641,6 +641,7 @@ const handleTextureChange = (e) => {
                     </button>
                 </div>
             )}
+            
         </div>
     </div>
     
@@ -793,6 +794,7 @@ const handleTextureChange = (e) => {
 
 
   <label htmlFor="file-upload" style={{
+
                 padding: '10px 20px',
                 color: '#fff',
                 backgroundColor: '#b32c04',

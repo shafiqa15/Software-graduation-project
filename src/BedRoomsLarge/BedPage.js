@@ -5,8 +5,21 @@ import { OrbitControls } from '@react-three/drei';
 import { products } from './BedRoomsLarge.js';
 import React, { useState } from 'react';
 import Top from '../PAGES/Top.js';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+
+
+
+import { TouchableOpacity,  Image,  FlatList,View, Text, ScrollView,StyleSheet  } from 'react';
+// import { SIZES } from '../contents/theme';
+
+//  import React, { useEffect, useState } from 'react';
+// import styles from './Productols.style';
+// import image from '../assets/images/home.jpg';
+// import { EvilIcons,Feather,Fontisto,Ionicons } from '@expo/vector-icons';
+// import { useNavigation } from '@react-navigation/native';
+// import { ProductDetails } from '../pages';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 // import Imageslider  from '/Users/shafiqaabdat/Downloads/client-main/src/BedRoomsLarge/Imageslider.js';
@@ -19,6 +32,7 @@ import { MeshStandardMaterial } from 'three';
 import { useNavigate } from 'react-router-dom';
 
 import { useCart } from '../Cart/CartContext.js'; // Adjust the import path based on your file structure
+import axios from 'axios';
 
 // Define the useQuery hook
 function useQuery() {
@@ -97,8 +111,76 @@ const handleAddToCartClick = (product) => {
 const StarRating = ({ rating, interactive = true, onRatingChange }) => {
 
 
+
+
+
+  const [product,setProduct]=useState([])
+  useEffect( () => {
+  
+    axios.get('http://192.168.88.5:3001/viewAllProduct')
+    .then(result=>{ setProduct(result.data.product)
+      window.confirm(result.data);
+    })
+  
+  
+    .catch( e =>console.log(e));
+  
+},[])
+
+
   return (
     <div>
+
+
+
+
+
+
+{/* <ScrollView > */}
+
+       {/* {product.map(product => (
+        <View key={product._id} product={product} >
+         <TouchableOpacity style={{ marginHorizontal:12}} >
+
+    <View >
+  
+  
+  
+    <View >
+     <Image  source={product.img1}></Image>
+    </View>
+  
+   <View >
+     <Text numberOfLines={1} >{product.name}</Text>
+      <Text  numberOfLines={1}>Product</Text>
+      <View >
+     <Text >$2321</Text> */}
+     {/* <TouchableOpacity onPress={()=>{updataLike(),setLike(!like)}}> */}
+      {/* <Ionicons name={like?'heart':'heart-outline'} color={like?'red':'black'} size={24}/> */}
+    {/* </TouchableOpacity> */}
+     {/* </View>
+   </View>
+   </View>
+     </TouchableOpacity>
+         </View>
+
+       ))}
+     </ScrollView> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       {[...Array(5)].map((star, index) => {
         const ratingValue = index + 1;
 
