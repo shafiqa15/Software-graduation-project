@@ -19,18 +19,14 @@ import ReelsPage from './Reels/ReelsPage.js';
 import Cart from './Cart/Cart.js';
 import { CartProvider } from './Cart/CartContext.js';
 import Contact from '/Users/shafiqaabdat/Downloads/client-main/src/Contactus/Contact.js';
-// import Like from './Like/Like.js';
-// import FavoritesProvider from './Like/FavoritesContext.js';
 import FavoritesPage from './Fav/FavoritesPage.js';
-import { products } from './BedRoomsLarge/BedRoomsLarge.js'; // Adjust the path to where products is actually defined
+import { products } from './BedRoomsLarge/BedRoomsLarge.js'; 
 
 const App = () => {
 
 
   return (
     <CartProvider>
-          {/* <FavoritesProvider>   */}
-
     <Router> 
       <div>
         <Routes>    
@@ -63,7 +59,6 @@ const App = () => {
         </Routes>
       </div>
     </Router>
-    {/* </FavoritesProvider>   */}
     </CartProvider>
 
   );

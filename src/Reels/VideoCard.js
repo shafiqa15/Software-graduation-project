@@ -3,6 +3,8 @@ import '/Users/shafiqaabdat/Downloads/client-main/src/Reels/VideoCard.css';
 import VideoFooter from '../Reels/VideoFooter';
 import VideoHeader from '../Reels/VideoHeader';
 
+
+
 function VideoCard({ url, likes, shares, channel, avatarSrc, song }) {
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
     const videoRef = useRef(null);
