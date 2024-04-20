@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Avatar, Button, TextField } from '@material-ui/core';
+// import { Avatar, Button, TextField } from '@material-ui/core';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ModeCommentIcon from '@material-ui/icons/ModeComment';
@@ -9,6 +9,7 @@ import '../Reels/VideoFooter.css';
 import { IconButton } from '@material-ui/core';
 import Picker from 'emoji-picker-react';
 import ShareIcon from '@material-ui/icons/Share';
+import { Avatar, Button, TextField, Menu, MenuItem } from '@material-ui/core';
 
 function VideoFooter({ channel, avatarSrc, song, likes, shares, toggleLike, userLiked }) {
     const [showCommentBox, setShowCommentBox] = useState(false);
@@ -27,11 +28,11 @@ function VideoFooter({ channel, avatarSrc, song, likes, shares, toggleLike, user
     const handleSendComment = () => {
         if (commentText.trim()) {
             setComments([...comments, commentText]);
-            setCommentText(''); // Clear input after sending
+            setCommentText(''); 
         }
     };
     const onEmojiClick = (event, emojiObject) => {
-        console.log("Emoji object received:", emojiObject); // This should log the received object
+        console.log("Emoji object received:", emojiObject); 
         const emoji = emojiObject?.emoji;
         if (emoji) {
             setCommentText(prevCommentText => prevCommentText + emoji);
@@ -51,14 +52,25 @@ function VideoFooter({ channel, avatarSrc, song, likes, shares, toggleLike, user
 
     const handleShare = () => {
         console.log("Share button clicked");
-        // Implement the logic to share the video, e.g., sending data to an admin or another page.
     };
+    const [copySuccessMessageVisible, setCopySuccessMessageVisible] = useState(false);
+
     
+    const [anchorEl, setAnchorEl] = useState(null);
+
+const handleShareClick = (event) => {
+  setAnchorEl(event.currentTarget);
+};
+
+const handleClose = () => {
+  setAnchorEl(null);
+};
+
 
     
     
     return (
-        <div className="videoFooter" style={{ position: 'relative' }}> {/* Make sure it's relative for absolute positioning of children */}
+        <div className="videoFooter" style={{ position: 'relative' }}> 
         <div className="videoFooter__text">
                 <Avatar src={avatarSrc} />
                 <h3 style={{ fontSize: '15px' ,color:'white'}}>
@@ -72,19 +84,44 @@ function VideoFooter({ channel, avatarSrc, song, likes, shares, toggleLike, user
             <div className="videoFooter__actions">
                 <div className="videoFooter__actionsLeft">
                 
- 
+         
 
-                <FavoriteIcon onClick={handleLike} />
+                <FavoriteIcon onClick={handleLike} style={{marginLeft:'270px',marginTop:'-30px'}} />
                     <SendIcon onClick={handleSendComment} />
-                    {/* <ShareIcon onClick={handleShare} style={{color:'white'}} /> */}
 
                     <MoreHorizIcon style={{color:'white'}} />
 
                 </div>
+<Menu
+    id="simple-menu"
+    anchorEl={anchorEl}
+    keepMounted
+    open={Boolean(anchorEl)}
+    onClose={handleClose}
+>
+    <MenuItem onClick={() => {
+        console.log("Send to admin");
+        handleClose();
+    }}>Send to Admin</MenuItem>
+<MenuItem onClick={() => {
+    navigator.clipboard.writeText(window.location.href)
+        .then(() => {
+            console.log("Link copied successfully!");
+            setCopySuccessMessageVisible(true);
+            setTimeout(() => {
+                setCopySuccessMessageVisible(false); 
+            }, 5000);
+        })
+        .catch(err => console.error("Failed to copy link: ", err));
+    handleClose();
+}}>Copy Link</MenuItem>
+
+
+</Menu>
                 <div className="videoFooter__actionsRight" style={{ marginTop: '-60px' }}>
                     <div className="videoFooter__stat">
                     <FavoriteIcon />
-                        <p style={{color:'white'}}>{likeCount}</p> {/* Updated to use likeCount state */}
+                        <p style={{color:'white'}}>{likeCount}</p> 
                     
                     </div>
                     <div className="videoFooter__stat">
@@ -92,15 +129,30 @@ function VideoFooter({ channel, avatarSrc, song, likes, shares, toggleLike, user
                         <ModeCommentIcon onClick={handleCommentIconClick}   />
 
                         <p style={{color:'white'}}>{shares}</p>
-                        <ShareIcon onClick={handleShare} />
-
+                        <IconButton onClick={handleShareClick}  >
+        <ShareIcon className="sharing" />
+    </IconButton>
                     </div>
 
                 </div>
             </div>
 
 
-
+            {copySuccessMessageVisible && (
+            <div style={{
+                position: 'fixed',
+                bottom: '20px',
+                left: '47%',
+                transform: 'translateX(-50%)',
+                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                color: 'white',
+                padding: '10px 20px',
+                borderRadius: '5px',
+                zIndex: 1000 
+            }}>
+                Link copied successfully!
+            </div>
+        )}
 
             <div className={`videoFooter__comments ${showCommentBox ? 'videoFooter__comments--visible' : ''}`} style={{marginLeft:'100px',marginTop:'-500px'}}>
 
