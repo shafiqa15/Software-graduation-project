@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,Component } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import '/Users/shafiqaabdat/Downloads/client-main/src/App.css';
 import Home1 from './home/Home1.js';
@@ -21,17 +21,31 @@ import { CartProvider } from './Cart/CartContext.js';
 import Contact from '/Users/shafiqaabdat/Downloads/client-main/src/Contactus/Contact.js';
 import FavoritesPage from './Fav/FavoritesPage.js';
 import { products } from './BedRoomsLarge/BedRoomsLarge.js'; 
-
+import firebase from './Firebase/Firebase.js';
+import main from './main.jsx';
+import Chat_io from './Chat_io.js';
 const App = () => {
 
+//  constructor(probs) {
+//   super(probs);
+//   this.state{
 
+//   }
+
+// }
+// constructorDidMount( ){
+//   const messageing=firebase.messageing();
+//   messageing.requestper
+
+// }
   return (
     <CartProvider>
     <Router> 
       <div>
         <Routes>    
-          <Route index element={<Admin_convert3d/>}/>
-          <Route path="/Home1" element={<Admin_convert3d/>}/>
+          <Route index element={<Home1/>}/>
+          <Route path="/Admin_convert3d" element={<Admin_convert3d/>}/>
+          <Route path="/Chat_io" element={<Chat_io/>}/>
           <Route path="/Contact" element={<Contact/>}/>
           <Route path="/Slider" element={<Slider/>}/> 
           <Route path="/SignUp" element={<SignUp/>}/>
@@ -74,6 +88,7 @@ export default App;
 // import '/Users/shafiqaabdat/Downloads/client-main/src/App.css';
 
 // import { startTransition } from 'react';
+// import { message } from '../node_modules/@firebase/messaging/dist/esm/src/api.d';
 
 
 

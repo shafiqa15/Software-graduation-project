@@ -1,11 +1,18 @@
 import React from 'react';
 import '../Cart/ShoppingAssistance.css'; // Ensure the CSS file path is correct
+import { useNavigate } from 'react-router-dom';
 
 const ShoppingAssistance = () => {
+  const navigate = useNavigate();
+
+  const handleChatClick = () => {
+    navigate('/Chat_io'); // Navigate to the chat page
+  };
+
   return (
     <div className="shopping-assistance">
       <div className="shopping-assistance-content">
-        <h2 className='advanced-glow'>Shopping Assistance</h2>
+        <h2 className='advanced-glow' > Shopping Assistance</h2>
         <p>Have questions before you check out? We're here to help!</p>
       </div>
       <div className="shopping-assistance-actions">
@@ -16,11 +23,12 @@ const ShoppingAssistance = () => {
           </svg>
           Call Us
         </button>
-        <button className="button-chat">
+        <button className="button-chat" onClick={handleChatClick}>
           {/* Chat icon SVG */}
           <svg className="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"></path>
           </svg>
+          
           Chat Now
         </button>
       </div>
