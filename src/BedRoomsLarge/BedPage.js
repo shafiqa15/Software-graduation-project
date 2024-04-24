@@ -263,13 +263,28 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
     navigate(`/design`, { state: { product: productToPass } });
   };
 
-
   const navigateToDetailingPage = (productId) => {
-    // Assuming the product you want to pass is at index 1
-    const productToPass = products.find(product => product.id === productId);
-    navigate(`/Decore`, { state: { product: productToPass } });
-  };
+    console.log("Navigating to detailing page for product ID:", productId);
+    const productToPass = products.find(product => product.id.toString() === productId);
 
+    console.log("Found product:", productToPass);
+
+    if (!productToPass) {
+        alert('Product not found');
+        return;
+    }
+    
+    if (!productToPass.pieces || productToPass.pieces.length === 0) {
+        alert('No pieces found for this product');
+        return;
+    }
+
+    console.log("Navigating with pieces:", productToPass.pieces);
+    navigate('/detailing', { state: { bedroomSet: productToPass.pieces } });
+};
+
+
+  
 
 // Example of navigating with multiple products
 const navigateToDesignPageWithMultipleProducts = () => {

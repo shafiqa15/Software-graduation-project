@@ -1,6 +1,6 @@
 
     import React, { useRef, useEffect, useState } from 'react';
-    import ReactModal from 'react-modal';
+    // import ReactModal from 'react-modal';
 
     import * as THREE from 'three';
     import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -11,12 +11,12 @@
     import image2 from '../images/decore/Screenshot 2024-03-20 at 02.58.49.png';
     import image3 from '../images/decore/Screenshot 2024-03-20 at 02.55.56.png';
     import image4 from '../images/decore/Screenshot 2024-04-03 at 01.07.56.png';
-    import image5 from '../images/decore/tv.webp';
+    // import image5 from '../images/decore/tv.webp';
 
 
     import image1 from '../images/decore/tv.webp';
     import img1 from '../images/decore/DALL·E 2024-03-20 03.16.26 - An elegant shoe cupboard designed for a modern home interior. The cupboard should have a sleek white finish with minimalist handles. It must feature s.webp';
-    import img2 from '../images/decore/3d413bcd-c785-4023-b151-345449ab9f16.webp';
+    // import img2 from '../images/decore/3d413bcd-c785-4023-b151-345449ab9f16.webp';
     import img3 from '../images/decore/Screenshot 2024-03-20 at 03.24.42.png';
 
     
@@ -26,9 +26,22 @@
   
     import example3 from '../images/decore/Screenshot 2024-04-07 at 15.00.55.png';
     
-
+// import { useAppContext } from '../AppContext'; // Import the context
+// import Design from '../design/Design';
+import '../Cart/ShoppingAssistance.css'; // Ensure the CSS file path is correct
+import { useNavigate } from 'react-router-dom';
 
     function Decore() {
+      const [designs, setDesigns] = useState([
+      
+      ]);
+
+      const navigate = useNavigate();
+      const handleChatClick = () => {
+        navigate('/Chat_io'); // Navigate to the chat page
+      };
+
+
       const mountRef = useRef(null);
       const objectsRef = useRef([]);
       const sceneRef = useRef(new THREE.Scene()); // Use a ref for the scene to access it outside of useEffect
@@ -37,8 +50,8 @@
       const [boxDimensions, setBoxDimensions] = useState({ width: 1, height: 1, depth: 1 });
       const [boxWidth, setBoxWidth] = useState(1);
       const [currentModel, setCurrentModel] = useState('defaultModel');
-      const [modelWidth, setModelWidth] = useState('');
-      const [modelHeight, setModelHeight] = useState('');
+      // const [modelWidth, setModelWidth] = useState('');
+      // const [modelHeight, setModelHeight] = useState('');
       const [designDescription, setDesignDescription] = useState('');
       const [textureFile, setTextureFile] = useState(null);
 
@@ -192,7 +205,7 @@ useEffect(() => {
         };
     
     
-        const edgeOffset = 0.5; // half the size of the box to get to the edges
+        const edgeOffset = 0.5;// half the size of the box to get to the edges
         const frontZ = offsetZ + edgeOffset + 0.01; // slightly in front of the box to avoid z-fighting
       
         // Horizontal line
@@ -599,16 +612,128 @@ const [texturePreview, setTexturePreview] = useState(null);
 
 
 const handleTextureChange = (e) => {
-    if (e.target.files[0]) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            setTexturePreview(event.target.result);
-        };
-        reader.readAsDataURL(e.target.files[0]);
-        setTextureFile(e.target.files[0]);
-    }
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setTexturePreview(event.target.result);
+      setTextureFile(file); 
+    };
+    reader.readAsDataURL(file);
+  }
 };
 
+// const [savedDesigns, setSavedDesigns] = useState([]);
+
+
+
+const [width, setWidth] = useState('');
+const [height, setHeight] = useState('');
+
+const [uploadedImage, setUploadedImage] = useState(null);
+
+const handleImageUpload = event => {
+  const file = event.target.files[0];
+  if (file && file.type.startsWith('image')) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+          console.log('Loaded image: ', reader.result); 
+          setUploadedImage(reader.result);
+      };
+
+      reader.readAsDataURL(file);
+  } else {
+      alert('Please upload an image file.');
+  }
+};
+
+
+
+
+const deleteDesign = (id) => {
+  setDesigns(designs.filter(design => design.id !== id));
+};
+
+const saveDesign = () => {
+  if (!width || !height || !designDescription) {
+    alert('Please enter width, height, and a description for your design.');
+    return;
+}
+
+
+  
+  const savedColor = color !== 0xffffff ? `#${color.toString(16)}` : 'No color picked';
+
+  const newDesign = {
+      id: designs.length + 1,
+      width: width,
+      height: height,
+      image: uploadedImage ? uploadedImage : 'No image uploaded',
+      color: savedColor, 
+      texture: texturePreview ? texturePreview : 'No texture uploaded', 
+      description: designDescription, 
+
+  };
+  
+  setDesigns([...designs, newDesign]);
+  
+  // Reset the UI fields
+  setWidth('');
+  setHeight('');
+  setUploadedImage(null);
+  // If you want to reset the color and texture as well, uncomment below lines
+  // setColor(0xffffff);
+  // setTexturePreview(null);
+};
+
+
+const [zoomed, setZoomed] = useState(false);
+
+const toggleZoom = () => setZoomed(!zoomed);
+// At the start of your component function, add:
+const [isModalOpen, setIsModalOpen] = useState(false);
+const [currentImage, setCurrentImage] = useState(null);
+
+// Now, you can use these states in your ImageModal component.
+
+const ImageModal = () => {
+  if (!isModalOpen) return null;
+
+  return (
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      zIndex: 1000,
+      cursor: zoomed ? 'zoom-out' : 'zoom-in'
+    }} onClick={() => setIsModalOpen(false)}>
+      <img src={currentImage} alt="Enlarged Design" onClick={(e) => {
+        e.stopPropagation(); // Prevent modal from closing when image is clicked
+        toggleZoom();
+      }} style={{
+        maxHeight: '90%',
+        maxWidth: '90%',
+        boxShadow: '0 4px 8px rgba(0,0,0,0.5)',
+        border: '1px solid #ccc',
+        cursor: 'zoom-in',
+        transform: zoomed ? 'scale(2)' : 'scale(1)',
+        transition: 'transform 0.3s ease'
+      }} />
+    </div>
+  );
+};
+
+const openImageModal = (imageSrc) => {
+  setCurrentImage(imageSrc);  // Set the image to be displayed
+  setIsModalOpen(true);       // Open the modal
+};
 
 
 
@@ -616,16 +741,13 @@ const handleTextureChange = (e) => {
     
         <div>
       <Top></Top>
-        
-
-
 
   
+  <ImageModal></ImageModal>
     
     <div className="image-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%',marginTop:'90px',marginLeft:'300px'}}>
       <img src={image1} alt="Decor 1" style={{ width: '15%', height: 'auto',paddingRight:'20px' }} />
       <img src={img1} alt="Decor 2" style={{ width: '15%', height: 'auto' ,paddingRight:'20px'}}  />
-      {/* <img src={img2} alt="Decor 3" style={{ width: '15%', height: 'auto',paddingRight:'20px' }} /> */}
       <img src={img3} alt="Decor 4" style={{ width: '15%', height: '150px' ,paddingRight:'20px'}} />
 
       <div style={{ marginLeft: '50px', width:'400px' }}>
@@ -649,10 +771,9 @@ const handleTextureChange = (e) => {
 
 
 
-    {/* <div className="model-display-container"> */}
-  <div ref={mountRef} style={{ width: '100%', height: '700px', position: 'relative', top: '50px', border: '2px solid #b0955b',marginLeft:'200px',backgroundColor:'##FAF9F6' }}></div>
-      {/* width :
-      hight: */}
+ 
+  <div ref={mountRef} style={{ width: '100%', height: '800px', position: 'relative', top: '50px', border: '2px solid #b0955b',marginLeft:'200px',backgroundColor:'##FAF9F6' }}></div>
+   
    
 
       
@@ -665,9 +786,9 @@ const handleTextureChange = (e) => {
   flexDirection: 'column', 
   alignItems: 'center', 
   gap: '10px',
-  fontFamily: 'Arial, sans-serif',
+
+  // fontFamily: 'Arial, sans-serif',
 }}>
-  {/* Existing model addition buttons */}
   <button onClick={addModelAbove} style={{
       padding: '10px 20px',
       color: '#fff',
@@ -820,22 +941,20 @@ const handleTextureChange = (e) => {
                 />
             </label>
             
-            {/* ... more JSX code */}
-
-            {/* Image preview section */}
+         
            
             {texturePreview && (
               
                 <div style={{
                   marginTop:'500px',
                     position: 'absolute',
-                    top: '30%', // Adjust the position as necessary
+                    top: '30%', 
                     left: '5%',
                     border: '3px dashed #b32c04',
                     borderRadius: '10px',
                     padding: '5px',
-                    width: '170px', // Adjust the size as necessary
-                    height: '160px', // Adjust the size as necessary
+                    width: '170px',
+                    height: '160px', 
                 }}>
 
 
@@ -856,13 +975,13 @@ const handleTextureChange = (e) => {
             type="color"
             value={`#${color.toString(16)}`}
             onChange={(e) => setColor(parseInt(e.target.value.substr(1), 16))}
-            style={{ position: 'absolute', top: '77vh', left: '50%', transform: 'translateX(-50%)' }}
+            style={{ position: 'absolute', top: '83vh', left: '50%', transform: 'translateX(-50%)' }}
           />
 </div>
 
 
 
-
+<br/>
 
 
 
@@ -920,53 +1039,256 @@ const handleTextureChange = (e) => {
 
           </div>
 
+          <div style={{ 
+  marginTop: '180px', 
+  textAlign: 'center', 
+  padding: '20px', 
+  backgroundColor: '#FAF9F6', 
+  border: '1px solid #b0955b', 
+  borderRadius: '5px',
+  marginLeft: '200px', 
+  display: 'flex', 
+  flexDirection: 'column', 
+  justifyContent: 'space-around', 
+  alignItems: 'center',
+  boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
+  maxWidth: '500px', // Adjust width as needed
+  margin: '100px auto' ,// This centers the div
+  height:'500px',
 
-          <div style={{ marginTop: '100px', textAlign: 'center', padding: '20px', backgroundColor: '#FAF9F6', border: '1px solid #b0955b', borderRadius: '5px',marginLeft:'200px' }}>
-  <div style={{ marginBottom: '10px', display: 'flex', justifyContent: 'center', gap: '20px' }}>
-    <input
+}}>
+  <input
       type="text"
       placeholder="Width (e.g., 2.5 meters)"
-      value={modelWidth}
-      onChange={(e) => setModelWidth(e.target.value)}
-      style={{ padding: '10px', width: '200px', border: '1px solid #ccc', borderRadius: '4px', fontFamily: 'Arial, sans-serif' }}
-    />
-    <input
+      value={width}
+      onChange={(e) => setWidth(e.target.value)}
+      style={{
+        width: '80%', // Makes input take 80% of the div's width
+        padding: '10px',
+        margin: '10px 0',
+        border: '1px solid #ced4da',
+        borderRadius: '4px',
+        // fontFamily: 'Arial, sans-serif'
+      }}
+  />
+  <input
       type="text"
       placeholder="Height (e.g., 1.5 meters)"
-      value={modelHeight}
-      onChange={(e) => setModelHeight(e.target.value)}
-      style={{ padding: '10px', width: '200px', border: '1px solid #ccc', borderRadius: '4px', fontFamily: 'Arial, sans-serif' }}
-    />
-  </div>
-  <textarea
-    placeholder="Describe your design here... Include all details you think are important."
-    value={designDescription}
-    onChange={(e) => setDesignDescription(e.target.value)}
-    style={{ width: '420px', height: '100px', padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontFamily: 'Arial, sans-serif', resize: 'none' }}
-  ></textarea>
-  <button
-    onClick={() => {
-      console.log(`Width: ${modelWidth}, Height: ${modelHeight}, Description: ${designDescription}`);
-      // Additional actions here, like sending data to a server or updating the scene
-    }}
+      value={height}
+      onChange={(e) => setHeight(e.target.value)}
+      style={{
+        width: '80%', // Makes input take 80% of the div's width
+        padding: '10px',
+        margin: '10px 0',
+        border: '1px solid #ced4da',
+        borderRadius: '4px',
+        // fontFamily: 'Arial, sans-serif'
+      }}
+  />
+
+<input
+  type="text"
+  placeholder="Design description"
+  value={designDescription}
+  onChange={(e) => setDesignDescription(e.target.value)}
+  style={{
+    width: '80%', // Adjust the width as necessary
+    padding: '10px',
+    margin: '10px 0',
+    border: '1px solid #ced4da',
+    borderRadius: '4px',
+    // fontFamily: 'Arial, sans-serif',
+    height:'100px'
+  }}
+/>
+
+
+   <div style={{marginTop:'10px'}}>
+   *please upload ur design screenshoot to be saved
+
+   </div>
+
+  <input 
+      type="file" 
+      onChange={handleImageUpload} 
+      accept="image/*"
+      style={{
+        width: '80%',
+        padding: '10px',
+        margin: '10px 0',
+ 
+      }}
+  />
+
+
+<div style={{
+  display: 'flex', // Enables flexbox layout
+  justifyContent: 'space-around', // Distributes space around items
+  alignItems: 'center', // Vertically aligns items in the center
+  padding: '10px' // Adds padding around the container
+}}>
+  <button 
+    onClick={saveDesign}
     style={{
-      display: 'block',
-      marginTop: '10px',
+      width: '50%',
       padding: '10px 20px',
-      cursor: 'pointer',
       backgroundColor: '#b32c04',
       color: 'white',
       border: 'none',
-      borderRadius: '5px',
-      marginLeft:'500px',
+      borderRadius: '4px',
+      cursor: 'pointer',
+      fontWeight: 'bold',
       fontFamily: 'Arial, sans-serif',
-      transition: 'background-color 0.3s ease',
+      transition: 'background-color 0.3s ease-in-out',
+      alignSelf: 'center',
+      height:'50px'
     }}
-    onMouseOver={(e) => (e.target.style.backgroundColor = '#cf5532')}
-    onMouseOut={(e) => (e.target.style.backgroundColor = '#b32c04')}
+    onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
+    onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}
   >
-    Submit Design
+    <p style={{color:'white',marginTop:'5px'}}> Save Design</p>  
   </button>
+
+  <button 
+    style={{
+      width: '50%',
+      padding: '10px 20px',
+      backgroundColor: '#b32c04',
+      color: 'white',
+      border: 'none',
+      borderRadius: '4px',
+      cursor: 'pointer',
+      fontWeight: 'bold',
+      fontFamily: 'Arial, sans-serif',
+      transition: 'background-color 0.3s ease-in-out',
+      alignSelf: 'center',
+      height:'50px',
+      width:'200px',
+      marginLeft:'10px'
+    }}
+    onClick={handleChatClick}
+    onMouseOver={(e) => e.target.style.backgroundColor = '#cf5532'}
+    onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}
+  >
+    <p style={{color:'white',marginTop:'5px'}}> Message Admin</p>  
+  </button>
+</div>
+
+</div>
+
+
+
+
+<div style={{ 
+  padding: '10px', 
+  backgroundColor: '#f8f9fa', 
+  border: '1px solid #dee2e6', 
+  borderRadius: '8px',
+  boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+  marginBottom: '20px',
+  fontFamily: 'Arial, sans-serif',
+  color: '#212529',
+  marginTop:'-50px',
+}}>
+  <h3 style={{ 
+    borderBottom: '1px solid #dee2e6', 
+    paddingBottom: '10px', 
+    marginBottom: '20px',
+    color: '#495057'
+  }}> Username's Saved Designs</h3>
+  {designs.map(design => (
+    <div key={design.id} style={{ 
+      marginBottom: '20px',
+      padding: '10px',
+      backgroundColor: 'white',
+      border: '1px solid #dee2e6',
+      borderRadius: '8px',
+      boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+      transition: 'transform 0.2s ease-in-out',
+    }}>
+      <h4 style={{ 
+        color: '#495057',
+        fontSize: '18px',
+        fontWeight: 'bold',
+        marginBottom: '10px'
+      }}> 
+       Design  #{design.id}  <br/>Width: {design.width} m <span style={{color:'red'}}>x </span> Height: {design.height} m
+      </h4>
+      <p style={{ /* Existing styles */ }}>
+      Description: {design.description}
+    </p>
+      <p style={{ 
+        fontSize: '16px',
+        marginBottom: '10px'
+      }}>
+        Color: {design.color}
+      </p>
+      <div style={{ 
+        marginBottom: '10px',
+        textAlign: 'center'
+      }}>
+        <p style={{ 
+          fontSize: '16px',
+          fontWeight: 'bold',
+          color: '#343a40',
+          marginBottom: '5px'
+        }}>Wood texture</p>
+
+        
+        {design.texture !== 'No texture uploaded' ? (
+          <img src={design.texture} alt="Wood Texture" style={{ 
+            width: '100px', 
+            height: '100px', 
+            border: '1px solid #dee2e6',
+            borderRadius: '4px',
+          }} />
+        ) : (
+          <p>No texture uploaded</p>
+        )}
+      </div>
+      <div style={{
+        textAlign: 'center',
+        marginBottom: '10px'
+      }}>
+        <p style={{ 
+          fontSize: '16px',
+          fontWeight: 'bold',
+          color: '#343a40',
+          marginBottom: '5px'
+        }}>Design image</p>
+
+        
+{design.image && (
+  <img 
+    src={design.image} 
+    alt="Design Visual" 
+    style={{ width: '100px', height: '100px', border: '1px solid #dee2e6', borderRadius: '4px' }}
+    onClick={() => openImageModal(design.image)} // Add this line
+  />
+)}
+
+
+        
+      </div>
+
+      <button onClick={() => deleteDesign(design.id)} style={{
+        display: 'block',
+        width: '100%',
+        padding: '10px 0',
+        backgroundColor: '#dc3545',
+        color: 'white',
+        border: 'none',
+        borderRadius: '4px',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        fontSize: '16px',
+        transition: 'background-color 0.2s ease-in-out',
+      }} onMouseOver={(e) => e.target.style.backgroundColor = '#c82333'}
+         onMouseOut={(e) => e.target.style.backgroundColor = '#dc3545'}>
+        Delete
+      </button>
+    </div>
+  ))}
 </div>
 
 

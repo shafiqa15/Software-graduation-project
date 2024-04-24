@@ -24,6 +24,8 @@ import { products } from './BedRoomsLarge/BedRoomsLarge.js';
 import firebase from './Firebase/Firebase.js';
 import main from './main.jsx';
 import Chat_io from './Chat_io.js';
+import Decore2 from './decore/Decore2.js';
+
 const App = () => {
 
 //  constructor(probs) {
@@ -65,8 +67,7 @@ const App = () => {
           <Route path="/favorites" element={<FavoritesPage products={products} />} />
           <Route path="/ReelsPage" element={<ReelsPage/>} />
 
-
-          {/* <Route path="/Liken" element={<Like />} /> */}
+          <Route path="/detailing" element={<Decore2 />} />
           {/* <Route path='/Mode' element={<Mode/>}/> */}
           
 
