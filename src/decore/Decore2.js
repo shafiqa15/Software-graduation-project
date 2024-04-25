@@ -1,58 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
 
-const Decore2 = () => {
-  const location = useLocation();
-  const { bedroomSet } = location.state;
-  const [pieces, setPieces] = useState([]);
-  console.log("Received state:", location.state);
+function Decore2() {
+    // const product = products.find(product => product.id.toString() === id);
+    // const [mainImageUrl, setMainImageUrl] = useState(product?.imageUrl || product?.img1);
+    // const [mainImageUrl2, setMainImageUrl2] = useState(product?.upadte1 || product?.img1);
+    // const [mainImageUrlkhzana, setMainImageUrlkhzana] = useState(product?.khzana);
+    // const [mainImageUrlkfloow, setMainImageUrlkfolow] = useState(product?.follow2);
+    // const [mainImageUrlcomedena, setMainImageUrlcomedena] = useState(product?.comedena1);
+    // const [mainImageUrlmirror, setMainImageUrlmirror] = useState(product?.mirror);
+  // Dummy data for products
+  const products = [
+    {
+      id: 1,
+      name: 'Product 1',
+      image: 'path/to/image1.png',
+      price: 100,
+      dimensions: { width: 50, height: 20, depth: 10 }
+    },
+    {
+      id: 2,
+      name: 'Product 2',
+      image: 'path/to/image2.png',
+      price: 150,
+      dimensions: { width: 60, height: 30, depth: 20 }
+    }
+    // Add more products as needed
+  ];
 
-  useEffect(() => {
-      if (location.state && location.state.bedroomSet) {
-          // logic to set state
-      } else {
-          console.error('No bedroom set data found');
-      }
-  }, [location.state]);
-  useEffect(() => {
-    // Initialize pieces with default dimensions and individual pricing
-    const initializedPieces = bedroomSet.map(piece => ({
-      ...piece,
-      currentHeight: piece.height,
-      currentWidth: piece.width,
-      currentLength: piece.length,
-      currentPrice: piece.price
-    }));
-    setPieces(initializedPieces);
-  }, [bedroomSet]);
+  const [selectedProduct, setSelectedProduct] = useState(products[0]);
 
-  const handleDimensionChange = (index, dimension, value) => {
-    const updatedPieces = [...pieces];
-    const piece = updatedPieces[index];
-    piece[dimension] = value;
-    // Recalculate price based on the change in dimensions
-    piece.currentPrice = calculatePriceChange(piece, dimension, value);
-    setPieces(updatedPieces);
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
   };
-
-  const calculatePriceChange = (piece, dimension, newValue) => {
-    const dimensionDiff = (newValue - piece[dimension]) / 100;
-    return piece.price + (dimensionDiff * 50);
-  };
-
-  const totalPrice = pieces.reduce((acc, piece) => acc + piece.currentPrice, 0);
 
   return (
     <div>
-        <h1>Detailing Page</h1>
-        {location.state && location.state.bedroomSet.map(piece => (
-            <div key={piece.name}>
-                <p>{piece.name} - Dimensions: {piece.width}x{piece.height}x{piece.length}</p>
-            </div>
+    
+      <h1>Products</h1>
+      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+        {products.map(product => (
+          <div key={product.id} onClick={() => handleProductClick(product)} style={{ cursor: 'pointer' }}>
+            <img src={product.image} alt={product.name} style={{ width: '100px', height: '100px' }} />
+            <p>{product.name}</p>
+          </div>
         ))}
+      </div>
+
+      {selectedProduct && (
+        <div>
+          <h2>{selectedProduct.name}</h2>
+          <img src={selectedProduct.image} alt={selectedProduct.name} />
+          <p>Price: ${selectedProduct.price}</p>
+          <p>Dimensions (W x H x D): {selectedProduct.dimensions.width} x {selectedProduct.dimensions.height} x {selectedProduct.dimensions.depth}</p>
+          <input type="number" value={selectedProduct.dimensions.width} onChange={(e) => setSelectedProduct({ ...selectedProduct, dimensions: { ...selectedProduct.dimensions, width: e.target.value }})} />
+          <input type="number" value={selectedProduct.dimensions.height} onChange={(e) => setSelectedProduct({ ...selectedProduct, dimensions: { ...selectedProduct.dimensions, height: e.target.value }})} />
+          <input type="number" value={selectedProduct.dimensions.depth} onChange={(e) => setSelectedProduct({ ...selectedProduct, dimensions: { ...selectedProduct.dimensions, depth: e.target.value }})} />
+        </div>
+      )}
     </div>
-);
-   
-};
+  );
+}
 
 export default Decore2;

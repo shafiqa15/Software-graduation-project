@@ -32,6 +32,9 @@ const SignUp = () => {
     const togglePasswordVisibility = () => setPasswordShown(!passwordShown);
     const togglePasswordVisibility2 = () => setPasswordShown2(!passwordShown2);
 
+
+
+    const [username,setusername]=useState('');
     const handleSubmit = (e) => {
         e.preventDefault();
         setFlage(true);
@@ -41,11 +44,33 @@ const SignUp = () => {
         if (formData.password !== formData.confirmPassword) {
             return; // Stop the form submission if passwords do not match
         }
-        axios.post('http://192.168.88.6:9000/signup', formData)
+        axios.post('http://172.19.89.50:9000/signup', formData)
         .then(response => {
             console.log('Signup successful:', response.data);
+            setusername(response.data._id);
             // Redirect the user to the home page after successful signup
             window.location.href = '/Home1';
+    alert(response.data._id);
+    { alert(formData.name)} //back to it
+         
+    e.preventDefault();
+    const { value } = e.target[0];
+    
+    axios.post(
+        'http://localhost:3001/authenticate',
+        {username :formData.name}
+        
+        )
+
+    axios.post(
+      'http://localhost:3001/authenticate',
+      {username :value}
+      
+      )
+      .then(r=> e.onAuth({ ...r.data,secret:value }))
+      .catch(e => console.log('error',e))
+   
+
 
           
         })
@@ -64,7 +89,19 @@ const SignUp = () => {
         });   
     };
     
+//     const AuthPage = (props) => {
+   
+     
+//         axios.post(
+//           'http://localhost:3001/authenticate',
+//           {username :formData.name}
+          
+//           )
+//           .then(r=> props.onAuth({ ...r.data,secret:'1111111' }))
+      
+//   }
  
+
     // // UseEffect to call fetchUsers when the component mounts
     // useEffect(() => {
     //     axios.get('http://192.168.88.8:9000/signup') // Adjust this URL
@@ -76,10 +113,11 @@ const SignUp = () => {
     // }, []);
 
     useEffect(() => {
-        axios.get('http://192.168.88.6:9000/signup') // Adjust this URL
+        axios.get('http://172.19.89.50:9000/signup') // Adjust this URL
             .then(response => {
                 console.log('Fetched users:', response.data); // Check the structure here
                 setUsers(response.data); // Adjust based on your actual structure
+                
             })
             .catch(error => {
                 console.error('Failed to fetch users:', error);
@@ -115,7 +153,9 @@ const SignUp = () => {
                                 required
                             />
                             {flage && !formData.name && <p className='errormsg'>Name is required.</p>}
+                         
                             <label htmlFor="text">Your name</label>
+                        
                         </div>
 
                         <div className="password-input-container">

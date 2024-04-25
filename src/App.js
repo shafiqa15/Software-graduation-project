@@ -45,7 +45,7 @@ const App = () => {
     <Router> 
       <div>
         <Routes>    
-          <Route index element={<Home1/>}/>
+          <Route index element={<Decore2/>}/>
           <Route path="/Admin_convert3d" element={<Admin_convert3d/>}/>
           <Route path="/Chat_io" element={<Chat_io/>}/>
           <Route path="/Contact" element={<Contact/>}/>
@@ -67,7 +67,7 @@ const App = () => {
           <Route path="/favorites" element={<FavoritesPage products={products} />} />
           <Route path="/ReelsPage" element={<ReelsPage/>} />
 
-          <Route path="/detailing" element={<Decore2 />} />
+          <Route path="/Decore2" element={<Decore2 />} />
           {/* <Route path='/Mode' element={<Mode/>}/> */}
           
 
