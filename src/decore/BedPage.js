@@ -136,51 +136,6 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
 
 
 
-{/* <ScrollView > */}
-
-       {/* {product.map(product => (
-        <View key={product._id} product={product} >
-         <TouchableOpacity style={{ marginHorizontal:12}} >
-
-    <View >
-  
-  
-  
-    <View >
-     <Image  source={product.img1}></Image>
-    </View>
-  
-   <View >
-     <Text numberOfLines={1} >{product.name}</Text>
-      <Text  numberOfLines={1}>Product</Text>
-      <View >
-     <Text >$2321</Text> */}
-     {/* <TouchableOpacity onPress={()=>{updataLike(),setLike(!like)}}> */}
-      {/* <Ionicons name={like?'heart':'heart-outline'} color={like?'red':'black'} size={24}/> */}
-    {/* </TouchableOpacity> */}
-     {/* </View>
-   </View>
-   </View>
-     </TouchableOpacity>
-         </View>
-
-       ))}
-     </ScrollView> */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       {[...Array(5)].map((star, index) => {
         const ratingValue = index + 1;
 
@@ -192,7 +147,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
               value={ratingValue}
               onClick={() => {
                 setRating(ratingValue);
-                onRatingChange(ratingValue); // Notify parent component
+                onRatingChange(ratingValue); 
               }}
               style={{ display: 'none' }}
             />
@@ -218,7 +173,6 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
     const newRating = userRating; // Assuming userRating is captured via state from StarRating component
     const reviewText = event.target.reviewText.value; // Capture review text from a form field if available
 
-    // Update the reviews state with the new review
     setReviews([...reviews, { rating: newRating, text: reviewText }]);
     // Reset form and rating state if needed
 };
@@ -227,17 +181,9 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
   const averageRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length || 0;
   const numberOfReviews = reviews.length;
   
-  const handleNewAction = () => {
-    // Example action: navigate to a different page or show alert
-    // alert('Button clicked!');
-    // For navigation, you might use history.push('/some-path') if using React Router
-  };
 
 
-  
-
-  // Function to change the main image
-  const changeMainImage = (newImageUrl) => {
+   const changeMainImage = (newImageUrl) => {
     setMainImageUrl(newImageUrl);
   };
 
@@ -258,12 +204,13 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
   };
 
  const navigateToDesignPage = (productId) => {
-    // Assuming the product you want to pass is at index 1
+  
     const productToPass = products.find(product => product.id === productId);
     navigate(`/design`, { state: { product: productToPass } });
   };
 
   const navigateToDetailingPage = (productId) => {
+
     console.log("Navigating to detailing page for product ID:", productId);
     const productToPass = products.find(product => product.id.toString() === productId);
 
@@ -888,11 +835,6 @@ const navigateToDesignPageWithMultipleProducts = () => {
       </form>
 
     
-
-      <button style={{marginLeft:'1200px', marginTop: '20px', display: 'block',width:'200px'}} className="AddToCartButton madimi-one-regular" onClick={() => navigateToDesignPage(product.id)}>Design This Bedroom</button>
-      <button style={{marginLeft:'1200px', marginTop: '20px', display: 'block',width:'200px'}} className="AddToCartButton madimi-one-regular" onClick={() => navigateToDetailingPage(product.id)}>Put it to detailing page</button>
-
-
 
       </div>
     </>
