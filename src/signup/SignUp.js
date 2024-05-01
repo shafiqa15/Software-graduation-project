@@ -17,6 +17,14 @@ const SignUp = () => {
     const [passwordMatch, setPasswordMatch] = useState(true);
     const [emailExists, setEmailExists] = useState(false);
     const [flage, setFlage] = useState(false);
+    const [profile, setProfile] = useState(null); // State to hold the logged-in user's profile info
+    const [showProfileModal, setShowProfileModal] = useState(false); // State to control the visibility of the profile modal
+
+    const toggleProfileModal = () => {
+        setShowProfileModal(!showProfileModal);
+    };
+
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -25,8 +33,8 @@ const SignUp = () => {
             [name]: value
         }));
     };
-    const [users, setUsers] = useState([]); // State to store users
-    const [showUsers, setShowUsers] = useState(false); // This state might be used to control the visibility of the users list
+    const [users, setUsers] = useState([]); 
+    const [showUsers, setShowUsers] = useState(false); 
 
 
     const togglePasswordVisibility = () => setPasswordShown(!passwordShown);
@@ -42,13 +50,12 @@ const SignUp = () => {
         setPasswordMatch(formData.password === formData.confirmPassword);
     
         if (formData.password !== formData.confirmPassword) {
-            return; // Stop the form submission if passwords do not match
+            return; 
         }
-        axios.post('http://172.19.89.50:9000/signup', formData)
+        axios.post('http://192.168.88.3:9000/signup', formData)
         .then(response => {
             console.log('Signup successful:', response.data);
             setusername(response.data._id);
-            // Redirect the user to the home page after successful signup
             window.location.href = '/Home1';
     alert(response.data._id);
     { alert(formData.name)} //back to it
@@ -89,45 +96,18 @@ const SignUp = () => {
         });   
     };
     
-//     const AuthPage = (props) => {
-   
-     
-//         axios.post(
-//           'http://localhost:3001/authenticate',
-//           {username :formData.name}
-          
-//           )
-//           .then(r=> props.onAuth({ ...r.data,secret:'1111111' }))
-      
-//   }
- 
-
-    // // UseEffect to call fetchUsers when the component mounts
-    // useEffect(() => {
-    //     axios.get('http://192.168.88.8:9000/signup') // Adjust this URL
-    //         .then(response => {
-    //             console.log('Fetched users:', response.data);
-    //             setUsers(response.data); // Ensure this matches your response structure
-    //         })
-    //         .catch(error => console.error('Failed to fetch users:', error));
-    // }, []);
 
     useEffect(() => {
-        axios.get('http://172.19.89.50:9000/signup') // Adjust this URL
+        axios.get('http://192.168.88.3:9000/signup')
             .then(response => {
-                console.log('Fetched users:', response.data); // Check the structure here
-                setUsers(response.data); // Adjust based on your actual structure
+                console.log('Fetched users:', response.data); 
+                setUsers(response.data); 
                 
             })
             .catch(error => {
                 console.error('Failed to fetch users:', error);
             });
     }, []);
-    
-    // useEffect(() => {
-    //     // Temporary hardcoded data to test rendering
-    //     setUsers([{ name: 'John Doe' }, { name: 'Jane Doe' }]);
-    // }, []);
     
 
     return (
@@ -136,10 +116,15 @@ const SignUp = () => {
 <Top></Top>
 
 
+
+
             <h1 style={{marginTop: '150px', fontFamily: 'fantasy', fontSize: '30px'}}>
                 Create a new account for Exclusive Furniture Deals!
             </h1>
+            <form onSubmit={handleSubmit} className="signup-form">
+
             <div className="cover-page">
+            
                 <i style={{marginTop: '-30px'}} className="ri-close-line login__close" id="signup-close" onClick={() => window.location.href = '/'}></i>
                 <div className="signup-container" style={{marginTop: '10px'}}>
                     <form onSubmit={handleSubmit} className="signup-form">
@@ -171,16 +156,6 @@ const SignUp = () => {
                             {emailExists && <p className='errormsg'>An account with this email already exists.</p>}
                             <label htmlFor="email">Your Email</label>
                         </div>
-
-{/* 
-                        <input
-                                type="button"
-                                name="b"
-                                value={formData.name}
-                                onChange={fetchUsers}
-                                placeholder="Your Email"
-                                required
-                            /> */}
 
 
 
@@ -223,17 +198,28 @@ const SignUp = () => {
                         <img src={image1} alt="Decorative" className="signup-image" />
                     </div>
                 </div>
+
+
+
             </div>
 
-
+</form>
 
 
             <div className="users-list">
             <h2>Users</h2>
             {users.map((user,index) => (
-                <div key={index}>{user.name}</div> // Adjust according to your user object structure
+                <div key={index}>{user.name}</div> 
             ))}
+
+
         </div>
+
+        {profile && (
+                    <div onClick={toggleProfileModal} className="profile-icon">
+                        <img src={profile.imageUrl || 'default-profile.png'} alt="Profile" />
+                    </div>
+                )}
         </>
     );
 };

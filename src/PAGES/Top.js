@@ -65,7 +65,7 @@ const Top = () => {
               
               <ul className="dropdown">
       <li><Link className="nav__link" to="/BedRoomsLarge">Full Bedrooms</Link></li>
-      <li><a href="#" className="nav__link">Kids Bedrooms</a></li>
+      <li><a href="/Kidsbedrooms" className="nav__link">Kids Bedrooms</a></li>
       {/* <li><a href="#" className="nav__link">King Bedrooms</a></li> */}
     </ul>
   </li>
@@ -79,7 +79,7 @@ const Top = () => {
               
               <ul className="dropdown">
       <li><Link className="nav__link" to="/Decore">Your own design</Link></li>
-      <li><a href="#" className="nav__link">Existing desgins</a></li>
+      <li><a href="/Decore2" className="nav__link">Existing desgins</a></li>
       {/* <li><a href="#" className="nav__link">King Bedrooms</a></li> */}
     </ul>
     </li>

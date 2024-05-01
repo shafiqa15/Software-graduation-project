@@ -263,25 +263,34 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
     navigate(`/design`, { state: { product: productToPass } });
   };
 
-  const navigateToDetailingPage = (productId) => {
-    console.log("Navigating to detailing page for product ID:", productId);
-    const productToPass = products.find(product => product.id.toString() === productId);
+  const navigateToDetailingPage = (product) => {
 
-    console.log("Found product:", productToPass);
-
-    if (!productToPass) {
-        alert('Product not found');
-        return;
-    }
+      navigate('/Decore2', {
+        state: {
+          numberOfPieces: product.number_of_pieces,
+          name: product.name,
+          price: product.price,
+          imageUrl: product.imageUrl,
+          img1: product.img1,
+          img1Dimensions: product.img1Dimensions, // assuming you have these dimensions in your product object
+          comedena1: product.comedena1,
+          comedena1Dimensions: product.comedena1Dimensions,
+          mirror: product.mirror,
+          mirrorDimensions: product.mirrorDimensions,
+          khzana: product.khzana,
+          khzanaDimensions: product.khzanaDimensions,
+          kind: product.kind,
+          dimensions: product.dimensions,
+          folo:product.follow2,
+          foloDimensions:product.foloDimensions,
+        }
+      });
+    };
     
-    if (!productToPass.pieces || productToPass.pieces.length === 0) {
-        alert('No pieces found for this product');
-        return;
-    }
 
-    console.log("Navigating with pieces:", productToPass.pieces);
-    navigate('/detailing', { state: { bedroomSet: productToPass.pieces } });
-};
+     
+
+    
 
 
   
@@ -890,7 +899,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
     
 
       <button style={{marginLeft:'1200px', marginTop: '20px', display: 'block',width:'200px'}} className="AddToCartButton madimi-one-regular" onClick={() => navigateToDesignPage(product.id)}>Design This Bedroom</button>
-      <button style={{marginLeft:'1200px', marginTop: '20px', display: 'block',width:'200px'}} className="AddToCartButton madimi-one-regular" onClick={() => navigateToDetailingPage(product.id)}>Put it to detailing page</button>
+      <button style={{marginLeft:'1200px', marginTop: '20px', display: 'block',width:'200px'}} className="AddToCartButton madimi-one-regular" onClick={() => navigateToDetailingPage(product)}>Put it to detailing page</button>
 
 
 

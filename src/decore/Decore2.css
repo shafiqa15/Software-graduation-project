@@ -1,0 +1,97 @@
+.container11111_1 {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    margin-left: 150px;
+   background-color: #e5d6cc;
+  }
+  
+  .section-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .product-details {
+    margin-bottom: 30px;
+  }
+  
+  .product-name {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #a06767;
+  }
+  
+  .price {
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .number-of-pieces {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .image-container {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px; /* Reduced from 20px */
+    flex-wrap: wrap;
+}
+
+.image {
+    width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-right: 10px; /* Reduced from 20px */
+}
+
+/*   
+  .image {
+    width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+  }
+   */
+  .dimension-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 20px; /* Reduced from 300px */
+}
+
+  
+.dimension-input {
+    width: 80px;
+    /* margin-left: 10-px; */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    /* margin-left: 600px; Removed to reduce space */
+}
+
+  
+  .overall-dimensions {
+    margin-top: 20px;
+  }
+  
+  .button {
+    padding: 10px 10px;
+    background-color: #552e2e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 400px;
+
+
+  }
+  
+  .button:hover {
+    background-color:  #9b6363;
+  }
+  

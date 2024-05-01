@@ -4,14 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { CartProvider } from './Cart/CartContext'; // Adjust path as necessary
+import { CartProvider } from './Cart/CartContext'; // Ensure this path is correct
+import { AppProvider } from './AppContext'; // Import the context provider
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-  <CartProvider>
-       <App />
-     </CartProvider>
+    <AppProvider>
+      <CartProvider>
+        <App />
+      </CartProvider>
+    </AppProvider>
   </React.StrictMode>
 );
 
@@ -19,6 +22,7 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
 
 
 

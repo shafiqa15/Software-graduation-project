@@ -36,12 +36,3 @@
   height: 20px;
 }
 
-/* Additional styles for the advanced glow effect on h2 and other desired styling */
-.advanced-glow {
-  /* Your glow effect styling here */
-}
-
-/* Adjust button styles as needed for hover effects, active states, etc. */
-.button-call:hover, .button-chat:hover {
-  /* Your hover effect styling here */
-}

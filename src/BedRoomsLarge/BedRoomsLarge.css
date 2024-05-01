@@ -213,3 +213,19 @@ body {
   color: red;
 }
 
+
+
+
+
+
+.sora33333 {
+  /* background-color: rgba(255, 255, 255, 0.9); */
+  background-image: url('../images/kids/kids_main.webp');
+  
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-size: 100% auto; /* Stretches the image to 100% of the element's width while maintaining aspect ratio */
+  margin-top: 0;
+  height: 600px; /* You may need to adjust this depending on your needs */
+  width: 100vw; /* This makes the element's width equal to the width of the viewport */
+  /* opacity: 0.6; */
+}
