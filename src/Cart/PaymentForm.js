@@ -1,7 +1,9 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import React, { useState } from 'react';
-
+import Lottie from 'react-lottie';
+import celebrationAnimation from '/Users/shafiqaabdat/Downloads/client-main/src/Cart/Animation - 1714596651280.json'; 
+import { useLocation } from "react-router-dom";
 const CARD_OPTIONS = {
     iconStyle: "solid",
     style: {
@@ -26,6 +28,15 @@ export default function PaymentForm({ amount }) {
     const [success, setSuccess] = useState(false);
     const stripe = useStripe();
     const elements = useElements();
+
+
+
+    const location = useLocation();
+    const { userId, email, name, password, phone, address, location: userLocation } = location.state || {};
+    const [userInfo, setUserInfo] = useState({ email, name, password, phone, address, location: userLocation });
+    const handleChange = (e) => {
+      setUserInfo(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -54,7 +65,16 @@ export default function PaymentForm({ amount }) {
         }
     };
 
-    return (
+    const defaultOptions = {
+        loop: false,
+        autoplay: true,
+        animationData: celebrationAnimation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
+    return (  
+
         <>
             {!success ? 
                 <form onSubmit={handleSubmit}>
@@ -64,11 +84,14 @@ export default function PaymentForm({ amount }) {
                         </div>
                     </fieldset>
                     <br/>
-                    <button style={{width:'200px',marginLeft:'600px'}}>Pay</button>
+                    <button className="ppay" style={{width:'200px',marginLeft:'600px',backgroundColor:'#464a5d' }}>Pay</button>
                 </form>
             :
                 <div>
-                    <h2>You just bought a bedroom</h2>
+                    <h2 style={{fontSize:'22px'}}>Thanks for choosing us {name}
+ ! Your cart just has been bought,check the messages from admin of arrival day + check ur profile to know the date! Have a nice day. </h2>
+                    <Lottie options={defaultOptions} height={200} width={200}/>
+
                 </div> 
             }
         </>

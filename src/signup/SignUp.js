@@ -1,8 +1,11 @@
-import axios from 'axios';
+
 import image1 from '/Users/shafiqaabdat/Downloads/client-main/src/images/Screenshot 2024-03-01 at 01.22.19.png';
 import './SignupPage.css'; // Update this path if necessary
 import React, { useState, useEffect } from 'react';
 import Top from '../PAGES/Top';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import Home1 from '../home/Home1';
+import axios from 'axios';
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -10,6 +13,7 @@ const SignUp = () => {
         email: '',
         password: '',
         confirmPassword: ''
+      
     });
 
     const [passwordShown, setPasswordShown] = useState(false);
@@ -24,7 +28,8 @@ const SignUp = () => {
         setShowProfileModal(!showProfileModal);
     };
 
-    
+    const navigate = useNavigate(); // Create the navigate function
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -43,6 +48,70 @@ const SignUp = () => {
 
 
     const [username,setusername]=useState('');
+
+
+    // const handleSubmit = (e) => {
+       
+    //     e.preventDefault();
+    //     setFlage(true);
+    //     setEmailExists(false);
+    //     setPasswordMatch(formData.password === formData.confirmPassword);
+    
+    //     if (formData.password !== formData.confirmPassword) {
+    //         return; 
+    //     }
+    //     axios.post('http://192.168.88.5:9000/signup',formData)
+    //     .then(response => {
+            
+    //         console.log('Signup successful:', response.data);
+    //         setusername(response.data._id);
+    //         navigate("/Home1");
+
+        
+    // alert(response.data._id);
+    // { alert(formData.email)} //back to it
+    // { alert(formData.name)} //back to it
+    // { alert(formData.password)} //back to it
+    // // { alert(formData.name)} //back to it
+
+         
+    // e.preventDefault();
+    // const { value } = e.target[0];
+    
+    // axios.post(
+    //     'http://localhost:9000/authenticate',
+    //     {username :formData.name}
+        
+    //     )
+
+    // axios.post(
+    //   'http://localhost:9000/authenticate',
+    //   {username :value}
+      
+    //   )
+    //   .then(r=> e.onAuth({ ...r.data,secret:value }))
+    //   .catch(e => console.log('error',e))
+   
+
+
+          
+    //     })
+    //     .catch(error => {
+    //         console.error('Signup error:', error);
+    //         if (error.response) {
+    //             console.error('Error response:', error.response);
+    //             if (error.response.status === 409 || error.response.data.message === "Email already exists") {
+    //                 setEmailExists(true);
+    //             } else {
+    //                 setEmailExists(false); // Ensure this is reset if the error is not due to a duplicate email
+    //             }
+    //         } else {
+    //             console.error('Error message:', error.message);
+    //         }
+    //     });   
+    // };
+    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setFlage(true);
@@ -52,53 +121,53 @@ const SignUp = () => {
         if (formData.password !== formData.confirmPassword) {
             return; 
         }
-        axios.post('http://192.168.88.3:9000/signup', formData)
+        axios.post('http://192.168.88.5:9000/signup', formData)
         .then(response => {
             console.log('Signup successful:', response.data);
             setusername(response.data._id);
-            window.location.href = '/Home1';
-    alert(response.data._id);
-    { alert(formData.name)} //back to it
-         
-    e.preventDefault();
-    const { value } = e.target[0];
-    
-    axios.post(
-        'http://localhost:3001/authenticate',
-        {username :formData.name}
+            alert(response.data._id); // Ensure this shows the correct ID
+            navigate("/NavigationBar", { state: { userId: response.data._id, email: formData.email, name: formData.name, password: formData.password }});
+            navigate("/Cart", { state: { userId: response.data._id, email: formData.email, name: formData.name, password: formData.password }});
+
+
+            e.preventDefault();
+            const { value } = e.target[0];
+            
+            axios.post(
+                'http://localhost:9000/authenticate',
+                {username :formData.name}
+                
+                )
         
-        )
-
-    axios.post(
-      'http://localhost:3001/authenticate',
-      {username :value}
-      
-      )
-      .then(r=> e.onAuth({ ...r.data,secret:value }))
-      .catch(e => console.log('error',e))
-   
+            axios.post(
+              'http://localhost:9000/authenticate',
+              {username :value}
+              
+              )
+              .then(r=> e.onAuth({ ...r.data,secret:value }))
+              .catch(e => console.log('error',e))
 
 
-          
+
         })
         .catch(error => {
             console.error('Signup error:', error);
-            if (error.response) {
-                console.error('Error response:', error.response);
-                if (error.response.status === 409 || error.response.data.message === "Email already exists") {
-                    setEmailExists(true);
-                } else {
-                    setEmailExists(false); // Ensure this is reset if the error is not due to a duplicate email
-                }
-            } else {
-                console.error('Error message:', error.message);
+            if (error.response && (error.response.status === 409 || error.response.data.message === "Email already exists")) {
+                setEmailExists(true);
             }
-        });   
+        });
+
+
+
+
+
+
+
     };
     
 
     useEffect(() => {
-        axios.get('http://192.168.88.3:9000/signup')
+        axios.get('http://192.168.88.5:9000/signup')
             .then(response => {
                 console.log('Fetched users:', response.data); 
                 setUsers(response.data); 
@@ -121,7 +190,7 @@ const SignUp = () => {
             <h1 style={{marginTop: '150px', fontFamily: 'fantasy', fontSize: '30px'}}>
                 Create a new account for Exclusive Furniture Deals!
             </h1>
-            <form onSubmit={handleSubmit} className="signup-form">
+            {/* <form onSubmit={handleSubmit} className="signup-form" method='POST'> */}
 
             <div className="cover-page">
             
@@ -136,6 +205,7 @@ const SignUp = () => {
                                 onChange={handleChange}
                                 placeholder="Your Name"
                                 required
+                                
                             />
                             {flage && !formData.name && <p className='errormsg'>Name is required.</p>}
                          
@@ -156,7 +226,7 @@ const SignUp = () => {
                             {emailExists && <p className='errormsg'>An account with this email already exists.</p>}
                             <label htmlFor="email">Your Email</label>
                         </div>
-
+                    
 
 
                         <div className="password-input-container">
@@ -203,7 +273,7 @@ const SignUp = () => {
 
             </div>
 
-</form>
+
 
 
             <div className="users-list">

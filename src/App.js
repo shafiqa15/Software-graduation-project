@@ -25,13 +25,14 @@ import Chat_io from './Chat_io.js';
 import Decore2 from './decore/Decore2.js';
 import Kidsbedrooms from './Kidsbedrooms/Kidsbedrooms.js';
 import Visa from './Cart/Visa.js';
+import NavigationBar from './PAGES/NavigationBar.js';
 const App = () => {
   return (
     <CartProvider>
     <Router> 
       <div>
         <Routes>    
-          <Route index element={<Decore2/>}/>
+          <Route index element={<Home1/>}/>
           <Route path="/Home1" element={<Home1/>}/>
           <Route path="/Admin_convert3d" element={<Admin_convert3d/>}/>
           <Route path="/Chat_io" element={<Chat_io/>}/>
@@ -56,6 +57,8 @@ const App = () => {
           <Route path="/Decore2" element={<Decore2 />} />
           <Route path="/Kidsbedrooms" element={<Kidsbedrooms />} />
           <Route path="/Visa" element={<Visa />} />
+          <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/NavigationBar" element={<NavigationBar />} />
 
 
         </Routes>

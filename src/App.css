@@ -72,35 +72,7 @@ p {
       padding: 11px 15px 11px 0;
     }
     
-    button {
-      display: block;
-      font-size: 16px;
-      width: calc(100% - 30px);
-      height: 40px;
-      margin: 40px 15px 0;
-      background-color: #f6a4eb;
-      box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 #ffb9f6;
-      border-radius: 4px;
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 100ms ease-in-out;
-      will-change: transform, background-color, box-shadow;
-      border: none;
-    }
-    
-    button:active {
-      background-color: #d782d9;
-      box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 #e298d8;
-      transform: scale(0.99);
-    }
-    
-    .App {
-      margin-left: 25%;
-      margin-top: 5%;
-      margin-right: 25%;
-    }
-    
+  
     h1,
     h3 {
       text-align: center;
@@ -130,9 +102,9 @@ p {
   color: #1a1a1b;
 }
 
-button {
-  background-color: #5469d4;
-  color: #661818;
+.ppay {
+  background-color: #464a5d;
+  color: #fdfbfb;
   font-size: 16px;
   font-weight: bold;
   width: 100%;
@@ -140,11 +112,11 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(52, 52, 107, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 6px rgba(140, 140, 187, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
   transition: all 0.2s ease;
 }
 
-button:hover {
+.ppay:hover {
   background-color: #4b77d0;
 }
 

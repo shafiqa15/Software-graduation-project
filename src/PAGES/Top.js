@@ -50,7 +50,7 @@ const Top = () => {
         <nav className="nav container" style={{marginRight:'90px'}}>
           <a href="/Home1" className="nav__logo">
             <img src={home_img} alt="Logo" style={{ margin: '0px', borderRadius: '50%', width: '90px', height: '90px',marginRight:'10px' }} />
-            <span className="nav__logo-text">Cach Bblash</span>
+            <span className="nav__logo-text" style={{fontSize:'14px'}}>Cach Bblash</span>
             
           </a>
 
@@ -93,6 +93,12 @@ const Top = () => {
               <div className="nav__actions">
             <i className="ri-search-line nav__search" id="search-btn" onClick={() => setShowSearch(true)}></i>
             <i className="ri-user-line nav__login" id="login-btn" onClick={() => setShowLogin(true)}></i>
+
+
+            <Link to="/NavigationBar">
+                <i className="ri-account-circle-line nav__profile"></i>  {/* Profile icon */}
+              </Link>
+
             <div className="nav__toggle" id="nav-toggle" onClick={() => setShowMenu(true)}>
               <i className="ri-menu-line"></i>
             </div>

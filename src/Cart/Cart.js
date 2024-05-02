@@ -4,7 +4,7 @@ import '/Users/shafiqaabdat/Downloads/client-main/src/Cart/Cart.css';
 import Top from '../PAGES/Top';
 import Top1 from './Top1';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-
+import { useLocation } from 'react-router-dom';
 import ConfirmModal from './ConfirmModal';
 import Footer from '../footer/Footer';
 import React, { useState } from 'react';
@@ -43,7 +43,12 @@ const Cart = () => {
     setShowItem(true);  // This will trigger the component to re-render and show StripeContainer
 
   };
-
+  const location = useLocation();
+    const { userId, email, name, password, phone, address, location: userLocation } = location.state || {};
+    const [userInfo, setUserInfo] = useState({ email, name, password, phone, address, location: userLocation });
+    const handleChange = (e) => {
+      setUserInfo(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   // Calculate the total for each item (price * quantity)
   const itemTotals = cartItems.map(item => item.price * item.quantity);
@@ -70,6 +75,7 @@ const Cart = () => {
       
       <ShoppingAssistance />
       {/* <Test width={300} height={10} top={100} left={100} /> */}
+      {/* <p>{name}'s Profile</p> */}
 
       <div className="cart-header">
         <Top1 itemCount={totalItemCount} />
@@ -128,7 +134,7 @@ const Cart = () => {
                 <StripeContainer amount={amount} />
             ) : (
                 <>
-                    <h3>{amount}</h3>
+                    {/* <h3>{amount}</h3> */}
                     {/* <img src={spatula} alt='Spatula' /> */}
                     <br/>
                     {/* <button onClick={() => setShowItem(true)}>Purchase Spatula</button> */}
