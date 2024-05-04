@@ -6,15 +6,22 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CartProvider } from './Cart/CartContext'; // Ensure this path is correct
 import { AppProvider } from './AppContext'; // Import the context provider
+import { UserProvider } from './signup/UserContext.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+      <UserProvider>
+
     <AppProvider>
       <CartProvider>
         <App />
+        
       </CartProvider>
     </AppProvider>
+    </UserProvider>
+
+    
   </React.StrictMode>
 );
 

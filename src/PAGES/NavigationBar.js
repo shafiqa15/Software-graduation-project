@@ -4,16 +4,27 @@ import Top from './Top';
 import prof from '/Users/shafiqaabdat/Downloads/client-main/src/PAGES/Animation - 1714676364665.json'; 
 import Lottie from 'react-lottie';
 import Footer from '../footer/Footer';
-
+import axios from 'axios';
+import { useUser } from '../signup/UserContext';
 function NavigationBar() {
     const location = useLocation();
     const navigate = useNavigate();
-    const { userId, email, name, password, phone, address, location: userLocation } = location.state || {};
-    const [userInfo, setUserInfo] = useState({ email, name, password, phone, address, location: userLocation });
+    // const { userId, email, name, password, phoneNumber, country, location: userLocation } = location.state || {};
+    // const [userInfo, setUserInfo] = useState({ userId,email, name, password, phoneNumber, country, location: userLocation });
+    // const { userData } = useUser();
+    const { userData, setUserData } = useUser();
+    if (!userData) {
+        return <div>No user data available.</div>;
+    }
+ const handleChange = (e) => {
+    const { name, value } = e.target;
+    console.log(`Updating ${name} with value: ${value}`);
+    setUserData(prev => ({ ...prev, [name]: value }));
+    console.log(userData); // Log the userInfo state after updating
+};
 
-    const handleChange = (e) => {
-        setUserInfo(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    };
+    
+    
 
     const defaultOptions = {
         loop: true,
@@ -85,77 +96,85 @@ function NavigationBar() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!userId) {
+        if (!userData.userId) {
             alert('User ID is undefined. Cannot update profile.');
+
             return;
         }
     
-        const formData = new FormData();
-        Object.keys(userInfo).forEach(key => {
-            if (key === 'profileImage') {
-                formData.append(key, userInfo[key]);
-            } else {
-                formData.append(key, userInfo[key]);
-            }
-        });
-    
-        const response = await fetch(`http://192.168.88.5:9000/editProfile/${userId}`, {
-            method: 'PUT',
-            body: formData
-        });
+  
+
+
+        axios.put(`http://192.168.88.2:9000/editProfile/${userData.userId}`, userData)
+    .then(res => {
+        // console.log(res.data);
+        // alert(JSON.stringify(res.data));
+        // alert(userData.data);
+        // alert(userData.address);
+        alert("success");
         
+    })
+    .catch(error => {
+        console.error("Error updating profile:", error);
+        alert("Failed to update profile. Please try again.");
+    });
+
     
-        if (response.ok) {
-            alert('Profile updated successfully!');
+    
+ 
+    
             // navigate(`/Homee1/${userId}`);
 
-        } else {
-            const errorText = await response.text();
-            alert(`Failed to update profile. Please try again. Error: ${errorText}`);
-        }
+        // } else {
+        //     const errorText = await response.text();
+        //     alert(`Failed to update profile. Please try again. Error: ${errorText}`);
+        // }
     };
 
     return (
         <div>
             <Top />      <Lottie options={defaultOptions} height={400} width={400} style={styles.lottie} />
 
+            {/* <h1>User Profile</h1>
+            <p>Name: {userData.name}</p>
+            <p>Email: {userData.email}</p> */}
       <div style={{marginTop:'-150px'}}>
             <form style={styles.container} onSubmit={handleSubmit}>
 
-                <p style={styles.header}>{name}'s Profile</p>
+                <p style={styles.header}>{userData.name}'s Profile</p>
                 <div style={styles.inputContainer}>
                     <label style={styles.label} htmlFor="name">Name</label>
-                    <input style={styles.input} type="text" name="name" id="name" value={userInfo.name} onChange={handleChange} />
+                    <input style={styles.input} type="text" name="name" id="name" value={userData.name} onChange={handleChange} />
                 </div>
                 <div style={styles.inputContainer}>
                     <label style={styles.label} htmlFor="email">Email</label>
-                    <input style={styles.input} type="email" name="email" id="email" value={userInfo.email} onChange={handleChange} />
+                    <input style={styles.input} type="email" name="email" id="email" value={userData.email} onChange={handleChange} />
                 </div>
                 <div style={styles.inputContainer}>
                     <label style={styles.label} htmlFor="password">Password</label>
-                    <input style={styles.input} type="password" name="password" id="password" value={userInfo.password} onChange={handleChange} />
+                    <input style={styles.input} type="password" name="password" id="password" value={userData.password} onChange={handleChange} />
                 </div>
                 <div style={styles.inputContainer}>
-                    <label style={styles.label} htmlFor="phone">Phone Number</label>
-                    <input style={styles.input} type="tel" name="phone" id="phone" value={userInfo.phone} onChange={handleChange} />
+                    <label style={styles.label} htmlFor="phoneNumber">Phone Number</label>
+                    <input style={styles.input} type="tel" name="phoneNumber" id="phone" value={userData.phoneNumber} onChange={handleChange} />
                 </div>
                 <div style={styles.inputContainer}>
-                    <label style={styles.label} htmlFor="address">Address</label>
-                    <input style={styles.input} type="text" name="address" id="address" value={userInfo.address} onChange={handleChange} />
+                    <label style={styles.label} htmlFor="country">country</label>
+                    <input style={styles.input} type="text" name="country" id="address" value={userData.country} onChange={handleChange} />
                 </div>
                 <div style={styles.inputContainer}>
                     <label style={styles.label} htmlFor="location">Location</label>
-                    <input style={styles.input} type="text" name="location" id="location" value={userInfo.location} onChange={handleChange} />
+                    <input style={styles.input} type="text" name="location" id="location" value={userData.location} onChange={handleChange} />
                 </div>
                 <div style={styles.inputContainer}>
                     <label style={styles.label} htmlFor="profileImage">Profile Image</label>
-                    <input style={styles.input} type="file" name="profileImage" id="profileImage" onChange={(e) => setUserInfo({ ...userInfo, profileImage: e.target.files[0] })} />
+                    <input style={styles.input} type="file" name="profileImage" id="profileImage" onChange={(e) => setUserData({ ...userData, profileImage: e.target.files[0] })} />
                 </div>
                 <button style={styles.button} type="submit">Update Profile</button>
             </form>
             </div>
 
-            <br/>    <br/>    <br/>
+            <br/>
             <Footer></Footer>
         </div>
     );

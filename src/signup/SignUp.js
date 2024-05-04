@@ -6,16 +6,20 @@ import Top from '../PAGES/Top';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import Home1 from '../home/Home1';
 import axios from 'axios';
-
+import { useUser } from './UserContext';
 const SignUp = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        country:'',
+        phoneNumber:'',
+        // location:'',
       
     });
 
+    
     const [passwordShown, setPasswordShown] = useState(false);
     const [passwordShown2, setPasswordShown2] = useState(false);
     const [passwordMatch, setPasswordMatch] = useState(true);
@@ -23,6 +27,7 @@ const SignUp = () => {
     const [flage, setFlage] = useState(false);
     const [profile, setProfile] = useState(null); // State to hold the logged-in user's profile info
     const [showProfileModal, setShowProfileModal] = useState(false); // State to control the visibility of the profile modal
+    const [addressShown, setaddressShownl] = useState(false); // State to control the visibility of the profile modal
 
     const toggleProfileModal = () => {
         setShowProfileModal(!showProfileModal);
@@ -110,25 +115,38 @@ const SignUp = () => {
     //         }
     //     });   
     // };
-    
+    const { setUserData } = useUser();
 
+
+
+ 
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         setFlage(true);
         setEmailExists(false);
         setPasswordMatch(formData.password === formData.confirmPassword);
+        // setaddressShownl(false);
     
         if (formData.password !== formData.confirmPassword) {
             return; 
         }
-        axios.post('http://192.168.88.5:9000/signup', formData)
+        axios.post('http://192.168.88.2:9000/signup', formData)
         .then(response => {
-            console.log('Signup successful:', response.data);
-            setusername(response.data._id);
-            alert(response.data._id); // Ensure this shows the correct ID
-            navigate("/NavigationBar", { state: { userId: response.data._id, email: formData.email, name: formData.name, password: formData.password }});
-            navigate("/Cart", { state: { userId: response.data._id, email: formData.email, name: formData.name, password: formData.password }});
-
+            console.log('Signup successful:', response.data.user._id);
+            setusername(response.data.user._id);
+            alert(response.data.user._id); // Ensure this shows the correct ID
+        //   navigate("/NavigationBar", { state: { userId: response.data.user._id, email: formData.email, name: formData.name, password: formData.password,country:formData.country,phoneNumber:formData.phoneNumber}});
+            // navigate("/Cart", { state: { userId: response.data.id, email: formData.email, name: formData.name, password: formData.password }});
+          
+            setUserData({
+                userId: response.data.user._id,
+                email: formData.email,
+                name: formData.name,
+                password: formData.password,
+                country: formData.country,
+                phoneNumber: formData.phoneNumber
+            });
 
             e.preventDefault();
             const { value } = e.target[0];
@@ -167,7 +185,7 @@ const SignUp = () => {
     
 
     useEffect(() => {
-        axios.get('http://192.168.88.5:9000/signup')
+        axios.get('http://192.168.88.2:9000/signup')
             .then(response => {
                 console.log('Fetched users:', response.data); 
                 setUsers(response.data); 
@@ -254,6 +272,9 @@ const SignUp = () => {
                                 placeholder="Confirm Password"
                                 required
                             />
+
+
+
                             {flage && !formData.confirmPassword && <p className='errormsg'>Confirm password is required.</p>}
                             {flage && !passwordMatch && <p className='errormsg'>Passwords do not match.</p>}
                             <label htmlFor="confirmPassword">Confirm Password</label>
@@ -261,6 +282,22 @@ const SignUp = () => {
                                 {passwordShown2 ? '👁️' : '🙈'}
                             </span>
                         </div>
+
+
+                        {/* <div className="password-input-container">
+                            <input
+                                type="address"
+                                name="address"
+                                value={formData.password}
+                                onChange={handleChange}
+                                placeholder="Your address"
+                                required
+                            />
+                            {flage && !formData.country && <p className='errormsg'>address is required.</p>}
+                            {addressShown && <p className='errormsg'>An account with this email already exists.</p>}
+                            <label htmlFor="email">Your address</label>
+                        </div> */}
+
 
                         <button type="submit" className="signup-button" style={{fontFamily: 'fantasy', fontSize: '20px'}}>Sign Up</button>
                     </form>

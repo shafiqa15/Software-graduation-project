@@ -12,7 +12,7 @@ import ShoppingAssistance from './ShoppingAssistance';
 import visaImage from '../Cart/webimage-ED81074F-347A-430E-AC7CC0A3429D9570.jpg';
 import StripeContainer from './StripeContainer';
 import cashImage from '/Users/shafiqaabdat/Downloads/client-main/src/images/cash_.webp';
-
+import { useUser } from '../signup/UserContext';
 import Test from '../decore/Test';
 const Cart = () => {
   const { cartItems, updateQuantity, removeItem } = useCart();
@@ -67,13 +67,16 @@ const Cart = () => {
       const [showItem, setShowItem] = useState(false);
     // const amount = 100000; // Amount in cents for Stripe (₪15.00)
     const amount = itemTotals+"00";
-
+    const { userData } = useUser();
 
   return (
     <div>
       <Top />
       
       <ShoppingAssistance />
+
+      {/* <p>Name: {userData?.name}</p>
+      <p>Email: {userData?.email}</p> */}
       {/* <Test width={300} height={10} top={100} left={100} /> */}
       {/* <p>{name}'s Profile</p> */}
 

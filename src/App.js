@@ -26,6 +26,7 @@ import Decore2 from './decore/Decore2.js';
 import Kidsbedrooms from './Kidsbedrooms/Kidsbedrooms.js';
 import Visa from './Cart/Visa.js';
 import NavigationBar from './PAGES/NavigationBar.js';
+
 const App = () => {
   return (
     <CartProvider>
