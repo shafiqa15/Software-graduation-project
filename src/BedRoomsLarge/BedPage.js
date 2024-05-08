@@ -7,51 +7,91 @@ import React, { useState } from 'react';
 import Top from '../PAGES/Top.js';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
-
-
-
-import { TouchableOpacity,  Image,  FlatList,View, Text, ScrollView,StyleSheet  } from 'react';
-// import { SIZES } from '../contents/theme';
-
-//  import React, { useEffect, useState } from 'react';
-// import styles from './Productols.style';
-// import image from '../assets/images/home.jpg';
-// import { EvilIcons,Feather,Fontisto,Ionicons } from '@expo/vector-icons';
-// import { useNavigation } from '@react-navigation/native';
-// import { ProductDetails } from '../pages';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-// import Imageslider  from '/Users/shafiqaabdat/Downloads/client-main/src/BedRoomsLarge/Imageslider.js';
 import '/Users/shafiqaabdat/Downloads/client-main/src/BedRoomsLarge/bedpage.css';
 import ReviewStars from './ReviewStars.js';
-
 import { useLoader } from '@react-three/fiber';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MeshStandardMaterial } from 'three';
 import { useNavigate } from 'react-router-dom';
-
 import { useCart } from '../Cart/CartContext.js'; // Adjust the import path based on your file structure
 import axios from 'axios';
 
-// Define the useQuery hook
+import bed2 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/Screenshot 2024-02-28 at 22.05.01.png';
+import bed3 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/Screenshot 2024-02-28 at 22.05.15.png';
+import bed4 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/Screenshot 2024-02-28 at 22.05.24.png';
+import bed1 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/Screenshot 2024-02-28 at 22.05.33.png';
+import room1 from '../images/decore/Screenshot 2024-03-26 at 00.09.43.png';
+import room2 from '../images/decore/Screenshot 2024-03-26 at 00.09.11.png';
+import room3 from '../images/decore/Screenshot 2024-03-26 at 00.02.13.png';
+import room4 from '../images/decore/Screenshot 2024-03-26 at 00.01.53.png';
+import room5 from '../images/decore/Screenshot 2024-03-25 at 23.57.27.png';
+import room6 from '../images/decore/Screenshot 2024-03-25 at 23.57.04.png';
+import room7 from '../images/decore/Screenshot 2024-03-25 at 23.56.52.png';
+import room8 from '../images/decore/Screenshot 2024-03-25 at 23.56.26.png';
+import room9 from '../images/decore/Screenshot 2024-03-26 at 04.37.25.png';
+import room10 from '../images/decore/Screenshot 2024-03-26 at 04.36.20.png';
+import room11 from '../images/decore/Screenshot 2024-03-26 at 04.39.30.png';
+
+
+import bed2coloreblue from '../images/bed1/Untitled-5.jpg';
+import bed3coloreblue from '../images/bed1/Untitled-2.jpg';
+import bed4coloreblue from '../images/bed1/Untitled-3.jpg';
+import bed1coloreblue from '../images/bed1/Untitled-4.jpg';
+import bed0coloreblue from '../images/bed1/Untitled.jpg';
+
+
+import black1 from '../images/Screenshot 2024-02-27 at 15.44.00.png';
+import black2 from '../images/Screenshot 2024-02-20 at 16.56.49.png';
+import black3 from '../images/Screenshot 2024-02-20 at 15.13.32.png';
+import black4 from '../images/Screenshot 2024-02-26 at 17.43.26.png';
+import khzana from '../images/bed1/Screenshot 2024-03-02 at 16.41.28.png'
+
+import folo from '../images/bed1/Screenshot_2024-03-02_at_02.23.41-removebg-preview.png'
+import mirror from '../images/bed1/mirror.png'
+
+import khazana2 from '../images/bed1/Screenshot 2024-03-02 at 16.38.24.png';
+import khazana3 from '../images/bed1/Screenshot 2024-03-02 at 16.38.30.png';
+import khazana4 from '../images/bed1/Screenshot 2024-03-02 at 16.41.13.png';
+import folo2 from '../images/bed1/Screenshot_2024-03-03_at_04.04.33-removebg-preview.png';
+import folo3 from '../images/bed1/426294832_1143236580341178_7319021772950498233_n-removebg-preview.png';
+
+import comedena1 from '../images/bed1/Screenshot 2024-03-03 at 15.47.57.png';
+import comedena2 from '../images/bed1/Screenshot 2024-03-03 at 15.53.23.png';
+import comedena3 from '../images/bed1/Screenshot 2024-03-03 at 15.53.30.png';
+import comedena4 from '../images/bed1/Screenshot 2024-03-03 at 15.53.38.png';
+
+
+import mirror2 from '../images/bed1/Screenshot 2024-03-03 at 16.49.19.png';
+import mirror3 from '../images/bed1/Screenshot 2024-03-03 at 16.49.49.png';
+import mirror4 from '../images/bed1/Screenshot 2024-03-03 at 16.50.20.png';
+
+const obj1 = '/SESSION_1709059176_2562448_mesh.gltf';
+const obj2='/SESSION_1709322881_5313601_mesh.gltf'
+const khzana_obj='/SESSION_1709322029_4794408_mesh.gltf';
+const folowobj='/SESSION_1709431540_7920988_preview.gltf';
+const comedenaobj ='/SESSION_1709473701_3541317_preview.gltf';
+const mirrorobj='/SESSION_1709338570_8496202_preview.gltf';
+const comedenaobj2='/shafiqa.gltf';
+
 function useQuery() {
     return new URLSearchParams(useLocation().search);
   }
 
 
 const BedPage = () => {
+  const location = useLocation();
+  const { product } = location.state || {}; // Default to an empty object if state is undefined
 
   const navigate = useNavigate();
 
-  const handleDesignNavigation = () => {
-    navigate('/design', { state: { product } }); // 'product' is the product data you want to pass
-  };
 
-  const {id } = useParams();
+
+  const id=1;
   const query = useQuery();
   const imageUrl = query.get('imageUrl');
-  const product = products.find(product => product.id.toString() === id);
+   const product1 = products.find(product1 => product1.id.toString() === id);
 
   function Scene1Model({ modelPath, scale = 1 }) {
     const { scene } = useGLTF(modelPath);
@@ -60,54 +100,52 @@ const BedPage = () => {
   }
   
 
-
-
-
-  const navigateToBedPage = (navigate, productId, imageUrl) => {
-    const encodedImageUrl = encodeURIComponent(imageUrl);
-    navigate(`/product/${productId}?imageUrl=${encodedImageUrl}`);
-  };
-  
-
-  const scene1Path = '/SESSION_1709059176_2562448_preview-2.glb';
-  const [mainImageUrl, setMainImageUrl] = useState(product?.imageUrl || product?.img1);
-  const [mainImageUrl2, setMainImageUrl2] = useState(product?.upadte1 || product?.img1);
-  const [mainImageUrlkhzana, setMainImageUrlkhzana] = useState(product?.khzana);
-  const [mainImageUrlkfloow, setMainImageUrlkfolow] = useState(product?.follow2);
-  const [mainImageUrlcomedena, setMainImageUrlcomedena] = useState(product?.comedena1);
-  const [mainImageUrlmirror, setMainImageUrlmirror] = useState(product?.mirror);
-
-
-
-
-  
- // Part of the BedRoomsLarge component
-const { addToCart } = useCart(); // This is how you access addToCart now
-// Using useNavigate hook from react-router-dom
-// const navigate = useNavigate();
-
-const handleAddToCartClick = (product) => {
-  addToCart({ ...product, quantity: 1 });
-  navigate('/cart'); // Assuming '/cart' is your cart page's path
+  const handleAddToCartClick = (product) => {
+    console.log("Adding product:", product);  // Ensure this logs the correct product data
+    addToCart({ ...product, quantity: 1 });
+    navigate('/cart'); 
+    
 };
 
-  const handleAddFlower = () => {
-    const productFlowerData = {
-      // Example data structure; adjust as needed
-      modelPath: 'path/to/flower/model.glb',
-      position: [0, 0, 0],
-      rotation: [0, 0, 0],
-      scale: 1,
-    };
 
-    navigate('/design', { state: { flower: productFlowerData } });
-  };
 
+// const handleAddToCartClick = (product) => {
+
+//   addToCart({ ...product, quantity: 1 });
+//   navigate('/cart'); // Assuming '/cart' is your cart page's path
+// };
+// Test this inside your component or directly in your addToCart function
+// useEffect(() => {
+//   addToCart({ id: 1, name: "Test Product 1", price: 100, quantity: 1 });
+//   addToCart({ id: 2, name: "Test Product 2", price: 200, quantity: 1 });
+// }, []);
+
+
+
+
+
+  const scene1Path = '/SESSION_1709059176_2562448_preview-2.glb';
+  const [mainImageUrl, setMainImageUrl] = useState(bed2);
+  const [mainImageUrl2, setMainImageUrl2] = useState(product?.upadte1 || product?.img1);
+  const [mainImageUrlkhzana, setMainImageUrlkhzana] = useState(khazana2);
+  const [mainImageUrlkfloow, setMainImageUrlkfolow] = useState(folo2);
+  const [mainImageUrlcomedena, setMainImageUrlcomedena] = useState(comedena1);
+  const [mainImageUrlmirror, setMainImageUrlmirror] = useState(mirror);
+
+
+
+
+  
+const { addToCart } = useCart(); // This is how you access addToCart now
+
+const [userId, setUserId] = useState(''); // Assuming you get this from user session or context
+const [cart, setCart] = useState(null);
+const [error, setError] = useState('');
+const ipdevice='192.168.88.2';
 
 
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0); // To implement a hover effect, optional
-// Assuming this is part of your BedPage.js or a separate component file
 const StarRating = ({ rating, interactive = true, onRatingChange }) => {
 
 
@@ -128,56 +166,22 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
 },[])
 
 
+
+
+
+const ipdevice='192.168.88.2';
+
+
+
+//   axios.post(`http://${ipdevice}:9000/addToCart`)
+
+
+
+
+
   return (
+    
     <div>
-
-
-
-
-
-
-{/* <ScrollView > */}
-
-       {/* {product.map(product => (
-        <View key={product._id} product={product} >
-         <TouchableOpacity style={{ marginHorizontal:12}} >
-
-    <View >
-  
-  
-  
-    <View >
-     <Image  source={product.img1}></Image>
-    </View>
-  
-   <View >
-     <Text numberOfLines={1} >{product.name}</Text>
-      <Text  numberOfLines={1}>Product</Text>
-      <View >
-     <Text >$2321</Text> */}
-     {/* <TouchableOpacity onPress={()=>{updataLike(),setLike(!like)}}> */}
-      {/* <Ionicons name={like?'heart':'heart-outline'} color={like?'red':'black'} size={24}/> */}
-    {/* </TouchableOpacity> */}
-     {/* </View>
-   </View>
-   </View>
-     </TouchableOpacity>
-         </View>
-
-       ))}
-     </ScrollView> */}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -227,11 +231,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
   const averageRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length || 0;
   const numberOfReviews = reviews.length;
   
-  const handleNewAction = () => {
-    // Example action: navigate to a different page or show alert
-    // alert('Button clicked!');
-    // For navigation, you might use history.push('/some-path') if using React Router
-  };
+
 
 
   
@@ -256,50 +256,18 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
   const changeMainImagemirror= (newImageUrl) => {
     setMainImageUrlmirror(newImageUrl);
   };
-
- const navigateToDesignPage = (productId) => {
-    // Assuming the product you want to pass is at index 1
-    const productToPass = products.find(product => product.id === productId);
-    navigate(`/design`, { state: { product: productToPass } });
+  const navigateToDesignPage = (productId) => {
+    // Assuming 'products' is accessible here and contains all your product data
+    const productToPass = products.find(product1 => product1.id === productId);
+    if (productToPass) {
+      navigate('/design', { state: { product1: productToPass } });
+    } else {
+      console.error('Product not found');
+      // Optionally, handle the case where the product is not found, such as showing a user notification
+    }
   };
-
-  const navigateToDetailingPage = (product) => {
-
-      navigate('/Decore2', {
-        state: {
-          numberOfPieces: product.number_of_pieces,
-          name: product.name,
-          price: product.price,
-          imageUrl: product.imageUrl,
-          img1: product.img1,
-          img1Dimensions: product.img1Dimensions, // assuming you have these dimensions in your product object
-          comedena1: product.comedena1,
-          comedena1Dimensions: product.comedena1Dimensions,
-          mirror: product.mirror,
-          mirrorDimensions: product.mirrorDimensions,
-          khzana: product.khzana,
-          khzanaDimensions: product.khzanaDimensions,
-          kind: product.kind,
-          dimensions: product.dimensions,
-          folo:product.follow2,
-          foloDimensions:product.foloDimensions,
-        }
-      });
-    };
-    
-
-     
-
-    
-
-
   
-
-// Example of navigating with multiple products
-const navigateToDesignPageWithMultipleProducts = () => {
-  const selectedProducts = [products[1], products[2]]; // Select products as per your logic
-  navigate('/design', { state: { selectedProducts } });
-};
+  
 
 
   const handleButtonClick = () => {
@@ -317,7 +285,6 @@ const navigateToDesignPageWithMultipleProducts = () => {
   const [showButton4, setShowButton4] = useState(false);
 
   const handleCircleButtonClick = (buttonNumber) => {
-    // Add your logic for handling circle button clicks
     console.log(`Clicked on Circle Button ${buttonNumber}`);
 
     setShowButton(!showButton);
@@ -325,30 +292,9 @@ const navigateToDesignPageWithMultipleProducts = () => {
     setShowButton3(showButton3);
 
     
-    // You can replace this with your specific logic
   };
 
-  const handleCircleButtonClick2 = (buttonNumber) => {
-    // Add your logic for handling circle button clicks
-    console.log(`Clicked on Circle Button ${buttonNumber}`);
 
-    setShowButton(!showButton);
-    setShowFirstImages(!showFirstImages);
-    setShowButton3(!showButton3);
-   
-    // You can replace this with your specific logic
-  };
-
-  const handleCircleButtonClick3 = (buttonNumber) => {
-    // Add your logic for handling circle button clicks
-    console.log(`Clicked on Circle Button ${buttonNumber}`);
-
-    setShowButton(showButton);
-    setShowFirstImages(!showFirstImages);
-    setShowButton3(!showButton3);
-    setShowButton4(!showButton4);
-    // You can replace this with your specific logic
-  };
   const [showCanvas, setShowCanvas] = useState(false);
 
   const toggleCanvas = () => {
@@ -405,41 +351,50 @@ const navigateToDesignPageWithMultipleProducts = () => {
   const [quantity, setQuantity] = useState(1); // Default to 1, assuming users want at least one item
 
   
-  // const IMAGES = [
-  //   { url: product.bed1black, alt: "Car One" },
-  //   { url: product.bed1black, alt: "Car Two" },
-  //   { url: product.bed1black, alt: "Car Three" },
-  //   { url: product.bed1black, alt: "Car Four" },
-  //   { url: product.bed1black, alt: "Car Five" },
-  // ]
+  const navigateToDetailingPage = () => {
+    navigate('/detailing', { state: { product } });
+  };
+
   return (
     <>
     <Top></Top>
 
-    {/* <ReviewStars onSubmit={handleReviewSubmit}/>  */}
   
 
     <div className="main-container_beds">
 
 
-<p className='madimi-one-regular' style={{marginTop:'100px',fontWeight:'bold',fontSize:'30px',marginLeft:'40px'}}> One of the amazing {product.kind} in the website that has <span style={{color:'InfoText'}}>{product.number_of_pieces} </span>peices </p>
+<p className='madimi-one-regular' style={{marginTop:'100px',fontWeight:'bold',fontSize:'30px',marginLeft:'40px'}}> One of the amazing {product.type} manufactured in the website that has <span style={{color:'InfoText'}}>{product.numberPieces} </span>peices </p>
 <div style={{marginLeft: '1200px', marginTop: '20px', display: 'block', width: '150px'}}>
-  <p>{product.available} rooms remain</p>
+  <p>{product.count} rooms remain</p>
   <input
     type="number"
     value={quantity}
-    onChange={(e) => setQuantity(Math.max(1, Math.min(e.target.value, product.available)))} // Ensure the value is between 1 and the maximum available
+    onChange={(e) => setQuantity(Math.max(1, Math.min(e.target.value, product.count)))} // Ensure the value is between 1 and the maximum available
     min="1"
-    max={product.available}
+    max={product.count}
     className="quantity-input"
     style={{width: '100%', marginBottom: '10px'}}
   />
   
 
   <br/>  
+  
   <button className='madimi-one-regular buttoncart' onClick={() => handleAddToCartClick({ ...product, quantity })} style={{ width: '100%' }}>
   <FontAwesomeIcon icon={faShoppingCart}/> Add to Cart
 </button>
+{/* <button onClick={() => handleAddToCartClick(product)}>Add to Cart</button> */}
+
+    {/* <div>
+      {products.map(product => (
+        <div key={product.id}>
+          <h3>{product.name}</h3>
+          <button onClick={() => handleAddToCartClick(product)}>Add to Cart</button>
+        </div>
+      ))}
+    </div> */}
+
+
 
   <br/>  <br/>  <br/>  <br/><br/>  <br/><br/>  <br/>
 </div>
@@ -449,12 +404,12 @@ const navigateToDesignPageWithMultipleProducts = () => {
 
 
 
-      <img style={{  marginLeft: '80px'}} className='photo' src={product.img1} alt="Photo 1" />
+      <img style={{  marginLeft: '80px'}} className='photo' src={bed2} alt="Photo 1" />
 
-      <img className='photo' src={product.khzana} alt="Photo 2" />
-      <img className='photo' src={product.comedena1} alt="Photo 3" />
-      <img className='photo' src={product.mirror} alt="Photo 4" />
-      <img className='photo' src={product.follow2} alt="Photo 5" />
+      <img className='photo' src={khzana} alt="Photo 2" />
+      <img className='photo' src={comedena1} alt="Photo 3" />
+      <img className='photo' src={mirror} alt="Photo 4" />
+      <img className='photo' src={folo2} alt="Photo 5" />
 
     
 
@@ -471,14 +426,6 @@ const navigateToDesignPageWithMultipleProducts = () => {
       <span style={{ marginLeft: '100px' }}> 1 bed following</span>
     </p> 
     
-
-
-
-
-    {/* <Imageslider images={IMAGES} /> */}
-      {/* <p>This is the product page for product ID: {product.name}</p> */}
- 
-
       
 
 
@@ -493,7 +440,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
         </div>
         <div className='"small-images-container"' style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {/* Iterate over the smaller images */}
-          {[product.img1, product.img2, product.img3, product.img4].map((img, index) => img && (
+          {[bed1, bed2, bed3, bed4].map((img, index) => img && (
             <img
             className="img-zoom"
               key={index}
@@ -517,7 +464,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
             <img className='main-image' src={mainImageUrl} alt='Main Product' style={{ width: '450px', height: '450px', display: 'block' }} />
           </div>
           <div className='small-images-container' style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {[product.upadte1, product.update2, product.upadte3, product.update4].map((img, index) =>
+            {[bed0coloreblue,bed1coloreblue, bed2coloreblue, bed4coloreblue].map((img, index) =>
               img && (
                 <img
                   className='img-zoom'
@@ -541,7 +488,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
             <img className='main-image' src={mainImageUrl} alt='Main Product' style={{ width: '450px', height: '450px', display: 'block' }} />
           </div>
           <div className='small-images-container' style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {[product.bed1black, product.bed2black, product.bed3black, product.bed4black].map((img, index) =>
+            {[black1, black2,black3, black4].map((img, index) =>
               img && (
                 <img
                   className='img-zoom'
@@ -566,7 +513,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
         {/* Circle buttons */}
 
 
-       <p>-{product.kind} bed  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px'}}>-The wood kind is {product.name}.</p>
+       <p>-{product.type} bed  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px'}}>-The wood kind is snopar{product.wood_kind}.</p>
        <p>-Colors available:Dark blue,brown and black.</p>
        
        <button className="circle-button" onClick={(e) => { handleButtonClick(); toggleCanvas2(); }}>
@@ -608,7 +555,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
           <Canvas>
             <ambientLight intensity={1.5} />
             <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
-            <Scene1Model modelPath={product.obj} scale={4} />
+            <Scene1Model modelPath={obj1} scale={4} />
             <OrbitControls />
           </Canvas>
         </div>
@@ -623,7 +570,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
           <Canvas>
             <ambientLight intensity={1.5} />
             <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
-            <Scene1Model modelPath={product.comedenaobj} scale={4} />
+            <Scene1Model modelPath={comedenaobj} scale={4} />
             <OrbitControls />
           </Canvas>
         </div>
@@ -636,7 +583,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
           <Canvas>
             <ambientLight intensity={1.5} />
             <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
-            <Scene1Model modelPath={product.folowobj} scale={4.4} />
+            <Scene1Model modelPath={folowobj} scale={4.4} />
             <OrbitControls />
           </Canvas>
         </div>
@@ -649,7 +596,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
         <div style={{ position: 'absolute', top: '1000px', left: '700px', width: '500px', height: '100%' }}>    <Canvas>
       <ambientLight intensity={1.5} />
       <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
-      <Scene1Model modelPath={product.khzana_obj} scale={4} material={<meshStandardMaterial color="white" />} />
+      <Scene1Model modelPath={khzana_obj} scale={4} material={<meshStandardMaterial color="white" />} />
       <OrbitControls />
     </Canvas>
   </div>
@@ -660,7 +607,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
         <div style={{ position: 'absolute', top: '2000px', left: '800px', width: '500px', height: '100%' }}>    <Canvas>
       <ambientLight intensity={1.5} />
       <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
-      <Scene1Model modelPath={product.mirrorobj} scale={4.3} material={<meshStandardMaterial color="white" />} />
+      <Scene1Model modelPath={mirrorobj} scale={4.3} material={<meshStandardMaterial color="white" />} />
       <OrbitControls />
     </Canvas>
   </div>
@@ -676,7 +623,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
           <Canvas>
             <ambientLight intensity={1.5} />
             <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
-            <Scene1Model modelPath={product.objblue} scale={4} />
+            <Scene1Model modelPath={obj2} scale={4} />
             <OrbitControls />
           </Canvas>
         </div>
@@ -693,7 +640,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
   </div>
   <div className='"small-images-container"' style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
     {/* Iterate over the smaller images */}
-    {[product.khzana, product.Khzana2, product.khzana3, product.khzana4].map((img, index) => img && (
+    {[khzana,khazana2 ,khazana3, khazana4].map((img, index) => img && (
       <img
       className="img-zoom"
         key={index}
@@ -705,7 +652,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
     ))}
   </div>
 </div>
- <p style={{marginTop:'-450px',marginLeft:'700px'}}> -{product.kind} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is {product.name}.</p>
+ <p style={{marginTop:'-450px',marginLeft:'700px'}}> -{product.type} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is snopar{product.wood_kind}.</p>
        <p style={{marginTop:'-10px',marginLeft:'700px'}}>-Colors available:Only off-white.</p>
         <button className="circle-buttons6" onClick={() => {handleCircleButtonClick() }}></button>
           <div className="description" style={{marginTop:'170px',marginLeft:'700px'}}>
@@ -729,7 +676,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
   </div>
   <div className='"small-images-container"' style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
     {/* Iterate over the smaller images */}
-    {[product.comedena1, product.comedena2, product.comedena3, product.comedena4].map((img, index) => img && (
+    {[comedena1, comedena2, comedena3, comedena4].map((img, index) => img && (
       <img
       className="img-zoom"
         key={index}
@@ -744,7 +691,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
 
 
 
-<p style={{marginTop:'-450px',marginLeft:'700px'}}> -{product.kind} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is {product.name}.</p>
+<p style={{marginTop:'-450px',marginLeft:'700px'}}> -{product.type} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is snopar{product.wood_kind}.</p>
 <p style={{marginLeft:'700px'}}>-2 peices.</p>
        <p style={{marginTop:'-10px',marginLeft:'700px'}}>-Colors available:Only off-white.</p>
  
@@ -776,7 +723,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
   </div>
   <div className='"small-images-container"' style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
     {/* Iterate over the smaller images */}
-    {[product.mirror, product.mirror2, product.mirror3, product.mirror4].map((img, index) => img && (
+    {[mirror, mirror2,mirror3,mirror4].map((img, index) => img && (
       <img
       className="img-zoom"
         key={index}
@@ -789,7 +736,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
   </div>
 </div>
 
-<p style={{marginTop:'-450px',marginLeft:'700px'}}> -{product.kind} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is {product.name}.</p>
+<p style={{marginTop:'-450px',marginLeft:'700px'}}> -{product.type} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is snopar {product.wood_kind}.</p>
 
        <p style={{marginTop:'-10px',marginLeft:'700px'}}>-Colors available:</p>
  
@@ -825,7 +772,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
   </div>
   <div className='"small-images-container"' style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
     {/* Iterate over the smaller images */}
-    {[product.follow, product.follow2, product.folo3, product.follow].map((img, index) => img && (
+    {[folo2, folo, folo3,folo2].map((img, index) => img && (
       <img
       className="img-zoom"
         key={index}
@@ -837,7 +784,7 @@ const navigateToDesignPageWithMultipleProducts = () => {
     ))}
   </div>
 </div>
- <p style={{marginTop:'-450px',marginLeft:'700px'}}> -{product.kind} bed following  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is {product.name}.</p>
+ <p style={{marginTop:'-450px',marginLeft:'700px'}}> -{product.kind} bed following  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is snopar{product.wood_kind}.</p>
        <p style={{marginTop:'-10px',marginLeft:'700px'}}>-Colors available:Only off-white.</p>
         <button className="circle-buttons6" onClick={() => {handleCircleButtonClick() }}></button>
           <div className="description" style={{marginTop:'170px',marginLeft:'700px'}}>
@@ -898,10 +845,17 @@ const navigateToDesignPageWithMultipleProducts = () => {
 
     
 
-      <button style={{marginLeft:'1200px', marginTop: '20px', display: 'block',width:'200px'}} className="AddToCartButton madimi-one-regular" onClick={() => navigateToDesignPage(product.id)}>Design This Bedroom</button>
-      <button style={{marginLeft:'1200px', marginTop: '20px', display: 'block',width:'200px'}} className="AddToCartButton madimi-one-regular" onClick={() => navigateToDetailingPage(product)}>Put it to detailing page</button>
+      <button
+  style={{marginLeft:'1200px', marginTop: '20px', display: 'block', width:'200px'}}
+  className="AddToCartButton madimi-one-regular"
+  onClick={() => navigateToDesignPage(1)}  // Pass '1' directly to the function
+>
+  Design This Bedroom
+</button>
+      <button style={{marginLeft:'1200px', marginTop: '20px', display: 'block',width:'200px'}} className="AddToCartButton madimi-one-regular" onClick={() => navigateToDetailingPage(product._id, product)}>Put it to detailing page</button>
+      {/* <button className="AddToCartButton" onClick={() => navigateToBedPage(product._id, product)}>Details</button> */}
 
-
+      {/* <button onClick={navigateToDetailingPage}>Go to Detailing Page</button> */}
 
       </div>
     </>
@@ -909,3 +863,22 @@ const navigateToDesignPageWithMultipleProducts = () => {
 };
 
 export default BedPage;
+// import React from 'react';
+// import { useLocation } from 'react-router-dom';
+
+// const BedPage = () => {
+//   const location = useLocation();
+//   const { product } = location.state || {}; // Default to an empty object if state is undefined
+
+//   return (
+//     <div>
+//       <h1>{product.name}</h1>
+//       <img src={product.image} alt={product.name} />
+//       <p>Price: {product.price}</p>
+//       <p>Description: {product.description}</p>
+//       {/* Add more product details here */}
+//     </div>
+//   );
+// };
+
+// export default BedPage;

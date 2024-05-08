@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'; 
 import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons'; 
 
-
+import { Link } from 'react-router-dom';
 
 
 import bed2 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/Screenshot 2024-02-28 at 22.05.01.png';
@@ -31,9 +31,6 @@ import room8 from '../images/decore/Screenshot 2024-03-25 at 23.56.26.png';
 import room9 from '../images/decore/Screenshot 2024-03-26 at 04.37.25.png';
 import room10 from '../images/decore/Screenshot 2024-03-26 at 04.36.20.png';
 import room11 from '../images/decore/Screenshot 2024-03-26 at 04.39.30.png';
-
-
-
 
 
 import bed2coloreblue from '../images/bed1/Untitled-5.jpg';
@@ -67,7 +64,7 @@ import comedena4 from '../images/bed1/Screenshot 2024-03-03 at 15.53.38.png';
 import mirror2 from '../images/bed1/Screenshot 2024-03-03 at 16.49.19.png';
 import mirror3 from '../images/bed1/Screenshot 2024-03-03 at 16.49.49.png';
 import mirror4 from '../images/bed1/Screenshot 2024-03-03 at 16.50.20.png';
-
+import axios from 'axios';
 
 const obj1 = '/SESSION_1709059176_2562448_mesh.gltf';
 const obj2='/SESSION_1709322881_5313601_mesh.gltf'
@@ -100,73 +97,142 @@ export { products };
 
 const BedRoomsLarge = () => {
 
-  // Inside your BedRoomsLarge component
+const ipdevice='192.168.88.5';
 
-const navigate = useNavigate();
+  const [product1,setProduct1]= useState([]);
+  
+  const [isSorted, setIsSorted] = useState(false); // Track if data is sorted
 
-// Update your addToCart function or create a new function for navigation
+  const [favorites, setFavorites] = useState(() => {
+    return JSON.parse(localStorage.getItem('favorites')) || [];
+});
+  const fetchProductData = () => {
+    axios.get(`http://${ipdevice}:9000/viewAllProduct`)
+      .then(result => {
+        setProduct1(result.data.product);
 
-const navigateToBedPage = (productId, imageUrl) => {
-  const encodedImageUrl = encodeURIComponent(imageUrl);
-  navigate(`/product/${productId}?imageUrl=${encodedImageUrl}`);
+
+   
+      })
+      .catch(e => console.log(e));
+  };
+
+
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    fetchProductData();
+  }, []);
+
+
+
+  const updateLikeFalse= (productId, likeStatus,index) =>{
+ 
+    axios.put(`http://${ipdevice}:9000/updateLikeFalse/${productId}`)
+    .then(result => { fetchProductData();
+    
+    })
+    .catch( e =>console.log(e))
+  }
+
+  const updateLikeTrue= (productId, likeStatus,index) =>{
+   
+    axios.put(`http://${ipdevice}:9000/updateLikeTrue/${productId}`)
+    .then(response => {fetchProductData();
+   
+    })
+    .catch( e =>console.log(e))
+  }
+
+
+
+  const sorting_inc= () => {
+    axios.get(`http://${ipdevice}:9000/viewAllProductsortINC`)
+      .then(result => {
+        setProduct1(result.data.product);
+        setIsSorted(true); // Set sorted state to true
+
+
+
+   
+      })
+      .catch(e => console.log(e));
+  };
+ 
+
+
+  const sorting_dec= () => {
+    axios.get(`http://${ipdevice}:9000/viewAllProductsortDEC`)
+      .then(result => {
+        setProduct1(result.data.product);
+        setIsSorted(true); // Set sorted state to true
+
+
+
+   
+      })
+      .catch(e => console.log(e));
+  };
+
+
+
+ const toggleFavorite = (product) => {
+  const isFavorite = favorites.includes(product._id);
+  const updatedFavorites = isFavorite
+    ? favorites.filter(id => id !== product._id) // Remove from favorites
+    : [...favorites, product._id]; // Add to favorites
+
+  localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+  setFavorites(updatedFavorites);
+
+  if (isFavorite) {
+    updateLikeFalse(product._id);
+  } else {
+    updateLikeTrue(product._id);
+  }
 };
 
-  const [cart, setCart] = useState([]);
-  const [sortCriteria, setSortCriteria] = useState('priceLowToHigh');
-  const [sortedProducts, setSortedProducts] = useState(products);
-  useEffect(() => {
-    let sorted = [...sortedProducts];
-    switch (sortCriteria) {
-      case 'priceLowToHigh':
-        sorted.sort((a, b) => a.price - b.price);
-        break;
-      case 'priceHighToLow':
-        sorted.sort((a, b) => b.price - a.price);
-        break;
-      case 'Imported manufacturing':
-        sorted.sort((a, b) => a.kind.localeCompare(b.kind) || a.name.localeCompare(b.name));
-        break;
-      case 'Local manufacturing':
-        sorted.sort((a, b) => b.kind.localeCompare(a.kind) || a.name.localeCompare(b.name));
-        break;
-      default:
-        break;
+
+const navigateToBedPage = (productId, product) => {
+  navigate(`/product/${productId}`, { state: { product } });
+};
+
+
+
+
+useEffect(() => {
+  if (!isSorted) {
+    const interval = setInterval(() => {
+      fetchProductData();
+    }, 50000);
+    return () => clearInterval(interval);
+  }
+}, [isSorted]); // Dependency on isSorted to control fetching behavio
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const handleSortChange = (e) => {
+    const sortType = e.target.value;
+    if (sortType === 'priceLowToHigh') {
+      sorting_inc();
+    } else if (sortType === 'priceHighToLow') {
+      sorting_dec();
+    } else {
+      fetchProductData(); // Fetch unsorted data if 'Sort by' or any other default option is selected
     }
-    setSortedProducts(sorted);
-  }, [sortCriteria]);
-
-  const addToCart = (product) => {
-    setCart([...cart, product]);
   };
-
-
-
-  const [favorites, setFavorites] = useState([]);
-
-  // // Function to handle favorite toggle
-  // const toggleFavorite = (productId) => {
-  //   setFavorites((currentFavorites) => {
-  //     if (currentFavorites.includes(productId)) {
-  //       return currentFavorites.filter((id) => id !== productId);
-  //     } else {
-  //       return [...currentFavorites, productId];
-  //     }
-  //   });
-  // };
-
-  const toggleFavorite = (productId) => {
-    setFavorites((currentFavorites) => {
-      const updatedFavorites = currentFavorites.includes(productId)
-        ? currentFavorites.filter((id) => id !== productId)
-        : [...currentFavorites, productId];
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-      return updatedFavorites;
-    });
-  };
-  
-
-
-
 
   return (
     <div>
@@ -182,39 +248,48 @@ const navigateToBedPage = (productId, imageUrl) => {
 
 <br></br>
       <div className="sorting-options">
-        <select onChange={(e) => setSortCriteria(e.target.value)}>
-        <option value="name">Sort by</option>
+ 
+      
+          <select onChange={handleSortChange}>
+          <option value="">Sort by</option>
           <option value="priceLowToHigh">Price Low to High</option>
           <option value="priceHighToLow">Price High to Low</option>
-          <option value="Imported manufacturing">Imported manufacturing</option>
-          <option value="Local manufacturing">Local manufacturing</option>
+     
+          <option >Imported manufacturing</option>
+          <option >Local manufacturing</option>
          
         </select>
       </div>
 
       <div className="ProductList">
-        {sortedProducts.map((product) => (
-          <div className="ProductCard" key={product.id}>
-  <img className="ProductImage" src={product.imageUrl} alt={product.name} />
+
+        {product1.map((product) => (
+          <div className="ProductCard" key={product._id} >
+          {/* <div>{product._id}  </div> */}
+  <img className="ProductImage" src={product.image} alt={product.name} />
   <div className="ProductInfo">
-    <div className="ProductName">Name: {product.name}</div>
+    <div className="ProductName" style={{width:'200px'}}>Name: {product.name}</div>
     <div className="ProductPrice">Price :{` ${product.price} ₪`}</div>
-    <div className="ProductPrice">{` ${product.available} rooms remain `}</div>
-    <div className="ProductPrice">{` ${product.number_of_pieces} pieces `}</div>
+    <div className="ProductPrice">{` ${product.count} rooms remain `}</div>
+    <div className="ProductPrice">{` ${product.numberPieces} pieces `}</div>
   </div>
   <div className="ProductFooter">
-    <div className="ProductKind">{product.kind}</div>
+    {/* <div className="ProductKind">{product.kind}</div> */}
+    <div className="ProductName" style={{width:'200px'}}>{product.type} manufacturing</div>
 
-    <FontAwesomeIcon
-          icon={favorites.includes(product.id) ? fasHeart : farHeart}
-          className={`heart-icon ${favorites.includes(product.id) ? 'favorited' : ''}`}
-          onClick={() => toggleFavorite(product.id)}
-        />
+
+        <FontAwesomeIcon 
+  color={favorites.includes(product._id) ? 'red' : 'black'}
+  icon={favorites.includes(product._id) ? fasHeart : farHeart}
+  className={`heart-icon ${favorites.includes(product._id) ? 'favorited' : ''}`}
+  onClick={() => toggleFavorite(product)}
+/>
+{/* <Link to="/favorites">View Favorites</Link> */}
 
 
 {/* <a to="/favorites">View Favorites</Link> */}
 
-    <button className="AddToCartButton" onClick={() => navigateToBedPage(product.id, product.imageUrl)}>Details</button>
+<button className="AddToCartButton" onClick={() => navigateToBedPage(product._id, product)}>Details</button>
   </div>
 </div>
 

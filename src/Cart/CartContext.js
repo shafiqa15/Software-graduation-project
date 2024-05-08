@@ -1,49 +1,47 @@
 import React, { createContext, useContext, useState } from 'react';
 
 const CartContext = createContext();
-
 export const CartProvider = ({ children }) => {
+    const [cart, setCart] = useState([]);
     const [cartItems, setCartItems] = useState([]);
+const addToCart = (productToAdd) => {
+  setCartItems((currentItems) => {
+    const itemIndex = currentItems.findIndex((item) => item._id === productToAdd._id);
+    if (itemIndex > -1) {
+      const newItems = [...currentItems];
+      newItems[itemIndex] = {
+        ...newItems[itemIndex],
+        quantity: newItems[itemIndex].quantity + 1,
+      };
+      return newItems;
+    } else {
+      return [...currentItems, {...productToAdd, quantity: 1}]; // Initialize with quantity 1
+    }
+  });
+};
 
-    // Function to update quantity
-    const updateQuantity = (itemId, quantity) => {
-        setCartItems(currentItems => currentItems.map(item =>
-            item.id === itemId ? { ...item, quantity: quantity } : item
-        ));
-    };
+const updateQuantity = (productId, quantity) => {
+    setCartItems(prevItems => prevItems.map(item => item._id === productId ? {...item, quantity} : item));
+};
 
-    // Function to add an item to the cart
-    const addToCart = (product) => {
-        setCartItems(currentItems => {
-            const itemExists = currentItems.find(item => item.id === product.id);
-            if (itemExists) {
-                return currentItems.map((item) =>
-                    item.id === product.id ? { ...item, quantity: item.quantity + product.quantity } : item
-                );
-            } else {
-                return [...currentItems, product];
-            }
-        });
-    };
 
-    // Function to remove an item from the cart
-    const removeItem = (itemId) => {
-        setCartItems(currentItems => currentItems.filter(item => item.id !== itemId));
-    };
+const removeItem = (productId) => {
+    setCartItems(prevItems => prevItems.filter(item => item._id !== productId));
+};
 
-    // The value object provided to the context consumers
-    const value = { 
-        cartItems, 
-        updateQuantity, 
-        addToCart, 
-        removeItem
-    };
 
+    // return (
+    //     <CartContext.Provider value={{cartItems, addToCart, updateQuantity, removeItem }}>
+    //         {children}
+    //     </CartContext.Provider>
+    // );
     return (
-        <CartContext.Provider value={value}>
+        <CartContext.Provider value={{ cartItems, addToCart, updateQuantity, removeItem }}>
             {children}
         </CartContext.Provider>
     );
-};
+    };
+
+
 
 export const useCart = () => useContext(CartContext);

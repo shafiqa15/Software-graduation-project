@@ -1,7 +1,7 @@
 
     import React, { useRef, useEffect, useState } from 'react';
     // import ReactModal from 'react-modal';
-
+import { useUser } from '../signup/UserContext';
     import * as THREE from 'three';
     import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
     import Top from '../PAGES/Top';
@@ -111,7 +111,12 @@ useEffect(() => {
         };
       }, []);
       
-    
+
+
+
+
+
+      
 
       const createSimpleBox = (offsetX = 0, offsetY = 0) => {
         const scene = sceneRef.current;
@@ -736,6 +741,7 @@ const openImageModal = (imageSrc) => {
 };
 
 
+const { userData, setUserData } = useUser();
 
       return (
     
@@ -849,6 +855,22 @@ const openImageModal = (imageSrc) => {
      onMouseOut={(e) => e.target.style.backgroundColor = '#b32c04'}>
     Add Model to Bottom ↓
   </button>
+
+
+
+
+{/* 
+  <button onClick={handleChange} >
+    Add lsd;fwb
+  </button> */}
+
+
+
+
+
+
+
+  
 
   {/* New spacing addition buttons */}
   <button onClick={addSpaceAbove} style={{
@@ -1195,7 +1217,7 @@ const openImageModal = (imageSrc) => {
     paddingBottom: '10px', 
     marginBottom: '20px',
     color: '#495057'
-  }}> Username's Saved Designs</h3>
+  }}> shafiqa's Saved Designs</h3>
   {designs.map(design => (
     <div key={design.id} style={{ 
       marginBottom: '20px',

@@ -37,55 +37,55 @@ function NavigationBar() {
 
     const styles = {
         container: {
-            backgroundColor: '#ffffff', // Brighter background
+            backgroundColor: '#ffffff', 
             padding: '20px',
-            borderRadius: '12px', // More pronounced border radius
-            boxShadow: '0 10px 30px #d96b64', // More dramatic shadow
+            borderRadius: '12px', 
+            boxShadow: '0 10px 30px #d96b64', 
             maxWidth: '600px',
             margin: '40px auto',
             textAlign: 'center',
-            border: '1px solid #eee' // Subtle border
+            border: '1px solid #eee' 
         },
         header: {
-            color: '#d96b64', // Vibrant purple
-            fontSize: '26px', // Slightly larger text
+            color: '#d96b64', 
+            fontSize: '26px', 
             marginBottom: '15px',
-            fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif' // Modern font
+            fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif' 
         },
         inputContainer: {
-            margin: '15px 0' // Increase space between inputs
+            margin: '15px 0' 
         },
         label: {
             display: 'block',
             marginBottom: '10px',
             fontWeight: 'bold',
-            color: '#333', // Darker color for better readability
-            fontSize: '16px' // Larger font size for labels
+            color: '#333',
+            fontSize: '16px'
         },
         input: {
             padding: '12px 20px',
             width: '100%',
         
             borderRadius: '8px',
-            border: '2px solid #d96b64', // Purple border to match header
+            border: '2px solid #d96b64',
             outline: 'none',
-            transition: 'border-color 0.3s', // Smooth transition for focus
+            transition: 'border-color 0.3s', 
             ':focus': {
-                borderColor: '#d96b64' // Coral color on focus
+                borderColor: '#d96b64' 
             }
         },
         button: {
             padding: '12px 25px',
-            backgroundColor: '#472826', // Coral background
+            backgroundColor: '#472826',
             color: 'white',
             border: 'none',
             borderRadius: '8px',
             cursor: 'pointer',
-            fontSize: '18px', // Larger button text
+            fontSize: '18px',
             marginTop: '25px',
-            transition: 'background-color 0.3s', // Smooth transition for hover
+            transition: 'background-color 0.3s', 
             ':hover': {
-                backgroundColor: '#472826' // Tomato color on hover
+                backgroundColor: '#472826' 
             }
         },
         lottie: {
@@ -120,15 +120,7 @@ function NavigationBar() {
     });
 
     
-    
- 
-    
-            // navigate(`/Homee1/${userId}`);
 
-        // } else {
-        //     const errorText = await response.text();
-        //     alert(`Failed to update profile. Please try again. Error: ${errorText}`);
-        // }
     };
 
     return (
@@ -171,6 +163,8 @@ function NavigationBar() {
                     <input style={styles.input} type="file" name="profileImage" id="profileImage" onChange={(e) => setUserData({ ...userData, profileImage: e.target.files[0] })} />
                 </div>
                 <button style={styles.button} type="submit">Update Profile</button>
+                <button style={{marginLeft:'20px'}}  >log out</button>
+
             </form>
             </div>
 

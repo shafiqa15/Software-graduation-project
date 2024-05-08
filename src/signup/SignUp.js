@@ -53,68 +53,6 @@ const SignUp = () => {
 
 
     const [username,setusername]=useState('');
-
-
-    // const handleSubmit = (e) => {
-       
-    //     e.preventDefault();
-    //     setFlage(true);
-    //     setEmailExists(false);
-    //     setPasswordMatch(formData.password === formData.confirmPassword);
-    
-    //     if (formData.password !== formData.confirmPassword) {
-    //         return; 
-    //     }
-    //     axios.post('http://192.168.88.5:9000/signup',formData)
-    //     .then(response => {
-            
-    //         console.log('Signup successful:', response.data);
-    //         setusername(response.data._id);
-    //         navigate("/Home1");
-
-        
-    // alert(response.data._id);
-    // { alert(formData.email)} //back to it
-    // { alert(formData.name)} //back to it
-    // { alert(formData.password)} //back to it
-    // // { alert(formData.name)} //back to it
-
-         
-    // e.preventDefault();
-    // const { value } = e.target[0];
-    
-    // axios.post(
-    //     'http://localhost:9000/authenticate',
-    //     {username :formData.name}
-        
-    //     )
-
-    // axios.post(
-    //   'http://localhost:9000/authenticate',
-    //   {username :value}
-      
-    //   )
-    //   .then(r=> e.onAuth({ ...r.data,secret:value }))
-    //   .catch(e => console.log('error',e))
-   
-
-
-          
-    //     })
-    //     .catch(error => {
-    //         console.error('Signup error:', error);
-    //         if (error.response) {
-    //             console.error('Error response:', error.response);
-    //             if (error.response.status === 409 || error.response.data.message === "Email already exists") {
-    //                 setEmailExists(true);
-    //             } else {
-    //                 setEmailExists(false); // Ensure this is reset if the error is not due to a duplicate email
-    //             }
-    //         } else {
-    //             console.error('Error message:', error.message);
-    //         }
-    //     });   
-    // };
     const { setUserData } = useUser();
 
 
@@ -131,7 +69,7 @@ const SignUp = () => {
         if (formData.password !== formData.confirmPassword) {
             return; 
         }
-        axios.post('http://192.168.88.2:9000/signup', formData)
+        axios.post('http://192.168.88.5:9000/signup', formData)
         .then(response => {
             console.log('Signup successful:', response.data.user._id);
             setusername(response.data.user._id);
@@ -185,7 +123,7 @@ const SignUp = () => {
     
 
     useEffect(() => {
-        axios.get('http://192.168.88.2:9000/signup')
+        axios.get('http://192.168.88.5:9000/signup')
             .then(response => {
                 console.log('Fetched users:', response.data); 
                 setUsers(response.data); 

@@ -3,8 +3,7 @@ import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import '/Users/shafiqaabdat/Downloads/client-main/src/design/design.css';
-import html2canvas from 'html2canvas'; // Import html2canvas
-// import Scene1 from '/SESSION_1709059176_2562448_preview-2.glb';
+import html2canvas from 'html2canvas';
 import { products, navigateToBedPage } from '/Users/shafiqaabdat/Downloads/client-main/src/BedRoomsLarge/BedRoomsLarge.js'; // Adjust the path as necessary
 import { startTransition } from 'react';
 
@@ -14,7 +13,6 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
 
-// Then use it in your component like so:
 
 
 function CameraController() {
@@ -69,20 +67,6 @@ function GridBorder({ size = 100, height = 200, color = 'black' }) {
 }
 
 
-// function Floor() {
-//   const texture = useLoader(THREE.TextureLoader, "/floor.jpeg"); // Ensure the path and file are correct
-//   texture.wrapS = THREE.RepeatWrapping;
-//   texture.wrapT = THREE.RepeatWrapping;
-//   texture.repeat.set(4, 4); 
-
-//   return (
-//     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0 ,0, 0]}> {/* Adjust position to match room */}
-//       <planeGeometry args={[10, 10]} /> {/* Adjust size to match room */}
-//       <meshStandardMaterial map={texture} />
-//     </mesh>
-//   );
-// }
-
 function Floor({ texturePath }) {
   const texture = useLoader(THREE.TextureLoader, texturePath);
   texture.wrapS = THREE.RepeatWrapping;
@@ -102,7 +86,7 @@ function Floor({ texturePath }) {
 function Model({ modelPath, position, rotation, scale }) {
   const ref = useRef();
   const gltf = useGLTF(modelPath);
-  // const { scene1 } = useGLTF("/SESSION_1709059176_2562448_preview-2.glb");
+
 
   useFrame(() => {
     ref.current.position.set(...position);
@@ -170,7 +154,7 @@ a.click();
     if (file) {
       const url = URL.createObjectURL(file);
       setFloorTexturePath(url);
-      setShowFloorUpload(false); // Close the pop-up after setting the texture
+      setShowFloorUpload(false); 
     }
   };
 
@@ -182,9 +166,9 @@ a.click();
     if (file) {
       const url = URL.createObjectURL(file);
       document.body.style.backgroundImage = `url(${url})`;
-      document.body.style.backgroundSize = 'cover'; // Cover the entire page
-      document.body.style.backgroundPosition = 'center'; // Center the background image
-      setShowWallUpload(false); // Hide the upload input after setting the background
+      document.body.style.backgroundSize = 'cover'; 
+      document.body.style.backgroundPosition = 'center'; 
+      setShowWallUpload(false); 
     }
   };
   
@@ -252,22 +236,21 @@ a.click();
       delete newState[activeObject];
       return newState;
     });
-    setActiveObject(null); // Optionally reset active object
+    setActiveObject(null); 
   };
 
 
   const [windowModel, setWindowModel] = useState({
      modelPath :process.env.PUBLIC_URL + '/Users/shafiqaabdat/Downloads/client-main/public/uploads-files-3101237-PM_Baked_Window.glb',
-    position: [0, 0, 0], // Default position, update as necessary
-    rotation: [0, 0, 0], // Default rotation, update as necessary
-    scale: 0.24, // Scale value
-    visible: false, // Window visibility
+    position: [0, 0, 0], 
+    rotation: [0, 0, 0], 
+    scale: 0.24, 
+    visible: false, 
   });
 
   useEffect(() => {
-    // Add the class on component mount
     document.body.classList.add('customBodyStyle2');
-  
+  //console.log('--');
     return () => {
       document.body.classList.remove('customBodyStyle2');
     };
@@ -275,16 +258,15 @@ a.click();
  
 
   useEffect(() => {
-    // Assuming the product data is passed as a prop or through React Router's state
-    const product = location.state?.product;
-  
+    
+    const product = location.state?.product1;
     if (product) {
       const initialObjects = {
         khazana: { 
           modelPath: product.khzana_obj, 
-          position: [0, 0, 0], // Customize as needed
-          rotation: [0, 0, 0], // Customize as needed
-          scale: 2, // Customize as needed
+          position: [0, 0, 0], 
+          rotation: [0, 0, 0], 
+          scale: 2, 
         },
         bedFrame: { 
           modelPath: product.objblue, // Assuming obj1 is a property containing the model path for the bed frame

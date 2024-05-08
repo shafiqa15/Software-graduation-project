@@ -26,7 +26,8 @@ import Decore2 from './decore/Decore2.js';
 import Kidsbedrooms from './Kidsbedrooms/Kidsbedrooms.js';
 import Visa from './Cart/Visa.js';
 import NavigationBar from './PAGES/NavigationBar.js';
-
+import Admin from './Admin/Admin.js';
+import Dashboard from './Admin/Dashboard.js';
 const App = () => {
   return (
     <CartProvider>
@@ -53,14 +54,26 @@ const App = () => {
           <Route path="/Cart" element={<Cart/>} />
           <Route path="/CartProvider" element={<CartProvider/>} />
           <Route path="/Guide" element={<Guide/>} />
-          <Route path="/favorites" element={<FavoritesPage products={products} />} />
+          {/* <Route path="/favorites" element={<FavoritesPage products={products} />} /> */}
+          <Route path="/favorites" element={<FavoritesPage />} />
+
           <Route path="/ReelsPage" element={<ReelsPage/>} />
-          <Route path="/Decore2" element={<Decore2 />} />
           <Route path="/Kidsbedrooms" element={<Kidsbedrooms />} />
           <Route path="/Visa" element={<Visa />} />
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/NavigationBar" element={<NavigationBar />} />
+          <Route path="/Admin" element={<Admin />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+          {/* <Route path="/product/:productId" element={<BedPage />} /> */}
 
+          {/* <Route path="/" element={<BedRoomsLarge />} /> */}
+        <Route path="/product/:productId" element={<BedPage />} />
+        {/* <Route path="/BedPage" element={<BedPage />} /> */}
+        {/* <Route path="/product1/:productId" element={<Decore2 />} /> */}
+        <Route path="/detailing" element={<Decore2 />} />
+
+          {/* <Route path="/" exact component={BedRoomsLarge} /> */}
+           {/* <Route path="/product/:productId" component={BedPage} /> */}
 
         </Routes>
       </div>

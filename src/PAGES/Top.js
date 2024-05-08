@@ -1,59 +1,75 @@
-import React, { useState } from 'react';
 import '/Users/shafiqaabdat/Downloads/client-main/src/home/home.css'; // Ensure this path is correct
 import home_img from '/Users/shafiqaabdat/Downloads/client-main/src/images/cash_.webp'; // Ensure this path is correct
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../PAGES/Top.css';
-// import '/Users/shafiqaabdat/Downloads/client-main/src/PAGES/Top.css'
+import { useEffect } from 'react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import SignUp from '../signup/SignUp';
 const Top = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
-  
-  
-  const [showSignup, setShowSignup] = useState(false);
-  
-  const [flageerror, setflageerror] = useState(false);
-  const [flage, setflage] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [loginError, setLoginError] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  // const history = useHistory();
+  const navigate = useNavigate();
 
-    email:'',
-    password: '',
-   
-});
-  const handleLogin = () => {
-    setflageerror(true);
-    // Implement your login logic here
-    const userData={
-      email:formData.email,
-      password:formData.password
-    };
-    // console.log('Login submitted:', { username, password });
-    axios.post('http://192.168.1.12:9000/signin',userData)
-    .then( res =>{ 
-      res.data? <Link className="nav__link" to="/Home"></Link>:setflage(true);
-     
 
-    // <Text style={styles.passwordMatchMessage}>Passwords do not match.</Text>
-    }
-    )
-    .catch( e =>{console.log(e);
-    // console.log(flage);
-  });
-    
-    // Here you would typically include a call to your API for the login
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
+
+
+  useEffect(() => {
+    const handler = () => {
+        console.log("Event!");
+    };
+
+    document.addEventListener("click", handler);
+
+    // Cleanup function
+    return () => {
+        document.removeEventListener("click", handler);
+    };
+}, []); // Ensure dependencies are correctly listed
+
+
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    if (formData.email === 'shafiqa@gmail.com' && formData.password === '12345' ||formData.email === 's12027801@stu.najah.edu' ) {
+      setIsAdmin(true); // Set admin state
+      navigate('/Admin'); // Redirect to admin dashboard
+    } else {
+      const userData = {
+        email: formData.email,
+        password: formData.password
+      };
+      try {
+        const response = await axios.post('http://192.168.88.5:9000/signin', userData);
+        if (response.data) {
+          navigate('/Home1'); // Redirect to admin dashboard
+        } else {
+          setLoginError(true);
+        }
+      } catch (error) {
+        console.error(error);
+        setLoginError(true);
+      }
+    }
+  };
+
   return (
     <>
-     
-     <header className="header" id="header">
+      <header className="header" id="header">
         <nav className="nav container" style={{marginRight:'90px'}}>
           <a href="/Home1" className="nav__logo">
-            <img src={home_img} alt="Logo" style={{ margin: '0px', borderRadius: '50%', width: '90px', height: '90px',marginRight:'10px' }} />
+            <img src={home_img} alt="Logo" style={{ margin: '0px', borderRadius: '50%', width: '90px', height: '90px', marginRight:'10px' }} />
             <span className="nav__logo-text" style={{fontSize:'14px'}}>Cach Bblash</span>
-            
           </a>
-
           <div className={`nav__menu ${showMenu ? 'show-menu' : ''}`} id="nav-menu">
             <ul className="nav__list" style={{marginRight:'-70px',marginTop:'-55px'}}>
             <li className="nav__item"><a href="/Contact" className="nav__link" >Contact </a></li>
@@ -105,14 +121,11 @@ const Top = () => {
           </div>
 
               {/* <li className="nav__item"><a href="#" className="nav__link">About Us</a></li> */}
-            </ul>
-
+            </ul>            
             <div className="nav__close" id="nav-close" onClick={() => setShowMenu(false)}>
               <i className="ri-close-line"></i>
             </div>
           </div>
-
-  
         </nav>
       </header>
 
@@ -125,59 +138,38 @@ const Top = () => {
       </div>
 
       <div className={`login ${showLogin ? 'show-login' : ''}`} id="login">
-        <form action="" className="login__form">
+        <form action="" className="login__form" onSubmit={handleLogin}>
           <h2 className="login__title">Log In</h2>
           <div className="login__group">
             <div>
-              <label htmlFor="email" className="login__label">Email</label>
+              <label htmlFor="email" className="login__label"><p style={{color:'black'}}>Email : </p></label>
               <input
                type="email" 
-              placeholder="Write your email" 
-              id="email"
-              className="login__input" 
-              // value={formData.email}
-              onChange={handleLogin}
-
-
+               name="email"
+               placeholder="Write your email" 
+               className="login__input"
+               value={formData.email}
+               onChange={handleInputChange}
               />
-
-     {/* {formData.email==='' &&flageerror&&<p className='errormsg'>Email is required.</p>} */}
-
-
-
             </div>
             <div>
-              <label htmlFor="password" className="login__label">Password</label>
+              <label htmlFor="password" className="login__label" > <p style={{color:'black'}}>Password :</p> </label>
               <input
                type="password"
-                placeholder="Enter your password" 
-                id="password" 
-                className="login__input"
-                // value={formData.password}
-                onChange={handleLogin} 
-
-                />
-  {/* {formData.password==='' &&flageerror&&<p className='errormsg'>Password is required.</p>} */}
-
+               name="password"
+               placeholder="Enter your password" 
+               className="login__input"
+               value={formData.password}
+               onChange={handleInputChange}
+              />
             </div>
           </div>
-          <div className="login__options">
-            <p className="login__signup">
-              You do not have an account? <Link to="/SignUp">Sign up</Link>
-            </p>
-            <a href="#" className="login__forgot">Forgot your password?</a>
-          </div>
-          <button type="submit" className="login__button">Log In</button>
-          <div id="signInDiv"> </div>
+    <p>Already have an account ? <a href='/SignUp'> signup</a></p> 
+          <button type="submit" className="login__button" style={{justifyContent:'center',height:'50px'}}><p style={{color:'white',justifyContent:'center'}}> Log In</p></button>
+          {loginError && <p className="error">Invalid email or password.</p>}
         </form>
-        {/* <div id="signInDiv"> </div> Google sign-in button will be rendered here */}
         <i className="ri-close-line login__close" id="login-close" onClick={() => setShowLogin(false)}></i>
       </div>
-
-  
-<div>
-</div>
-   
     </>
   );
 }
