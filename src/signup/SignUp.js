@@ -53,14 +53,16 @@ const SignUp = () => {
 
 
     const [username,setusername]=useState('');
-    const { setUserData } = useUser();
+    // const { setUserData } = useUser();
+    const { setUserId, setUserData } = useUser();
 
-
+    const { userData ,userId, setuserId} = useUser();
 
  
     
     const handleSubmit = (e) => {
         e.preventDefault();
+
         setFlage(true);
         setEmailExists(false);
         setPasswordMatch(formData.password === formData.confirmPassword);
@@ -69,39 +71,56 @@ const SignUp = () => {
         if (formData.password !== formData.confirmPassword) {
             return; 
         }
-        axios.post('http://192.168.88.5:9000/signup', formData)
+  
+
+
+
+
+        axios.post('http://192.168.88.8:9000/signup', formData)
         .then(response => {
             console.log('Signup successful:', response.data.user._id);
+            // setuserId(response.data.user._id);
             setusername(response.data.user._id);
             alert(response.data.user._id); // Ensure this shows the correct ID
         //   navigate("/NavigationBar", { state: { userId: response.data.user._id, email: formData.email, name: formData.name, password: formData.password,country:formData.country,phoneNumber:formData.phoneNumber}});
             // navigate("/Cart", { state: { userId: response.data.id, email: formData.email, name: formData.name, password: formData.password }});
-          
-            setUserData({
-                userId: response.data.user._id,
-                email: formData.email,
-                name: formData.name,
-                password: formData.password,
-                country: formData.country,
-                phoneNumber: formData.phoneNumber
-            });
+           
+                const userId = response.data.user._id;
+                setUserId(userId); // Store userId in UserContext
+                setUserData({
+                    userId: userId,
+                    email: formData.email,
+                    name: formData.name,
+                    password: formData.password,
+                    country: formData.country,
+                    phoneNumber: formData.phoneNumber
+                });
+            // setUserData({
+            //     userId: response.data.user._id,
+
+            //     email: formData.email,
+            //     name: formData.name,
+            //     password: formData.password,
+            //     country: formData.country,
+            //     phoneNumber: formData.phoneNumber
+            // });
 
             e.preventDefault();
             const { value } = e.target[0];
             
             axios.post(
-                'http://localhost:9000/authenticate',
+                'http://localhost:3001/authenticate',
                 {username :formData.name}
                 
                 )
         
             axios.post(
-              'http://localhost:9000/authenticate',
+              'http://localhost:3001/authenticate',
               {username :value}
               
               )
               .then(r=> e.onAuth({ ...r.data,secret:value }))
-              .catch(e => console.log('error',e))
+            .catch(e => console.log('error',e))
 
 
 
@@ -123,7 +142,7 @@ const SignUp = () => {
     
 
     useEffect(() => {
-        axios.get('http://192.168.88.5:9000/signup')
+        axios.get('http://192.168.88.8:9000/signup')
             .then(response => {
                 console.log('Fetched users:', response.data); 
                 setUsers(response.data); 

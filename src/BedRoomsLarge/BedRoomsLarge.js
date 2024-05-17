@@ -73,9 +73,7 @@ const folowobj='/SESSION_1709431540_7920988_preview.gltf';
 const comedenaobj ='/SESSION_1709473701_3541317_preview.gltf';
 const mirrorobj='/SESSION_1709338570_8496202_preview.gltf';
 const comedenaobj2='/shafiqa.gltf';
-// img1Dimensions, comedena1Dimensions, mirrorDimensions, khzanaDimensions } = location.state || {};
 
-// Combined products array
 const products = [
   { id: 1,available:5,number_of_pieces:5, name: 'Bed Frame', price: 1000,imageUrl: room2,kind:"Imported manufacturing",obj:obj1 ,img1:bed2,img2:bed2,img3:bed1,img4:bed4,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown",bed1black:black1,bed2black:black2,bed3black:black3,bed4black:black4,khzana:khzana,follow:folo ,mirror:mirror,objblue:obj2,khzana_obj:khzana_obj,Khzana2:khazana2,khzana3:khazana3,khzana4:khazana4,follow2:folo2,folowobj:folowobj,folo3:folo3,comedena1:comedena1,comedena2:comedena2,comedena3:comedena3,comedena4:comedena4,comedenaobj:comedenaobj,comedenaobj2:comedenaobj2,mirror2:mirror2,mirror3:mirror3,mirror4:mirror4,mirrorobj:mirrorobj,kindd:'bedroom',img1Dimensions: { width: 50, height: 20, depth: 10 },comedena1Dimensions:{ width: 50, height: 20, depth: 10 },mirrorDimensions:{ width: 50, height: 20, depth: 10 },khzanaDimensions:{ width: 50, height: 20, depth: 10 },foloDimensions:{ width: 50, height: 20, depth: 10 }},
   { id: 2,available:3, number_of_pieces:10,name: 'Mattress', price: 2000 ,imageUrl: room1,kind:"Local manufacturing " ,obj:obj1,img1:bed2,img2:bed2,img3:bed3,img4:bedFrameImage,upadte1:bed0coloreblue,update2:bed1coloreblue,upadte3:bed2coloreblue,update4:bed3coloreblue,update5:bed4coloreblue,color:"brown",khzana:khzana,follow:folo,mirror:mirror,objblue:obj2,khzana_obj:khzana_obj,Khzana2:khazana2,khzana3:khazana3,khzana4:khazana4,follow2:folo2,folowobj:folowobj,folo3:folo3,comedena1:comedena1,comedena2:comedena2,comedena3:comedena3,comedena4:comedena4,comedenaobj:comedenaobj,mirror2:mirror2,mirror3:mirror3,mirror4:mirror4,mirrorobj:mirrorobj,comedenaobj2:comedenaobj2,kindd:'bedroom',img1Dimensions: { width: 50, height: 20, depth: 10 },comedena1Dimensions:{ width: 50, height: 20, depth: 10 },mirrorDimensions:{ width: 50, height: 20, depth: 10 },khzanaDimensions:{ width: 50, height: 20, depth: 10 },foloDimensions:{ width: 50, height: 20, depth: 10 }},
@@ -93,11 +91,9 @@ const products = [
 export { products };
 
 
-// const imageUrl2 = query.get('imageUrl');
-
 const BedRoomsLarge = () => {
 
-const ipdevice='192.168.88.5';
+const ipdevice='192.168.88.8';
 
   const [product1,setProduct1]= useState([]);
   
@@ -151,7 +147,7 @@ const ipdevice='192.168.88.5';
     axios.get(`http://${ipdevice}:9000/viewAllProductsortINC`)
       .then(result => {
         setProduct1(result.data.product);
-        setIsSorted(true); // Set sorted state to true
+        setIsSorted(true);
 
 
 
@@ -166,7 +162,7 @@ const ipdevice='192.168.88.5';
     axios.get(`http://${ipdevice}:9000/viewAllProductsortDEC`)
       .then(result => {
         setProduct1(result.data.product);
-        setIsSorted(true); // Set sorted state to true
+        setIsSorted(true); 
 
 
 
@@ -180,8 +176,8 @@ const ipdevice='192.168.88.5';
  const toggleFavorite = (product) => {
   const isFavorite = favorites.includes(product._id);
   const updatedFavorites = isFavorite
-    ? favorites.filter(id => id !== product._id) // Remove from favorites
-    : [...favorites, product._id]; // Add to favorites
+    ? favorites.filter(id => id !== product._id) 
+    : [...favorites, product._id]; 
 
   localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
   setFavorites(updatedFavorites);
@@ -208,19 +204,7 @@ useEffect(() => {
     }, 50000);
     return () => clearInterval(interval);
   }
-}, [isSorted]); // Dependency on isSorted to control fetching behavio
-
-
-
-
-
-
-
-
-
-
-
-
+}, [isSorted]); 
 
 
   const handleSortChange = (e) => {
@@ -230,7 +214,7 @@ useEffect(() => {
     } else if (sortType === 'priceHighToLow') {
       sorting_dec();
     } else {
-      fetchProductData(); // Fetch unsorted data if 'Sort by' or any other default option is selected
+      fetchProductData(); 
     }
   };
 

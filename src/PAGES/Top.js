@@ -49,7 +49,7 @@ const Top = () => {
         password: formData.password
       };
       try {
-        const response = await axios.post('http://192.168.88.5:9000/signin', userData);
+        const response = await axios.post('http://192.168.88.8:9000/signin', userData);
         if (response.data) {
           navigate('/Home1'); // Redirect to admin dashboard
         } else {
@@ -99,7 +99,7 @@ const Top = () => {
       {/* <li><a href="#" className="nav__link">King Bedrooms</a></li> */}
     </ul>
     </li>
-              <li className="nav__item"><a href="#" className="nav__link">Offers</a></li>
+              <li className="nav__item"><a href="/OfferPage" className="nav__link">Offers</a></li>
               <li className="nav__item"><a href="/ReelsPage" className="nav__link">Reels</a></li>
               <li className="nav__item"><a href="/Cart" className="nav__link">Cart🛒</a></li>
               <li className="nav__item"><a href="/favorites" className="nav__link" style={{marginLeft:'-30px'}}>♡</a></li>

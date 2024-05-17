@@ -16,7 +16,7 @@ const FavoritesPage = () => {
   }, []);  
 
 
-  const ipdevice='192.168.88.2';
+  const ipdevice='192.168.88.8';
   const fetchFavorites = () => {
   
 
@@ -37,15 +37,19 @@ const FavoritesPage = () => {
   const removeFromFavorites = (productId) => {
     console.log("Attempting to remove product with ID:", productId); 
     axios.post(`http://${ipdevice}:9000/removeFromFavorites`, { id: productId })
-      .then(response => {
-        console.log("Product removed:", response.data);
-        const updatedFavorites = favoriteProducts.filter(product => product.id !== productId);
-        setFavoriteProducts(updatedFavorites);
-      })
-      .catch(error => {
-        console.error('Error removing product from favorites:', error);
-      });
-  }
+        .then(response => {
+            console.log("Product removed:", response.data);
+            // Filter using the correct ID property
+            const updatedFavorites = favoriteProducts.filter(product => product.id !== productId);
+            setFavoriteProducts(updatedFavorites);
+            alert("Product successfully removed from favorites!");
+        })
+        .catch(error => {
+            console.error('Error removing product from favorites:', error);
+            alert(`Error: ${error.message}`);
+        });
+}
+
 
   return (
     <div>
@@ -56,7 +60,7 @@ const FavoritesPage = () => {
           <h1 style={{marginTop:'80px'}}>Favorites</h1>
           {favoriteProducts.map(product => (
             <div key={product.id} className="product-card">
-              <img src={product.imageUrl} alt={product.name} />
+              <img src={product.image} alt={product.name} />
               <h2>{product.name}</h2>
               <p>Kind: {product.type} manufacturing</p>
               <p>Price: {product.price}₪</p>
@@ -65,7 +69,7 @@ const FavoritesPage = () => {
                 View Product
               </Link>
           
-            <button onClick={() => removeFromFavorites(product.id)} className="remove-favorite-button">
+            <button onClick={() => removeFromFavorites(product._id)} className="remove-favorite-button">
   Remove from Favorites
 </button>
 

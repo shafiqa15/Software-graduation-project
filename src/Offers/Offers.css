@@ -1,0 +1,134 @@
+.ProductContainer15 {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .ProductCard15 {
+    flex: 0 0 30%; /* Adjust the width as needed */
+    margin: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .ProductCard15 img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .ProductInfo15 {
+    margin-top: 10px;
+  }
+  
+  .ProductFooter15 {
+    margin-top: 10px;
+    font-style: italic;
+  }
+  
+  .CenteredButton {
+    position: absolute;
+    top:60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    background-color: #d8d4c9;
+    width: 200px;
+    height: 50px;
+/* border-radius: 50%; */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  }
+  
+  .fading-images {
+    display: flex;
+    gap: 10px;
+    overflow: hidden;
+  }
+  
+  .fade-image {
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+    animation: fadeIn 5s forwards;
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+
+  .fading-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust the spacing between images as needed */
+  }
+  
+  .fade-image {
+    width: 200px; /* Adjust the size as needed */
+    height: auto;
+    transition: opacity 1s ease-in-out;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+  
+  .fade-image:nth-child(1) {
+    animation-delay: 0s;
+  }
+  
+  .fade-image:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+  
+  .fade-image:nth-child(3) {
+    animation-delay: 1s;
+  }
+  
+  .fade-image:nth-child(4) {
+    animation-delay: 1.5s;
+  }
+  
+  .fade-image:nth-child(5) {
+    animation-delay: 2s;
+  }
+  
+  .fade-image:nth-child(6) {
+    animation-delay: 2.5s;
+  }
+  
+  .fade-image:nth-child(7) {
+    animation-delay: 3s;
+  }
+  
+  .fade-image:nth-child(8) {
+    animation-delay: 3.5s;
+  }
+  .fade-image:nth-child(6) {
+    animation-delay:4s;
+  }
+  .fade-image:nth-child(9) {
+    animation-delay: 4.5s;
+  }
+  .fade-image:nth-child(10) {
+    animation-delay: 5s;
+  }
+  .fade-image:nth-child(11) {
+    animation-delay: 5.5s;
+  }
+  .fade-image:nth-child(12) {
+    animation-delay: 6s;
+  }
+
+
+  /* Add more nth-child selectors as needed */
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  

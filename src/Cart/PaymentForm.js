@@ -90,8 +90,13 @@ export default function PaymentForm({ amount }) {
                 <div>
                     <h2 style={{fontSize:'22px'}}>Thanks for choosing us {name}
  ! Your cart just has been bought,check the messages from admin of arrival day + check ur profile to know the date! Have a nice day. </h2>
-                    <Lottie options={defaultOptions} height={200} width={200}/>
 
+                    <Lottie options={defaultOptions} height={200} width={200}/>
+                    <h2 style={{marginLeft:'210px'}}> Here you can keep checking the date of your order arriving   </h2>
+                    <button  style={{width:'200px',marginLeft:'600px',backgroundColor:'#464a5d',color:'white' }}> Go</button>
+<p>
+INVOICE HISTORY:
+</p>
                 </div> 
             }
         </>

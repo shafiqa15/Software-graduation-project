@@ -28,14 +28,19 @@ import Visa from './Cart/Visa.js';
 import NavigationBar from './PAGES/NavigationBar.js';
 import Admin from './Admin/Admin.js';
 import Dashboard from './Admin/Dashboard.js';
+import Threed from './Threed/Threed.js';
+import ThreedComponent from './Threed/Threed.js';
+import OfferPage from './Offers/OfferPage.js';
+import OfferDetails from './Offers/OfferDetails.js';
 const App = () => {
   return (
     <CartProvider>
     <Router> 
       <div>
         <Routes>    
-          <Route index element={<Home1/>}/>
+          <Route index element={<ThreedComponent/>}/>
           <Route path="/Home1" element={<Home1/>}/>
+          <Route path="/ThreedComponent" element={<ThreedComponent/>}/>
           <Route path="/Admin_convert3d" element={<Admin_convert3d/>}/>
           <Route path="/Chat_io" element={<Chat_io/>}/>
           <Route path="/Contact" element={<Contact/>}/>
@@ -71,6 +76,9 @@ const App = () => {
         {/* <Route path="/BedPage" element={<BedPage />} /> */}
         {/* <Route path="/product1/:productId" element={<Decore2 />} /> */}
         <Route path="/detailing" element={<Decore2 />} />
+>
+        <Route path="/OfferPage" element={<OfferPage />} />
+        <Route path="/offer-details/:id" element={<OfferDetails />} />
 
           {/* <Route path="/" exact component={BedRoomsLarge} /> */}
            {/* <Route path="/product/:productId" component={BedPage} /> */}
