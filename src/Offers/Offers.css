@@ -24,6 +24,25 @@
     font-style: italic;
   }
   
+
+
+
+  .CenteredButton2 {
+    position: absolute;
+margin-top: 20px;
+    margin-left: 50px;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    background-color: #d8d4c9;
+    width: 100px;
+    height: 50px;
+/* border-radius: 50%; */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  
   .CenteredButton {
     position: absolute;
     top:60%;
@@ -59,76 +78,169 @@
   }
   
 
-  .fading-images {
+ 
+  /* Fading images effect */
+.fading-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Adjust the spacing between images as needed */
+}
+
+.fade-image {
+  width: 100%; /* Make sure the image fills the container */
+  height: auto;
+  transition: opacity 1s ease-in-out;
+  opacity: 0;
+  animation: fadeIn 4s forwards;
+}
+
+.fade-image:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.fade-image:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.fade-image:nth-child(3) {
+  animation-delay: 1s;
+}
+
+.fade-image:nth-child(4) {
+  animation-delay: 1.5s;
+}
+
+.fade-image:nth-child(5) {
+  animation-delay: 2s;
+}
+
+.fade-image:nth-child(6) {
+  animation-delay: 2.5s;
+}
+
+.fade-image:nth-child(7) {
+  animation-delay: 3s;
+}
+
+.fade-image:nth-child(8) {
+  animation-delay: 3.5s;
+}
+
+.fade-image:nth-child(9) {
+  animation-delay: 4s;
+}
+
+.fade-image:nth-child(10) {
+  animation-delay: 4.5s;
+}
+
+.fade-image:nth-child(11) {
+  animation-delay: 5s;
+}
+
+.fade-image:nth-child(12) {
+  animation-delay: 5.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+
+
+
+
+
+
+  .ProductContainer15 {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* Adjust the spacing between images as needed */
+    justify-content: space-around; /* Center the items within the container */
+    /* gap: 10px; Add space between items */
   }
   
-  .fade-image {
-    width: 200px; /* Adjust the size as needed */
+  .ProductCard15 {
+    position: relative; /* Necessary for positioning the button */
+    flex: 0 0 30%; /* Adjust the width as needed */
+    margin: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    transition: transform 0.3s ease-in-out; /* Add a smooth scaling effect */
+  }
+  
+  .ProductCard15:hover {
+    transform: scale(1.05); /* Scale up slightly on hover */
+  }
+  
+  .ProductImage15 {
+    width: 100%; /* Make sure the image fills the container */
     height: auto;
-    transition: opacity 1s ease-in-out;
-    opacity: 0;
-    animation: fadeIn 1s forwards;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out; /* Smooth transition for the opacity */
   }
   
-  .fade-image:nth-child(1) {
-    animation-delay: 0s;
+  .ProductCard15:hover .ProductImage15 {
+    opacity: 0.5; /* Dim the image on hover */
   }
   
-  .fade-image:nth-child(2) {
-    animation-delay: 0.5s;
-  }
-  
-  .fade-image:nth-child(3) {
-    animation-delay: 1s;
-  }
-  
-  .fade-image:nth-child(4) {
-    animation-delay: 1.5s;
-  }
-  
-  .fade-image:nth-child(5) {
-    animation-delay: 2s;
-  }
-  
-  .fade-image:nth-child(6) {
-    animation-delay: 2.5s;
-  }
-  
-  .fade-image:nth-child(7) {
-    animation-delay: 3s;
-  }
-  
-  .fade-image:nth-child(8) {
-    animation-delay: 3.5s;
-  }
-  .fade-image:nth-child(6) {
-    animation-delay:4s;
-  }
-  .fade-image:nth-child(9) {
-    animation-delay: 4.5s;
-  }
-  .fade-image:nth-child(10) {
-    animation-delay: 5s;
-  }
-  .fade-image:nth-child(11) {
-    animation-delay: 5.5s;
-  }
-  .fade-image:nth-child(12) {
-    animation-delay: 6s;
-  }
+  .ProductInfo15 {
+    margin-top: 10px;
+    text-align: center; 
+  }  
 
+  .fade-image-container {
+    text-align: center; /* Center the text below each image */
+    transition: transform 0.3s, box-shadow 0.3s; /* Add a smooth transition for hover effect */
+    padding: 4px; /* Add padding to include space for the glow */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    box-shadow: 0 0 10px 10px rgba(152, 124, 95, 0.6); /* Add a glowing border */
 
-  /* Add more nth-child selectors as needed */
+  }
   
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  .fade-image-container:hover {
+    transform: scale(0.9); /* Scale up the image block on hover */
+  }
+  
+  .related-images {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .related-images h3 {
+    margin-bottom: 15px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .related-images-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px;
+  }
+  
+  .related-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 0 10px 10px rgba(152, 124, 95, 0.6); /* Add a glowing border */
+
+  }
+  
+  .related-image:hover {
+    transform: scale(3); /* Increase scale value for more zoom */
+    box-shadow: 0 4px 12px rgba(139, 108, 108, 0.2);
   }
   

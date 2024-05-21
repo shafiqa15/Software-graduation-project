@@ -5,11 +5,21 @@ import video_1 from '../videos/vid1.MP4';
 import video_2 from '../videos/vid2.MP4';
 import video_3 from '../videos/vid3.MP4';
 import video_4 from '../videos/vid4.MP4';
+import video_5 from '../videos/vid0.MP4';
 import logo_reels from '../images/Screenshot_2024-02-20_at_15.13.32-removebg-preview.png';
 import commentIcon from '../images/VEGA.jpeg'; // Replace with the path to your comment icon image
 import avatar from '../images/cash_.webp';
 function ReelsPage() {
   const videos = [
+    {
+      channel: "كاش ببلاش الاضخم في فلسطين",
+      avatarSrc: avatar,
+      song: "Cash Bblash",
+      url: video_5,
+      likes: 1,
+      shares: 1,
+      comments: []
+    },
     {
       channel: "كاش ببلاش الاضخم في فلسطين",
       avatarSrc: avatar,

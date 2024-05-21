@@ -141,7 +141,7 @@ const { addToCart } = useCart(); // This is how you access addToCart now
 const [userId, setUserId] = useState(''); // Assuming you get this from user session or context
 const [cart, setCart] = useState(null);
 const [error, setError] = useState('');
-const ipdevice='192.168.88.3';
+const ipdevice='192.168.88.11';
 
 
   const [rating, setRating] = useState(0);
@@ -155,7 +155,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
   const [product,setProduct]=useState([])
   useEffect( () => {
   
-    axios.get('http://192.168.88.8:3001/viewAllProduct')
+    axios.get('http://192.168.88.11:3001/viewAllProduct')
     .then(result=>{ setProduct(result.data.product)
       window.confirm(result.data);
     })

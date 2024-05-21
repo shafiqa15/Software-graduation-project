@@ -93,7 +93,7 @@ export { products };
 
 const BedRoomsLarge = () => {
 
-const ipdevice='192.168.88.8';
+const ipdevice='192.168.88.11';
 
   const [product1,setProduct1]= useState([]);
   
