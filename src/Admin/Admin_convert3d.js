@@ -1,38 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { useGLTF, OrbitControls } from '@react-three/drei';
 
-function Admin_convert3d() {
-  const [conversionResult, setConversionResult] = useState(null);
+function Model({ modelUrl }) {
+  const { scene } = useGLTF(modelUrl);
+  scene.scale.set(2, 2, 2); // Adjust the scale as needed
+  return <primitive object={scene} />;
+}
 
-  const handleConvertTo3D = async () => {
-    try {
-        // axios.post('http://192.168.88.6:9000/signup', formData)
+function AddAndShow3DAdmin() {
+  const [modelUrl, setModelUrl] = useState(null);
+  const [showModel, setShowModel] = useState(false);
 
-      const response = await fetch('http://192.168.88.5:2000/convert-to-3d', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      });
-      const data = await response.json();
-      setConversionResult(data);
-      console.log(data);
-    }
-     catch (error) {
-      console.error('Error:', error);
-      alert('Failed to convert to 3D.');
+  const handleModelUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setModelUrl(url);
+      setShowModel(false); // Hide the model initially until the "Show" button is clicked
     }
   };
 
   return (
-    <div>
-      <h1>3D Image Converter</h1>
-      <button onClick={handleConvertTo3D}>Convert Image</button>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
       <div>
-        <h2>Conversion Result:</h2>
-        <pre>{JSON.stringify(conversionResult, null, 2)}</pre>
+        <input type="file" onChange={handleModelUpload} accept=".gltf,.glb" />
+        <button onClick={() => setShowModel(true)} style={{ marginLeft: '10px' }}>Show</button>
       </div>
+      {showModel && modelUrl && (
+        <div style={{ width: '100%', height: '500px', marginTop: '20px' }}>
+          <Canvas>
+            <Suspense fallback={null}>
+              <ambientLight intensity={0.5} />
+              <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+              <pointLight position={[-10, -10, -10]} />
+              <Model modelUrl={modelUrl} />
+              <OrbitControls />
+            </Suspense>
+          </Canvas>
+        </div>
+      )}
     </div>
   );
 }
 
-export default Admin_convert3d;
+export default AddAndShow3DAdmin;

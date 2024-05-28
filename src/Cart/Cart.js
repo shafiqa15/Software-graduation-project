@@ -207,11 +207,11 @@ const Cart = () => {
 
 {cartItems.map((item, index) => (
   <div key={item.id} className="cart-item" style={{width:'800px', marginLeft:'300px'}}>
-    <img className='photo' src={item.imageUrl} alt={item.name} />
+    <img className='photo' src={item.image} alt={item.name} />
     <div className="item-details">
       <h3>
         <p style={{fontSize:'23px', color:'black'}}>
-          Product Name: {item.name} {item.details ? `(Detailed)` : ''}
+          Product Name: {item.name} {item.details ? `(Customized)` : ''}
         </p>
       </h3>
       <p>Price: {item.price} ₪</p>

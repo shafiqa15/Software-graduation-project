@@ -103,6 +103,7 @@ const BedPage = () => {
   const handleAddToCartClick = (product) => {
     console.log("Adding product:", product);  // Ensure this logs the correct product data
     addToCart({ ...product, quantity: 1 });
+    
     navigate('/cart'); 
     
 };

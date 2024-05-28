@@ -8,7 +8,7 @@ function Model({ modelUrl }) {
   return <primitive object={scene} />;
 }
 
-function add_and_show_3d_admin() {
+function AddAndShow3DAdmin() {
   const [modelUrl, setModelUrl] = useState(null);
   const [showModel, setShowModel] = useState(false);
 
@@ -44,4 +44,4 @@ function add_and_show_3d_admin() {
   );
 }
 
-export default add_and_show_3d_admin;
+export default AddAndShow3DAdmin;

@@ -1,0 +1,15 @@
+.CenteredButton40 {
+    position: absolute;
+    top:30%;
+    left: 8%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    background-color: #d8d4c9;
+    width: 200px;
+    height: 50px;
+/* border-radius: 50%; */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  }

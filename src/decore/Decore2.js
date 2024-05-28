@@ -10,6 +10,7 @@ import folo2 from '../images/bed1/Screenshot_2024-03-03_at_04.04.33-removebg-pre
 import mirror from '../images/bed1/mirror.png'
 import comedena1 from '../images/bed1/Screenshot 2024-03-03 at 15.47.57.png';
 import bed2 from '/Users/shafiqaabdat/Downloads/client-main/src/images/bed1/Screenshot 2024-02-28 at 22.05.01.png';
+import { image1 } from '/Users/shafiqaabdat/Downloads/client-main/src/images/Screenshot 2024-03-01 at 01.22.19.png';
 
 
 
@@ -88,36 +89,40 @@ const Decore2 = () => {
   };
   
   
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     const extraPrice = calculatePriceIncrease();
-    const basePrice = parseFloat(product.price) || 0; 
+    const basePrice = parseFloat(product.price) || 0;
     const finalPrice = basePrice + extraPrice;
-  
+
     const productToAdd = {
-      id: product.name + new Date().toISOString(),
-      name: product.name,
-      price: finalPrice,
-      imageUrl: bed2, 
-      quantity: 1,
-      details: "Updated Dimensions",
-      dimensions: updatedDimensions 
+        id: product.name + new Date().toISOString(),
+        name: product.name,
+        price: finalPrice,
+        image: product.image,
+        quantity: 1,
+        details: "Updated Dimensions",
+        dimensions: updatedDimensions,
+        isOffer: false,  // Add this property
+        source: 'detailing' // Add this property
+
     };
-  
+
     if (isNaN(finalPrice)) {
-      console.error('Computed final price is NaN, check input values:', finalPrice);
+        console.error('Computed final price is NaN, check input values:', finalPrice);
     } else {
-      addToCart(productToAdd); 
-      navigate('/cart');
+        addToCart(productToAdd);
+        // alert( product.image)
+        navigate('/cart');
     }
-  };
+};
+
   
 
 
   useEffect(() => {
     if (product.name) {
-      alert(product.name);
+      // alert(product.name);
     }
   }, [product.name]);
 

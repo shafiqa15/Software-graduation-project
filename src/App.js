@@ -32,14 +32,21 @@ import Threed from './Threed/Threed.js';
 import ThreedComponent from './Threed/Threed.js';
 import OfferPage from './Offers/OfferPage.js';
 import OfferDetails from './Offers/OfferDetails.js';
-const App = () => {
+import Three from './Admin/Three.js';
+
+// import AddAndShow3DAdmin from '/Users/shafiqaabdat/Downloads/client-main/src/Admin/Admin_convert3d.js';
+
+import AddAndShow3DAdmin from './add_and_show_3d_admin';
+ const App = () => {
   return (
     <CartProvider>
     <Router> 
       <div>
         <Routes>    
-          <Route index element={<ThreedComponent/>}/>
+          <Route index element={<Three/>}/>
           <Route path="/Home1" element={<Home1/>}/>
+          <Route path="/Three" element={<Three/>}/>
+          <Route path="/AddAndShow3DAdmin" element={<AddAndShow3DAdmin />}/>
           <Route path="/ThreedComponent" element={<ThreedComponent/>}/>
           <Route path="/Admin_convert3d" element={<Admin_convert3d/>}/>
           <Route path="/Chat_io" element={<Chat_io/>}/>
@@ -76,7 +83,7 @@ const App = () => {
         {/* <Route path="/BedPage" element={<BedPage />} /> */}
         {/* <Route path="/product1/:productId" element={<Decore2 />} /> */}
         <Route path="/detailing" element={<Decore2 />} />
->
+
         <Route path="/OfferPage" element={<OfferPage />} />
         <Route path="/offer-details/:id" element={<OfferDetails />} />
 
@@ -92,4 +99,3 @@ const App = () => {
 }
 
 export default App;
-

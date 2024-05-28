@@ -44,6 +44,7 @@ const handleAddToCartClick = () => {
         image: offer.image,
         quantity: 1,
         color: selectedColor,
+        source: 'offer' ,// Add this property
         offer: {
             ...offer,
             isOffer: true
@@ -51,8 +52,10 @@ const handleAddToCartClick = () => {
     };
     console.log("Adding product:", product);
     addToCart(product);
+
     navigate('/cart');
 };
+
 
 
   return (
@@ -101,7 +104,7 @@ const handleAddToCartClick = () => {
             <p>{offer.descriptionn[selectedImageIndex]}</p>
             <div>
               <p> <label htmlFor="color-select">Select a color:</label></p>
-              <select id="color-select" value={selectedColor} onChange={handleColorChange}>
+              <select id="color-select" value={selectedColor} onChange={handleColorChange} style={{width:'200px'}}>
                 {Array.isArray(offer.Colors?.[selectedImageIndex]) &&
                   offer.Colors[selectedImageIndex].map((color, index) => (
                     <option key={index} value={color}>{color}</option>

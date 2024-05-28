@@ -5,7 +5,7 @@ import axios from 'axios';
 import '../Offers/Offers.css';
 
 const OfferPage = () => {
-  const ipdevice = '192.168.88.11';
+  const ipdevice = '192.168.88.3';
   const [product1, setProduct1] = useState([]);
   const [hoveringId, setHoveringId] = useState(null);
   const navigate = useNavigate();
