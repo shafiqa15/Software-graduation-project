@@ -33,6 +33,7 @@ import ThreedComponent from './Threed/Threed.js';
 import OfferPage from './Offers/OfferPage.js';
 import OfferDetails from './Offers/OfferDetails.js';
 import Three from './Admin/Three.js';
+import Addoffer from './Admin/Addoffer.js';
 
 // import AddAndShow3DAdmin from '/Users/shafiqaabdat/Downloads/client-main/src/Admin/Admin_convert3d.js';
 
@@ -43,9 +44,10 @@ import AddAndShow3DAdmin from './add_and_show_3d_admin';
     <Router> 
       <div>
         <Routes>    
-          <Route index element={<Three/>}/>
+          <Route index element={<Home1/>}/>
           <Route path="/Home1" element={<Home1/>}/>
           <Route path="/Three" element={<Three/>}/>
+          <Route path="/Addoffer" element={<Addoffer/>}/>
           <Route path="/AddAndShow3DAdmin" element={<AddAndShow3DAdmin />}/>
           <Route path="/ThreedComponent" element={<ThreedComponent/>}/>
           <Route path="/Admin_convert3d" element={<Admin_convert3d/>}/>

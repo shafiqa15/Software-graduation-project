@@ -93,7 +93,7 @@ export { products };
 
 const BedRoomsLarge = () => {
 
-const ipdevice='192.168.88.11';
+const ipdevice='192.168.88.6';
 
   const [product1,setProduct1]= useState([]);
   
@@ -102,13 +102,15 @@ const ipdevice='192.168.88.11';
   const [favorites, setFavorites] = useState(() => {
     return JSON.parse(localStorage.getItem('favorites')) || [];
 });
+
+
   const fetchProductData = () => {
-    axios.get(`http://${ipdevice}:9000/viewAllProduct`)
+    axios.post(`http://${ipdevice}:9000/viewkind`,{kind:"bedroom"})
       .then(result => {
-        setProduct1(result.data.product);
+        setProduct1(result.data);
 
 
-   
+        
       })
       .catch(e => console.log(e));
   };

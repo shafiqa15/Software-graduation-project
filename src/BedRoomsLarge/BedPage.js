@@ -68,7 +68,7 @@ import mirror3 from '../images/bed1/Screenshot 2024-03-03 at 16.49.49.png';
 import mirror4 from '../images/bed1/Screenshot 2024-03-03 at 16.50.20.png';
 
 const obj1 = '/SESSION_1709059176_2562448_mesh.gltf';
-const obj2='/SESSION_1709322881_5313601_mesh.gltf'
+const obj2='/SESSION_1709322881_5313601_mesh.gltf';
 const khzana_obj='/SESSION_1709322029_4794408_mesh.gltf';
 const folowobj='/SESSION_1709431540_7920988_preview.gltf';
 const comedenaobj ='/SESSION_1709473701_3541317_preview.gltf';
@@ -156,7 +156,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
   const [product,setProduct]=useState([])
   useEffect( () => {
   
-    axios.get('http://192.168.88.11:3001/viewAllProduct')
+    axios.get('http://192.168.88.6:3001/viewAllProduct')
     .then(result=>{ setProduct(result.data.product)
       window.confirm(result.data);
     })
@@ -365,7 +365,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
 
 
 <p className='madimi-one-regular' style={{marginTop:'100px',fontWeight:'bold',fontSize:'30px',marginLeft:'40px'}}> One of the amazing {product.type} manufactured in the website that has <span style={{color:'InfoText'}}>{product.numberPieces} </span>peices </p>
-<div style={{marginLeft: '1200px', marginTop: '20px', display: 'block', width: '150px'}}>
+<div style={{marginLeft: '1100px', marginTop: '20px', display: 'block', width: '150px'}}>
   <p>{product.count} rooms remain</p>
   <input
     type="number"
@@ -404,7 +404,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
 
 
 
-      <img style={{  marginLeft: '80px'}} className='photo' src={bed2} alt="Photo 1" />
+      <img style={{  marginLeft: '10px'}} className='photo' src={bed2} alt="Photo 1" />
 
       <img className='photo' src={khzana} alt="Photo 2" />
       <img className='photo' src={comedena1} alt="Photo 3" />
@@ -419,7 +419,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
 
 
     <p className='madimi-one-regular' style={{ marginRight: '20px' }}>
-    <span style={{ marginLeft: '170px' }}>1 Bed</span>
+    <span style={{ marginLeft: '50px' }}>1 Bed</span>
        <span style={{ marginLeft: '150px' }}>1 Wardrobe</span>
       <span style={{ marginLeft: '100px' }}>2 Nightstands</span>
       <span style={{ marginLeft: '130px' }}> 1 Mirror</span>
@@ -818,7 +818,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
 
 
 
-      <form onSubmit={handleReviewSubmit} style={{marginLeft:'1200px' ,width:'200px',marginTop:'-3100px'}}>
+      <form onSubmit={handleReviewSubmit} style={{marginLeft:'1100px' ,width:'200px',marginTop:'-3100px'}}>
       <p className='animated-text_bed madimi-one-regular ' style={{marginLeft:'10px'}}> Price is {product.price}₪ </p>
  
         <StarRating onRatingChange={(rating) => setUserRating(rating)} />
@@ -846,13 +846,13 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
     
 
       <button
-  style={{marginLeft:'1200px', marginTop: '20px', display: 'block', width:'200px'}}
+  style={{marginLeft:'1100px', marginTop: '20px', display: 'block', width:'200px'}}
   className="AddToCartButton madimi-one-regular"
   onClick={() => navigateToDesignPage(1)}  // Pass '1' directly to the function
 >
   Design This Bedroom
 </button>
-      <button style={{marginLeft:'1200px', marginTop: '20px', display: 'block',width:'200px'}} className="AddToCartButton madimi-one-regular" onClick={() => navigateToDetailingPage(product._id, product)}>Put it to detailing page</button>
+      <button style={{marginLeft:'1100px', marginTop: '20px', display: 'block',width:'200px'}} className="AddToCartButton madimi-one-regular" onClick={() => navigateToDetailingPage(product._id, product)}>Put it to detailing page</button>
       {/* <button className="AddToCartButton" onClick={() => navigateToBedPage(product._id, product)}>Details</button> */}
 
       {/* <button onClick={navigateToDetailingPage}>Go to Detailing Page</button> */}

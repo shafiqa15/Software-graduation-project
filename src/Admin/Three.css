@@ -1,7 +1,7 @@
 .CenteredButton40 {
     position: absolute;
-    top:30%;
-    left: 8%;
+    /* top:45%;
+    left: 70%; */
     transform: translate(-50%, -50%);
     font-size: 16px;
     font-weight: bold;
@@ -13,3 +13,191 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   }
+
+  .CenteredButton4000 {
+    position: absolute;
+    /* top:35%;
+    left: 8%; */
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    background-color: #d8d4c9;
+    width: 200px;
+    height: 50px;
+/* border-radius: 50%; */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  }
+
+  .CenteredButtonshaf {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 15px 32px; /* Some padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Get the element to line up correctly */
+    font-size: 16px; /* Increase font size */
+    margin: 4px 2px; /* Add some margin */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    border-radius: 12px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+  }
+  
+  .CenteredButtonshaf:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  .ButtonContainershaf {
+    display: flex;
+    justify-content: space-around; /* Space out buttons evenly */
+    width: 100%;
+    margin-top: 10px; /* Add some margin at the top */
+  }
+  
+
+  /* Add this to your Three.css or any other CSS file */
+.highlight {
+    position: relative;
+    animation: highlight-animation 1s infinite alternate;
+}
+
+@keyframes highlight-animation {
+    0% {
+        box-shadow: 0 0 10px 5px  #eee2c5;
+    }
+    100% {
+        box-shadow: 0 0 20px 10px rgb(209, 181, 129);
+    }
+}
+
+.arrow {
+    position: absolute;
+    left: 75%;
+    top: 50px; /* Adjust based on your button's position */
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid orange;
+    animation: arrow-animation 1s infinite alternate;
+}
+
+@keyframes arrow-animation {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+/*   top: 500px; 
+left:520px; */
+
+.arrow2{
+    position: absolute;
+    /* left:  800px; */
+    top: 1300px; /* Adjust based on your button's position */
+    left:520px;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid orange;
+    animation: arrow-animation 1s infinite alternate;
+
+
+}
+
+@keyframes arrow2-animation {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+.arrow3{
+    position: absolute;
+    /* left:  800px; */
+    top: 1300px; /* Adjust based on your button's position */
+    left:920px;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid orange;
+    animation: arrow-animation 1s infinite alternate;
+
+
+}
+
+@keyframes arrow3-animation {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+
+
+
+.arrow4{
+    position: absolute;
+    /* left:  800px; */
+    top: 1300px; /* Adjust based on your button's position */
+    left:1260px;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid orange;
+    animation: arrow-animation 1s infinite alternate;
+
+
+}
+
+@keyframes arrow4-animation {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+
+.sora20 {
+
+    /* background-color: rgba(255, 255, 255, 0.9); */
+    background-image: url( '/Users/shafiqaabdat/Downloads/client-main/src/Admin/Screenshot 2024-06-10 at 16.16.47.png' );
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-size: 100% auto; /* Stretches the image to 100% of the element's width while maintaining aspect ratio */
+    margin-top: 117px;
+    height:1000px; /* You may need to adjust this depending on your needs */
+    width: 1400px; /* This makes the element's width equal to the width of the viewport */
+  }
+
+
+
+
+/* .segmentation-button.highlighted {
+    background-color: yellow;
+    border: 2px solid orange;
+    position: relative;
+    padding-right: 20px; /* Adjust to make space for the arrow 
+}
+
+.arrow {
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px; 
+    color: red; 
+} */
+

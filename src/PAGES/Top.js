@@ -49,7 +49,7 @@ const Top = () => {
         password: formData.password
       };
       try {
-        const response = await axios.post('http://192.168.88.8:9000/signin', userData);
+        const response = await axios.post('http://192.168.88.6:9000/signin', userData);
         if (response.data) {
           navigate('/Home1'); // Redirect to admin dashboard
         } else {
@@ -65,13 +65,13 @@ const Top = () => {
   return (
     <>
       <header className="header" id="header">
-        <nav className="nav container" style={{marginRight:'90px'}}>
+        <nav className="nav container" style={{marginRight:'130px'}}>
           <a href="/Home1" className="nav__logo">
-            <img src={home_img} alt="Logo" style={{ margin: '0px', borderRadius: '50%', width: '90px', height: '90px', marginRight:'10px' }} />
-            <span className="nav__logo-text" style={{fontSize:'14px'}}>Cach Bblash</span>
+            <img src={home_img} alt="Logo" style={{ margin: '0px', borderRadius: '50%', width: '90px', height: '77px', marginRight:'-60px' ,marginTop:'-8px'}} />
+            <span className="nav__logo-text" style={{fontSize:'10px',marginLeft:'-20px'}}>Cach Bblash</span>
           </a>
           <div className={`nav__menu ${showMenu ? 'show-menu' : ''}`} id="nav-menu">
-            <ul className="nav__list" style={{marginRight:'-70px',marginTop:'-55px'}}>
+            <ul className="nav__list" style={{marginRight:'-90px',marginTop:'-55px'}}>
             <li className="nav__item"><a href="/Contact" className="nav__link" >Contact </a></li>
             {/* <li className="nav__item"><a href="#" className="nav__link">About Us</a></li> */}
 
@@ -94,8 +94,10 @@ const Top = () => {
               
               
               <ul className="dropdown">
-      <li><Link className="nav__link" to="/Decore">Your own design</Link></li>
-      <li><a href="/Decore2" className="nav__link">Existing desgins</a></li>
+      <li><a href="/design" className="nav__link">-Design your room</a></li>
+      <li style={{width:'170px'}}><Link className="nav__link" to="/Decore" >-Your own design</Link></li>
+      <li><a href="/Decore2" className="nav__link">-Existing desgins</a></li>
+
       {/* <li><a href="#" className="nav__link">King Bedrooms</a></li> */}
     </ul>
     </li>
@@ -103,6 +105,8 @@ const Top = () => {
               <li className="nav__item"><a href="/ReelsPage" className="nav__link">Reels</a></li>
               <li className="nav__item"><a href="/Cart" className="nav__link">Cart🛒</a></li>
               <li className="nav__item"><a href="/favorites" className="nav__link" style={{marginLeft:'-30px'}}>♡</a></li>
+              <li className="nav__item"><a href="/Three" className="nav__link" style={{marginLeft:'-30px'}}>3D</a></li>
+
               {/* <li className="nav__item"><a href="#" className="nav__link">Videos</a></li> */}
               {/* <a href="/favorites" className="nav__link">Bedrooms</a> */}
 
