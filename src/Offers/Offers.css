@@ -68,8 +68,8 @@ margin-top: 20px;
   }
   
   .fade-image {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     opacity: 0;
     animation: fadeIn 5s forwards;
   }

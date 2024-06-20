@@ -34,7 +34,8 @@ import OfferPage from './Offers/OfferPage.js';
 import OfferDetails from './Offers/OfferDetails.js';
 import Three from './Admin/Three.js';
 import Addoffer from './Admin/Addoffer.js';
-
+import Sofa from './BedRoomsLarge/Sofa.js';
+import Sofabed from './BedRoomsLarge/Sofabed.js';
 // import AddAndShow3DAdmin from '/Users/shafiqaabdat/Downloads/client-main/src/Admin/Admin_convert3d.js';
 
 import AddAndShow3DAdmin from './add_and_show_3d_admin';
@@ -47,7 +48,9 @@ import AddAndShow3DAdmin from './add_and_show_3d_admin';
           <Route index element={<Home1/>}/>
           <Route path="/Home1" element={<Home1/>}/>
           <Route path="/Three" element={<Three/>}/>
-          <Route path="/Addoffer" element={<Addoffer/>}/>
+          <Route path="/Sofa" element={<Sofa/>}/>
+          <Route path="/Sofa" element={<Sofa/>}/>
+     
           <Route path="/AddAndShow3DAdmin" element={<AddAndShow3DAdmin />}/>
           <Route path="/ThreedComponent" element={<ThreedComponent/>}/>
           <Route path="/Admin_convert3d" element={<Admin_convert3d/>}/>
@@ -82,6 +85,7 @@ import AddAndShow3DAdmin from './add_and_show_3d_admin';
 
           {/* <Route path="/" element={<BedRoomsLarge />} /> */}
         <Route path="/product/:productId" element={<BedPage />} />
+        <Route path="/products/:productId" element={<Sofabed/>}/>
         {/* <Route path="/BedPage" element={<BedPage />} /> */}
         {/* <Route path="/product1/:productId" element={<Decore2 />} /> */}
         <Route path="/detailing" element={<Decore2 />} />

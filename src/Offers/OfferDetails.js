@@ -79,7 +79,7 @@ const handleAddToCartClick = () => {
         Add to Cart 🛒
       </button>
       <br />      <br />
-      <div className="fading-images">
+      <div className="fading-images" style={{marginLeft:'120px'}}>
         {offer.images &&
           offer.products &&
           offer.images.map((imageUrl, index) => (

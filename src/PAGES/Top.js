@@ -87,8 +87,8 @@ const Top = () => {
   </li>
               
            
-              <li className="nav__item"><a href="#" className="nav__link">Tables</a></li>
-              <li className="nav__item"><a href="#" className="nav__link">Setting Rooms</a></li>
+              <li className="nav__item"><a href="/Sofa" className="nav__link">Sofa Sets</a></li>
+              <li className="nav__item"><a href="#" className="nav__link">Dining Rooms</a></li>
               <li className="nav__item"><a href="#" className="nav__link">Electronics</a></li>
               <li className="nav__item"><Link className="nav__link" to="/Decore">Design</Link>
               
