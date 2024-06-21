@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '/Users/shafiqaabdat/Downloads/client-main/src/Admin/Addoffer.css';
+import './Addoffer.css';
+
 const AddOffer = () => {
   const [formData, setFormData] = useState({
     title: '',
@@ -17,12 +18,18 @@ const AddOffer = () => {
     productname: '',
   });
 
+  const [imageFile, setImageFile] = useState(null);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
     });
+  };
+
+  const handleFileChange = (e) => {
+    setImageFile(e.target.files[0]);
   };
 
   const handleArrayChange = (e, index, arrayName) => {
@@ -48,13 +55,28 @@ const AddOffer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log('Submitting Form Data:', formData);
+      let imageUrl = '';
+      if (imageFile) {
+        const imageData = new FormData();
+        imageData.append('file', imageFile);
+        imageData.append('upload_preset', 'your_upload_preset'); // Replace with your upload preset
+        const imageResponse = await axios.post('https://api.cloudinary.com/v1_1/your_cloud_name/image/upload', imageData); // Replace with your Cloudinary URL
+        imageUrl = imageResponse.data.secure_url;
+      }
+
+      const finalFormData = {
+        ...formData,
+        image: imageUrl,
+      };
+
+      console.log('Submitting Form Data:', finalFormData);
   
-      const response = await axios.post('http://192.168.88.6:9000/addOffer', formData);
+      const response = await axios.post('http://192.168.88.6:9000/addOffer', finalFormData);
       console.log('Response:', response.data);
-      alert('Offer added successfully');
       if (response.data.success) {
         alert('Offer added successfully');
+      } else {
+        alert('Error adding offer');
       }
     } catch (error) {
       console.error('Error adding offer:', error);
@@ -63,16 +85,18 @@ const AddOffer = () => {
   };
   
   return (
-    <form onSubmit={handleSubmit}>
+    
+    <form onSubmit={handleSubmit} style={{width:'600px',height:'100px'}}>
       <input type="text" name="title" value={formData.title} onChange={handleChange} placeholder="Title" required />
       <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Description" required />
-      <input type="text" name="image" value={formData.image} onChange={handleChange} placeholder="Image URL" required />
+      <input type="file" name="image" onChange={handleFileChange} required />
       <input type="number" name="price" value={formData.price} onChange={handleChange} placeholder="Price" required />
       <input type="number" name="numberOfPieces" value={formData.numberOfPieces} onChange={handleChange} placeholder="Number of Pieces" required />
       <input type="date" name="endDate" value={formData.endDate} onChange={handleChange} placeholder="End Date" required />
       
       {formData.images.map((img, index) => (
-        <input key={index} type="text" value={img} onChange={(e) => handleArrayChange(e, index, 'images')} placeholder="Image URL" />
+        <input type="file" name="Image URL" onChange={handleFileChange} required />
+
       ))}
 
       {formData.products.map((product, index) => (
@@ -84,10 +108,11 @@ const AddOffer = () => {
       ))}
 
       {formData.relatedImages.map((outerArray, outerIndex) => (
-        <div key={outerIndex}>
-          {outerArray.map((innerValue, innerIndex) => (
-            <input key={innerIndex} type="text" value={innerValue} onChange={(e) => handleNestedArrayChange(e, outerIndex, innerIndex, 'relatedImages')} placeholder="Related Image URL" />
-          ))}
+        <div key={outerIndex}> Related image 
+        
+            <input type="file" name="relatedImages" onChange={handleFileChange} required />
+
+        
         </div>
       ))}
 

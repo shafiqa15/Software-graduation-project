@@ -169,6 +169,7 @@ const Top = () => {
             </div>
           </div>
     <p>Already have an account ? <a href='/SignUp'> signup</a></p> 
+ <a href='/EmailRestAPI'> Forget your password?</a>
           <button type="submit" className="login__button" style={{justifyContent:'center',height:'50px'}}><p style={{color:'white',justifyContent:'center'}}> Log In</p></button>
           {loginError && <p className="error">Invalid email or password.</p>}
         </form>

@@ -36,6 +36,7 @@ import Three from './Admin/Three.js';
 import Addoffer from './Admin/Addoffer.js';
 import Sofa from './BedRoomsLarge/Sofa.js';
 import Sofabed from './BedRoomsLarge/Sofabed.js';
+import EmailRestAPI from './signup/EmailRestAPI.js';
 // import AddAndShow3DAdmin from '/Users/shafiqaabdat/Downloads/client-main/src/Admin/Admin_convert3d.js';
 
 import AddAndShow3DAdmin from './add_and_show_3d_admin';
@@ -50,7 +51,8 @@ import AddAndShow3DAdmin from './add_and_show_3d_admin';
           <Route path="/Three" element={<Three/>}/>
           <Route path="/Sofa" element={<Sofa/>}/>
           <Route path="/Sofa" element={<Sofa/>}/>
-     
+          <Route path="/Addoffer" element={<Addoffer/>}/>
+          <Route path="/EmailRestAPI" element={<EmailRestAPI/>}/>
           <Route path="/AddAndShow3DAdmin" element={<AddAndShow3DAdmin />}/>
           <Route path="/ThreedComponent" element={<ThreedComponent/>}/>
           <Route path="/Admin_convert3d" element={<Admin_convert3d/>}/>
