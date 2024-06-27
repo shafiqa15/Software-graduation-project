@@ -73,7 +73,7 @@ const Cart = () => {
 
     const [cart, setCart] = useState(null);
 
-    const ipdevice='192.168.88.8';
+    const ipdevice='192.168.88.6';
 
 
 
@@ -83,7 +83,7 @@ const Cart = () => {
         return; 
       }
     
-      const apiUrl = 'http://192.168.88.8:9000/addToCart';
+      const apiUrl = 'http://192.168.88.6:9000/addToCart';
       const cartData = {
         userId: userData.userId, 
         items: [{
@@ -126,16 +126,16 @@ const Cart = () => {
     const { userId } = useUser();
     const [product1, setProduct1] = useState([]);
 
-    useEffect(() => {
-        if (userId) {
-            fetchProductData(userId);
-        }
-    }, [userId]);
+    // useEffect(() => {
+    //     if (userId) {
+    //         fetchProductData('663bd7fe3b2eb3ab18c13e5a');
+    //     }
+    // }, [userId]);
 
     const [totalCost, setTotalCost] = useState(0);
 
-    const fetchProductData = (userId) => {
-      const url = `http://${ipdevice}:9000/viewCart/${userId}`;
+    const fetchProductData = () => {
+      const url = `http://${ipdevice}:9000/viewCart/663bd7fe3b2eb3ab18c13e5a`;
       axios.get(url)
           .then(response => {
         if (response.data && response.data.cart && response.data.cart.items) {
@@ -225,13 +225,133 @@ const Cart = () => {
         />
       </p>
       {item.dimensions && (
-        <>
-          <p>Updated Dimensions:</p>
-          <p>Width: {item.dimensions.width} cm</p>
-          <p>Length: {item.dimensions.length} cm</p>
-          <p>Depth: {item.dimensions.depth} cm</p>
-        </>
-      )}
+        <div className="cart-container">
+      <table className="cart-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Dimensions</th> {/* New column for dimensions */}
+          </tr>
+        </thead>
+        <tbody>
+          {cartItems?.map((item, index) => (
+            <tr key={index}>
+              <td>{item.name}</td>
+              <td>{item.price}₪</td>
+              <td>{item.quantity}</td>
+              <td>{(item.price * item.quantity).toFixed(2)}₪</td>
+              <td>
+                {/* Display updated dimensions if available */}
+                {item.dimensions ? (
+                  <>
+               
+                    {Object.entries(item.dimensions).map(([key, dimensions], dimIndex) => (
+                      <div key={dimIndex}>
+                        <strong>{key}:</strong>
+                        <p>W: {dimensions.width} cm, L: {dimensions.length} cm, D: {dimensions.depth} cm</p>
+                      </div>
+                    ))}
+                
+
+
+{/*                   
+                    <p>W: {item.dimensions.width} cm</p>
+                    <p>L: {item.dimensions.length} cm</p>
+                    <p>D: {item.dimensions.depth} cm</p> */}
+                  </>
+                ) : (
+                  <p>Real price</p>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    )}
+       
+{/* 
+        <div className="cart-container">
+      <table className="cart-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Dimensions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cartItems?.map((item, index) => (
+            <tr key={index}>
+              <td>{item.name}</td>
+              <td>{item.price}₪</td>
+              <td>{item.quantity}</td>
+              <td>{(item.price * item.quantity).toFixed(2)}₪</td>
+              <td>
+                    {Object.entries(item.dimensions).map(([key, dimensions], dimIndex) => (
+                      <div key={dimIndex}>
+                        <strong>{key}:</strong>
+                        <p>W: {dimensions.width} cm, L: {dimensions.length} cm, D: {dimensions.depth} cm</p>
+                      </div>
+                    ))}
+                  </td>
+                 
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div> */}
+    
+
+
+        {/* <div> */}
+          {/* <table className="cart-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Dimensions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cartItems.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.name}</td>
+                  <td>{item.price}₪</td>
+                  <td>
+                    <input
+                      type="number"
+                      value={item.quantity}
+                      onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
+                      min="1"
+                    />
+                  </td>
+                  <td>{(item.price * item.quantity).toFixed(2)}₪</td>
+                  <td>
+                    {Object.entries(item.dimensions).map(([key, dimensions], dimIndex) => (
+                      <div key={dimIndex}>
+                        <strong>{key}:</strong>
+                        <p>W: {dimensions.width} cm, L: {dimensions.length} cm, D: {dimensions.depth} cm</p>
+                      </div>
+                    ))}
+                  </td>
+                 
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          </div> */}
+ 
+
+
+
       <p>Total: {(item.price * item.quantity).toFixed(2)} ₪</p>
       <button className="button-remove" onClick={() => handleRemoveClick(item.id)}>
         Remove

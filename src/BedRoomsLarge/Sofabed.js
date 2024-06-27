@@ -305,9 +305,9 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
     <div className="main-container_beds">
 
 
-<p className='madimi-one-regular' style={{marginTop:'100px',fontWeight:'bold',fontSize:'27px',marginLeft:'40px'}}> One of the amazing {product.type} manufactured {product.kind} in the website that has <span style={{color:'InfoText'}}>{product.numberPieces} </span>peices🤩 </p>
+<p className='madimi-one-regular' style={{marginTop:'1100px',fontWeight:'bold',fontSize:'27px',marginLeft:'40px'}}> One of the amazing {product.type} manufactured {product.kind} in the website that has <span style={{color:'InfoText'}}>{product.numberPieces} </span>peices🤩 </p>
 <div style={{marginLeft: '1080px', marginTop: '-50px', display: 'block', width: '200px'}}>
-  <p>{product.count} Sofa sets remain</p>
+  {/* <p>{product.count} Sofa sets remain</p> */}
 
   
 
@@ -401,7 +401,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
 
 
 {showCanvas7 && (
-        <div style={{ position: 'absolute', top: '1900px', left: '800px', width: '500px', height: '100%' }}>
+        <div style={{ position: 'absolute', top: '-500px', left: '800px', width: '500px', height: '100%' }}>
           <Canvas>
             <ambientLight intensity={1.5} />
             <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
@@ -633,7 +633,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
         {reviews.map((review, index) => (
             <div key={index}>
                 <StarRating rating={review.rating} />
-                <p>username:{review.text}</p>
+                <p>Shafiqa15:{review.text}</p>
             </div>
         ))}
 

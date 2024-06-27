@@ -362,17 +362,17 @@ a.click();
       )}
 
 
-      <button onClick={toggleFloorUpload} style={{ position: 'absolute', top: '510px', left: '20px', zIndex: 100 }}>
+      <button onClick={toggleFloorUpload} style={{ position: 'absolute', top: '510px', left: '20px', zIndex: 100 ,width:'150px'}}>
         Floor
       </button>
       {/* <p>Product Name: {product?.name}</p>
       <p>Product Name: {product?.kind}</p> */}
 
-      <button onClick={() => setShowWallUpload(true)} style={{ position: 'absolute', top: '555px', left: '20px', zIndex: 100 }}>Wall</button>
+      <button onClick={() => setShowWallUpload(true)} style={{ position: 'absolute', top: '555px', left: '20px', zIndex: 100 ,width:'150px'}}>Wall</button>
 
       
       <video ref={videoRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -1 }} autoPlay muted />
-      <button onClick={startCamera} style={{ position: 'absolute', zIndex: 100,top: '780px', left: '20px' }}>Camera</button>
+      <button onClick={startCamera} style={{ position: 'absolute', zIndex: 100,top: '780px', left: '20px' ,width:'150px'}}>Camera</button>
      
 
       
@@ -403,23 +403,23 @@ a.click();
           U CAN DESIGN UR CHOSEN PRODUCTS HERE !
         </h2>
         
-        <button onClick={() => updatePosition(0, 0.1)}>Right</button>
+        <button onClick={() => updatePosition(0, 0.1)} style={{width:'150px'}}>Right</button>
         <br/>
-        <button onClick={() => updatePosition(0, -0.1)}>Left</button>
+        <button onClick={() => updatePosition(0, -0.1)} style={{width:'150px'}}>Left</button>
         <br/>
-        <button onClick={() => updatePosition(1, 0.1)}>Up</button>
+        <button onClick={() => updatePosition(1, 0.1)} style={{width:'150px'}}>Up</button>
         <br/>
-        <button onClick={() => updatePosition(1, -0.1)}>Down</button>
+        <button onClick={() => updatePosition(1, -0.1)} style={{width:'150px'}}>Down</button>
         <br/>
-        <button onClick={() => updatePosition(2, 0.1)}>Forward</button>
+        <button onClick={() => updatePosition(2, 0.1)} style={{width:'150px'}}>Forward</button>
         <br/>
-        <button onClick={() => updatePosition(2, -0.1)}>Backward</button>
+        <button onClick={() => updatePosition(2, -0.1)} style={{width:'150px'}}>Backward</button>
         <br/>
-        <button onClick={() => updateRotation(0, Math.PI / 8)}>Rotate X</button>
+        <button onClick={() => updateRotation(0, Math.PI / 8)} style={{width:'150px'}}>Rotate X</button>
         <br/>
-        <button onClick={() => updateRotation(1, Math.PI / 8)}>Rotate Y</button>
+        <button onClick={() => updateRotation(1, Math.PI / 8)} style={{width:'150px'}}>Rotate Y</button>
         <br/>
-        <button onClick={() => updateRotation(2, Math.PI / 8)}>Rotate Z</button>
+        <button onClick={() => updateRotation(2, Math.PI / 8)} style={{width:'150px'}}>Rotate Z</button>
 
 
     <br></br>
@@ -431,16 +431,16 @@ a.click();
         <input type="file" onChange={handleModelUpload} accept=".glb,.gltf,.usdz" />
       </div>
       
-      <select value={activeObject || ''} onChange={handleChangeObject} style={{ position: 'absolute',top: '640px',left: '7px',width:'100px' ,zIndex: 100 }}>
+      <select value={activeObject || ''} onChange={handleChangeObject} style={{ position: 'absolute',top: '640px',left: '7px',width:'100px' ,zIndex: 100,width:'150px' }}>
         {Object.keys(objects).map(modelName => (
           <option key={modelName} value={modelName}>{modelName}</option>
         ))}
 
       </select>
       <br/>
-    <button onClick={deleteActiveObject} style={{ position: 'absolute', top: '590px', left: '2px', zIndex: 100 }}>Delete</button> 
+    <button onClick={deleteActiveObject} style={{ position: 'absolute', top: '590px', left: '2px', zIndex: 100,width:'150px' }}>Delete</button> 
 
-    <button className='btn btn-deafult'id='button' onClick={capture} style={{ position: 'absolute', top: '720px', left: '2px', zIndex: 100 }}>  
+    <button className='btn btn-deafult'id='button' onClick={capture} style={{ position: 'absolute', top: '720px', left: '2px', zIndex: 100 ,width:'150px'}}>  
      screen
      </button>
 

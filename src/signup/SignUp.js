@@ -77,7 +77,7 @@ const SignUp = () => {
 
 
 
-        axios.post('http://192.168.88.8:9000/signup', formData)
+        axios.post('http://192.168.88.6:9000/signup', formData)
         .then(response => {
             console.log('Signup successful:', response.data.user._id);
             // setuserId(response.data.user._id);

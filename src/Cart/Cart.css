@@ -118,3 +118,74 @@
     color: #333;
     font-weight: 500;
 }
+
+/* Cart table styling */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse; /* Removes the space between table cells */
+    margin: 1rem 0; /* Adds space around the table */
+    font-size: 1rem; /* Adjusts the font size */
+    background-color: #ffffff; /* Sets a white background for the table */
+    border-radius: 10px; /* Rounds the corners of the table */
+    overflow: hidden; /* Ensures the table respects the border radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Adds a soft shadow */
+}
+
+.cart-table thead {
+    background-color: #333; /* Dark background for the header */
+    color: #ffffff; /* White text color for the header */
+}
+
+.cart-table th,
+.cart-table td {
+    padding: 0.75rem; /* Adds padding to table cells */
+    text-align: left; /* Aligns text to the left */
+    border-bottom: 1px solid #ddd; /* Adds a bottom border to table cells */
+}
+
+.cart-table th {
+    font-weight: 600; /* Makes the header text bold */
+}
+
+.cart-table tbody tr:hover {
+    background-color: #f3f3f3; /* Light grey background on hover for rows */
+}
+
+.cart-table input[type="number"] {
+    width: 60px; /* Sets the width of the input */
+    padding: 0.5rem; /* Adds padding to the input */
+    border: 1px solid #ccc; /* Adds a light grey border */
+    border-radius: 4px; /* Rounds the corners of the input */
+    text-align: center; /* Centers the text inside the input */
+    transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+.cart-table input[type="number"]:focus {
+    border-color: #0056b3; /* Blue border on focus for visibility */
+}
+
+.cart-table button {
+    background-color: #8a3838; /* Sets a red background color */
+    color: white; /* Sets the text color to white */
+    border: none; /* Removes the border */
+    padding: 0.5rem 1rem; /* Adds padding to the button */
+    border-radius: 5px; /* Rounds the corners of the button */
+    cursor: pointer; /* Changes the cursor to pointer */
+    transition: background-color 0.3s ease-in-out; /* Smooth transition for background color */
+}
+
+.cart-table button:hover {
+    background-color: #ff8787; /* Lightens the red color on hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adds a shadow on hover */
+}
+
+/* Dimensions styling */
+.cart-table td div {
+    margin-bottom: 0.5rem; /* Adds space below each dimension div */
+}
+
+.cart-table td div p {
+    margin: 0; /* Removes default margin from paragraphs */
+    font-size: 0.9rem; /* Adjusts the font size */
+    color: #666; /* Sets a grey color for the text */
+}

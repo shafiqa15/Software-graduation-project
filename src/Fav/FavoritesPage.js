@@ -16,7 +16,7 @@ const FavoritesPage = () => {
   }, []);  
 
 
-  const ipdevice='192.168.88.8';
+  const ipdevice='192.168.88.6';
   const fetchFavorites = () => {
   
 

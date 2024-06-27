@@ -364,8 +364,8 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
     <div className="main-container_beds">
 
 
-<p className='madimi-one-regular' style={{marginTop:'100px',fontWeight:'bold',fontSize:'30px',marginLeft:'40px'}}> One of the amazing {product.type} manufactured in the website that has <span style={{color:'InfoText'}}>{product.numberPieces} </span>peices </p>
-<div style={{marginLeft: '1100px', marginTop: '20px', display: 'block', width: '150px'}}>
+<p className='madimi-one-regular' style={{marginTop:'100px',fontWeight:'bold',fontSize:'30px',marginLeft:'-10px'}}> One of the amazing {product.type} manufactured in the website that has <span style={{color:'InfoText'}}>{product.numberPieces} </span>peices </p>
+<div style={{marginLeft: '1050px', marginTop: '20px', display: 'block', width: '150px'}}>
   <p>{product.count} rooms remain</p>
   <input
     type="number"
@@ -380,7 +380,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
 
   <br/>  
   
-  <button className='madimi-one-regular buttoncart' onClick={() => handleAddToCartClick({ ...product, quantity })} style={{ width: '100%' }}>
+  <button className='madimi-one-regular buttoncart' onClick={() => handleAddToCartClick({ ...product, quantity })} style={{ width: '100%',marginLeft:'-15px' }}>
   <FontAwesomeIcon icon={faShoppingCart}/> Add to Cart
 </button>
 {/* <button onClick={() => handleAddToCartClick(product)}>Add to Cart</button> */}
@@ -509,7 +509,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
 
 
    {/* Right side content */}
-   <div className="right-side-content" style={{marginTop:'-500px'}}>
+   <div className="right-side-content" style={{marginTop:'-550px'}}>
         {/* Circle buttons */}
 
 
@@ -579,7 +579,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
 
 
       {showCanvas9&&(
-        <div style={{ position: 'absolute', top: '2550px', left: '800px', width: '500px', height: '100%' }}>
+        <div style={{ position: 'absolute', top: '2750px', left: '800px', width: '500px', height: '100%' }}>
           <Canvas>
             <ambientLight intensity={1.5} />
             <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
@@ -604,7 +604,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
 
 
 {showCanvas7 && (
-        <div style={{ position: 'absolute', top: '2000px', left: '800px', width: '500px', height: '100%' }}>    <Canvas>
+        <div style={{ position: 'absolute', top: '2200px', left: '800px', width: '500px', height: '100%' }}>    <Canvas>
       <ambientLight intensity={1.5} />
       <spotLight position={[0, 0, 0]} angle={0.3} intensity={1.5} />
       <Scene1Model modelPath={mirrorobj} scale={4.3} material={<meshStandardMaterial color="white" />} />
@@ -652,7 +652,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
     ))}
   </div>
 </div>
- <p style={{marginTop:'-450px',marginLeft:'700px'}}> -{product.type} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is snopar{product.wood_kind}.</p>
+ <p style={{marginTop:'-500px',marginLeft:'700px'}}> -{product.type} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is snopar{product.wood_kind}.</p>
        <p style={{marginTop:'-10px',marginLeft:'700px'}}>-Colors available:Only off-white.</p>
         <button className="circle-buttons6" onClick={() => {handleCircleButtonClick() }}></button>
           <div className="description" style={{marginTop:'170px',marginLeft:'700px'}}>
@@ -691,7 +691,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
 
 
 
-<p style={{marginTop:'-450px',marginLeft:'700px'}}> -{product.type} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is snopar{product.wood_kind}.</p>
+<p style={{marginTop:'-500px',marginLeft:'700px'}}> -{product.type} Nightstands  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is snopar{product.wood_kind}.</p>
 <p style={{marginLeft:'700px'}}>-2 peices.</p>
        <p style={{marginTop:'-10px',marginLeft:'700px'}}>-Colors available:Only off-white.</p>
  
@@ -736,7 +736,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
   </div>
 </div>
 
-<p style={{marginTop:'-450px',marginLeft:'700px'}}> -{product.type} Wardrobe  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is snopar {product.wood_kind}.</p>
+<p style={{marginTop:'-500px',marginLeft:'700px'}}> -{product.type} Mirror which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is snopar {product.wood_kind}.</p>
 
        <p style={{marginTop:'-10px',marginLeft:'700px'}}>-Colors available:</p>
  
@@ -762,7 +762,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
 
 
 
-<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 
 <div className='product-display-container' style={{ display: 'flex', marginTop: '50px' ,marginLeft:'-400px'}}>
@@ -784,7 +784,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
     ))}
   </div>
 </div>
- <p style={{marginTop:'-450px',marginLeft:'700px'}}> -{product.kind} bed following  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is snopar{product.wood_kind}.</p>
+ <p style={{marginTop:'-500px',marginLeft:'700px'}}> -{product.kind} bed following  which is manufactured on Palestine.</p>  <p style={{marginTop:'10px',marginLeft:'700px'}}>-The wood kind is snopar{product.wood_kind}.</p>
        <p style={{marginTop:'-10px',marginLeft:'700px'}}>-Colors available:Only off-white.</p>
         <button className="circle-buttons6" onClick={() => {handleCircleButtonClick() }}></button>
           <div className="description" style={{marginTop:'170px',marginLeft:'700px'}}>
@@ -818,7 +818,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
 
 
 
-      <form onSubmit={handleReviewSubmit} style={{marginLeft:'1100px' ,width:'200px',marginTop:'-3100px'}}>
+      <form onSubmit={handleReviewSubmit} style={{marginLeft:'1050px' ,width:'200px',marginTop:'-3200px'}}>
       <p className='animated-text_bed madimi-one-regular ' style={{marginLeft:'10px'}}> Price is {product.price}₪ </p>
  
         <StarRating onRatingChange={(rating) => setUserRating(rating)} />
@@ -830,7 +830,7 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
         {reviews.map((review, index) => (
             <div key={index}>
                 <StarRating rating={review.rating} />
-                <p>username:{review.text}</p>
+                <p>Shafiqa15:{review.text}</p>
             </div>
         ))}
 {/* Image preview */}
@@ -846,13 +846,13 @@ const StarRating = ({ rating, interactive = true, onRatingChange }) => {
     
 
       <button
-  style={{marginLeft:'1100px', marginTop: '20px', display: 'block', width:'200px'}}
+  style={{marginLeft:'1050px', marginTop: '60px', display: 'block', width:'200px'}}
   className="AddToCartButton madimi-one-regular"
   onClick={() => navigateToDesignPage(1)}  // Pass '1' directly to the function
 >
   Design This Bedroom
 </button>
-      <button style={{marginLeft:'1100px', marginTop: '20px', display: 'block',width:'200px'}} className="AddToCartButton madimi-one-regular" onClick={() => navigateToDetailingPage(product._id, product)}>Put it to detailing page</button>
+      <button style={{marginLeft:'1050px', marginTop: '20px', display: 'block',width:'200px'}} className="AddToCartButton madimi-one-regular" onClick={() => navigateToDetailingPage(product._id, product)}>Put it to detailing page</button>
       {/* <button className="AddToCartButton" onClick={() => navigateToBedPage(product._id, product)}>Details</button> */}
 
       {/* <button onClick={navigateToDetailingPage}>Go to Detailing Page</button> */}
